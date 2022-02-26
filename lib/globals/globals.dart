@@ -43,6 +43,7 @@ const String warning2_3 =
 const String warning2_4 = "Your age must be greater than 17.";
 const String warning2_5 = "It's not an email format.";
 const String warning2_6 = "It's not a university email.";
+const String error2_7 = "phone Number already exists";
 const String error3 = "Please make sure your passwords match.";
 const String error4 = "Cannot connect to the dataBase.";
 const String warning5 = "UserName already exist.";
@@ -51,6 +52,8 @@ const String warning7 = "Field cannot be empty.";
 const String warning8 = "Full Table";
 const String error9 = "Position Taken";
 const String warning10 = "Table name already taken";
+const String error11 = "This email is not Registered";
+const String error12 = "Incorrect Email sent";
 const String warningEmptyLibrary = "There is no Table yet";
 const String warningEmptyContacts = "You doesn't have contacts yet";
 const String warningEmptyFriends = "You doesn't have friends yet";
@@ -62,6 +65,8 @@ const String errorException =
 const String errorVersion = "New version available.";
 const String rememberMe =
     "Stay signed in?\n Do this to reduce the number of times you are asked to sign in.";
+const String codeFailed = "your code is incorrect";
+const String codeException = "Oops Something went wrong! please try to login again!";
 
 //for 6 digit code
 String? sixCodeNb = null;
