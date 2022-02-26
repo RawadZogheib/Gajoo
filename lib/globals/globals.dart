@@ -19,8 +19,16 @@ final Color blue_2 = Colors.blue.shade900.withOpacity(0.5);
 final Color red = Colors.red.shade50;
 final Color red_1 = Colors.red.shade900;
 final Color red_2 = Colors.red.shade900.withOpacity(0.5);
-final Color transparent = Colors.transparent;
-final Color black = Colors.black;
+
+Color blue1 = Colors.blue.shade900;
+Color blue2 = Colors.blue.shade50;
+Color red1 = Colors.red.shade900;
+Color red2 = Colors.red.shade50;
+Color yellow1 = Colors.yellow.shade900;
+Color yellow2 = Colors.yellow.shade50;
+
+const Color transparent = Colors.transparent;
+const Color black = Colors.black;
 final Color whiteBlue = HexColor("#f2f3f8");
 final Color white = HexColor("#fdfdfd");
 
