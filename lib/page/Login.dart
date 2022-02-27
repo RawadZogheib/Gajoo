@@ -4,34 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/code/codeDialogLogin.dart';
 import 'package:gajoo/widgets/other/errorAlertDialog.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
-
-Color colEmail = globals.blue; //email
-Color colEmail_1 = globals.blue_1;
-Color colEmail_2 = globals.blue_2;
-
-Color colPass = globals.blue; //password
-Color colPass_1 = globals.blue_1;
-Color colPass_2 = globals.blue_2;
-
-String errTxtEmail = ''; //email error
-Color colErrTxtEmail = globals.transparent;
-String errTxtPass = ''; //password error
-Color colErrTxtPass = globals.transparent;
-String errTxt = ''; //else error
-Color colErrTxt = globals.transparent;
-
-String errTxtForgetPass = '';
-Color colErrForgetPass = globals.transparent;
-
-var oneClick;
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -41,6 +20,26 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  Color colEmail = globals.blue; //email
+  Color colEmail_1 = globals.blue_1;
+  Color colEmail_2 = globals.blue_2;
+
+  Color colPass = globals.blue; //password
+  Color colPass_1 = globals.blue_1;
+  Color colPass_2 = globals.blue_2;
+
+  String errTxtEmail = ''; //email error
+  Color colErrTxtEmail = globals.transparent;
+  String errTxtPass = ''; //password error
+  Color colErrTxtPass = globals.transparent;
+  String errTxt = ''; //else error
+  Color colErrTxt = globals.transparent;
+
+  String errTxtForgetPass = '';
+  Color colErrForgetPass = globals.transparent;
+
+  var oneClick = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -55,131 +54,128 @@ class _loginState extends State<login> {
       onWillPop: () async => _back(),
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
-        body: ListView(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(fontSize: 40.0, color: Colors.black),
-                    ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: Text(
+                    "Login",
+                    style: const TextStyle(fontSize: 40.0, color: Colors.black),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 120.0,
-                    ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.account_circle,
+                    size: 120.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
-                    child: myTextInput(
-                        textString: "Enter Your Email Address",
-                        labelText: 'Enter Your Email Address',
-                        colBlue: colEmail,
-                        colBlue_1: colEmail_1,
-                        colBlue_2: colEmail_2,
-                        textInputAction: TextInputAction.next,
-                        spaceAllowed: false,
-                        obscure: false,
-                        onChange: (value) {
-                          globals.emailLogin = value;
-                        }),
-                  ),
-                  myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
-                  WarningPopup(context,errTxtEmail),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
-                    child: myTextInput(
-                      textString: "Enter Your Password",
-                      labelText: 'Enter Your Password',
-                      colBlue: colPass,
-                      colBlue_1: colPass_1,
-                      colBlue_2: colPass_2,
-                      maxLines: 1,
-                      textInputAction: TextInputAction.none,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                  child: myTextInput(
+                      textString: "Enter Your Email Address",
+                      labelText: 'Enter Your Email Address',
+                      colBlue: colEmail,
+                      colBlue_1: colEmail_1,
+                      colBlue_2: colEmail_2,
+                      textInputAction: TextInputAction.next,
                       spaceAllowed: false,
-                      obscure: true,
+                      obscure: false,
                       onChange: (value) {
-                        globals.passwordLogin = value;
-                        //print(globals.Login);
-                      },
-                    ),
+                        globals.emailLogin = value;
+                      }),
+                ),
+                myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
+                //WarningPopup(context, errTxtEmail),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                  child: myTextInput(
+                    textString: "Enter Your Password",
+                    labelText: 'Enter Your Password',
+                    colBlue: colPass,
+                    colBlue_1: colPass_1,
+                    colBlue_2: colPass_2,
+                    maxLines: 1,
+                    textInputAction: TextInputAction.none,
+                    spaceAllowed: false,
+                    obscure: true,
+                    onChange: (value) {
+                      globals.passwordLogin = value;
+                      //print(globals.Login);
+                    },
                   ),
-                  myErrorText(errorText: errTxtPass, color: colErrTxtPass),
-                  WarningPopup(context,errTxtPass),
-                  Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: InkWell(
-                      child: btn(btnText: "Submit"),
-                      onTap: () {
-                        try {
-                          if (oneClick == 0) {
-                            _LoginCtrl();
-                          }
-                        } catch (e) {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  ErrorAlertDialog(
-                                      message: globals.errorException));
+                ),
+                myErrorText(errorText: errTxtPass, color: colErrTxtPass),
+                //WarningPopup(context, errTxtPass),
+                Padding(
+                  padding: const EdgeInsets.all(28.0),
+                  child: InkWell(
+                    child: btn(btnText: "Submit"),
+                    onTap: () {
+                      try {
+                        if (oneClick == 0) {
+                          _LoginCtrl();
                         }
-                      },
-                    ),
+                      } catch (e) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => ErrorAlertDialog(
+                                message: globals.errorException));
+                      }
+                    },
                   ),
-                  myErrorText(errorText: errTxt, color: colErrTxt),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.001),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * 0.05),
-                          child: InkWell(
-                            child: Text(
-                              'Forget Password',
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
+                ),
+                myErrorText(errorText: errTxt, color: colErrTxt),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.001),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.05),
+                        child: InkWell(
+                          child: const Text(
+                            'Forget Password',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                          onTap: () {
+                            //_checkIfIsRegist();
+                            Navigator.pushNamed(context, '/forgetPassword');
+                          },
+                        ),
+                      ),
+                      const Text("didn't have an account? "),
+                      Row(
+                        children: [
+                          InkWell(
+                            child: const Text(
+                              "create new one",
+                              style: const TextStyle(color: Colors.blue),
                             ),
                             onTap: () {
-                              //_checkIfIsRegist();
-                              Navigator.pushNamed(context, '/forgetPassword');
+                              _nullLogin();
+                              Navigator.pushNamed(context, '/Registration');
                             },
                           ),
-                        ),
-                        Text("didn't have an account? "),
-                        Row(
-                          children: [
-                            InkWell(
-                              child: Text(
-                                "create new one",
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                              onTap: () {
-                                _nullLogin();
-                                Navigator.pushNamed(context, '/Registration');
-                              },
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -197,7 +193,7 @@ class _loginState extends State<login> {
     colErrTxt = globals.transparent;
 
     if (globals.emailLogin != null && globals.emailLogin != '') {
-      if(mounted) {
+      if (mounted) {
         setState(() {
           colEmail = Colors.blue.shade50;
           colEmail_1 = Colors.blue.shade900;
@@ -206,7 +202,7 @@ class _loginState extends State<login> {
       }
     } else {
       isEmpty = true;
-      if(mounted) {
+      if (mounted) {
         setState(() {
           colEmail = Colors.red.shade50;
           colEmail_1 = Colors.red.shade900;
@@ -218,7 +214,7 @@ class _loginState extends State<login> {
     }
 
     if (globals.passwordLogin != null && globals.passwordLogin != '') {
-      if(mounted) {
+      if (mounted) {
         setState(() {
           colPass = Colors.blue.shade50;
           colPass_1 = Colors.blue.shade900;
@@ -227,7 +223,7 @@ class _loginState extends State<login> {
       }
     } else {
       isEmpty = true;
-      if(mounted) {
+      if (mounted) {
         setState(() {
           colPass = Colors.red.shade50;
           colPass_1 = Colors.red.shade900;
@@ -271,13 +267,14 @@ class _loginState extends State<login> {
       //print("welcome");
       if (body[0] == "true") {
         showDialog(
-            context: context,
-            builder: (BuildContext context) => codeDialogLogin()).then((exit) {
-              if(mounted) {
-                setState(() {
-                  _nullTextCode();
-                });
-              }
+                context: context,
+                builder: (BuildContext context) => const codeDialogLogin())
+            .then((exit) {
+          if (mounted) {
+            setState(() {
+              _nullTextCode();
+            });
+          }
         });
       } else if (body[0] == "success") {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -325,11 +322,12 @@ class _loginState extends State<login> {
         //     colErrTxt = globals.red_1;
         //   });
       } else if (body[0] == "errorVersion") {
-        if(mounted) {
+        if (mounted) {
           setState(() {
-            errTxt =
-                "Your version: " + globals.version + "\n" +
-                    globals.errorVersion;
+            errTxt = "Your version: " +
+                globals.version +
+                "\n" +
+                globals.errorVersion;
             colErrTxt = globals.red_1;
           });
         }
@@ -340,14 +338,14 @@ class _loginState extends State<login> {
         colPass = Colors.red.shade50;
         colPass_1 = Colors.red.shade900;
         colPass_2 = Colors.red.shade900.withOpacity(0.5);
-        if(mounted) {
+        if (mounted) {
           setState(() {
             errTxt = globals.warning8;
             colErrTxt = globals.red_1;
           });
         }
       } else {
-        if(mounted) {
+        if (mounted) {
           setState(() {
             errTxt = globals.errorElse;
             colErrTxt = globals.red_1;
@@ -356,7 +354,7 @@ class _loginState extends State<login> {
       }
     } catch (e) {
       print(e);
-      if(mounted) {
+      if (mounted) {
         setState(() {
           errTxt = globals.errorException;
           colErrTxt = globals.red_1;
@@ -370,7 +368,7 @@ class _loginState extends State<login> {
   }
 
   _nullLogin() {
-    if(mounted) {
+    if (mounted) {
       setState(() {
         globals.clearLogin();
 
@@ -391,21 +389,21 @@ class _loginState extends State<login> {
     globals.sixCodeNb = null;
   }
 
-  // _checkIfIsRegist() async {
-  //   try {
-  //     var data = {
-  //       'version': globals.version,
-  //       'email': globals.emailLogin,
-  //     };
-  //
-  //     var res =
-  //         await CallApi().postData(data, 'Login/Control/(Control)Login.php');
-  //     print(res);
-  //     print(res.body);
-  //     //print("pppppp");
-  //     List<dynamic> body = json.decode(res.body);
-  //   }catch(e){
-  //
-  //   }
-  // }
+// _checkIfIsRegist() async {
+//   try {
+//     var data = {
+//       'version': globals.version,
+//       'email': globals.emailLogin,
+//     };
+//
+//     var res =
+//         await CallApi().postData(data, 'Login/Control/(Control)Login.php');
+//     print(res);
+//     print(res.body);
+//     //print("pppppp");
+//     List<dynamic> body = json.decode(res.body);
+//   }catch(e){
+//
+//   }
+// }
 }
