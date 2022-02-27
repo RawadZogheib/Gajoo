@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/other/animatedLogo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +19,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      body: Wrap(
+        children: [
+          Image.asset(
+            'Assets/HomePage/logo.png',
+            height: 95,
+            width: 300,
+            fit: BoxFit.contain,
+          ),
+          AnimatedLogo(),
+        ],
+      ),
     );
   }
 }
