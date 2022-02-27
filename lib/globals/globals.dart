@@ -9,7 +9,7 @@ import 'package:gajoo/hexColor/hexColor.dart';
 const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
-const String myIP = "https://kwikcode.net/moonLighters_php/";
+const String myIP = "https://kwikcode.net/gajoo_php/";
 
 
 //Colors

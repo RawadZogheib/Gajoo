@@ -490,6 +490,7 @@ class _registrationState extends State<registration> {
           colRePass_1 = globals.red_1;
           colRePass_2 = globals.red_2;
           errTxtRepass = globals.warning7;
+          WarningPopup(context,globals.warning7);
         });
       }
 
@@ -508,6 +509,7 @@ class _registrationState extends State<registration> {
           colPhoneNb_1 = globals.red_1;
           colPhoneNb_2 = globals.red_2;
           errTxtPhone = globals.warning7;
+          WarningPopup(context,globals.warning7);
         });
       }
 
@@ -577,6 +579,7 @@ class _registrationState extends State<registration> {
             colRePass_2 = globals.red_2;
             colErrTxtRepass = globals.red_1;
             errTxtRepass = globals.error3;
+            ErrorPopup(context, globals.error3);
           });
         } else if (globals.userName!.contains(" ")) {
           setState(() {
@@ -609,6 +612,7 @@ class _registrationState extends State<registration> {
             colPhoneNb_2 = globals.red_2;
             colErrTxtPhone = globals.red_1;
             errTxtPhone = globals.error9;
+            ErrorPopup(context, globals.error9);
           });
         } else {
           _reg(); // Calling the Function for Database
@@ -757,11 +761,13 @@ class _registrationState extends State<registration> {
             colRePass_2 = globals.red_2;
             colErrTxtRepass = globals.red_1;
             errTxtRepass = globals.error3;
+            ErrorPopup(context, globals.error3);
           });
         } else if (body[0] == "error4") {
           setState(() {
             colErrTxt = globals.red_1;
             errTxt = globals.error4;
+            ErrorPopup(context, globals.error4);
           });
         } else if (body[0] == "error5") {
           setState(() {
@@ -783,17 +789,20 @@ class _registrationState extends State<registration> {
           setState(() {
             colErrTxt = globals.red_1;
             errTxt = globals.warning7;
+            WarningPopup(context, globals.warning7);
           });
         } else if (body[0] == "errorVersion") {
           setState(() {
             colErrTxt = globals.red_1;
             errTxt = globals.errorVersion;
+            ErrorPopup(context, globals.errorVersion);
           });
         } else {
           print(body[0]);
           setState(() {
             colErrTxt = globals.red_1;
             errTxt = globals.errorElse;
+            ErrorPopup(context, globals.errorElse);
           });
         }
         /* } else {
@@ -833,12 +842,14 @@ class _registrationState extends State<registration> {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = 'No nulls allowed';
+          ErrorPopup(context, errTxt);
         });
       }
     } catch (e) {
       setState(() {
         colErrTxt = globals.red_1;
         errTxt = globals.errorException;
+        ErrorPopup(context, globals.errorException);
       });
     }
   }
