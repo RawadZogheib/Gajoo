@@ -11,7 +11,7 @@ import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/PopUp/errorWarningPopup.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 Color colEmail = globals.blue; //email
 Color colEmail_1 = globals.blue_1;
