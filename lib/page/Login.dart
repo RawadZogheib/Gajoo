@@ -197,37 +197,45 @@ class _loginState extends State<login> {
     colErrTxt = globals.transparent;
 
     if (globals.emailLogin != null && globals.emailLogin != '') {
-      setState(() {
-        colEmail = Colors.blue.shade50;
-        colEmail_1 = Colors.blue.shade900;
-        colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
-      });
+      if(mounted) {
+        setState(() {
+          colEmail = Colors.blue.shade50;
+          colEmail_1 = Colors.blue.shade900;
+          colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+        });
+      }
     } else {
       isEmpty = true;
-      setState(() {
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
-        errTxtEmail = globals.warning7;
-        colErrTxtEmail = globals.red_1;
-      });
+      if(mounted) {
+        setState(() {
+          colEmail = Colors.red.shade50;
+          colEmail_1 = Colors.red.shade900;
+          colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+          errTxtEmail = globals.warning7;
+          colErrTxtEmail = globals.red_1;
+        });
+      }
     }
 
     if (globals.passwordLogin != null && globals.passwordLogin != '') {
-      setState(() {
-        colPass = Colors.blue.shade50;
-        colPass_1 = Colors.blue.shade900;
-        colPass_2 = Colors.blue.shade900.withOpacity(0.5);
-      });
+      if(mounted) {
+        setState(() {
+          colPass = Colors.blue.shade50;
+          colPass_1 = Colors.blue.shade900;
+          colPass_2 = Colors.blue.shade900.withOpacity(0.5);
+        });
+      }
     } else {
       isEmpty = true;
-      setState(() {
-        colPass = Colors.red.shade50;
-        colPass_1 = Colors.red.shade900;
-        colPass_2 = Colors.red.shade900.withOpacity(0.5);
-        errTxtPass = globals.warning7;
-        colErrTxtPass = globals.red_1;
-      });
+      if(mounted) {
+        setState(() {
+          colPass = Colors.red.shade50;
+          colPass_1 = Colors.red.shade900;
+          colPass_2 = Colors.red.shade900.withOpacity(0.5);
+          errTxtPass = globals.warning7;
+          colErrTxtPass = globals.red_1;
+        });
+      }
     }
 
     if (isEmpty == false) {
@@ -265,9 +273,11 @@ class _loginState extends State<login> {
         showDialog(
             context: context,
             builder: (BuildContext context) => codeDialogLogin()).then((exit) {
-          setState(() {
-            _nullTextCode();
-          });
+              if(mounted) {
+                setState(() {
+                  _nullTextCode();
+                });
+              }
         });
       } else if (body[0] == "success") {
         SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -315,11 +325,14 @@ class _loginState extends State<login> {
         //     colErrTxt = globals.red_1;
         //   });
       } else if (body[0] == "errorVersion") {
-        setState(() {
-          errTxt =
-              "Your version: " + globals.version + "\n" + globals.errorVersion;
-          colErrTxt = globals.red_1;
-        });
+        if(mounted) {
+          setState(() {
+            errTxt =
+                "Your version: " + globals.version + "\n" +
+                    globals.errorVersion;
+            colErrTxt = globals.red_1;
+          });
+        }
       } else if (body[0] == "error8") {
         colEmail = Colors.red.shade50;
         colEmail_1 = Colors.red.shade900;
@@ -327,22 +340,28 @@ class _loginState extends State<login> {
         colPass = Colors.red.shade50;
         colPass_1 = Colors.red.shade900;
         colPass_2 = Colors.red.shade900.withOpacity(0.5);
-        setState(() {
-          errTxt = globals.warning8;
-          colErrTxt = globals.red_1;
-        });
+        if(mounted) {
+          setState(() {
+            errTxt = globals.warning8;
+            colErrTxt = globals.red_1;
+          });
+        }
       } else {
-        setState(() {
-          errTxt = globals.errorElse;
-          colErrTxt = globals.red_1;
-        });
+        if(mounted) {
+          setState(() {
+            errTxt = globals.errorElse;
+            colErrTxt = globals.red_1;
+          });
+        }
       }
     } catch (e) {
       print(e);
-      setState(() {
-        errTxt = globals.errorException;
-        colErrTxt = globals.red_1;
-      });
+      if(mounted) {
+        setState(() {
+          errTxt = globals.errorException;
+          colErrTxt = globals.red_1;
+        });
+      }
     }
   }
 
@@ -351,19 +370,21 @@ class _loginState extends State<login> {
   }
 
   _nullLogin() {
-    setState(() {
-      globals.clearLogin();
+    if(mounted) {
+      setState(() {
+        globals.clearLogin();
 
-      errTxtEmail = '';
-      errTxtPass = '';
-      errTxt = '';
-      colEmail = globals.blue; //email
-      colEmail_1 = globals.blue_1;
-      colEmail_2 = globals.blue_2;
-      colPass = globals.blue; //password
-      colPass_1 = globals.blue_1;
-      colPass_2 = globals.blue_2;
-    });
+        errTxtEmail = '';
+        errTxtPass = '';
+        errTxt = '';
+        colEmail = globals.blue; //email
+        colEmail_1 = globals.blue_1;
+        colEmail_2 = globals.blue_2;
+        colPass = globals.blue; //password
+        colPass_1 = globals.blue_1;
+        colPass_2 = globals.blue_2;
+      });
+    }
   }
 
   _nullTextCode() {
