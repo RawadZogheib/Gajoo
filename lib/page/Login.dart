@@ -92,7 +92,6 @@ class _loginState extends State<login> {
                       }),
                 ),
                 myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
-                //WarningPopup(context, errTxtEmail),
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
@@ -113,7 +112,6 @@ class _loginState extends State<login> {
                   ),
                 ),
                 myErrorText(errorText: errTxtPass, color: colErrTxtPass),
-                //WarningPopup(context, errTxtPass),
                 Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: InkWell(
