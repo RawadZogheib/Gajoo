@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AnimatedLogo extends StatefulWidget {
-  const AnimatedLogo({Key? key}) : super(key: key);
+  var onTapRed;
+  var onTapYellow;
+  var onTapBlue;
+  var onTapGreen;
+
+  AnimatedLogo(
+      {required this.onTapRed,
+      required this.onTapYellow,
+      required this.onTapBlue,
+      required this.onTapGreen});
 
   @override
   _AnimatedLogoState createState() => _AnimatedLogoState();
@@ -22,7 +31,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
       child: Stack(
         children: [
           Image.asset(
-            'Assets/HomePage/img1.png',
+            'Assets/HomePage/AnimatedLogo/img1.png',
             fit: BoxFit.contain,
           ),
           /////////////////////////////////////////////////
@@ -35,9 +44,9 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: () => print('red'),
+                    onTap: () => widget.onTapRed(),
                     onHover: (val) {
-                      if (val) {
+                      if (val == true) {
                         setState(() {
                           setState(() {
                             _hide2 = true;
@@ -55,7 +64,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                       }
                     },
                     child: Image.asset(
-                      'Assets/HomePage/img2.png',
+                      'Assets/HomePage/AnimatedLogo/img2.png',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -71,9 +80,9 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: () => print('yellow'),
+                    onTap: () => widget.onTapYellow(),
                     onHover: (val) {
-                      if (val) {
+                      if (val == true) {
                         setState(() {
                           _hide1 = true;
                           _hide3 = true;
@@ -89,7 +98,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                       }
                     },
                     child: Image.asset(
-                      'Assets/HomePage/img3.png',
+                      'Assets/HomePage/AnimatedLogo/img3.png',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -105,9 +114,9 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: () => print('blue'),
+                    onTap: () => widget.onTapBlue(),
                     onHover: (val) async {
-                      if (val) {
+                      if (val == true) {
                         setState(() {
                           _hide1 = true;
                           _hide2 = true;
@@ -123,7 +132,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                       }
                     },
                     child: Image.asset(
-                      'Assets/HomePage/img4.png',
+                      'Assets/HomePage/AnimatedLogo/img4.png',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -139,9 +148,9 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: () => print('green'),
+                    onTap: () => widget.onTapGreen(),
                     onHover: (val) async {
-                      if (val) {
+                      if (val == true) {
                         setState(() {
                           _hide1 = true;
                           _hide2 = true;
@@ -157,7 +166,7 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                       }
                     },
                     child: Image.asset(
-                      'Assets/HomePage/img5.png',
+                      'Assets/HomePage/AnimatedLogo/img5.png',
                       fit: BoxFit.contain,
                     ),
                   ),
