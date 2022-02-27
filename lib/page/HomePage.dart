@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 200,
                     ),
                     Center(
                       child: AnimatedLogo(
