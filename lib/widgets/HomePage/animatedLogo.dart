@@ -27,14 +27,14 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 300,
-      width: 300,
+      height: 400,
+      width: 400,
       child: Stack(
         children: [
           Image.asset(
             'Assets/HomePage/AnimatedLogo/img1.png',
-            height: 300,
-            width: 300,
+            height: 400,
+            width: 400,
             fit: BoxFit.contain,
           ),
           /////////////////////////////////////////////////
@@ -68,8 +68,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img2.png',
-                      height: 100,
-                      width: 100,
+                      height: 150,
+                      width: 150,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -104,8 +104,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img3.png',
-                      height: 100,
-                      width: 100,
+                      height: 150,
+                      width: 150,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -140,8 +140,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img4.png',
-                      height: 100,
-                      width: 100,
+                      height: 150,
+                      width: 150,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -176,8 +176,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img5.png',
-                      height: 100,
-                      width: 100,
+                      height: 150,
+                      width: 150,
                       fit: BoxFit.contain,
                     ),
                   ),
