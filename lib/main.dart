@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/page/HomePage.dart';
+import 'package:gajoo/page/Login.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: FirstPage(),
-        initialRoute: '/HomePage',
+        initialRoute: '/Login',
         routes: {
-          '/HomePage': (context) => HomePage(),
+          '/Login': (context) => login(),
         });
     //});
   }
