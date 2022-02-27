@@ -17,7 +17,6 @@ class AnimatedLogo extends StatefulWidget {
 }
 
 class _AnimatedLogoState extends State<AnimatedLogo> {
-  int _time = 40;
   bool _hide1 = false;
   bool _hide2 = false;
   bool _hide3 = false;
@@ -25,13 +24,17 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 180,
-      width: 180,
+      height: _height * 0.5,
+      width: _width * 0.5,
       child: Stack(
         children: [
           Image.asset(
             'Assets/HomePage/AnimatedLogo/img1.png',
+            height: _height * 0.5,
+            width: _width * 0.5,
             fit: BoxFit.contain,
           ),
           /////////////////////////////////////////////////
@@ -65,6 +68,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img2.png',
+                      height: _height * 0.2,
+                      width: _width * 0.2,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -99,6 +104,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img3.png',
+                      height: _height * 0.2,
+                      width: _width * 0.2,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -133,6 +140,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img4.png',
+                      height: _height * 0.2,
+                      width: _width * 0.2,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -167,6 +176,8 @@ class _AnimatedLogoState extends State<AnimatedLogo> {
                     },
                     child: Image.asset(
                       'Assets/HomePage/AnimatedLogo/img5.png',
+                      height: _height * 0.2,
+                      width: _width * 0.2,
                       fit: BoxFit.contain,
                     ),
                   ),
