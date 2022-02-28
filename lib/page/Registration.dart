@@ -110,26 +110,12 @@ class _registrationState extends State<registration> {
       onWillPop: () async => _back(),
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Sign up",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-          ),
-          leading: new IconButton(
-              icon: new Icon(Icons.arrow_back),
-              onPressed: () {
-                _back();
-              }),
-        ),
-        body: Center(
-          child: ListView(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(28.0),
                     child: Text(
                       "Create Your Account",
                       style: TextStyle(
@@ -145,7 +131,8 @@ class _registrationState extends State<registration> {
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 20.0, top: 8.0, right: 15.0, bottom: 8.0),
+                              left: MediaQuery.of(context).size.width * 0.3,
+                              top: 8.0, right: 15.0, bottom: 8.0),
                           child: myTextInput(
                             textString: "First Name",
                             labelText: 'First Name',
@@ -165,7 +152,9 @@ class _registrationState extends State<registration> {
                         width: MediaQuery.of(context).size.width * 0.50,
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: 15.0, top: 8.0, right: 20.0, bottom: 8.0),
+                              left: 15.0, top: 8.0,
+                              right: MediaQuery.of(context).size.width * 0.3,
+                              bottom: 8.0),
                           child: myTextInput(
                             textString: "Last Name",
                             labelText: 'Last Name',
@@ -187,16 +176,19 @@ class _registrationState extends State<registration> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            right: 8.0, left: 28.0, bottom: 8.0),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.3,
+                            bottom: 8.0,),
                         child: Container(
                           child: myErrorText(
                               errorText: errTxtFname, color: colErrTxtFname),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 10.0, bottom: 8.0, right: 28.0),
+                        padding: EdgeInsets.only(
+                            left: 3.0,
+                            bottom: 8.0,
+                            right: MediaQuery.of(context).size.width * 0.3),
                         child: Container(
                           child: myErrorText(
                               errorText: errTxtLname, color: colErrTxtLname),
@@ -204,11 +196,12 @@ class _registrationState extends State<registration> {
                       )
                     ],
                   ),
-                  WarningPopup(context,errTxtFname),
-                  WarningPopup(context,errTxtLname),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        bottom: 8.0),
                     child: myTextInput(
                       textString: "UserName",
                       labelText: 'UserName',
@@ -224,10 +217,13 @@ class _registrationState extends State<registration> {
                     ),
                   ),
                   myErrorText(errorText: errTxtUsr, color: colErrTxtUsr),
-                  WarningPopup(context,errTxtUsr),
+
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        bottom: 8.0),
                     child: myTextInput(
                       textString: "Email Address",
                       labelText: 'Email Address',
@@ -243,10 +239,13 @@ class _registrationState extends State<registration> {
                     ),
                   ),
                   myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
-                  WarningPopup(context,errTxtEmail),
+
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        bottom: 8.0),
                     child: myTextInput(
                       textString: "Password",
                       labelText: 'Password',
@@ -263,10 +262,13 @@ class _registrationState extends State<registration> {
                     ),
                   ),
                   myErrorText(errorText: errTxtPass, color: colErrTxtPass),
-                  WarningPopup(context,errTxtPass),
+
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        bottom: 8.0),
                     child: myTextInput(
                       textString: "ReEnterPassword",
                       labelText: 'ReEnterPassword',
@@ -284,7 +286,10 @@ class _registrationState extends State<registration> {
                   ),
                   myErrorText(errorText: errTxtRepass, color: colErrTxtRepass),
                   Padding(
-                    padding: EdgeInsets.only(left: 20.0, top: 8.0, right: 20.0),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3),
                     child: myTextInput(
                       textString: "Phone Number",
                       labelText: 'Phone Number',
@@ -346,10 +351,12 @@ class _registrationState extends State<registration> {
                     ],
                   ),
                   myErrorText(errorText: errTxtGender, color: colErrTxtGender),
-                  WarningPopup(context,errTxtGender),
+
                   Padding(
                     padding:
-                    const EdgeInsets.only(top: 18.0, left: 8.0, right: 8.0),
+                    EdgeInsets.only(top: 18.0,
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        right: MediaQuery.of(context).size.width * 0.3),
                     child: myDateOfBirth(),
                   ),
                   myErrorText(errorText: errTxtDate, color: colErrTxtDate),
@@ -365,8 +372,7 @@ class _registrationState extends State<registration> {
                   myErrorText(errorText: errTxt, color: colErrTxt),
 
                 ],
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -394,6 +400,7 @@ class _registrationState extends State<registration> {
           colFName_1 = globals.red_1;
           colFName_2 = globals.red_2;
           errTxtFname = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
         //color red
         //text1 = globals.error1;
@@ -416,6 +423,7 @@ class _registrationState extends State<registration> {
           colLName_1 = globals.red_1;
           colLName_2 = globals.red_2;
           errTxtLname = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
         //color red
         //text2 = globals.error1;
@@ -436,6 +444,7 @@ class _registrationState extends State<registration> {
           colUserName_1 = globals.red_1;
           colUserName_2 = globals.red_2;
           errTxtUsr = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
       }
 
@@ -454,6 +463,7 @@ class _registrationState extends State<registration> {
           colEmail_1 = globals.red_1;
           colEmail_2 = globals.red_2;
           errTxtEmail = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
       }
 
@@ -472,6 +482,7 @@ class _registrationState extends State<registration> {
           colPass_1 = globals.red_1;
           colPass_2 = globals.red_2;
           errTxtPass = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
       }
 
@@ -526,6 +537,7 @@ class _registrationState extends State<registration> {
           colRadioMale_1 = globals.red_1;
           colRadioFem_1 = globals.red_1;
           errTxtGender = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
       }
 
@@ -555,6 +567,7 @@ class _registrationState extends State<registration> {
             colEmail_2 = globals.red_2;
             colErrTxtEmail = globals.red_1;
             errTxtEmail = globals.warning2_5;
+            WarningPopup(context, globals.warning2_5);
           });
         } else if (globals.password!.length < 8) {
           setState(() {
@@ -563,6 +576,7 @@ class _registrationState extends State<registration> {
             colPass_2 = globals.red_2;
             colErrTxtPass = globals.red_1;
             errTxtPass = globals.warning2_3;
+            WarningPopup(context, globals.warning2_3);
           });
         } else if (!passExp.hasMatch(globals.password!)) {
           setState(() {
@@ -571,6 +585,7 @@ class _registrationState extends State<registration> {
             colPass_2 = globals.red_2;
             colErrTxtPass = globals.red_1;
             errTxtPass = globals.warning2_3;
+            WarningPopup(context, globals.warning2_3);
           });
         } else if (globals.password != globals.repassword) {
           setState(() {
@@ -588,6 +603,7 @@ class _registrationState extends State<registration> {
             colUserName_2 = globals.red_2;
             colErrTxtUsr = globals.red_1;
             errTxtUsr = globals.warning1;
+            WarningPopup(context, globals.warning1);
           });
         } else if (globals.userName!.length < 8) {
           setState(() {
@@ -596,6 +612,7 @@ class _registrationState extends State<registration> {
             colUserName_2 = globals.red_2;
             colErrTxtUsr = globals.red_1;
             errTxtUsr = globals.warning2_1;
+            WarningPopup(context, globals.warning2_1);
           });
         } else if (!exp.hasMatch(globals.userName!)) {
           setState(() {
@@ -604,6 +621,7 @@ class _registrationState extends State<registration> {
             colUserName_2 = globals.red_2;
             colErrTxtUsr = globals.red_1;
             errTxtUsr = globals.warning2_2;
+            WarningPopup(context, globals.warning2_2);
           });
         } else if (!phoneExp.hasMatch(globals.phoneNumber!)) {
           setState(() {
@@ -713,6 +731,7 @@ class _registrationState extends State<registration> {
             colUserName_1 = globals.red_1;
             colUserName_2 = globals.red_2;
             errTxtUsr = globals.warning1;
+            WarningPopup(context, globals.warning1);
           });
         } else if (body[0] == "error2_1") {
           setState(() {
@@ -721,6 +740,7 @@ class _registrationState extends State<registration> {
             colUserName_1 = globals.red_1;
             colUserName_2 = globals.red_2;
             errTxtUsr = globals.warning2_1;
+            WarningPopup(context, globals.warning2_1);
           });
         } else if (body[0] == "error2_2") {
           setState(() {
@@ -729,6 +749,7 @@ class _registrationState extends State<registration> {
             colUserName_1 = globals.red_1;
             colUserName_2 = globals.red_2;
             errTxtUsr = globals.warning2_2;
+            WarningPopup(context, globals.warning2_2);
           });
         } else if (body[0] == "error2_3") {
           setState(() {
@@ -737,6 +758,7 @@ class _registrationState extends State<registration> {
             colPass_2 = globals.red_2;
             colErrTxtPass = globals.red_1;
             errTxtPass = globals.warning2_3;
+            WarningPopup(context, globals.warning2_3);
           });
         } else if (body[0] == "error2_5") {
           setState(() {
@@ -745,6 +767,7 @@ class _registrationState extends State<registration> {
             colEmail_2 = globals.red_2;
             colErrTxtEmail = globals.red_1;
             errTxtEmail = globals.warning2_5;
+            WarningPopup(context, globals.warning2_5);
           });
         } else if (body[0] == "error2_7") {
           setState(() {
@@ -753,6 +776,7 @@ class _registrationState extends State<registration> {
             colPhoneNb_2 = globals.red_2;
             colErrTxtPhone = globals.red_1;
             errTxtPhone = globals.error2_7;
+            ErrorPopup(context, globals.error2_7);
           });
         } else if (body[0] == "error3") {
           setState(() {
@@ -776,6 +800,7 @@ class _registrationState extends State<registration> {
             colUserName_1 = globals.red_1;
             colUserName_2 = globals.red_2;
             errTxtUsr = globals.warning5;
+            WarningPopup(context, globals.warning5);
           });
         } else if (body[0] == "error6") {
           setState(() {
@@ -784,6 +809,7 @@ class _registrationState extends State<registration> {
             colEmail_1 = globals.red_1;
             colEmail_2 = globals.red_2;
             errTxtEmail = globals.warning6;
+            WarningPopup(context, globals.warning6);
           });
         } else if (body[0] == "error7") {
           setState(() {
