@@ -1,5 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 
 class CardFb1 extends StatelessWidget {
   final String text;
@@ -20,8 +20,8 @@ class CardFb1 extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 250,
         height: 230,
+        width: 250,
         padding: const EdgeInsets.all(30.0),
         margin: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(

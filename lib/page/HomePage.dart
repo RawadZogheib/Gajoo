@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomCarousel.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
+import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
@@ -17,75 +19,82 @@ class _HomePageState extends State<HomePage> {
   int _currentActive = 0;
   String _currentImage = 'img1.webp';
 
-  List<Widget> cards = [
+  final List<Widget> _coreTeam = [
     CardFb1(
         text: "Ghada Zogheib",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img1.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img1.png",
+        subtitle: "C.E.O.",
+        onPressed: () {}),
+    CardFb1(
+        text: "Michel Nachar",
+        imageUrl: "Assets/HomePage/ProfilePicture/img2.png",
+        subtitle: "Project Manager",
+        onPressed: () {}),
+  ];
+
+  final List<Widget> _teachers = [
+    CardFb1(
+        text: "Ghada Zogheib",
+        imageUrl: "Assets/HomePage/ProfilePicture/img1.png",
         subtitle: "Frensh, English",
         onPressed: () {}),
     CardFb1(
         text: "Michel Nachar",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img2.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img2.png",
         subtitle: "Arabic anja2 :p",
         onPressed: () {}),
     CardFb1(
-        text: "Clara Zeidan",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img3.png",
+        text: "Rawad Zogheib",
+        imageUrl: "Assets/HomePage/ProfilePicture/img3.png",
         subtitle: "Arabic, French, English",
         onPressed: () {}),
     CardFb1(
-        text: "Rawad Zogheib",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img1.png",
+        text: "Clara Zeidan",
+        imageUrl: "Assets/HomePage/ProfilePicture/img1.png",
         subtitle: "Arabic, French, English",
         onPressed: () {}),
     CardFb1(
         text: "Felix Gedeon",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img2.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img2.png",
         subtitle: "English",
         onPressed: () {}),
     CardFb1(
         text: "Piere ElAsmar",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img3.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img3.png",
         subtitle: "Russian, English",
         onPressed: () {}),
     CardFb1(
         text: "Philips Maalouf",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img1.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img1.png",
         subtitle: "Arabic, Spanish",
         onPressed: () {}),
     CardFb1(
         text: "Joe Skandar",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img2.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img2.png",
         subtitle: "Arabic",
         onPressed: () {}),
     CardFb1(
         text: "Nabil Kenaan",
-        imageUrl:
-            "Assets/HomePage/ProfilePicture/img3.png",
+        imageUrl: "Assets/HomePage/ProfilePicture/img3.png",
         subtitle: "Arabic, Frensh",
         onPressed: () {}),
   ];
 
   final double carouselItemMargin = 16;
+  final InfiniteScrollController _infiniteController = InfiniteScrollController(
+    initialScrollOffset: 0.0,
+  );
 
-  late PageController _pageController;
-  int _position = 0;
-
-  final ScrollController _controller = ScrollController();
+  // late PageController _pageController;
+  // int _position = 0;
+  //
+  // final ScrollController _controller = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _pageController = PageController(initialPage: 0, viewportFraction: .2);
+    //_pageController = PageController(initialPage: 0, viewportFraction: .2);
   }
 
   @override
@@ -97,29 +106,32 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  'Assets/HomePage/logo.png',
-                  height: 95,
-                  width: 300,
-                  fit: BoxFit.contain,
+          SizedBox(
+            height: _height * 0.15,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'Assets/HomePage/logo.png',
+                    height: 95,
+                    width: 300,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-              Container(
-                height: 60,
-                width: 120,
-                padding: const EdgeInsets.only(right: 16.0),
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/Login'),
-                  child: const Text('Login'),
+                Container(
+                  height: 60,
+                  width: 120,
+                  margin: const EdgeInsets.only(right: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/Login'),
+                    child: const Text('Login'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Expanded(
             child: Padding(
@@ -128,16 +140,103 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(32.0),
                   topLeft: Radius.circular(32.0),
-                  bottomRight: Radius.circular(32.0),
-                  bottomLeft: Radius.circular(32.0),
+                  bottomRight: Radius.circular(8.0),
+                  bottomLeft: Radius.circular(8.0),
                 ),
-                child: ListView(
-                  controller: ScrollController(),
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
+                child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: ListView(
+                    controller: ScrollController(),
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(32.0),
+                              topLeft: Radius.circular(32.0),
+                              bottomRight: Radius.circular(32.0),
+                              bottomLeft: Radius.circular(32.0),
+                            ),
+                            child: Container(
+                              height: _height * 0.82,
+                              width: _width,
+                              color: Colors.white,
+                              child: Image.asset(
+                                'Assets/HomePage/CoverImage/$_currentImage',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: ImagePagination(
+                                currentActive: _currentActive,
+                                onTapRed: () {
+                                  setState(() {
+                                    _currentActive = 0;
+                                    _currentImage = 'img1.webp';
+                                  });
+                                },
+                                onTapYellow: () {
+                                  setState(() {
+                                    _currentActive = 1;
+                                    _currentImage = 'img2.jpg';
+                                  });
+                                },
+                                onTapBlue: () {
+                                  setState(() {
+                                    _currentActive = 2;
+                                    _currentImage = 'img3.jpg';
+                                  });
+                                },
+                                onTapGreen: () {
+                                  setState(() {
+                                    _currentActive = 3;
+                                    _currentImage = 'img0.jpg';
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      Center(
+                        child: AnimatedLogo(
+                          onTapRed: () {
+                            print('Red');
+                          },
+                          onTapYellow: () {
+                            print('Yellow');
+                          },
+                          onTapBlue: () {
+                            print('Blue');
+                          },
+                          onTapGreen: () {
+                            print('Green');
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text(
+                          'Core Team',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(32.0),
                             topLeft: Radius.circular(32.0),
@@ -145,90 +244,65 @@ class _HomePageState extends State<HomePage> {
                             bottomLeft: Radius.circular(32.0),
                           ),
                           child: Container(
-                            height: _height * 0.82,
-                            width: _width,
-                            color: Colors.white,
-                            child: Image.asset(
-                              'Assets/HomePage/CoverImage/$_currentImage',
-                              fit: BoxFit.cover,
+                            height: 260,
+                            width: 250,
+                            color: Colors.white70,
+                            child: ScrollConfiguration(
+                              //ScrollBehavior can be set for a specific widget.
+                              behavior: MyCustomScrollBehavior(),
+                              child: InfiniteListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _infiniteController,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return _coreTeam[index % _coreTeam.length];
+                                  }),
                             ),
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: ImagePagination(
-                              currentActive: _currentActive,
-                              onTapRed: () {
-                                setState(() {
-                                  _currentActive = 0;
-                                  _currentImage = 'img1.webp';
-                                });
-                              },
-                              onTapYellow: () {
-                                setState(() {
-                                  _currentActive = 1;
-                                  _currentImage = 'img2.jpg';
-                                });
-                              },
-                              onTapBlue: () {
-                                setState(() {
-                                  _currentActive = 2;
-                                  _currentImage = 'img3.jpg';
-                                });
-                              },
-                              onTapGreen: () {
-                                setState(() {
-                                  _currentActive = 3;
-                                  _currentImage = 'img0.jpg';
-                                });
-                              },
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text(
+                          'Teachers',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(32.0),
+                            topLeft: Radius.circular(32.0),
+                            bottomRight: Radius.circular(32.0),
+                            bottomLeft: Radius.circular(32.0),
+                          ),
+                          child: Container(
+                            height: 260,
+                            width: 250,
+                            color: Colors.white70,
+                            child: ScrollConfiguration(
+                              //ScrollBehavior can be set for a specific widget.
+                              behavior: MyCustomScrollBehavior(),
+                              child: InfiniteListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _infiniteController,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return _teachers[index % _teachers.length];
+                                  }),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    Center(
-                      child: AnimatedLogo(
-                        onTapRed: () {
-                          print('Red');
-                        },
-                        onTapYellow: () {
-                          print('Yellow');
-                        },
-                        onTapBlue: () {
-                          print('Blue');
-                        },
-                        onTapGreen: () {
-                          print('Green');
-                        },
                       ),
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    SizedBox(
-                      height: 250,
-                      width: 500,
-                      child: ScrollConfiguration(
-                        //ScrollBehavior can be set for a specific widget.
-                        behavior: MyCustomScrollBehavior(),
-                        child: InfiniteListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              print(index % cards.length);
-                              return cards[index % cards.length];
-                            }),
+                      const SizedBox(
+                        height: 100,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 300,
-                    ),
-                  ],
+                      MyFooter(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -237,21 +311,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-// Widget imageSlider(int position) {
-//   return AnimatedBuilder(
-//     animation: _pageController,
-//     builder: (BuildContext context, widget) {
-//       return Container(
-//         margin: EdgeInsets.all(carouselItemMargin),
-//         child: Center(child: widget),
-//       );
-//     },
-//     child: Container(
-//       child: cards[position],
-//     ),
-//   );
-// }
 }
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
