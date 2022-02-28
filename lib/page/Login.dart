@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
@@ -55,126 +56,159 @@ class _loginState extends State<login> {
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
         body: SingleChildScrollView(
-          child: Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(18.0),
-                  child: Text(
-                    "Login",
-                    style: const TextStyle(fontSize: 40.0, color: Colors.black),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.account_circle,
-                    size: 120.0,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
-                  child: myTextInput(
-                      textString: "Enter Your Email Address",
-                      labelText: 'Enter Your Email Address',
-                      colBlue: colEmail,
-                      colBlue_1: colEmail_1,
-                      colBlue_2: colEmail_2,
-                      textInputAction: TextInputAction.next,
-                      spaceAllowed: false,
-                      obscure: false,
-                      onChange: (value) {
-                        globals.emailLogin = value;
-                      }),
-                ),
-                myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 8.0, right: 20.0, bottom: 8.0),
-                  child: myTextInput(
-                    textString: "Enter Your Password",
-                    labelText: 'Enter Your Password',
-                    colBlue: colPass,
-                    colBlue_1: colPass_1,
-                    colBlue_2: colPass_2,
-                    maxLines: 1,
-                    textInputAction: TextInputAction.none,
-                    spaceAllowed: false,
-                    obscure: true,
-                    onChange: (value) {
-                      globals.passwordLogin = value;
-                      //print(globals.Login);
-                    },
-                  ),
-                ),
-                myErrorText(errorText: errTxtPass, color: colErrTxtPass),
-                Padding(
-                  padding: const EdgeInsets.all(28.0),
-                  child: InkWell(
-                    child: btn(btnText: "Submit"),
-                    onTap: () {
-                      try {
-                        if (oneClick == 0) {
-                          _LoginCtrl();
-                        }
-                      } catch (e) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => ErrorAlertDialog(
-                                message: globals.errorException));
-                      }
-                    },
-                  ),
-                ),
-                myErrorText(errorText: errTxt, color: colErrTxt),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.001),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.05),
-                        child: InkWell(
-                          child: const Text(
-                            'Forget Password',
-                            style: TextStyle(
-                              color: Colors.blue,
-                            ),
-                          ),
-                          onTap: () {
-                            //_checkIfIsRegist();
-                            Navigator.pushNamed(context, '/forgetPassword');
-                          },
+              child: Padding(
+                padding:
+                    EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+                child: Center(
+                  child: Container(
+                        width: 500,
+                        height: 670,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white,
                         ),
-                      ),
-                      const Text("didn't have an account? "),
-                      Row(
-                        children: [
-                          InkWell(
-                            child: const Text(
-                              "create new one",
-                              style: const TextStyle(color: Colors.blue),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 28.0, left: 8.0,
+                                      right: 8.0, bottom: 8.0),
+                              child: Container(
+                                width: 300,
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  'Assets/HomePage/logo.png',
+                                  height: 95,
+                                  width: 300,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
-                            onTap: () {
-                              _nullLogin();
-                              Navigator.pushNamed(context, '/Registration');
-                            },
-                          ),
-                        ],
-                      )
-                    ],
+                            const Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                "Login",
+                                style: const TextStyle(fontSize: 40.0, color: Colors.black),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.05, top: 18.0,
+                                  right: MediaQuery.of(context).size.width * 0.05, bottom: 8.0),
+                              child: Container(
+                                width: 400,
+                                height: 55,
+                                child: myTextInput(
+                                    textString: "Enter Your Email Address",
+                                    labelText: 'Enter Your Email Address',
+                                    colBlue: colEmail,
+                                    colBlue_1: colEmail_1,
+                                    colBlue_2: colEmail_2,
+                                    textInputAction: TextInputAction.next,
+                                    spaceAllowed: false,
+                                    obscure: false,
+                                    onChange: (value) {
+                                      globals.emailLogin = value;
+                                    }),
+                              )
+                            ),
+                            myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.05, top: 8.0,
+                                  right: MediaQuery.of(context).size.width * 0.05, bottom: 8.0),
+                              child: Container(
+                                width: 500,
+                                height: 50,
+                                child: myTextInput(
+                                  textString: "Enter Your Password",
+                                  labelText: 'Enter Your Password',
+                                  colBlue: colPass,
+                                  colBlue_1: colPass_1,
+                                  colBlue_2: colPass_2,
+                                  maxLines: 1,
+                                  textInputAction: TextInputAction.none,
+                                  spaceAllowed: false,
+                                  obscure: true,
+                                  onChange: (value) {
+                                    globals.passwordLogin = value;
+                                    //print(globals.Login);
+                                  },
+                                ),
+                              ),
+                            ),
+                            myErrorText(errorText: errTxtPass, color: colErrTxtPass),
+                            Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: InkWell(
+                                child: btn(btnText: "Submit"),
+                                onTap: () {
+                                  try {
+                                    if (oneClick == 0) {
+                                      _LoginCtrl();
+                                    }
+                                  } catch (e) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) => ErrorAlertDialog(
+                                            message: globals.errorException));
+                                  }
+                                },
+                              ),
+                            ),
+                            myErrorText(errorText: errTxt, color: colErrTxt),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height * 0.001),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(18.0),
+                                    child: InkWell(
+                                      child: Text(
+                                        'Forget Password',
+                                        style: TextStyle(
+                                          color: globals.blue_1,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        //_checkIfIsRegist();
+                                        Navigator.pushNamed(context, '/forgetPassword');
+                                      },
+                                    ),
+                                  ),
+
+                                  Padding(
+                                    padding: EdgeInsets.all(18.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        const Text("didn't have an account? "),
+                                        InkWell(
+                                          child: Text(
+                                            "create new one",
+                                            style: TextStyle(color: globals.blue_1,
+                                              decoration: TextDecoration.underline,),
+                                          ),
+                                          onTap: () {
+                                            _nullLogin();
+                                            Navigator.pushNamed(context, '/Registration');
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
@@ -207,6 +241,7 @@ class _loginState extends State<login> {
           colEmail_2 = Colors.red.shade900.withOpacity(0.5);
           errTxtEmail = globals.warning7;
           colErrTxtEmail = globals.red_1;
+          WarningPopup(context, globals.warning7);
         });
       }
     }
@@ -228,6 +263,7 @@ class _loginState extends State<login> {
           colPass_2 = Colors.red.shade900.withOpacity(0.5);
           errTxtPass = globals.warning7;
           colErrTxtPass = globals.red_1;
+          WarningPopup(context, globals.warning7);
         });
       }
     }
@@ -310,7 +346,7 @@ class _loginState extends State<login> {
         //     "globpass = ${globals.passwordLogin} globEmail = ${globals.emailLogin} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
         //     "globDate = ${globals.dateOfBirth}");
 
-        Navigator.pushNamed(context, '/Contrat');
+        Navigator.pushNamed(context, '/HomePage');
 
         // Navigator.pushNamed(context, '/home');
 
@@ -327,6 +363,7 @@ class _loginState extends State<login> {
                 "\n" +
                 globals.errorVersion;
             colErrTxt = globals.red_1;
+            ErrorPopup(context, globals.errorVersion);
           });
         }
       } else if (body[0] == "error8") {
@@ -340,6 +377,7 @@ class _loginState extends State<login> {
           setState(() {
             errTxt = globals.warning8;
             colErrTxt = globals.red_1;
+            WarningPopup(context, globals.warning8);
           });
         }
       } else {
@@ -347,6 +385,7 @@ class _loginState extends State<login> {
           setState(() {
             errTxt = globals.errorElse;
             colErrTxt = globals.red_1;
+            ErrorPopup(context, globals.errorElse);
           });
         }
       }
@@ -356,6 +395,7 @@ class _loginState extends State<login> {
         setState(() {
           errTxt = globals.errorException;
           colErrTxt = globals.red_1;
+          ErrorPopup(context, globals.errorException);
         });
       }
     }
