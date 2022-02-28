@@ -130,7 +130,7 @@ class MyFooter extends StatelessWidget {
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          'Who we are',
+                          'Who We Are?',
                           style: TextStyle(fontSize: 16, color: Colors.white70),
                         ),
                       ),
