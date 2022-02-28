@@ -261,6 +261,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.all(8.0),
@@ -291,6 +294,7 @@ class _HomePageState extends State<HomePage> {
                                   controller: _infiniteController,
                                   itemBuilder:
                                       (BuildContext context, int index) {
+                                    //print(index % _teachers.length);
                                     return _teachers[index % _teachers.length];
                                   }),
                             ),

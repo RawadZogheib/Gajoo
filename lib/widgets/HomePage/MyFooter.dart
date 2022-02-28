@@ -154,7 +154,7 @@ class MyFooter extends StatelessWidget {
               margin: const EdgeInsets.only(right: 110.0),
               alignment: Alignment.bottomRight,
               child: const Text(
-                '® 2022 Envoy, All Rights Reserved',
+                '® 2022 Gajoo, All Rights Reserved',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
