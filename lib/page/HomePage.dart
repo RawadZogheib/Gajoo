@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: _height * 0.15,
+            height: _height * 0.12,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                               bottomLeft: Radius.circular(32.0),
                             ),
                             child: Container(
-                              height: _height * 0.82,
+                              height: _height * 0.85,
                               width: _width,
                               color: Colors.white,
                               child: Image.asset(
