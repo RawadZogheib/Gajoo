@@ -4,6 +4,7 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/HomePage/CustomCarousel.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
+import 'package:infinite_listview/infinite_listview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,58 +19,58 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> cards = [
     CardFb1(
-        text: "Explore",
+        text: "Ghada Zogheib",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Working_late_re_0c3y%201.png?alt=media&token=7b880917-2390-4043-88e5-5d58a9d70555",
-        subtitle: "+31 books",
+            "Assets/HomePage/ProfilePicture/img1.png",
+        subtitle: "Frensh, English",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Michel Nachar",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Designer_re_5v95%201.png?alt=media&token=5d053bd8-d0ea-4635-abb6-52d87539b7ec",
-        subtitle: "+32 books",
+            "Assets/HomePage/ProfilePicture/img2.png",
+        subtitle: "Arabic anja2 :p",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Clara Zeidan",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Accept_terms_re_lj38%201.png?alt=media&token=476b97fd-ba66-4f62-94a7-bce4be794f36",
-        subtitle: "+33 books",
+            "Assets/HomePage/ProfilePicture/img3.png",
+        subtitle: "Arabic, French, English",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Rawad Zogheib",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Working_late_re_0c3y%201.png?alt=media&token=7b880917-2390-4043-88e5-5d58a9d70555",
-        subtitle: "+34 books",
+            "Assets/HomePage/ProfilePicture/img1.png",
+        subtitle: "Arabic, French, English",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Felix Gedeon",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Designer_re_5v95%201.png?alt=media&token=5d053bd8-d0ea-4635-abb6-52d87539b7ec",
-        subtitle: "+35 books",
+            "Assets/HomePage/ProfilePicture/img2.png",
+        subtitle: "English",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Piere ElAsmar",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Accept_terms_re_lj38%201.png?alt=media&token=476b97fd-ba66-4f62-94a7-bce4be794f36",
-        subtitle: "+36 books",
+            "Assets/HomePage/ProfilePicture/img3.png",
+        subtitle: "Russian, English",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Philips Maalouf",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Working_late_re_0c3y%201.png?alt=media&token=7b880917-2390-4043-88e5-5d58a9d70555",
-        subtitle: "+37 books",
+            "Assets/HomePage/ProfilePicture/img1.png",
+        subtitle: "Arabic, Spanish",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Joe Skandar",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Designer_re_5v95%201.png?alt=media&token=5d053bd8-d0ea-4635-abb6-52d87539b7ec",
-        subtitle: "+38 books",
+            "Assets/HomePage/ProfilePicture/img2.png",
+        subtitle: "Arabic",
         onPressed: () {}),
     CardFb1(
-        text: "Explore",
+        text: "Nabil Kenaan",
         imageUrl:
-            "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/illustrations%2Fundraw_Accept_terms_re_lj38%201.png?alt=media&token=476b97fd-ba66-4f62-94a7-bce4be794f36",
-        subtitle: "+39 books",
+            "Assets/HomePage/ProfilePicture/img3.png",
+        subtitle: "Arabic, Frensh",
         onPressed: () {}),
   ];
 
@@ -97,9 +98,9 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: _width,
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
@@ -107,6 +108,15 @@ class _HomePageState extends State<HomePage> {
                   height: 95,
                   width: 300,
                   fit: BoxFit.contain,
+                ),
+              ),
+              Container(
+                height: 60,
+                width: 120,
+                padding: const EdgeInsets.only(right: 16.0),
+                child: ElevatedButton(
+                  onPressed: () => Navigator.of(context).pushNamed('/Login'),
+                  child: const Text('Login'),
                 ),
               ),
             ],
@@ -201,32 +211,22 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 100,
                     ),
-                    // SizedBox(
-                    //   height: 250,
-                    //   width: 500,
-                    //   child: ListView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     controller: _controller,
-                    //     children: cards,
-                    //   ),
-                    // ),
-                    const SizedBox(
-                      height: 100,
-                    ),
                     SizedBox(
                       height: 250,
                       width: 500,
                       child: ScrollConfiguration(
                         //ScrollBehavior can be set for a specific widget.
                         behavior: MyCustomScrollBehavior(),
-                        child: ListView.builder(
-                            controller: _controller,
+                        child: InfiniteListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
-                              print(index%cards.length);
-                              return cards[index%cards.length];
+                              print(index % cards.length);
+                              return cards[index % cards.length];
                             }),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 300,
                     ),
                   ],
                 ),

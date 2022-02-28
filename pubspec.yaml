@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.0.13
   http: ^0.13.4
   motion_toast: ^2.1.1
+  infinite_listview: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,9 @@ flutter:
      - Assets/HomePage/CoverImage/img1.webp
      - Assets/HomePage/CoverImage/img2.jpg
      - Assets/HomePage/CoverImage/img3.jpg
+     - Assets/HomePage/ProfilePicture/img1.png
+     - Assets/HomePage/ProfilePicture/img2.png
+     - Assets/HomePage/ProfilePicture/img3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

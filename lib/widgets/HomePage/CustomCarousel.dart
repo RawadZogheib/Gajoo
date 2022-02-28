@@ -37,7 +37,7 @@ class CardFb1 extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.network(imageUrl, height: 90, fit: BoxFit.cover),
+            Image.asset(imageUrl, height: 90, fit: BoxFit.cover),
             const Spacer(),
             Text(text,
                 textAlign: TextAlign.center,
