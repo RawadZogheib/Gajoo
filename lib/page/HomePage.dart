@@ -1,8 +1,11 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
-import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomCarousel.dart';
+import 'package:gajoo/widgets/HomePage/CustomImage.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
@@ -17,7 +20,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentActive = 0;
-  String _currentImage = 'img1.webp';
+  late Timer _timer;
+
+  final List<CustomImage> _img = [
+    CustomImage(
+      imageName: 'Assets/HomePage/CoverImage/img1.webp',
+    ),
+    CustomImage(
+      imageName: 'Assets/HomePage/CoverImage/img2.jpg',
+    ),
+    CustomImage(
+      imageName: 'Assets/HomePage/CoverImage/img3.jpg',
+    ),
+    CustomImage(
+      imageName: 'Assets/HomePage/CoverImage/img0.jpg',
+    ),
+  ];
 
   final List<Widget> _coreTeam = [
     CardFb1(
@@ -95,6 +113,20 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     //_pageController = PageController(initialPage: 0, viewportFraction: .2);
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      print('5sec passed');
+      setState(() {
+        _currentActive = ++_currentActive % _img.length;
+        print(_currentActive);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -162,10 +194,7 @@ class _HomePageState extends State<HomePage> {
                               height: _height * 0.85,
                               width: _width,
                               color: Colors.white,
-                              child: Image.asset(
-                                'Assets/HomePage/CoverImage/$_currentImage',
-                                fit: BoxFit.cover,
-                              ),
+                              child: _img[_currentActive],
                             ),
                           ),
                           Positioned(
@@ -174,28 +203,64 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.only(bottom: 16.0),
                               child: ImagePagination(
                                 currentActive: _currentActive,
-                                onTapRed: () {
+                                onTapRed: () async {
                                   setState(() {
                                     _currentActive = 0;
-                                    _currentImage = 'img1.webp';
+                                  });
+                                  _timer.cancel();
+                                  _timer = Timer.periodic(
+                                      const Duration(seconds: 5), (Timer t) {
+                                    print('5sec passed');
+                                    setState(() {
+                                      _currentActive =
+                                          ++_currentActive % _img.length;
+                                      print(_currentActive);
+                                    });
                                   });
                                 },
-                                onTapYellow: () {
+                                onTapYellow: () async {
                                   setState(() {
                                     _currentActive = 1;
-                                    _currentImage = 'img2.jpg';
+                                  });
+                                  _timer.cancel();
+                                  _timer = Timer.periodic(
+                                      const Duration(seconds: 5), (Timer t) {
+                                    print('5sec passed');
+                                    setState(() {
+                                      _currentActive =
+                                          ++_currentActive % _img.length;
+                                      print(_currentActive);
+                                    });
                                   });
                                 },
-                                onTapBlue: () {
+                                onTapBlue: () async {
                                   setState(() {
                                     _currentActive = 2;
-                                    _currentImage = 'img3.jpg';
+                                  });
+                                  _timer.cancel();
+                                  _timer = Timer.periodic(
+                                      const Duration(seconds: 5), (Timer t) {
+                                    print('5sec passed');
+                                    setState(() {
+                                      _currentActive =
+                                          ++_currentActive % _img.length;
+                                      print(_currentActive);
+                                    });
                                   });
                                 },
-                                onTapGreen: () {
+                                onTapGreen: () async {
                                   setState(() {
                                     _currentActive = 3;
-                                    _currentImage = 'img0.jpg';
+                                  });
+                                  _timer.cancel();
+                                  _timer = Timer.periodic(
+                                      const Duration(seconds: 5), (Timer t) {
+                                    print('5sec passed');
+                                    setState(() {
+                                      _currentActive =
+                                          ++_currentActive % _img.length;
+                                      print(_currentActive);
+                                    });
                                   });
                                 },
                               ),
