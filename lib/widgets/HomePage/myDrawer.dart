@@ -10,66 +10,69 @@ class myDrawer extends StatelessWidget {
         color: HexColor('#222222'),//globals.blue1,
         child: ListView(
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Image.asset(
-                      'Assets/HomePage/ProfilePicture/img1.png',
-                      fit: BoxFit.cover,
-                    ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 250,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'Assets/HomePage/ProfilePicture/img1.png',
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: 20),
-                  const SearchFieldDrawer(),
-                  const SizedBox(height: 12),
-                  MenuItem(
-                    text: 'My Courses',
-                    icon: Icons.menu_book,
-                    color: Colors.red,
-                    onClicked: () => selectedItem(context, 0),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 12),
+                      const SearchFieldDrawer(),
+                      const SizedBox(height: 12),
+                      MenuItem(
+                        text: 'My Courses',
+                        icon: Icons.menu_book,
+                        color: Colors.red,
+                        onClicked: () => selectedItem(context, 0),
+                      ),
+                      const SizedBox(height: 5),
+                      MenuItem(
+                        text: 'Liked Courses',
+                        icon: Icons.favorite_border,
+                        color: Colors.yellow,
+                        onClicked: () => selectedItem(context, 1),
+                      ),
+                      const SizedBox(height: 5),
+                      MenuItem(
+                        text: 'Liked Teachers',
+                        icon: Icons.people,
+                        color: Colors.blue,
+                        onClicked: () => selectedItem(context, 2),
+                      ),
+                      const SizedBox(height: 5),
+                      MenuItem(
+                        text: 'Updates',
+                        icon: Icons.update,
+                        color: Colors.green,
+                        onClicked: () => selectedItem(context, 3),
+                      ),
+                      const SizedBox(height: 8),
+                      const Divider(color: Colors.white70),
+                      const SizedBox(height: 8),
+                      MenuItem(
+                        text: 'Notifications',
+                        icon: Icons.notifications_outlined,
+                        color: globals.whiteBlue,
+                        onClicked: () => selectedItem(context, 5),
+                      ),
+                      MenuItem(
+                        text: 'Settings',
+                        icon: Icons.settings,
+                        color: globals.whiteBlue,
+                        onClicked: () => selectedItem(context, 6),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  MenuItem(
-                    text: 'Liked Courses',
-                    icon: Icons.favorite_border,
-                    color: Colors.yellow,
-                    onClicked: () => selectedItem(context, 1),
-                  ),
-                  const SizedBox(height: 5),
-                  MenuItem(
-                    text: 'Liked Teachers',
-                    icon: Icons.people,
-                    color: Colors.blue,
-                    onClicked: () => selectedItem(context, 2),
-                  ),
-                  const SizedBox(height: 5),
-                  MenuItem(
-                    text: 'Updates',
-                    icon: Icons.update,
-                    color: Colors.green,
-                    onClicked: () => selectedItem(context, 3),
-                  ),
-                  const SizedBox(height: 8),
-                  const Divider(color: Colors.white70),
-                  const SizedBox(height: 8),
-                  MenuItem(
-                    text: 'Notifications',
-                    icon: Icons.notifications_outlined,
-                    color: globals.whiteBlue,
-                    onClicked: () => selectedItem(context, 5),
-                  ),
-                  MenuItem(
-                    text: 'Settings',
-                    icon: Icons.settings,
-                    color: globals.whiteBlue,
-                    onClicked: () => selectedItem(context, 6),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
