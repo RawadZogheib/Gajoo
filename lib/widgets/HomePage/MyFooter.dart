@@ -13,7 +13,7 @@ class MyFooter extends StatelessWidget {
       ),
       child: Container(
         height: 264,
-        padding: const EdgeInsets.fromLTRB(16.0,16.0,16.0,4.0),
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
         color: HexColor('#222222'),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -48,6 +48,15 @@ class MyFooter extends StatelessWidget {
                           style: TextStyle(fontSize: 16, color: Colors.white70),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Image.asset(
+                      'Assets/HomePage/logo.png',
+                      height: 95,
+                      width: 300,
+                      fit: BoxFit.contain,
                     ),
                   ],
                 ),

@@ -201,21 +201,21 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(32.0),
-                    topLeft: Radius.circular(32.0),
-                    bottomRight: Radius.circular(8.0),
-                    bottomLeft: Radius.circular(8.0),
-                  ),
-                  child: ScrollConfiguration(
-                    behavior: MyCustomScrollBehavior(),
-                    child: ListView(
-                      controller: ScrollController(),
-                      children: [
-                        Stack(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(32.0),
+                  topLeft: Radius.circular(32.0),
+                  bottomRight: Radius.circular(0.0),
+                  bottomLeft: Radius.circular(0.0),
+                ),
+                child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: ListView(
+                    controller: ScrollController(),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Stack(
                           alignment: Alignment.center,
                           children: [
                             ClipRRect(
@@ -307,112 +307,114 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 100,
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8.0),
+                        child: AnimatedLogo(
+                          onTapRed: () {
+                            print('Red');
+                          },
+                          onTapYellow: () {
+                            print('Yellow');
+                          },
+                          onTapBlue: () {
+                            print('Blue');
+                          },
+                          onTapGreen: () {
+                            print('Green');
+                          },
                         ),
-                        Center(
-                          child: AnimatedLogo(
-                            onTapRed: () {
-                              print('Red');
-                            },
-                            onTapYellow: () {
-                              print('Yellow');
-                            },
-                            onTapBlue: () {
-                              print('Blue');
-                            },
-                            onTapGreen: () {
-                              print('Green');
-                            },
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text(
+                          'Core Team',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(32.0),
+                            topLeft: Radius.circular(32.0),
+                            bottomRight: Radius.circular(32.0),
+                            bottomLeft: Radius.circular(32.0),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Text(
-                            'Core Team',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(32.0),
-                              topLeft: Radius.circular(32.0),
-                              bottomRight: Radius.circular(32.0),
-                              bottomLeft: Radius.circular(32.0),
-                            ),
-                            child: Container(
-                              height: 260,
-                              width: 250,
-                              color: Colors.white70,
-                              child: ScrollConfiguration(
-                                //ScrollBehavior can be set for a specific widget.
-                                behavior: MyCustomScrollBehavior(),
-                                child: InfiniteListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    controller: _infiniteController,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return _coreTeam[
-                                          index % _coreTeam.length];
-                                    }),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Text(
-                            'Teachers',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(32.0),
-                              topLeft: Radius.circular(32.0),
-                              bottomRight: Radius.circular(32.0),
-                              bottomLeft: Radius.circular(32.0),
-                            ),
-                            child: Container(
-                              height: 260,
-                              width: 250,
-                              color: Colors.white70,
-                              child: ScrollConfiguration(
-                                //ScrollBehavior can be set for a specific widget.
-                                behavior: MyCustomScrollBehavior(),
-                                child: InfiniteListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    controller: _infiniteController,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      //print(index % _teachers.length);
-                                      return _teachers[
-                                          index % _teachers.length];
-                                    }),
-                              ),
+                          child: Container(
+                            height: 260,
+                            width: 250,
+                            color: Colors.white70,
+                            child: ScrollConfiguration(
+                              //ScrollBehavior can be set for a specific widget.
+                              behavior: MyCustomScrollBehavior(),
+                              child: InfiniteListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _infiniteController,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return _coreTeam[
+                                        index % _coreTeam.length];
+                                  }),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 100,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8.0),
+                        child: const Text(
+                          'Teachers',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        const MyFooter(),
-                      ],
-                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(32.0),
+                            topLeft: Radius.circular(32.0),
+                            bottomRight: Radius.circular(32.0),
+                            bottomLeft: Radius.circular(32.0),
+                          ),
+                          child: Container(
+                            height: 260,
+                            width: 250,
+                            color: Colors.white70,
+                            child: ScrollConfiguration(
+                              //ScrollBehavior can be set for a specific widget.
+                              behavior: MyCustomScrollBehavior(),
+                              child: InfiniteListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _infiniteController,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    //print(index % _teachers.length);
+                                    return _teachers[
+                                        index % _teachers.length];
+                                  }),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      const MyFooter(),
+                    ],
                   ),
                 ),
               ),
