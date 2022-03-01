@@ -80,35 +80,35 @@ class myDrawer extends StatelessWidget {
   void selectedItem(BuildContext context, int index) {
     Navigator.of(context).pop();
     switch (index) {
-      case 0:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 1
-        ));
+      case 0:// My Courses
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 1
+        // ));
         break;
-      case 1:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 2
-        ));
+      case 1:// Liked Courses
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 2
+        // ));
         break;
-      case 3:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 3
-        ));
+      case 3:// Liked Teachers
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 3
+        // ));
         break;
-      case 4:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 4
-        ));
+      case 4:// Updates
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 4
+        // ));
         break;
-      case 5:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 5
-        ));
+      case 5:// Notifications
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 5
+        // ));
         break;
-      case 6:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Scaffold(), // Page 6
-        ));
+      case 6:// Settings
+        // Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) => const Scaffold(), // Page 6
+        // ));
         break;
     }
   }
