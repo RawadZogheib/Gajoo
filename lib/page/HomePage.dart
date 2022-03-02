@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
   int _currentActive = 0;
   late Timer _timer;
   final int _duration = 5;
-  bool _logedIn = true;
+  bool _isLogedIn = true;
 
   final double carouselItemMargin = 16;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  _logedIn == false
+                  _isLogedIn == false
                       ? Container(
                           height: 60,
                           width: 120,
