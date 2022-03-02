@@ -68,6 +68,10 @@ const String rememberMe =
 const String codeFailed = "your code is incorrect";
 const String codeException = "Oops Something went wrong! please try to login again!";
 
+//for AlertDialog
+String x = '0';
+
+
 //for 6 digit code
 String? sixCodeNb = null;
 
