@@ -41,6 +41,7 @@ dependencies:
   motion_toast: ^2.1.1
   infinite_listview: ^1.1.0
   scrollable_clean_calendar: ^1.0.1
+  paged_vertical_calendar: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +80,7 @@ flutter:
      - Assets/HomePage/ProfilePicture/img1.png
      - Assets/HomePage/ProfilePicture/img2.png
      - Assets/HomePage/ProfilePicture/img3.png
+     - Assets/HomePage/graphics/strikethrough2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
