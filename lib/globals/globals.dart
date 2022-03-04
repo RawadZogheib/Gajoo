@@ -67,9 +67,9 @@ const String rememberMe =
     "Stay signed in?\n Do this to reduce the number of times you are asked to sign in.";
 const String codeFailed = "your code is incorrect";
 const String codeException = "Oops Something went wrong! please try to login again!";
-const String warningNotLogedIn = "you must Login First to get access";///////
-const String warningDayIsFull = "Sorry, this day is full";///////
-const String warningDayNotAvailable = "Sorry, this day is not available";///////
+const String warningNotLogedIn = "you must Login First to get access.";///////
+const String warningDayIsFull = "Sorry, this day is full.";///////
+const String warningDayNotAvailable = "Sorry, this day is not available.";///////
 //for AlertDialog
 String x = '0';
 
