@@ -230,7 +230,6 @@ class _TeacherState extends State<Teacher> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 const SizedBox(
                                   width: 250.0,
                                 ),
@@ -244,6 +243,7 @@ class _TeacherState extends State<Teacher> {
                                       bottomLeft: Radius.circular(12.5),
                                     ),
                                     child: Container(
+                                      alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12.5),
                                         color: Colors.white70,
