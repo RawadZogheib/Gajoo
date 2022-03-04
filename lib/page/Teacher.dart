@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
-import 'package:gajoo/widgets/TeacherPage/TeacherCard.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
 import '../hexColor/hexColor.dart';
