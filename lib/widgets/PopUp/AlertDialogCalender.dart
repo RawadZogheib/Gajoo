@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/widgets/CalenderPage/CalenderHours.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:intl/intl.dart';
 
 class AlertDialogCalender extends StatefulWidget {

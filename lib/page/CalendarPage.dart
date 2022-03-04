@@ -159,9 +159,9 @@ class _CalenderPageState extends State<CalenderPage> {
         ),
       );
     }else if(_redList.contains(DateFormat('yyyy-MM-dd').format(_date))){
-      WarningPopup(context, globals.warningDayIsFull);
+      ErrorPopup(context, globals.errorDayIsFull);
     }else{
-      WarningPopup(context, globals.warningDayNotAvailable);
+      ErrorPopup(context, globals.errorDayNotAvailable);
     }
   }
 }

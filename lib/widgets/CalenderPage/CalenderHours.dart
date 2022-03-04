@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CalenderHours extends StatefulWidget {
   String fromTime;
@@ -83,7 +85,10 @@ class _CalenderHoursState extends State<CalenderHours> {
           ),
           widget.onTap != null
               ? InkWell(
-                  onTap: () => widget.onTap(),
+                  onTap: () {
+                    widget.onTap();
+                    SuccessPopup(context, globals.successCourseAdded);
+                  },
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6.0),
@@ -103,7 +108,8 @@ class _CalenderHoursState extends State<CalenderHours> {
                   ),
                 )
               : InkWell(
-                  onTap: () => null,
+                  onTap: () =>
+                      ErrorPopup(context, globals.errorCourseNotAvailable),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6.0),

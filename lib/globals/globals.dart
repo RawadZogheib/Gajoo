@@ -26,6 +26,8 @@ Color red1 = Colors.red.shade900;
 Color red2 = Colors.red.shade50;
 Color yellow1 = Colors.yellow.shade900;
 Color yellow2 = Colors.yellow.shade50;
+Color green1 = Colors.green.shade900;
+Color green2 = Colors.green.shade50;
 
 const Color transparent = Colors.transparent;
 const Color black = Colors.black;
@@ -68,8 +70,10 @@ const String rememberMe =
 const String codeFailed = "your code is incorrect";
 const String codeException = "Oops Something went wrong! please try to login again!";
 const String warningNotLogedIn = "you must Login First to get access.";///////
-const String warningDayIsFull = "Sorry, this day is full.";///////
-const String warningDayNotAvailable = "Sorry, this day is not available.";///////
+const String errorDayIsFull = "Sorry, this day is full.";///////
+const String errorDayNotAvailable = "Sorry, this day is not available.";///////
+const String errorCourseNotAvailable = "Sorry, this course is not available.";///////
+const String successCourseAdded = "New course added.";///////
 //for AlertDialog
 String x = '0';
 
