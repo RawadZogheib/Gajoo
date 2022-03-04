@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gajoo/page/Teacher.dart';
+import 'package:gajoo/widgets/other/Teacher.dart';
 
 import '../button/myButton.dart';
 

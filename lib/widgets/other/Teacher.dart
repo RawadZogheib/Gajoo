@@ -5,10 +5,10 @@ import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
-import '../hexColor/hexColor.dart';
-import '../widgets/other/myDrawer.dart';
-import '../widgets/button/myButton.dart';
-import '../widgets/other/MyCustomScrollBehavior.dart';
+import '../../hexColor/hexColor.dart';
+import 'myDrawer.dart';
+import '../button/myButton.dart';
+import 'MyCustomScrollBehavior.dart';
 
 Color type1 = HexColor('#dfe2e6');
 Color type2 = HexColor('#dfe2e6');

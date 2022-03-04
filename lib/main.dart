@@ -3,7 +3,7 @@ import 'package:gajoo/page/CalendarPage.dart';
 import 'package:gajoo/page/HomePage.dart';
 import 'package:gajoo/page/Login.dart';
 import 'package:gajoo/page/Registration.dart';
-import 'package:gajoo/page/Teacher.dart';
+import 'package:gajoo/widgets/other/Teacher.dart';
 import 'package:gajoo/page/forgetPassword.dart';
 import 'package:gajoo/page/forgetPassword2.dart';
 import 'package:sizer/sizer.dart';
