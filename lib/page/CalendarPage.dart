@@ -3,7 +3,7 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
-import 'package:gajoo/widgets/HomePage/myDrawer.dart';
+import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:intl/intl.dart';
 

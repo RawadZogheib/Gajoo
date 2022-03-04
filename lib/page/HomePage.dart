@@ -8,7 +8,7 @@ import 'package:gajoo/widgets/HomePage/CustomImage.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
-import 'package:gajoo/widgets/HomePage/myDrawer.dart';
+import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogLangLvl.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:infinite_listview/infinite_listview.dart';

@@ -6,7 +6,7 @@ import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
 import '../hexColor/hexColor.dart';
-import '../widgets/HomePage/myDrawer.dart';
+import '../widgets/other/myDrawer.dart';
 import '../widgets/button/myButton.dart';
 import '../widgets/other/MyCustomScrollBehavior.dart';
 
