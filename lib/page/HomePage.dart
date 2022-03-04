@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
-import 'package:gajoo/widgets/HomePage/CustomCarousel.dart';
+import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/HomePage/CustomImage.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
@@ -42,63 +42,85 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<Widget> _coreTeam = [
-    CardFb1(
+    TeacherCard(
         text: 'Ghada Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         subtitle: 'C.E.O.',
+        isHeart: false,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Michel Nachar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         subtitle: 'Project Manager',
+        isHeart: false,
+        isButton: false,
         onPressed: () {}),
   ];
 
   final List<Widget> _teachers = [
-    CardFb1(
+    TeacherCard(
         text: 'Ghada Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         subtitle: 'Frensh, English',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Michel Nachar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         subtitle: 'Arabic anja2 :p',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Rawad Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         subtitle: "Arabic, French, English",
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Clara Zeidan',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         subtitle: 'Arabic, French, English',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Felix Gedeon',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         subtitle: 'English',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Piere ElAsmar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         subtitle: 'Russian, English',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Philips Maalouf',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         subtitle: 'Arabic, Spanish',
-        onPressed: () {}),
-    CardFb1(
+      isHeart: true,
+        isButton: false,
+        onPressed: () {},),
+    TeacherCard(
         text: 'Joe Skandar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         subtitle: 'Arabic',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
-    CardFb1(
+    TeacherCard(
         text: 'Nabil Kenaan',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         subtitle: 'Arabic, Frensh',
+        isHeart: true,
+        isButton: false,
         onPressed: () {}),
   ];
 
