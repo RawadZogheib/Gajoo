@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/page/CalendarPage.dart';
-import 'package:gajoo/page/CalenderPage2.dart';
 import 'package:gajoo/page/HomePage.dart';
 import 'package:gajoo/page/Login.dart';
 import 'package:gajoo/page/Registration.dart';
