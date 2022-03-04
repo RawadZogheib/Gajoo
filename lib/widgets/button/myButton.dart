@@ -94,7 +94,7 @@ class myBtn2 extends StatelessWidget {
   var onPress;
   var color1,color2;
 
-  myBtn2({required this.btnText, this.height, this.width, this.onPress, this.color1, this.color2});
+  myBtn2({this.btnText, this.height, this.width, this.onPress, this.color1, this.color2});
 
   @override
   Widget build(BuildContext context) {
