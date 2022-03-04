@@ -9,8 +9,14 @@ import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
 import 'package:gajoo/widgets/HomePage/myDrawer.dart';
+import 'package:gajoo/widgets/PopUp/AlertDialogLangLvl.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:infinite_listview/infinite_listview.dart';
+
+import '../widgets/PopUp/errorWarningPopup.dart';
+
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -100,6 +106,8 @@ class _HomePageState extends State<HomePage> {
   late Timer _timer;
   final int _duration = 5;
   bool _isLogedIn = true;
+  String? _types;
+  Color? _pageColor;
 
   final double carouselItemMargin = 16;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
@@ -328,15 +336,27 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(8.0),
                             child: AnimatedLogo(
                               onTapRed: () {
+                                _types = "red";
+                                _pageColor = Colors.redAccent;
+                                _checkIfIsLoggedIn();
                                 print('Red');
                               },
                               onTapYellow: () {
+                                _types = "yellow";
+                                _pageColor = Colors.yellowAccent;
+                                _checkIfIsLoggedIn();
                                 print('Yellow');
                               },
                               onTapBlue: () {
+                                _types = "blue";
+                                _pageColor = Colors.blueAccent;
+                                //_checkIfIsLoggedIn();
                                 print('Blue');
                               },
                               onTapGreen: () {
+                                _types = "green";
+                                _pageColor = Colors.green;
+                                _checkIfIsLoggedIn();
                                 print('Green');
                               },
                             ),
@@ -435,5 +455,23 @@ class _HomePageState extends State<HomePage> {
             ),
       ),
     );
+  }
+
+
+  _checkIfIsLoggedIn(){
+    if(_isLogedIn == false){
+      WarningPopup(context, globals.warningNotLogedIn);
+    }else{
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialogLangLvl(types: _types, pageColor: _pageColor,))
+          .then((exit) {
+        if (mounted) {
+          setState(() {
+            //_nullTextCode();
+          });
+        }
+      });
+    }
   }
 }
