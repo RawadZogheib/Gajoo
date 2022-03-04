@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: FirstPage(),
-        initialRoute: '/HomePage',
+        initialRoute: '/Teacher',
         routes: {
           '/HomePage': (context) => HomePage(),
           '/CalendarPage': (context) => CalendarPage(),

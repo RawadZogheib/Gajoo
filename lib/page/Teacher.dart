@@ -215,318 +215,322 @@ class _TeacherState extends State<Teacher> {
                 ],
               ),
             ),
+
             Expanded(
               child: Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
+                child: Stack(
                   children: [
-                    const SizedBox(
-                      width: 100.0,
-                    ),
                     ScrollConfiguration(
                       behavior: MyCustomScrollBehavior(),
                       child: SingleChildScrollView(
                         controller: ScrollController(),
-                        child: Container(
-                          padding: const EdgeInsets.all(18.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.5),
-                              color: Colors.white),
-                          width: 200,
-                          height: 480,
-                          child: Column(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0),
-                                child: Text('Type: '),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 6.0,
-                                        left: 3.0,
-                                        right: 3.0,
-                                        bottom: 3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: type1,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'RED',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+                                const SizedBox(
+                                  width: 250.0,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12.5),
+                                      topLeft: Radius.circular(12.5),
+                                      //
+                                      bottomRight: Radius.circular(12.5),
+                                      bottomLeft: Radius.circular(12.5),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12.5),
+                                        color: Colors.white70,
                                       ),
-                                      onPress: () {
-                                        _cleanColorType();
-                                        if (mounted) {
-                                          setState(() {
-                                            type1 = Colors.yellowAccent;
-                                          });
-                                        }
-                                      },
+                                      child: Wrap(
+                                        children: _TeacherCard,
+                                      ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: type2,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'YELLOW',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorType();
-                                        if (mounted) {
-                                          setState(() {
-                                            type2 = Colors.yellowAccent;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: type3,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'GREEN',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorType();
-                                        if (mounted) {
-                                          setState(() {
-                                            type3 = Colors.yellowAccent;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Divider(color: Colors.black),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0),
-                                child: Text('Language: '),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 6.0,
-                                        left: 3.0,
-                                        right: 3.0,
-                                        bottom: 3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: language1,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'ENGLISH',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLanguage();
-                                        if (mounted) {
-                                          setState(() {
-                                            language1 = Colors.redAccent;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: language2,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'FRENCH',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLanguage();
-                                        if (mounted) {
-                                          setState(() {
-                                            language2 = Colors.redAccent;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: language3,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'ARABIC',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLanguage();
-                                        if (mounted) {
-                                          setState(() {
-                                            language3 = Colors.redAccent;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Divider(color: Colors.black),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Level: '),
-                              ),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 6.0,
-                                        left: 3.0,
-                                        right: 3.0,
-                                        bottom: 3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: level1,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'BEGINNER',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLevel();
-                                        if (mounted) {
-                                          setState(() {
-                                            level1 = Colors.indigo;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: level2,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'INTERMEDIATE',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLevel();
-                                        if (mounted) {
-                                          setState(() {
-                                            level2 = Colors.indigo;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: myBtn2(
-                                      height: 25,
-                                      width: 150,
-                                      color1: level3,
-                                      color2: Colors.black,
-                                      btnText: const Text(
-                                        'ADVANCED',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      ),
-                                      onPress: () {
-                                        _cleanColorLevel();
-                                        if (mounted) {
-                                          setState(() {
-                                            level3 = Colors.indigo;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 50.0,
-                    ),
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(12.5),
-                          topLeft: Radius.circular(12.5),
-                          //
-                          bottomRight: Radius.circular(12.5),
-                          bottomLeft: Radius.circular(12.5),
-                        ),
-                        child: ScrollConfiguration(
-                          behavior: MyCustomScrollBehavior(),
-                          child: SingleChildScrollView(
-                            controller: ScrollController(),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.5),
-                                color: Colors.white70,
-                              ),
-                              child: Wrap(
-                                children: _TeacherCard,
-                              ),
+                                ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                              ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            const MyFooter(),
+                          ],
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 100,
+                    Positioned(
+                      left: 35,
+                      child: Container(
+                        padding: const EdgeInsets.all(18.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.5),
+                            color: Colors.white),
+                        width: 200,
+                        height: 480,
+                        child: Column(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Text('Type: '),
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6.0,
+                                      left: 3.0,
+                                      right: 3.0,
+                                      bottom: 3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: type1,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'RED',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorType();
+                                      if (mounted) {
+                                        setState(() {
+                                          type1 = Colors.yellowAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: type2,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'YELLOW',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorType();
+                                      if (mounted) {
+                                        setState(() {
+                                          type2 = Colors.yellowAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: type3,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'GREEN',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorType();
+                                      if (mounted) {
+                                        setState(() {
+                                          type3 = Colors.yellowAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(color: Colors.black),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Text('Language: '),
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6.0,
+                                      left: 3.0,
+                                      right: 3.0,
+                                      bottom: 3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: language1,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'ENGLISH',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLanguage();
+                                      if (mounted) {
+                                        setState(() {
+                                          language1 = Colors.redAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: language2,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'FRENCH',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLanguage();
+                                      if (mounted) {
+                                        setState(() {
+                                          language2 = Colors.redAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: language3,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'ARABIC',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLanguage();
+                                      if (mounted) {
+                                        setState(() {
+                                          language3 = Colors.redAccent;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(color: Colors.black),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Level: '),
+                            ),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6.0,
+                                      left: 3.0,
+                                      right: 3.0,
+                                      bottom: 3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: level1,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'BEGINNER',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLevel();
+                                      if (mounted) {
+                                        setState(() {
+                                          level1 = Colors.indigo;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: level2,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'INTERMEDIATE',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLevel();
+                                      if (mounted) {
+                                        setState(() {
+                                          level2 = Colors.indigo;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: myBtn2(
+                                    height: 25,
+                                    width: 150,
+                                    color1: level3,
+                                    color2: Colors.black,
+                                    btnText: const Text(
+                                      'ADVANCED',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    onPress: () {
+                                      _cleanColorLevel();
+                                      if (mounted) {
+                                        setState(() {
+                                          level3 = Colors.indigo;
+                                        });
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            //const MyFooter(),
           ],
         ),
       ),
