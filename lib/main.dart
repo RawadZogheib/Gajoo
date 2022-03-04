@@ -3,6 +3,7 @@ import 'package:gajoo/page/CalendarPage.dart';
 import 'package:gajoo/page/HomePage.dart';
 import 'package:gajoo/page/Login.dart';
 import 'package:gajoo/page/Registration.dart';
+import 'package:gajoo/page/Teacher.dart';
 import 'package:gajoo/page/forgetPassword.dart';
 import 'package:gajoo/page/forgetPassword2.dart';
 import 'package:sizer/sizer.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: FirstPage(),
-        initialRoute: '/CalendarPage',
+        initialRoute: '/HomePage',
         routes: {
           '/HomePage': (context) => HomePage(),
           '/CalendarPage': (context) => CalendarPage(),
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           '/Registration': (context) => registration(),
           '/forgetPassword': (context) => forgetPass(),
           '/forgetPassword2': (context) => forgetPass2(),
+          '/Teacher': (context) => Teacher(),
         });
     //});
   }
