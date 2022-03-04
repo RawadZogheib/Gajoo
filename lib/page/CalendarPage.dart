@@ -7,12 +7,12 @@ import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:intl/intl.dart';
 
-class CalendarPage extends StatefulWidget {
+class CalenderPage extends StatefulWidget {
   @override
-  _CalendarPageState createState() => _CalendarPageState();
+  _CalenderPageState createState() => _CalenderPageState();
 }
 
-class _CalendarPageState extends State<CalendarPage> {
+class _CalenderPageState extends State<CalenderPage> {
   bool _isLogedIn = true;
   Set<String> _greenList = {};
   Set<String> _redList = {};
@@ -126,6 +126,7 @@ class _CalendarPageState extends State<CalendarPage> {
                           redList: _redList,
                           onDayPressed: (date) {
                             print(DateFormat('yyyy-MM-dd').format(date));
+
                           },
                         ),
                       ),
