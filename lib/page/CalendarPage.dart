@@ -1,111 +1,145 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
+import 'package:gajoo/widgets/HomePage/MyFooter.dart';
+import 'package:gajoo/widgets/HomePage/myDrawer.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
-import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
-import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
-import 'package:scrollable_clean_calendar/utils/enums.dart';
+import 'package:intl/intl.dart';
 
 class CalendarPage extends StatefulWidget {
-
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
 
 class _CalendarPageState extends State<CalendarPage> {
   bool _isLogedIn = true;
-  var calendarController;
+  Set<String> _greenList = {};
+  Set<String> _redList = {};
 
   @override
   void initState() {
     // TODO: implement initState
-    calendarController = CleanCalendarController(
-      initialDateSelected: DateTime.now(),
-      minDate: DateTime.now().subtract(const Duration(days: 90)),
-      maxDate: DateTime.now().add(const Duration(days: 90)),
-      rangeMode: false,
-      onDayTapped: (date) {
-        print(date);
-      },
-      onPreviousMinDateTapped: (date) {},
-      onAfterMaxDateTapped: (date) {},
-      weekdayStart: DateTime.monday,
-      // endDateSelected: DateTime(2022, 2, 3),
-    );
     super.initState();
+    _greenList.addAll([
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 01)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 04)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 05)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 08)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 09)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 10)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2023, 03, 03)),
+    ]);
+    _redList.addAll([
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 06)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 03)),
+      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 11)),
+    ]);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          _isLogedIn == false
-              ? Container(
-            height: 60,
-            width: 120,
-            margin: const EdgeInsets.only(right: 16.0),
-            child: ElevatedButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed('/Login'),
-              child: const Text('Login'),
-            ),
-          )
-              : Container(
-            margin: const EdgeInsets.only(right: 20.0),
-            child: Row(
+      endDrawer: myDrawer(),
+      body: Builder(
+        builder: (context) => ScrollConfiguration(
+          behavior: MyCustomScrollBehavior(),
+          child: SingleChildScrollView(
+            controller: ScrollController(),
+            child: Column(
               children: [
-                const Text(
-                  'Rawad Zogheib',
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  onTap: () =>
-                      Scaffold.of(context).openEndDrawer(),
-                  child: CircleAvatar(
-                    backgroundColor: HexColor('#222222'),
-                    backgroundImage: const AssetImage(
-                        'Assets/HomePage/ProfilePicture/img1.png'),
-                    maxRadius: 35,
+                SizedBox(
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'Assets/HomePage/logo.png',
+                          height: 95,
+                          width: 300,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      _isLogedIn == false
+                          ? Container(
+                              height: 60,
+                              width: 120,
+                              margin: const EdgeInsets.only(right: 16.0),
+                              child: ElevatedButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pushNamed('/Login'),
+                                child: const Text('Login'),
+                              ),
+                            )
+                          : Container(
+                              margin: const EdgeInsets.only(right: 20.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    'Rawad Zogheib',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    onTap: () =>
+                                        Scaffold.of(context).openEndDrawer(),
+                                    child: CircleAvatar(
+                                      backgroundColor: HexColor('#222222'),
+                                      backgroundImage: const AssetImage(
+                                          'Assets/HomePage/ProfilePicture/img1.png'),
+                                      maxRadius: 35,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 600,
-            width: 600,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-              child: Container(
-                color: globals.whiteBlue,
-                child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: ScrollableCleanCalendar(
-                    calendarController: calendarController,
-                    layout: Layout.DEFAULT,
-                    calendarCrossAxisSpacing: 4,
-                    scrollController: ScrollController(
-                      initialScrollOffset: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 1.4,
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
+                    child: Container(
+                      height: 700,
+                      width: 500,
+                      color: globals.whiteBlue,
+                      child: ScrollConfiguration(
+                        behavior: MyCustomScrollBehavior(),
+                        child: MyCustomCalender(
+                          greenList: _greenList,
+                          redList: _redList,
+                          onDayPressed: (date) {
+                            print(DateFormat('yyyy-MM-dd').format(date));
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const MyFooter(),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
