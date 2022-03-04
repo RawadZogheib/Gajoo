@@ -3,8 +3,10 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
-import 'package:gajoo/widgets/other/myDrawer.dart';
+import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:intl/intl.dart';
 
 class CalenderPage extends StatefulWidget {
@@ -126,7 +128,7 @@ class _CalenderPageState extends State<CalenderPage> {
                           redList: _redList,
                           onDayPressed: (date) {
                             print(DateFormat('yyyy-MM-dd').format(date));
-
+                            _checkIfIsLoggedIn(date);
                           },
                         ),
                       ),
@@ -143,5 +145,23 @@ class _CalenderPageState extends State<CalenderPage> {
         ),
       ),
     );
+  }
+
+  _checkIfIsLoggedIn(DateTime _date) {
+    if (_isLogedIn == false) {
+      WarningPopup(context, globals.warningNotLogedIn);
+    } else if(_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialogCalender(
+          color: Colors.green,
+          date: _date,
+        ),
+      );
+    }else if(_redList.contains(DateFormat('yyyy-MM-dd').format(_date))){
+      WarningPopup(context, globals.warningDayIsFull);
+    }else{
+      WarningPopup(context, globals.warningDayNotAvailable);
+    }
   }
 }

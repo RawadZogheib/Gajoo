@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AlertDialogCalender extends StatelessWidget {
-  String date;
+  Color color;
+  DateTime date;
 
-  AlertDialogCalender({required this.date});
+  AlertDialogCalender({required this.color, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,16 @@ class AlertDialogCalender extends StatelessWidget {
       contentPadding:
           const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
       title: Center(
-        child: Text(date,
-            style: const TextStyle(
-                color: Colors.white,
+        child: Text(DateFormat('yyyy-MM-dd').format(date),
+            style: TextStyle(
+                color: color,
                 fontWeight: FontWeight.bold,
                 fontSize: 20)),
       ),
-      content: Container(),
+      content: Container(
+        height: 300, //300
+        width: 400,
+      ),
     );
   }
 }
