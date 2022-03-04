@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/HomePage': (context) => HomePage(),
           '/CalendarPage': (context) => CalenderPage(),
-          '/CalendarPage2': (context) => CalenderPage2(),
           '/Login': (context) => login(),
           '/Registration': (context) => registration(),
           '/forgetPassword': (context) => forgetPass(),
