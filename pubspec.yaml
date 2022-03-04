@@ -42,6 +42,7 @@ dependencies:
   infinite_listview: ^1.1.0
   scrollable_clean_calendar: ^1.0.1
   paged_vertical_calendar: ^1.0.6
+  flip_card: ^0.6.0
 
 dev_dependencies:
   flutter_test:

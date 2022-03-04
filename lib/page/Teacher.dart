@@ -602,9 +602,9 @@ class _TeacherState extends State<Teacher> {
   _cleanColorType() {
     if (mounted) {
       setState(() {
-        type1 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        type2 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        type3 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
+        type1 = HexColor('#dfe2e6');
+        type2 = HexColor('#dfe2e6');
+        type3 = HexColor('#dfe2e6');
       });
     }
   }
@@ -612,9 +612,9 @@ class _TeacherState extends State<Teacher> {
   _cleanColorLanguage() {
     if (mounted) {
       setState(() {
-        language1 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        language2 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        language3 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
+        language1 = HexColor('#dfe2e6');
+        language2 = HexColor('#dfe2e6');
+        language3 = HexColor('#dfe2e6');
       });
     }
   }
@@ -622,9 +622,9 @@ class _TeacherState extends State<Teacher> {
   _cleanColorLevel() {
     if (mounted) {
       setState(() {
-        level1 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        level2 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
-        level3 = Colors.lightBlueAccent.shade100.withOpacity(0.1);
+        level1 = HexColor('#dfe2e6');
+        level2 = HexColor('#dfe2e6');
+        level3 = HexColor('#dfe2e6');
       });
     }
   }

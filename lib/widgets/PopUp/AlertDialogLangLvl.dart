@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/page/Teacher.dart';
 
@@ -31,7 +32,12 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.5)),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(32.0),
+        topRight: Radius.circular(32.0),
+        bottomLeft: Radius.circular(32.0),
+        bottomRight: Radius.circular(32.0),
+      )),
       backgroundColor: widget.pageColor,
       contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
       title: Center(
@@ -45,9 +51,14 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
           ? Container(
               height: 300, //300
               width: 400, //400
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.5),
-                color: Colors.white
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32.0),
+                  topRight: Radius.circular(32.0),
+                  bottomLeft: Radius.circular(32.0),
+                  bottomRight: Radius.circular(32.0),
+                ),
+                  color: Colors.white,
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -140,8 +151,13 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
               ? Container(
                   height: 300, //300
                   width: 400, //400
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.5),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(32.0),
+                        topRight: Radius.circular(32.0),
+                        bottomLeft: Radius.circular(32.0),
+                        bottomRight: Radius.circular(32.0),
+                      ),
                       color: Colors.white
                   ),
                   child: SingleChildScrollView(
