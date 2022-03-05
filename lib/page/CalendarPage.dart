@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
@@ -15,6 +17,7 @@ class CalenderPage extends StatefulWidget {
 }
 
 class _CalenderPageState extends State<CalenderPage> {
+  Timer? timer;
   bool _isLogedIn = true;
   Set<String> _greenList = {};
   Set<String> _redList = {};
@@ -22,21 +25,15 @@ class _CalenderPageState extends State<CalenderPage> {
   @override
   void initState() {
     // TODO: implement initState
+    _loadNewPage();
     super.initState();
-    _greenList.addAll([
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 01)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 04)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 05)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 08)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 09)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 10)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2023, 03, 03)),
-    ]);
-    _redList.addAll([
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 06)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 03)),
-      DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 11)),
-    ]);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -164,4 +161,49 @@ class _CalenderPageState extends State<CalenderPage> {
       ErrorPopup(context, globals.errorDayNotAvailable);
     }
   }
+
+  _loadNewPage() {
+    print(
+        '=========>>======================================================>>==================================================>>=========');
+    timer?.cancel();
+    _loadDates(); //0
+    _loadPage(); //1 -> INFINI
+  }
+
+  _loadPage() {
+    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+      print(
+          '=========>>======================================================>>==================================================>>=========');
+      print("30sec gone!!");
+      if (mounted) {
+        print("30sec gone, and _loadChildrenOnline!!");
+        _loadDates();
+      } else {
+        print(
+            '=========<<======================================================<<==================================================<<=========');
+      }
+    });
+  }
+
+  void _loadDates() {
+    setState(() {
+      _greenList.clear();
+      _redList.clear();
+      _greenList.addAll([
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 01)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 04)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 05)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 08)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 09)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 10)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2023, 03, 03)),
+      ]);
+      _redList.addAll([
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 06)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 03)),
+        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 11)),
+      ]);
+    });
+  }
+
 }
