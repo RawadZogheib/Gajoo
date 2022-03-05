@@ -22,11 +22,11 @@ final Color red_2 = Colors.red.shade900.withOpacity(0.5);
 
 Color blue1 = Colors.blue.shade900;
 Color blue2 = Colors.blue.shade50;
-Color red1 = Colors.red.shade900;
+Color red1 = Colors.red.shade700;
 Color red2 = Colors.red.shade50;
-Color yellow1 = Colors.yellow.shade900;
+Color yellow1 = Colors.yellow.shade700;
 Color yellow2 = Colors.yellow.shade50;
-Color green1 = Colors.green.shade900;
+Color green1 = Colors.green.shade700;
 Color green2 = Colors.green.shade50;
 
 const Color transparent = Colors.transparent;
