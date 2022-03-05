@@ -87,7 +87,7 @@ class _CalenderHoursState extends State<CalenderHours> {
               ? InkWell(
                   onTap: () {
                     widget.onTap();
-                    SuccessPopup(context, globals.successCourseAdded);
+                    SuccessPopup(context, globals.success404);
                   },
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(
@@ -109,7 +109,7 @@ class _CalenderHoursState extends State<CalenderHours> {
                 )
               : InkWell(
                   onTap: () =>
-                      ErrorPopup(context, globals.errorCourseNotAvailable),
+                      ErrorPopup(context, globals.error403),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(
                       Radius.circular(6.0),

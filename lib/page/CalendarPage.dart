@@ -146,7 +146,7 @@ class _CalenderPageState extends State<CalenderPage> {
 
   _checkIfIsLoggedIn(DateTime _date) {
     if (_isLogedIn == false) {
-      WarningPopup(context, globals.warningNotLogedIn);
+      WarningPopup(context, globals.warning400);
     } else if(_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))){
       showDialog(
         context: context,
@@ -156,9 +156,9 @@ class _CalenderPageState extends State<CalenderPage> {
         ),
       );
     }else if(_redList.contains(DateFormat('yyyy-MM-dd').format(_date))){
-      ErrorPopup(context, globals.errorDayIsFull);
+      ErrorPopup(context, globals.error401);
     }else{
-      ErrorPopup(context, globals.errorDayNotAvailable);
+      ErrorPopup(context, globals.error402);
     }
   }
 

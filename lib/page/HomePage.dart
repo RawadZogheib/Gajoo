@@ -465,7 +465,7 @@ class _HomePageState extends State<HomePage> {
 
   _checkIfIsLoggedIn() {
     if (_isLogedIn == false) {
-      WarningPopup(context, globals.warningNotLogedIn);
+      WarningPopup(context, globals.warning400);
     } else {
       showDialog(
         context: context,
