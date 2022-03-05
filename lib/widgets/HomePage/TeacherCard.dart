@@ -71,8 +71,12 @@ class TeacherCard extends StatelessWidget {
                   isButton == true
                       ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Icon(Icons.arrow_forward_ios),
+                    children: [
+                      IconButton(
+                          onPressed: (){
+                            Navigator.pushNamed(context, '/CalendarPage');
+                          },
+                          icon: const Icon(Icons.arrow_forward_ios),),
                     ],
                   )
                       : Container(),
