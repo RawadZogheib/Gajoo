@@ -3,30 +3,31 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
-import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
 import 'package:gajoo/widgets/HomePage/MyFooter.dart';
-import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
-import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
+import 'package:gajoo/widgets/other/MyCoursesList.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/TeacherProfile.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:intl/intl.dart';
 
-class CalenderPage extends StatefulWidget {
+class MyCourses extends StatefulWidget {
+  const MyCourses({Key? key}) : super(key: key);
+
   @override
-  _CalenderPageState createState() => _CalenderPageState();
+  State<MyCourses> createState() => _MyCoursesState();
 }
 
-class _CalenderPageState extends State<CalenderPage> {
+class _MyCoursesState extends State<MyCourses> {
   Timer? timer;
+  List<List<String>> _coursesList = [];
+
   bool _isLogedIn = true;
-  Set<String> _greenList = {};
-  Set<String> _redList = {};
 
   @override
   void initState() {
     // TODO: implement initState
     _loadNewPage();
+    globals.currentPage = 'MyCourses';
     super.initState();
   }
 
@@ -114,17 +115,6 @@ class _CalenderPageState extends State<CalenderPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TeacherProfile(
-                          name: 'Rawad',
-                          age: '22',
-                          languages: 'Arabic, french, english',
-                          nbrOfCourses: '20',
-                          coursesReserved: '27',
-                          coursesLeft: '3',
-                        ),
-                        const SizedBox(
-                          width: 60,
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: ClipRRect(
@@ -140,18 +130,25 @@ class _CalenderPageState extends State<CalenderPage> {
                               color: globals.whiteBlue,
                               child: ScrollConfiguration(
                                 behavior: MyCustomScrollBehavior(),
-                                child: MyCustomCalender(
-                                  greenList: _greenList,
-                                  redList: _redList,
-                                  onDayPressed: (date) {
-                                    print(
-                                        DateFormat('yyyy-MM-dd').format(date));
-                                    _checkIfIsLoggedIn(date);
-                                  },
+                                child: SingleChildScrollView(
+                                  child: MyCoursesList(
+                                    coursesList: _coursesList,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          width: 60,
+                        ),
+                        TeacherProfile(
+                          name: 'Rawad',
+                          age: '22',
+                          languages: 'Arabic, french, english',
+                          nbrOfCourses: '20',
+                          coursesReserved: '27',
+                          coursesLeft: '3',
                         ),
                       ],
                     ),
@@ -169,29 +166,11 @@ class _CalenderPageState extends State<CalenderPage> {
     );
   }
 
-  _checkIfIsLoggedIn(DateTime _date) {
-    if (_isLogedIn == false) {
-      WarningPopup(context, globals.warning400);
-    } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialogCalender(
-          color: Colors.green,
-          date: _date,
-        ),
-      );
-    } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
-      ErrorPopup(context, globals.error401);
-    } else {
-      ErrorPopup(context, globals.error402);
-    }
-  }
-
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
     timer?.cancel();
-    _loadDates(); //0
+    _loadCourses(); //0
     _loadPage(); //1 -> INFINI
   }
 
@@ -202,7 +181,7 @@ class _CalenderPageState extends State<CalenderPage> {
       print("30sec gone!!");
       if (mounted) {
         print("30sec gone, and _loadChildrenOnline!!");
-        _loadDates();
+        _loadCourses();
       } else {
         print(
             '=========<<======================================================<<==================================================<<=========');
@@ -210,23 +189,28 @@ class _CalenderPageState extends State<CalenderPage> {
     });
   }
 
-  void _loadDates() {
+  void _loadCourses() {
     setState(() {
-      _greenList.clear();
-      _redList.clear();
-      _greenList.addAll([
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 01)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 04)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 05)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 08)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 09)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 10)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2023, 03, 03)),
-      ]);
-      _redList.addAll([
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 06)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 03)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 11)),
+      _coursesList.clear();
+      _coursesList.addAll([
+        [
+          'Spanic Speaking',
+          DateFormat('yyyy-MM-dd HH:mm').format(
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-01 18:20'),
+          ),
+        ],
+        [
+          'English Course',
+          DateFormat('yyyy-MM-dd HH:mm').format(
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-07 23:59'),
+          ),
+        ],
+        [
+          'Arabic Course',
+          DateFormat('yyyy-MM-dd HH:mm').format(
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-01 18:20'),
+          ),
+        ],
       ]);
     });
   }

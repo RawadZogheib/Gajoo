@@ -119,8 +119,6 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
             toTime: DateFormat('HH:mm').format(
               DateFormat('HH:mm').parse('19:20'),
             ),
-            color1: Colors.green,
-            color2: Colors.white,
             onTap: () {
               print('ssa');
             },
@@ -134,8 +132,6 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
             toTime: DateFormat('HH:mm').format(
               DateFormat('HH:mm').parse('19:20'),
             ),
-            color1: Colors.red,
-            color2: Colors.red.shade900.withOpacity(0.8),
             onTap: null,
           ),
         );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:intl/intl.dart';
 import 'package:paged_vertical_calendar/paged_vertical_calendar.dart';
@@ -31,6 +32,7 @@ class MyCustomCalender extends StatelessWidget {
         startDate: DateTime.now().subtract(Duration(days: 10)),
         onDayPressed: (date) => onDayPressed(date),
         scrollController: ScrollController(),
+
         /// customize the month header look by adding a week indicator
         monthBuilder: (context, month, year) {
           return Column(
@@ -83,7 +85,7 @@ class MyCustomCalender extends StatelessWidget {
                   ? Expanded(
                       child: Container(
                           decoration: BoxDecoration(
-                            color: HexColor('#eef0f1'),
+                            color: HexColor('#dfe2e6'),
                             borderRadius: const BorderRadius.all(
                               Radius.circular(12.0),
                             ),
@@ -109,7 +111,7 @@ class MyCustomCalender extends StatelessWidget {
                               border: date.isAtSameMomentAs(DateTime.parse(
                                       DateFormat('yyyy-MM-dd')
                                           .format(DateTime.now())))
-                                  ? Border.all(width: 2)
+                                  ? Border.all(width: 2, color: Colors.green)
                                   : null,
                             ),
                             alignment: Alignment.center,
@@ -130,10 +132,12 @@ class MyCustomCalender extends StatelessWidget {
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(12.0),
                                   ),
-                                  border: date.isAtSameMomentAs(DateTime.parse(
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(DateTime.now())))
-                                      ? Border.all(width: 2)
+                                  border: date.isAtSameMomentAs(
+                                          DateTime.parse(
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(DateTime.now())))
+                                      ? Border.all(
+                                          width: 2, color: Colors.red)
                                       : null,
                                 ),
                                 alignment: Alignment.center,
@@ -149,15 +153,16 @@ class MyCustomCalender extends StatelessWidget {
                           : Expanded(
                               child: Container(
                                   decoration: BoxDecoration(
-                                    color: HexColor('#dfe2e6'),
+                                    color: globals
+                                        .whiteBlue, //HexColor('#dfe2e6'),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(12.0),
                                     ),
-                                    border: date.isAtSameMomentAs(
-                                            DateTime.parse(
-                                                DateFormat('yyyy-MM-dd')
-                                                    .format(DateTime.now())))
-                                        ? Border.all(width: 2)
+                                    border: date.isAtSameMomentAs(DateTime
+                                            .parse(DateFormat('yyyy-MM-dd')
+                                                .format(DateTime.now())))
+                                        ? Border.all(
+                                            width: 2, color: Colors.black)
                                         : null,
                                   ),
                                   alignment: Alignment.center,

@@ -142,6 +142,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
+    globals.currentPage = 'MyCourses';
     super.initState();
     //_pageController = PageController(initialPage: 0, viewportFraction: .2);
     _timer = Timer.periodic(Duration(seconds: _duration), (Timer t) {

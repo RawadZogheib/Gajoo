@@ -5,15 +5,11 @@ import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 class CalenderHours extends StatefulWidget {
   String fromTime;
   String toTime;
-  Color color1;
-  Color color2;
   var onTap;
 
   CalenderHours({
     required this.fromTime,
     required this.toTime,
-    required this.color1,
-    required this.color2,
     required this.onTap,
   });
 
@@ -29,9 +25,10 @@ class _CalenderHoursState extends State<CalenderHours> {
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 35.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: widget.color1,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(22.0),
+        color: widget.onTap != null ? Colors.green : Colors.red,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(22.0),
+          bottomRight: Radius.circular(22.0),
         ),
       ),
       child: Row(
@@ -90,35 +87,36 @@ class _CalenderHoursState extends State<CalenderHours> {
                     SuccessPopup(context, globals.success404);
                   },
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(6.0),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      bottomRight: Radius.circular(12.0),
                     ),
                     child: Container(
                       height: 35,
                       width: 100,
                       alignment: Alignment.center,
-                      color: widget.color2,
-                      child: Text(
+                      color: Colors.white,
+                      child: const Text(
                         'Get Course',
                         style: TextStyle(
-                          color: widget.color1,
+                          color: Colors.green,
                         ),
                       ),
                     ),
                   ),
                 )
               : InkWell(
-                  onTap: () =>
-                      ErrorPopup(context, globals.error403),
+                  onTap: () => ErrorPopup(context, globals.error403),
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(6.0),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      bottomRight: Radius.circular(12.0),
                     ),
                     child: Container(
                       height: 35,
                       width: 100,
                       alignment: Alignment.center,
-                      color: widget.color2,
+                      color: Colors.red.shade900.withOpacity(0.8),
                       child: Text(
                         'Expired',
                         style: TextStyle(

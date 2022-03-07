@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gajoo/page/CalendarPage.dart';
 import 'package:gajoo/page/HomePage.dart';
 import 'package:gajoo/page/Login.dart';
+import 'package:gajoo/page/MyCourses.dart';
 import 'package:gajoo/page/Registration.dart';
 import 'package:gajoo/page/Teacher.dart';
 import 'package:gajoo/page/forgetPassword.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           '/forgetPassword': (context) => forgetPass(),
           '/forgetPassword2': (context) => forgetPass2(),
           '/Teacher': (context) => Teacher(),
+          '/MyCourses': (context) => MyCourses(),
         });
     //});
   }

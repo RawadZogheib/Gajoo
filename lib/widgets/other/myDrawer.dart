@@ -8,7 +8,7 @@ class myDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: HexColor('#222222'),//globals.blue1,
+        color: HexColor('#222222'), //globals.blue1,
         child: ScrollConfiguration(
           behavior: MyCustomScrollBehavior(),
           child: ListView(
@@ -88,32 +88,31 @@ class myDrawer extends StatelessWidget {
   void selectedItem(BuildContext context, int index) {
     Navigator.of(context).pop();
     switch (index) {
-      case 0:// My Courses
-        // Navigator.of(context).push(MaterialPageRoute(
-        //   builder: (context) => const Scaffold(), // Page 1
-        // ));
+      case 0: // My Courses
+        if (globals.currentPage != 'MyCourses')
+          Navigator.of(context).pushNamed('/MyCourses');
         break;
-      case 1:// Liked Courses
+      case 1: // Liked Courses
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 2
         // ));
         break;
-      case 3:// Liked Teachers
+      case 3: // Liked Teachers
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 3
         // ));
         break;
-      case 4:// Updates
+      case 4: // Updates
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 4
         // ));
         break;
-      case 5:// Notifications
+      case 5: // Notifications
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 5
         // ));
         break;
-      case 6:// Settings
+      case 6: // Settings
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 6
         // ));
@@ -139,7 +138,7 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Color color = globals.whiteBlue;//Colors.white;
-    Color hoverColor = Colors.transparent.withOpacity(1);//Colors.white70;
+    Color hoverColor = Colors.transparent.withOpacity(1); //Colors.white70;
 
     return ListTile(
       leading: Icon(icon, color: color),
