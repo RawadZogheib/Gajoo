@@ -8,6 +8,7 @@ import 'package:gajoo/widgets/HomePage/MyFooter.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/TeacherProfile.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:intl/intl.dart';
 
@@ -105,30 +106,49 @@ class _CalenderPageState extends State<CalenderPage> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                    child: Container(
-                      height: 700,
-                      width: 500,
-                      color: globals.whiteBlue,
-                      child: ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: MyCustomCalender(
-                          greenList: _greenList,
-                          redList: _redList,
-                          onDayPressed: (date) {
-                            print(DateFormat('yyyy-MM-dd').format(date));
-                            _checkIfIsLoggedIn(date);
-                          },
+                ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    controller: ScrollController(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TeacherProfile(
+                          name: 'Rawad',
                         ),
-                      ),
+                        const SizedBox(
+                          width: 60,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.8,
+                              width: 500,
+                              color: globals.whiteBlue,
+                              child: ScrollConfiguration(
+                                behavior: MyCustomScrollBehavior(),
+                                child: MyCustomCalender(
+                                  greenList: _greenList,
+                                  redList: _redList,
+                                  onDayPressed: (date) {
+                                    print(
+                                        DateFormat('yyyy-MM-dd').format(date));
+                                    _checkIfIsLoggedIn(date);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -147,7 +167,7 @@ class _CalenderPageState extends State<CalenderPage> {
   _checkIfIsLoggedIn(DateTime _date) {
     if (_isLogedIn == false) {
       WarningPopup(context, globals.warning400);
-    } else if(_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))){
+    } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialogCalender(
@@ -155,9 +175,9 @@ class _CalenderPageState extends State<CalenderPage> {
           date: _date,
         ),
       );
-    }else if(_redList.contains(DateFormat('yyyy-MM-dd').format(_date))){
+    } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
       ErrorPopup(context, globals.error401);
-    }else{
+    } else {
       ErrorPopup(context, globals.error402);
     }
   }
@@ -205,5 +225,4 @@ class _CalenderPageState extends State<CalenderPage> {
       ]);
     });
   }
-
 }
