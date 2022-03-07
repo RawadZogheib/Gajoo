@@ -191,13 +191,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  ntp:
-    dependency: "direct main"
-    description:
-      name: ntp
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   paged_vertical_calendar:
     dependency: "direct main"
     description:
