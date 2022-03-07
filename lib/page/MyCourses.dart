@@ -127,14 +127,10 @@ class _MyCoursesState extends State<MyCourses> {
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.8,
                               width: 500,
-                              color: globals.whiteBlue,
-                              child: ScrollConfiguration(
-                                behavior: MyCustomScrollBehavior(),
-                                child: SingleChildScrollView(
-                                  child: MyCoursesList(
-                                    coursesList: _coursesList,
-                                  ),
-                                ),
+                              padding: const EdgeInsets.all(12.0),
+                              color: globals.white  ,
+                              child: MyCoursesList(
+                                coursesList: _coursesList,
                               ),
                             ),
                           ),
@@ -196,19 +192,25 @@ class _MyCoursesState extends State<MyCourses> {
         [
           'Spanic Speaking',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-01 18:20'),
+            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-01 18:20'),
           ),
         ],
         [
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-07 23:59'),
+            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-07 22:00'),
+          ),
+        ],
+        [
+          'English Course',
+          DateFormat('yyyy-MM-dd HH:mm').format(
+            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-08 22:20'),
           ),
         ],
         [
           'Arabic Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-01 18:20'),
+            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-09 18:20'),
           ),
         ],
       ]);

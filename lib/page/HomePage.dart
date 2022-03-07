@@ -142,10 +142,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    globals.currentPage = 'MyCourses';
+    globals.currentPage = 'HomePage';
     super.initState();
+
     //_pageController = PageController(initialPage: 0, viewportFraction: .2);
-    _timer = Timer.periodic(Duration(seconds: _duration), (Timer t) {
+    _timer = Timer.periodic(Duration(seconds: _duration), (Timer t) async {
       print('$_duration sec passed');
       setState(() {
         _currentActive = ++_currentActive % _img.length;

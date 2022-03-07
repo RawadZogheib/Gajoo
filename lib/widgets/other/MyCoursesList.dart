@@ -21,7 +21,10 @@ class MyCoursesList extends StatelessWidget {
         bottomRight: Radius.circular(30),
       ),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height * 0.8,
         width: 500,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -32,6 +35,8 @@ class MyCoursesList extends StatelessWidget {
               itemCount: coursesList.length,
               controller: ScrollController(),
               itemBuilder: (BuildContext context, int index) {
+                print( coursesList[index][1]);
+                print(DateTime.now().toUtc());
                 return MyCoursesItem(
                   width: 400,
                   text1: coursesList[index][0],
@@ -74,58 +79,113 @@ class MyCoursesItem extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          (DateTime.parse(DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()))
-                      .isBefore(DateTime.parse(date)
-                          .add(Duration(minutes: globals.meetingDuration))) ||
-                  DateTime.parse(
-                          DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()))
-                      .isAtSameMomentAs(DateTime.parse(date)))
+          ((DateTime.parse(
+              DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now().toUtc()))
+              .isAfter(DateTime.parse(date)) &&
+              DateTime.parse(
+                  DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now().toUtc()))
+                  .isBefore(DateTime.parse(date)
+                  .add(Duration(minutes: globals.meetingDuration)))) ||
+              DateTime.parse(
+                  DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now().toUtc()))
+                  .isAtSameMomentAs(DateTime.parse(date)))
               ? InkWell(
-                  onTap: () {
-                    SuccessPopup(context, globals.success404);
-                  },
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                    ),
-                    child: Container(
-                      height: 35,
-                      width: 100,
-                      alignment: Alignment.center,
-                      color: Colors.blue,
-                      child: const Text(
-                        'Join',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : InkWell(
-                  onTap: () => ErrorPopup(context, globals.error403),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                    ),
-                    child: Container(
-                      height: 35,
-                      width: 100,
-                      alignment: Alignment.center,
-                      color: Colors.grey.shade900.withOpacity(0.8),
-                      child: Text(
-                        'Join',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey.shade400,
-                        ),
-                      ),
-                    ),
+            onTap: () {
+              SuccessPopup(context, globals.success404);
+            },
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomRight: Radius.circular(12.0),
+              ),
+              child: Container(
+                height: 35,
+                width: 100,
+                alignment: Alignment.center,
+                color: Colors.blue,
+                child: const Text(
+                  'Join',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
                   ),
                 ),
+              ),
+            ),
+          )
+              : DateTime.parse(
+              DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()))
+              .isBefore(DateTime.parse(date))
+              ? InkWell(
+            onTap: () =>
+                ErrorPopup(context, 'Meeting havn\'t started yet'),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomRight: Radius.circular(12.0),
+              ),
+              child: Container(
+                height: 35,
+                width: 100,
+                alignment: Alignment.center,
+                color: Colors.blue.shade900.withOpacity(0.8),
+                child: Text(
+                  'Join',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+            ),
+          )
+              : DateTime.parse(DateFormat('yyyy-MM-dd HH:mm')
+              .format(DateTime.now()))
+              .isAfter(DateTime.parse(date))
+              ? InkWell(
+            onTap: () => ErrorPopup(context, 'Meeting Expired'),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomRight: Radius.circular(12.0),
+              ),
+              child: Container(
+                height: 35,
+                width: 100,
+                alignment: Alignment.center,
+                color: Colors.grey.shade900.withOpacity(0.8),
+                child: Text(
+                  'Join',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+            ),
+          )
+              : InkWell(
+            onTap: () => ErrorPopup(context, 'Error, please reload the page'),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomRight: Radius.circular(12.0),
+              ),
+              child: Container(
+                height: 35,
+                width: 100,
+                alignment: Alignment.center,
+                color: Colors.grey.shade900.withOpacity(0.8),
+                child: Text(
+                  'Join',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
