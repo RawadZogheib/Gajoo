@@ -128,7 +128,7 @@ class _MyCoursesState extends State<MyCourses> {
                               height: MediaQuery.of(context).size.height * 0.8,
                               width: 500,
                               padding: const EdgeInsets.all(12.0),
-                              color: globals.white  ,
+                              color: globals.white,
                               child: MyCoursesList(
                                 coursesList: _coursesList,
                               ),
