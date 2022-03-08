@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyHeader(),
+            const MyHeader(),
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
