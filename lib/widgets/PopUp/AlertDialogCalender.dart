@@ -16,7 +16,7 @@ class AlertDialogCalender extends StatefulWidget {
 }
 
 class _AlertDialogCalenderState extends State<AlertDialogCalender> {
-  Timer? timer;
+  Timer? _timer;
   List<CalenderHours> _availableTime = [];
 
   @override
@@ -87,13 +87,13 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    timer?.cancel();
+    _timer?.cancel();
     _loadHoursMins(); //0
     _loadPage(); //1 -> INFINI
   }
 
   _loadPage() {
-    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
       print(
           '=========>>======================================================>>==================================================>>=========');
       print("30sec gone!!");

@@ -18,7 +18,7 @@ class CalenderPage extends StatefulWidget {
 }
 
 class _CalenderPageState extends State<CalenderPage> {
-  Timer? timer;
+  Timer? _timer;
   bool _isLogedIn = true;
   Set<String> _greenList = {};
   Set<String> _redList = {};
@@ -34,7 +34,7 @@ class _CalenderPageState extends State<CalenderPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    timer?.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -195,13 +195,13 @@ class _CalenderPageState extends State<CalenderPage> {
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    timer?.cancel();
+    _timer?.cancel();
     _loadDates(); //0
     _loadPage(); //1 -> INFINI
   }
 
   _loadPage() {
-    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+    _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
       print(
           '=========>>======================================================>>==================================================>>=========');
       print("30sec gone!!");
