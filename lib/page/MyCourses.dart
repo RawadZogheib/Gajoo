@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
-import 'package:gajoo/widgets/HomePage/MyFooter.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/MyCoursesList.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/TeacherProfile.dart';
@@ -192,26 +192,30 @@ class _MyCoursesState extends State<MyCourses> {
         [
           'Spanic Speaking',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-01 18:20'),
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-08 20:35:00.000', true),
           ),
+          '40',
         ],
         [
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-07 22:00'),
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-07 22:00:00.000', true),
           ),
+          '40',
         ],
         [
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-08 22:20'),
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-08 22:20:00.000', true),
           ),
+          '40',
         ],
         [
           'Arabic Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parseUTC('2022-03-09 18:20'),
+            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-09 18:20:00.000', true),
           ),
+          '40',
         ],
       ]);
     });

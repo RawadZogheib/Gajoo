@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
-import 'package:gajoo/widgets/HomePage/MyFooter.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
@@ -172,7 +172,9 @@ class _CalenderPageState extends State<CalenderPage> {
   _checkIfIsLoggedIn(DateTime _date) {
     if (_isLogedIn == false) {
       WarningPopup(context, globals.warning400);
-    } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
+    } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(
+      DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
+    ))) {
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialogCalender(
@@ -180,7 +182,9 @@ class _CalenderPageState extends State<CalenderPage> {
           date: _date,
         ),
       );
-    } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(_date))) {
+    } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(
+      DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
+    ))) {
       ErrorPopup(context, globals.error401);
     } else {
       ErrorPopup(context, globals.error402);
@@ -211,22 +215,63 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   void _loadDates() {
+    // load from db
     setState(() {
       _greenList.clear();
       _redList.clear();
       _greenList.addAll([
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 01)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 04)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 05)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 08)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 09)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 10)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2023, 03, 03)),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-08 23:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-09 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-10 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-11 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-13 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-14 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-04-17 17:42:00.000', true)
+              .toLocal(),
+        ),
       ]);
       _redList.addAll([
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 06)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 03)),
-        DateFormat('yyyy-MM-dd').format(DateTime.utc(2022, 03, 11)),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-12 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-03-18 17:42:00.000', true)
+              .toLocal(),
+        ),
+        DateFormat('yyyy-MM-dd').format(
+          DateFormat('yyyy-MM-dd HH:mm')
+              .parse('2022-04-22 17:42:00.000', true)
+              .toLocal(),
+        ),
       ]);
     });
   }

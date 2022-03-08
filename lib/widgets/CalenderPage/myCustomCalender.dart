@@ -29,7 +29,7 @@ class MyCustomCalender extends StatelessWidget {
         //border: Border.all(width: 1),
       ),
       child: PagedVerticalCalendar(
-        startDate: DateTime.now().subtract(Duration(days: 10)),
+        startDate: DateTime.now().toLocal().subtract(Duration(days: 10)),
         onDayPressed: (date) => onDayPressed(date),
         scrollController: ScrollController(),
 
@@ -80,8 +80,8 @@ class MyCustomCalender extends StatelessWidget {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              date.isBefore(DateTime.parse(
-                      DateFormat('yyyy-MM-dd').format(DateTime.now())))
+              date.isBefore(DateTime.parse(DateFormat('yyyy-MM-dd')
+                      .format(DateTime.now().toLocal())))
                   ? Expanded(
                       child: Container(
                           decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class MyCustomCalender extends StatelessWidget {
                               ),
                               border: date.isAtSameMomentAs(DateTime.parse(
                                       DateFormat('yyyy-MM-dd')
-                                          .format(DateTime.now())))
+                                          .format(DateTime.now().toLocal())))
                                   ? Border.all(width: 2, color: Colors.green)
                                   : null,
                             ),
@@ -132,12 +132,10 @@ class MyCustomCalender extends StatelessWidget {
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(12.0),
                                   ),
-                                  border: date.isAtSameMomentAs(
-                                          DateTime.parse(
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(DateTime.now())))
-                                      ? Border.all(
-                                          width: 2, color: Colors.red)
+                                  border: date.isAtSameMomentAs(DateTime.parse(
+                                          DateFormat('yyyy-MM-dd').format(
+                                              DateTime.now().toLocal())))
+                                      ? Border.all(width: 2, color: Colors.red)
                                       : null,
                                 ),
                                 alignment: Alignment.center,
@@ -158,9 +156,10 @@ class MyCustomCalender extends StatelessWidget {
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(12.0),
                                     ),
-                                    border: date.isAtSameMomentAs(DateTime
-                                            .parse(DateFormat('yyyy-MM-dd')
-                                                .format(DateTime.now())))
+                                    border: date.isAtSameMomentAs(
+                                            DateTime.parse(
+                                                DateFormat('yyyy-MM-dd').format(
+                                                    DateTime.now().toLocal())))
                                         ? Border.all(
                                             width: 2, color: Colors.black)
                                         : null,

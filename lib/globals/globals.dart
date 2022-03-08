@@ -11,7 +11,7 @@ const String version = "v1.0";
 //Server Ip  (page[/my_api.dart])
 const String myIP = "https://kwikcode.net/gajoo_php/";
 
-int meetingDuration = 40;
+bool isLogedIn = true;
 String currentPage = 'HomePage';//HomePage//MyCourses//
 
 //Colors

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gajoo/widgets/HomePage/MyFooter.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/other/Responsive.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';

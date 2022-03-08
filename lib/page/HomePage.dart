@@ -5,11 +5,12 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomImage.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
-import 'package:gajoo/widgets/HomePage/MyFooter.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogLangLvl.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
@@ -173,63 +174,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'Assets/HomePage/logo.png',
-                      height: 95,
-                      width: 300,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  _isLogedIn == false
-                      ? Container(
-                          height: 60,
-                          width: 120,
-                          margin: const EdgeInsets.only(right: 16.0),
-                          child: ElevatedButton(
-                            onPressed: () =>
-                                Navigator.of(context).pushNamed('/Login'),
-                            child: const Text('Login'),
-                          ),
-                        )
-                      : Container(
-                          margin: const EdgeInsets.only(right: 20.0),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Rawad Zogheib',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                onTap: () =>
-                                    Scaffold.of(context).openEndDrawer(),
-                                child: CircleAvatar(
-                                  backgroundColor: HexColor('#222222'),
-                                  backgroundImage: const AssetImage(
-                                      'Assets/HomePage/ProfilePicture/img1.png'),
-                                  maxRadius: 35,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                ],
-              ),
-            ),
+            MyHeader(),
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(

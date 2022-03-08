@@ -114,11 +114,11 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
         _availableTime.add(
           CalenderHours(
             fromTime: DateFormat('HH:mm').format(
-              DateFormat('HH:mm').parse('18:20'),
-            ),
+              DateFormat('HH:mm').parse('18:20:00.000', true).toLocal(),
+            ).toString(),
             toTime: DateFormat('HH:mm').format(
-              DateFormat('HH:mm').parse('19:20'),
-            ),
+              DateFormat('HH:mm').parse('19:20:00.000', true).toLocal(),
+            ).toString(),
             onTap: () {
               print('ssa');
             },
@@ -127,11 +127,11 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
         _availableTime.add(
           CalenderHours(
             fromTime: DateFormat('HH:mm').format(
-              DateFormat('HH:mm').parse('18:20'),
-            ),
+              DateFormat('HH:mm').parse('18:20:00.000', true).toLocal(),
+            ).toString(),
             toTime: DateFormat('HH:mm').format(
-              DateFormat('HH:mm').parse('19:20'),
-            ),
+              DateFormat('HH:mm').parse('19:20:00.000', true).toLocal(),
+            ).toString(),
             onTap: null,
           ),
         );

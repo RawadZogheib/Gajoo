@@ -89,8 +89,9 @@ class myDrawer extends StatelessWidget {
     Navigator.of(context).pop();
     switch (index) {
       case 0: // My Courses
-        if (globals.currentPage != 'MyCourses')
-          Navigator.of(context).pushNamed('/MyCourses');
+        if (globals.currentPage != 'MyCourses') {
+          Navigator.of(context).pushNamedAndRemoveUntil('/MyCourses',  (route) => false);
+        }
         break;
       case 1: // Liked Courses
         // Navigator.of(context).push(MaterialPageRoute(

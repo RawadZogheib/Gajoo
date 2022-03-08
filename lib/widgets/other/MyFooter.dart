@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 
 class MyFooter extends StatelessWidget {
   const MyFooter({Key? key}) : super(key: key);
