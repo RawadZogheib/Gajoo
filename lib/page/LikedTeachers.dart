@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
