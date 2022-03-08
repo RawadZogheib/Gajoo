@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
 class TeacherCard extends StatelessWidget {
+  final String? Id;
   final String text;
   final String imageUrl;
   final String subtitle;
@@ -10,7 +11,8 @@ class TeacherCard extends StatelessWidget {
   final Function() onPressed;
 
   const TeacherCard(
-      {required this.text,
+      {this.Id,
+      required this.text,
       required this.imageUrl,
       required this.subtitle,
       required this.isHeart,
@@ -57,9 +59,6 @@ class TeacherCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       )),
-                  const SizedBox(
-                    height: 5,
-                  ),
                   Text(
                     subtitle,
                     textAlign: TextAlign.center,
@@ -76,13 +75,10 @@ class TeacherCard extends StatelessWidget {
                           onPressed: (){
                             Navigator.pushNamed(context, '/CalendarPage');
                           },
-                          icon: const Icon(Icons.arrow_forward_ios),),
+                          icon: const Icon(Icons.arrow_forward_ios,size: 20,),),
                     ],
                   )
                       : Container(),
-                  const SizedBox(
-                    height: 10,
-                  ),
                 ],
               ),
             ),
@@ -94,11 +90,21 @@ class TeacherCard extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 hoverColor: Colors.transparent,
-                onPressed: () => null,
+                onPressed: () {},
                 icon: const Icon(Icons.favorite_border),
               ),
             )
-                : Container(),
+                : Positioned(
+              top: 20,
+              right: 20,
+              child: IconButton(
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                onPressed: () {},
+                icon: const Icon(Icons.favorite),
+              ),
+            ),
           ],
         ),
 
@@ -112,7 +118,9 @@ class TeacherCard extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),
                     bottomLeft: Radius.circular(20),
-                  )),
+                  ),
+                  color: Colors.white
+              ),
               margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.only(
                   top: 86.0, bottom: 8.0, right: 8.0, left: 8.0),

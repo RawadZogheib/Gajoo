@@ -25,18 +25,18 @@ Color level1 = HexColor('#dfe2e6');
 Color level2 = HexColor('#dfe2e6');
 Color level3 = HexColor('#dfe2e6');
 
-class Teacher extends StatefulWidget {
+class LikedTeachers extends StatefulWidget {
   String? type;
   String? languages;
   String? level;
 
-  Teacher({this.type, this.languages, this.level});
+  LikedTeachers({this.type, this.languages, this.level});
 
   @override
-  _TeacherState createState() => _TeacherState();
+  _LikedTeachersState createState() => _LikedTeachersState();
 }
 
-class _TeacherState extends State<Teacher> {
+class _LikedTeachersState extends State<LikedTeachers> {
 
   Timer? timer;
 
@@ -44,7 +44,7 @@ class _TeacherState extends State<Teacher> {
     initialScrollOffset: 0.0,
   );
 
-  final List<Widget> _TeacherCard = [];
+  final List<Widget> _LikedTeacherCard = [];
 
   @override
   void initState() {
@@ -65,102 +65,102 @@ class _TeacherState extends State<Teacher> {
       endDrawer: myDrawer(),
       appBar: MediaQuery.of(context).size.width < 650
           ? AppBar(
-              leading: Builder(
-                builder: (context) => InkWell(
-                  child: const Icon(Icons.reorder),
-                  onTap: () {
-                    Scaffold.of(context).openDrawer();
-                  },
+        leading: Builder(
+          builder: (context) => InkWell(
+            child: const Icon(Icons.reorder),
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
+        actions: [
+          Builder(
+            builder: (context) => Row(
+              children: [
+                const Text(
+                  'Rawad Zogheib',
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-              actions: [
-                Builder(
-                  builder: (context) => Row(
-                    children: [
-                      const Text(
-                        'Rawad Zogheib',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        onTap: () => Scaffold.of(context).openEndDrawer(),
-                        child: CircleAvatar(
-                          backgroundColor: HexColor('#222222'),
-                          backgroundImage: const AssetImage(
-                              'Assets/HomePage/ProfilePicture/img1.png'),
-                          maxRadius: 35,
-                        ),
-                      ),
-                    ],
+                const SizedBox(
+                  width: 12,
+                ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onTap: () => Scaffold.of(context).openEndDrawer(),
+                  child: CircleAvatar(
+                    backgroundColor: HexColor('#222222'),
+                    backgroundImage: const AssetImage(
+                        'Assets/HomePage/ProfilePicture/img1.png'),
+                    maxRadius: 35,
                   ),
                 ),
               ],
-            )
+            ),
+          ),
+        ],
+      )
           : null,
       body: Responsive(
         mobile: Builder(
           builder: (context) =>
-           Column(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                  child: Stack(
-                    children: [
-                      ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: SingleChildScrollView(
-                          controller: ScrollController(),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+              Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
+                      child: Stack(
+                        children: [
+                          ScrollConfiguration(
+                            behavior: MyCustomScrollBehavior(),
+                            child: SingleChildScrollView(
+                              controller: ScrollController(),
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(12.5),
-                                        topLeft: Radius.circular(12.5),
-                                        //
-                                        bottomRight: Radius.circular(12.5),
-                                        bottomLeft: Radius.circular(12.5),
-                                      ),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(12.5),
+                                            topLeft: Radius.circular(12.5),
+                                            //
+                                            bottomRight: Radius.circular(12.5),
+                                            bottomLeft: Radius.circular(12.5),
+                                          ),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
                                               BorderRadius.circular(12.5),
-                                          color: Colors.white70,
-                                        ),
-                                        child: Expanded(
-                                          child: Wrap(
-                                            children: _TeacherCard,
+                                              color: Colors.white70,
+                                            ),
+                                            child: Expanded(
+                                              child: Wrap(
+                                                children: _LikedTeacherCard,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 100,
+                                      const SizedBox(
+                                        width: 100,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
         ),
         tablet: Builder(
           builder: (context) => Column(
@@ -242,11 +242,11 @@ class _TeacherState extends State<Teacher> {
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(12.5),
+                                          BorderRadius.circular(12.5),
                                           color: Colors.white70,
                                         ),
                                         child: Wrap(
-                                          children: _TeacherCard,
+                                          children: _LikedTeacherCard,
                                         ),
                                       ),
                                     ),
@@ -611,11 +611,11 @@ class _TeacherState extends State<Teacher> {
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(12.5),
+                                          BorderRadius.circular(12.5),
                                           color: Colors.white70,
                                         ),
                                         child: Wrap(
-                                          children: _TeacherCard,
+                                          children: _LikedTeacherCard,
                                         ),
                                       ),
                                     ),
@@ -930,8 +930,9 @@ class _TeacherState extends State<Teacher> {
 
   void _loadTeachers() {// load from db
     setState(() {
-      _TeacherCard.addAll([
+      _LikedTeacherCard.addAll([
         TeacherCard(
+            Id: "1",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
@@ -939,6 +940,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "2",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
@@ -946,6 +948,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "3",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
@@ -953,6 +956,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "4",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
@@ -960,6 +964,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "5",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
@@ -967,6 +972,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "6",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
@@ -974,6 +980,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "7",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
@@ -981,6 +988,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "8",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
@@ -988,6 +996,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "9",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
@@ -995,6 +1004,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "10",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
@@ -1002,6 +1012,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "11",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
@@ -1009,6 +1020,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "12",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
@@ -1016,6 +1028,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "13",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
@@ -1023,6 +1036,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "14",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
@@ -1030,6 +1044,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "15",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
@@ -1037,6 +1052,7 @@ class _TeacherState extends State<Teacher> {
             isButton: true,
             onPressed: () {}),
         TeacherCard(
+            Id: "16",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
