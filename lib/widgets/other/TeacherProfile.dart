@@ -48,54 +48,69 @@ class TeacherProfile extends StatelessWidget {
               ),
               const Divider(),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              Row(
-                children: [
-                  TeacherName(
-                    width: 233,
-                    text1: 'Name: ',
-                    text2: name,
-                  ),
-                  TeacherName(
-                    width: 233,
-                    text1: 'Age: ',
-                    text2: age,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Row(
+                  children: [
+                    TeacherName(
+                      width: 220,
+                      text1: 'Name: ',
+                      text2: name,
+                    ),
+                    TeacherName(
+                      width: 220,
+                      text1: 'Age: ',
+                      text2: age,
+                    ),
+                  ],
+                ),
               ),
-              TeacherName(
-                width: 440,
-                text1: 'Languages: ',
-                text2: languages,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: TeacherName(
+                  width: 440,
+                  text1: 'Languages: ',
+                  text2: languages,
+                ),
               ),
-              Row(
-                children: [
-                  TeacherName(
-                    width: 233,
-                    text1: 'Number of courses: ',
-                    text2: nbrOfCourses,
-                  ),
-                  TeacherName(
-                    width: 233,
-                    text1: 'Comming Soon: ',
-                    text2: 'null',
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Row(
+                  children: [
+                    TeacherName(
+                      width: 220,
+                      text1: 'Number of courses: ',
+                      text2: nbrOfCourses,
+                    ),
+                    TeacherName(
+                      width: 220,
+                      text1: 'Comming Soon: ',
+                      text2: 'null',
+                    ),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  TeacherName(
-                    width: 233,
-                    text1: 'Courses Reserved: ',
-                    text2: coursesReserved,
-                  ),
-                  TeacherName(
-                    width: 233,
-                    text1: 'Courses Left: ',
-                    text2: coursesLeft,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Row(
+                  children: [
+                    TeacherName(
+                      width: 220,
+                      text1: 'Courses Reserved: ',
+                      text2: coursesReserved,
+                    ),
+                    TeacherName(
+                      width: 220,
+                      text1: 'Courses Left: ',
+                      text2: coursesLeft,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
