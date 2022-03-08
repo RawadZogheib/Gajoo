@@ -26,6 +26,7 @@ class _CalenderPageState extends State<CalenderPage> {
   @override
   void initState() {
     // TODO: implement initState
+    globals.currentPage = 'CalendarPage';
     _loadNewPage();
     super.initState();
   }
