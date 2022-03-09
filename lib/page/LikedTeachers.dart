@@ -6,23 +6,14 @@ import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/other/Responsive.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';
 import 'package:infinite_listview/infinite_listview.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 
-import '../hexColor/hexColor.dart';
-import '../widgets/button/myButton.dart';
-import '../widgets/other/MyCustomScrollBehavior.dart';
-import '../widgets/other/myDrawer.dart';
+import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/button/myButton.dart';
+import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/myDrawer.dart';
 
-Color type1 = HexColor('#dfe2e6');
-Color type2 = HexColor('#dfe2e6');
-Color type3 = HexColor('#dfe2e6');
 
-Color language1 = HexColor('#dfe2e6');
-Color language2 = HexColor('#dfe2e6');
-Color language3 = HexColor('#dfe2e6');
-
-Color level1 = HexColor('#dfe2e6');
-Color level2 = HexColor('#dfe2e6');
-Color level3 = HexColor('#dfe2e6');
 
 class LikedTeachers extends StatefulWidget {
   String? type;
@@ -49,6 +40,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    globals.currentPage = "LikedTeachers";
     _choosedFilters();
     _loadNewPage();
   }
@@ -77,9 +69,9 @@ class _LikedTeachersState extends State<LikedTeachers> {
             builder: (context) => Row(
               children: [
                 const Text(
-                  'Rawad Zogheib',
+                  'Liked Teachers',
                   style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 8, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   width: 12,
@@ -186,7 +178,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
                       child: Row(
                         children: [
                           const Text(
-                            'Rawad Zogheib',
+                            'Liked Teachers',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -555,7 +547,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
                       child: Row(
                         children: [
                           const Text(
-                            'Rawad Zogheib',
+                            'Liked Teachers',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -908,7 +900,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
     print(
         '=========>>======================================================>>==================================================>>=========');
     timer?.cancel();
-    _loadTeachers(); //0
+    _loadLikedTeachers(); //0
     _loadPage(); //1 -> INFINI
   }
 
@@ -919,7 +911,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
       print("30sec gone!!");
       if (mounted) {
         print("30sec gone, and _loadChildrenOnline!!");
-        _loadTeachers();
+        _loadLikedTeachers();
       } else {
         print(
             '=========<<======================================================<<==================================================<<=========');
@@ -927,7 +919,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
     });
   }
 
-  void _loadTeachers() {// load from db
+  void _loadLikedTeachers() {// load from db
     setState(() {
       _LikedTeacherCard.addAll([
         TeacherCard(
@@ -936,40 +928,72 @@ class _LikedTeachersState extends State<LikedTeachers> {
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+              print(_LikedTeacherCard[Id]);
+            }),
         TeacherCard(
             Id: "2",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
+            isHeartLikedTeacher: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "3",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
+            isHeartLikedTeacher: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+
+              });
+            }),
         TeacherCard(
             Id: "4",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "5",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "6",
             text: 'Rawad Zogheib',
@@ -977,7 +1001,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             subtitle: 'ma 5asne bshi',
             isHeart: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "7",
             text: 'Rima Zogheib',
@@ -985,7 +1014,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             subtitle: 'Arabic, French, English',
             isHeart: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "8",
             text: 'Ghada Zogheib',
@@ -993,7 +1027,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             subtitle: 'English, Arabic, French',
             isHeart: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "9",
             text: 'Michel Nachar',
@@ -1001,7 +1040,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             subtitle: 'Arabic, French',
             isHeart: true,
             isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
         TeacherCard(
             Id: "10",
             text: 'Rawad Zogheib',
@@ -1009,55 +1053,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             subtitle: 'ma 5asne bshi',
             isHeart: true,
             isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "11",
-            text: 'Rima Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "12",
-            text: 'Ghada Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "13",
-            text: 'Michel Nachar',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            subtitle: 'Arabic, French',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "14",
-            text: 'Rawad Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'ma 5asne bshi',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "15",
-            text: 'Rima Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
-        TeacherCard(
-            Id: "16",
-            text: 'Ghada Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
-            isHeart: true,
-            isButton: true,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+              });
+            }),
       ]);
     });
   }

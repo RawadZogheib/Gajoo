@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
-class TeacherCard extends StatelessWidget {
+import '../../page/LikedTeachers.dart';
+
+
+class TeacherCard extends StatefulWidget {
   final String? Id;
   final String text;
   final String imageUrl;
   final String subtitle;
   final bool isHeart;
+  final bool? isHeartLikedTeacher;
   final bool isButton;
-  final Function() onPressed;
+  bool liked = false;
+  var onPressed;
 
-  const TeacherCard(
+  TeacherCard(
       {this.Id,
       required this.text,
       required this.imageUrl,
       required this.subtitle,
       required this.isHeart,
+      this.isHeartLikedTeacher,
       required this.isButton,
       required this.onPressed,
+      required this.liked,
       Key? key})
       : super(key: key);
 
   @override
+  State<TeacherCard> createState() => _TeacherCardState();
+}
+
+class _TeacherCardState extends State<TeacherCard> {
+  
+  @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: () {},
       child: FlipCard(
@@ -50,9 +64,9 @@ class TeacherCard extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Image.asset(imageUrl, height: 90, fit: BoxFit.cover),
+                  Image.asset(widget.imageUrl, height: 90, fit: BoxFit.cover),
                   const Spacer(),
-                  Text(text,
+                  Text(widget.text,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.black,
@@ -60,14 +74,14 @@ class TeacherCard extends StatelessWidget {
                         fontSize: 18,
                       )),
                   Text(
-                    subtitle,
+                    widget.subtitle,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.normal,
                         fontSize: 12),
                   ),
-                  isButton == true
+                  widget.isButton == true
                       ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -82,29 +96,26 @@ class TeacherCard extends StatelessWidget {
                 ],
               ),
             ),
-            isHeart == true
-                ? Positioned(
+            widget.isHeart == true ?
+            Positioned(
               top: 20,
               right: 20,
               child: IconButton(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 hoverColor: Colors.transparent,
-                onPressed: () {},
-                icon: const Icon(Icons.favorite_border),
+                onPressed: () {
+                  setState(() {
+                    widget.liked = !widget.liked;
+                    if(widget.isHeartLikedTeacher != false && widget.liked == false){
+                      widget.onPressed(widget.Id);
+                    }
+                  });
+                },
+                icon: widget.liked == false ? const Icon(Icons.favorite_border) : const Icon(Icons.favorite),
               ),
             )
-                : Positioned(
-              top: 20,
-              right: 20,
-              child: IconButton(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                onPressed: () {},
-                icon: const Icon(Icons.favorite),
-              ),
-            ),
+                : Container(),
           ],
         ),
 

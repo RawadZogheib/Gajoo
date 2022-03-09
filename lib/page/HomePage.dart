@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'C.E.O.',
         isHeart: false,
         isButton: false,
+        liked: false,
         onPressed: () {}),
     TeacherCard(
         text: 'Michel Nachar',
@@ -53,6 +54,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Project Manager',
         isHeart: false,
         isButton: false,
+        liked: false,
         onPressed: () {}),
   ];
 
@@ -63,6 +65,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Frensh, English',
         isHeart: true,
         isButton: false,
+        liked: true,
         onPressed: () {}),
     TeacherCard(
         text: 'Michel Nachar',
@@ -70,6 +73,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Arabic anja2 :p',
         isHeart: true,
         isButton: false,
+        liked: false,
         onPressed: () {}),
     TeacherCard(
         text: 'Rawad Zogheib',
@@ -77,6 +81,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: "Arabic, French, English",
         isHeart: true,
         isButton: false,
+        liked: true,
         onPressed: () {}),
     TeacherCard(
         text: 'Clara Zeidan',
@@ -84,6 +89,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Arabic, French, English',
         isHeart: true,
         isButton: false,
+        liked: false,
         onPressed: () {}),
     TeacherCard(
         text: 'Felix Gedeon',
@@ -91,6 +97,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'English',
         isHeart: true,
         isButton: false,
+        liked: false,
         onPressed: () {}),
     TeacherCard(
         text: 'Piere ElAsmar',
@@ -98,6 +105,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Russian, English',
         isHeart: true,
         isButton: false,
+        liked: true,
         onPressed: () {}),
     TeacherCard(
       text: 'Philips Maalouf',
@@ -105,6 +113,7 @@ class _HomePageState extends State<HomePage> {
       subtitle: 'Arabic, Spanish',
       isHeart: true,
       isButton: false,
+      liked: false,
       onPressed: () {},
     ),
     TeacherCard(
@@ -113,6 +122,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Arabic',
         isHeart: true,
         isButton: false,
+        liked: false,
         onPressed: () {}),
     TeacherCard(
         text: 'Nabil Kenaan',
@@ -120,6 +130,7 @@ class _HomePageState extends State<HomePage> {
         subtitle: 'Arabic, Frensh',
         isHeart: true,
         isButton: false,
+        liked: true,
         onPressed: () {}),
   ];
 

@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/page/LikedTeachers.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/other/Responsive.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';
 import 'package:infinite_listview/infinite_listview.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 
 import '../hexColor/hexColor.dart';
 import '../widgets/button/myButton.dart';
@@ -50,8 +52,10 @@ class _TeacherState extends State<Teacher> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    globals.currentPage = "Teacher";
     _choosedFilters();
     _loadNewPage();
+    //LikedTeachers(type: widget.type, languages: widget.languages, level: widget.level,);
   }
 
   @override
@@ -930,118 +934,151 @@ class _TeacherState extends State<Teacher> {
 
   void _loadTeachers() {// load from db
     setState(() {
+      _TeacherCard.clear();
       _TeacherCard.addAll([
         TeacherCard(
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: true,
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
+            isHeartLikedTeacher: false,
             isButton: true,
+            liked: false,
             onPressed: () {}),
       ]);
     });

@@ -98,22 +98,22 @@ class myDrawer extends StatelessWidget {
         //   builder: (context) => const Scaffold(), // Page 2
         // ));
         break;
-      case 3: // Liked Teachers
+      case 2: // Liked Teachers
         if (globals.currentPage != 'LikedTeachers') {
           Navigator.of(context).pushNamedAndRemoveUntil('/LikedTeachers',  (route) => false);
         }
         break;
-      case 4: // Updates
+      case 3: // Updates
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 4
         // ));
         break;
-      case 5: // Notifications
+      case 4: // Notifications
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 5
         // ));
         break;
-      case 6: // Settings
+      case 5: // Settings
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 6
         // ));
