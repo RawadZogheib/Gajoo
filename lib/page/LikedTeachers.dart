@@ -921,6 +921,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
 
   void _loadLikedTeachers() {// load from db
     setState(() {
+      _LikedTeacherCard.clear();
       _LikedTeacherCard.addAll([
         TeacherCard(
             Id: "1",
