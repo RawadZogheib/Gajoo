@@ -34,7 +34,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
     initialScrollOffset: 0.0,
   );
 
-  final List<Widget> _LikedTeacherCard = [];
+  final List<TeacherCard> _LikedTeacherCard = [];
 
   @override
   void initState() {
@@ -901,7 +901,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
         '=========>>======================================================>>==================================================>>=========');
     timer?.cancel();
     _loadLikedTeachers(); //0
-    _loadPage(); //1 -> INFINI
+    //_loadPage(); //1 -> INFINI
   }
 
   _loadPage() {   //for reload page each 30s
@@ -933,9 +933,8 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
-              print(_LikedTeacherCard[Id]);
             }),
         TeacherCard(
             Id: "2",
@@ -948,7 +947,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -962,8 +961,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
-
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -977,7 +975,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -991,7 +989,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -1004,7 +1002,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -1017,7 +1015,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -1030,7 +1028,12 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                // for(int i = 0; i<_LikedTeacherCard.length; i++){
+                //   if(_LikedTeacherCard[i].Id == Id){
+                //     _LikedTeacherCard.removeAt(i);
+                //   }
+                // }
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -1043,7 +1046,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
         TeacherCard(
@@ -1056,7 +1059,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
             liked: true,
             onPressed: (Id) {
               setState(() {
-                  _LikedTeacherCard.remove(_LikedTeacherCard[int.parse(Id)]);
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
               });
             }),
       ]);
