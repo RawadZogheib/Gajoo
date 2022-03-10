@@ -268,7 +268,7 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   _back() {
-    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
 
 }
