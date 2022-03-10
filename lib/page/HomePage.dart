@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
-        appBar: MediaQuery.of(context).size.width < 700
+        appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
                 backgroundColor: globals.whiteBlue,
                 elevation: 0,
@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MediaQuery.of(context).size.width > 700
+            MediaQuery.of(context).size.width > 650
                 ? const MyHeader()
                 : Container(),
             Expanded(

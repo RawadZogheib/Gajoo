@@ -44,7 +44,7 @@ class _CalenderPageState extends State<CalenderPage> {
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
-        appBar: MediaQuery.of(context).size.width < 700
+        appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
           backgroundColor: globals.whiteBlue,
           elevation: 0,
@@ -84,7 +84,9 @@ class _CalenderPageState extends State<CalenderPage> {
         endDrawer: myDrawer(),
         body: Column(
           children: [
-            const MyHeader(),
+            MediaQuery.of(context).size.width > 650
+                ? const MyHeader()
+                : Container(),
             Expanded(
               child: ScrollConfiguration(
                   behavior: MyCustomScrollBehavior(),
