@@ -356,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                           onTapBlue: () {
                             _types = "blue";
                             _pageColor = Colors.blueAccent;
-                            //_checkIfIsLoggedIn();
+                            _checkIfIsLoggedInBlue();
                             print('Blue');
                           },
                           onTapGreen: () {
@@ -480,6 +480,17 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+
+  _checkIfIsLoggedInBlue() {
+    if (_isLogedIn == false) {
+      WarningPopup(context, globals.warning400);
+    } else {
+      Navigator.pushNamed(context, "/MyAudio");
+    }
+  }
+
+
 
   _back() {
     print('No back available.');
