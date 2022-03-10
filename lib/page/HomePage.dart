@@ -5,11 +5,11 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomImage.dart';
 import 'package:gajoo/widgets/HomePage/ImagePagination.dart';
-import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/HomePage/animatedLogo.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogLangLvl.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:infinite_listview/infinite_listview.dart';
@@ -178,14 +178,54 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      endDrawer: myDrawer(),
-      backgroundColor: globals.whiteBlue,
-      body: Builder(
-        builder: (context) => Column(
+    return WillPopScope(
+      onWillPop: () async => _back(),
+      child: Scaffold(
+        appBar: MediaQuery.of(context).size.width < 700
+            ? AppBar(
+                backgroundColor: globals.whiteBlue,
+                elevation: 0,
+                title: Center(
+                  child: Text(
+                    'Gajoo',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: HexColor('#333333'),
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: HexColor('#333333'),
+                    ),
+                    onPressed: () {
+                      _back();
+                    }),
+                actions: [
+                  Builder(
+                    builder: (context) => IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.menu,
+                        color: HexColor('#333333'),
+                      ),
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    ),
+                  ),
+                ],
+              )
+            : null,
+        endDrawer: myDrawer(),
+        backgroundColor: globals.whiteBlue,
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const MyHeader(),
+            MediaQuery.of(context).size.width > 700
+                ? const MyHeader()
+                : Container(),
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
@@ -439,5 +479,9 @@ class _HomePageState extends State<HomePage> {
         }
       });
     }
+  }
+
+  _back() {
+    print('No back available.');
   }
 }
