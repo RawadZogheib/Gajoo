@@ -7,8 +7,9 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 100,
+      color: globals.whiteBlue,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
