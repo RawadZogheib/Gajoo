@@ -13,6 +13,9 @@ class MyHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
             onTap: () {
               if (globals.currentPage != 'HomePage') {
                 Navigator.of(context)
