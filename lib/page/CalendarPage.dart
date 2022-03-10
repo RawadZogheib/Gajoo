@@ -41,79 +41,119 @@ class _CalenderPageState extends State<CalenderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: myDrawer(),
-      body: Column(
-        children: [
-          const MyHeader(),
-          Expanded(
-            child: ScrollConfiguration(
-                behavior: MyCustomScrollBehavior(),
-                child: SingleChildScrollView(
-                  controller: ScrollController(),
-                  child: Column(
-                    children: [
-                      ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          controller: ScrollController(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TeacherProfile(
-                                name: 'Rawad',
-                                age: '22',
-                                languages: 'Arabic, french, english',
-                                nbrOfCourses: '20',
-                                coursesReserved: '27',
-                                coursesLeft: '3',
-                              ),
-                              const SizedBox(
-                                width: 60,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    topRight: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                    bottomRight: Radius.circular(30),
-                                  ),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height * 0.8,
-                                    width: 500,
-                                    color: globals.whiteBlue,
-                                    child: ScrollConfiguration(
-                                      behavior: MyCustomScrollBehavior(),
-                                      child: MyCustomCalender(
-                                        greenList: _greenList,
-                                        redList: _redList,
-                                        onDayPressed: (date) {
-                                          print(
-                                              DateFormat('yyyy-MM-dd').format(date));
-                                          _checkIfIsLoggedIn(date);
-                                        },
+    return WillPopScope(
+      onWillPop: () async => _back(),
+      child: Scaffold(
+        appBar: MediaQuery.of(context).size.width < 700
+            ? AppBar(
+          backgroundColor: globals.whiteBlue,
+          elevation: 0,
+          title: Center(
+            child: Text(
+              'Gajoo',
+              style: TextStyle(
+                fontSize: 28,
+                color: HexColor('#333333'),
+              ),
+            ),
+          ),
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: HexColor('#333333'),
+              ),
+              onPressed: () {
+                _back();
+              }),
+          actions: [
+            Builder(
+              builder: (context) => IconButton(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                icon: Icon(
+                  Icons.menu,
+                  color: HexColor('#333333'),
+                ),
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+              ),
+            ),
+          ],
+        )
+            : null,
+        endDrawer: myDrawer(),
+        body: Column(
+          children: [
+            const MyHeader(),
+            Expanded(
+              child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: SingleChildScrollView(
+                    controller: ScrollController(),
+                    child: Column(
+                      children: [
+                        ScrollConfiguration(
+                          behavior: MyCustomScrollBehavior(),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: ScrollController(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TeacherProfile(
+                                  name: 'Rawad',
+                                  age: '22',
+                                  languages: 'Arabic, french, english',
+                                  nbrOfCourses: '20',
+                                  coursesReserved: '27',
+                                  coursesLeft: '3',
+                                ),
+                                const SizedBox(
+                                  width: 60,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30),
+                                      bottomRight: Radius.circular(30),
+                                    ),
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height * 0.8,
+                                      width: 500,
+                                      color: globals.whiteBlue,
+                                      child: ScrollConfiguration(
+                                        behavior: MyCustomScrollBehavior(),
+                                        child: MyCustomCalender(
+                                          greenList: _greenList,
+                                          redList: _redList,
+                                          onDayPressed: (date) {
+                                            print(
+                                                DateFormat('yyyy-MM-dd').format(date));
+                                            _checkIfIsLoggedIn(date);
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const MyFooter(),
-                    ],
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const MyFooter(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -224,4 +264,9 @@ class _CalenderPageState extends State<CalenderPage> {
       ]);
     });
   }
+
+  _back() {
+    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+  }
+
 }
