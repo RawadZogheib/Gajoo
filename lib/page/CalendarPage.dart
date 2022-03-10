@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
-import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/TeacherProfile.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
@@ -270,5 +270,4 @@ class _CalenderPageState extends State<CalenderPage> {
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
-
 }

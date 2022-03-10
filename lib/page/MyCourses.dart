@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
-import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/MyCoursesList.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
+import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/TeacherProfile.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
@@ -41,13 +41,54 @@ class _MyCoursesState extends State<MyCourses> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: myDrawer(),
-      body: Column(
-        children: [
-          const MyHeader(),
-          Expanded(
-            child: ScrollConfiguration(
+    return WillPopScope(
+      onWillPop: () async => _back(),
+      child: Scaffold(
+        appBar: MediaQuery.of(context).size.width < 650
+            ? AppBar(
+                backgroundColor: globals.whiteBlue,
+                elevation: 0,
+                title: Center(
+                  child: Text(
+                    'Gajoo',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: HexColor('#333333'),
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: HexColor('#333333'),
+                    ),
+                    onPressed: () {
+                      _back();
+                    }),
+                actions: [
+                  Builder(
+                    builder: (context) => IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.menu,
+                        color: HexColor('#333333'),
+                      ),
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    ),
+                  ),
+                ],
+              )
+            : null,
+        endDrawer: myDrawer(),
+        body: Column(
+          children: [
+            MediaQuery.of(context).size.width > 650
+                ? const MyHeader()
+                : Container(),
+            Expanded(
+              child: ScrollConfiguration(
                 behavior: MyCustomScrollBehavior(),
                 child: SingleChildScrollView(
                   controller: ScrollController(),
@@ -71,7 +112,8 @@ class _MyCoursesState extends State<MyCourses> {
                                     bottomRight: Radius.circular(30),
                                   ),
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height * 0.8,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
                                     width: 500,
                                     padding: const EdgeInsets.all(12.0),
                                     color: Colors.white,
@@ -104,8 +146,9 @@ class _MyCoursesState extends State<MyCourses> {
                   ),
                 ),
               ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -140,32 +183,40 @@ class _MyCoursesState extends State<MyCourses> {
         [
           'Spanic Speaking',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-08 20:35:00.000', true),
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-08 20:35:00.000', true),
           ),
           '40',
         ],
         [
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-07 22:00:00.000', true),
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-07 22:00:00.000', true),
           ),
           '40',
         ],
         [
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-08 22:20:00.000', true),
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-08 22:20:00.000', true),
           ),
           '40',
         ],
         [
           'Arabic Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm').parse('2022-03-09 18:20:00.000', true),
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-09 18:20:00.000', true),
           ),
           '40',
         ],
       ]);
     });
+  }
+
+  _back() {
+    Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
 }
