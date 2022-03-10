@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/hexColor/hexColor.dart';
 
 class MyHeader extends StatelessWidget {
   const MyHeader({Key? key}) : super(key: key);
@@ -12,14 +12,22 @@ class MyHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'Assets/HomePage/logo.png',
-              height: 95,
-              width: 300,
-              fit: BoxFit.contain,
+          InkWell(
+            onTap: () {
+              if (globals.currentPage != 'HomePage') {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/HomePage', (route) => false);
+              }
+            },
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                'Assets/HomePage/logo.png',
+                height: 95,
+                width: 300,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           globals.isLogedIn == false
