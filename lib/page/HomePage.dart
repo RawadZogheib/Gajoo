@@ -137,7 +137,6 @@ class _HomePageState extends State<HomePage> {
   int _currentActive = 0;
   late Timer _timer;
   final int _duration = 5;
-  bool _isLogedIn = true;
   String? _types;
   Color? _pageColor;
 
@@ -462,7 +461,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _checkIfIsLoggedIn() {
-    if (_isLogedIn == false) {
+    if (globals.isLogedIn == false) {
       WarningPopup(context, globals.warning400);
     } else {
       showDialog(
@@ -483,7 +482,7 @@ class _HomePageState extends State<HomePage> {
 
 
   _checkIfIsLoggedInBlue() {
-    if (_isLogedIn == false) {
+    if (globals.isLogedIn == false) {
       WarningPopup(context, globals.warning400);
     } else {
       Navigator.pushNamed(context, "/MyAudio");

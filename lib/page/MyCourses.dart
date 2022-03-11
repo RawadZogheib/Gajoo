@@ -21,8 +21,7 @@ class MyCourses extends StatefulWidget {
 class _MyCoursesState extends State<MyCourses> {
   Timer? timer;
   List<List<String>> _coursesList = [];
-
-  bool _isLogedIn = true;
+  bool _clicked = false;
 
   @override
   void initState() {
@@ -126,7 +125,25 @@ class _MyCoursesState extends State<MyCourses> {
                               const SizedBox(
                                 width: 60,
                               ),
-                              TeacherProfile(
+                              _clicked == true
+                                  ? ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30),
+                                ),
+                                child: Container(
+                                  height:
+                                  MediaQuery.of(context).size.height *
+                                      0.8,
+                                  width: 500,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                                  : TeacherProfile(
                                 name: 'Rawad',
                                 age: '22',
                                 languages: 'Arabic, french, english',

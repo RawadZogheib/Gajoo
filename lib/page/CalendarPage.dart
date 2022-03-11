@@ -20,9 +20,9 @@ class CalenderPage extends StatefulWidget {
 
 class _CalenderPageState extends State<CalenderPage> {
   Timer? _timer;
-  bool _isLogedIn = true;
   Set<String> _greenList = {};
   Set<String> _redList = {};
+  bool _clicked = false;
 
   @override
   void initState() {
@@ -46,40 +46,40 @@ class _CalenderPageState extends State<CalenderPage> {
       child: Scaffold(
         appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
-          backgroundColor: globals.whiteBlue,
-          elevation: 0,
-          title: Center(
-            child: Text(
-              'Gajoo',
-              style: TextStyle(
-                fontSize: 28,
-                color: HexColor('#333333'),
-              ),
-            ),
-          ),
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: HexColor('#333333'),
-              ),
-              onPressed: () {
-                _back();
-              }),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                icon: Icon(
-                  Icons.menu,
-                  color: HexColor('#333333'),
+                backgroundColor: globals.whiteBlue,
+                elevation: 0,
+                title: Center(
+                  child: Text(
+                    'Gajoo',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: HexColor('#333333'),
+                    ),
+                  ),
                 ),
-                onPressed: () => Scaffold.of(context).openEndDrawer(),
-              ),
-            ),
-          ],
-        )
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: HexColor('#333333'),
+                    ),
+                    onPressed: () {
+                      _back();
+                    }),
+                actions: [
+                  Builder(
+                    builder: (context) => IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.menu,
+                        color: HexColor('#333333'),
+                      ),
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    ),
+                  ),
+                ],
+              )
             : null,
         endDrawer: myDrawer(),
         body: Column(
@@ -89,70 +89,89 @@ class _CalenderPageState extends State<CalenderPage> {
                 : Container(),
             Expanded(
               child: ScrollConfiguration(
-                  behavior: MyCustomScrollBehavior(),
-                  child: SingleChildScrollView(
-                    controller: ScrollController(),
-                    child: Column(
-                      children: [
-                        ScrollConfiguration(
-                          behavior: MyCustomScrollBehavior(),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            controller: ScrollController(),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TeacherProfile(
-                                  name: 'Rawad',
-                                  age: '22',
-                                  languages: 'Arabic, french, english',
-                                  nbrOfCourses: '20',
-                                  coursesReserved: '27',
-                                  coursesLeft: '3',
-                                ),
-                                const SizedBox(
-                                  width: 60,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30),
-                                      bottomLeft: Radius.circular(30),
-                                      bottomRight: Radius.circular(30),
-                                    ),
-                                    child: Container(
-                                      height: MediaQuery.of(context).size.height * 0.8,
-                                      width: 500,
-                                      color: globals.whiteBlue,
-                                      child: ScrollConfiguration(
-                                        behavior: MyCustomScrollBehavior(),
-                                        child: MyCustomCalender(
-                                          greenList: _greenList,
-                                          redList: _redList,
-                                          onDayPressed: (date) {
-                                            print(
-                                                DateFormat('yyyy-MM-dd').format(date));
-                                            _checkIfIsLoggedIn(date);
-                                          },
+                behavior: MyCustomScrollBehavior(),
+                child: SingleChildScrollView(
+                  controller: ScrollController(),
+                  child: Column(
+                    children: [
+                      ScrollConfiguration(
+                        behavior: MyCustomScrollBehavior(),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          controller: ScrollController(),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _clicked == true
+                                  ? ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30),
+                                        bottomRight: Radius.circular(30),
+                                      ),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.8,
+                                        width: 500,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
                                         ),
+                                      ),
+                                    )
+                                  : TeacherProfile(
+                                      name: 'Rawad',
+                                      age: '22',
+                                      languages: 'Arabic, french, english',
+                                      nbrOfCourses: '20',
+                                      coursesReserved: '27',
+                                      coursesLeft: '3',
+                                    ),
+                              const SizedBox(
+                                width: 60,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30),
+                                    bottomRight: Radius.circular(30),
+                                  ),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    width: 500,
+                                    color: globals.whiteBlue,
+                                    child: ScrollConfiguration(
+                                      behavior: MyCustomScrollBehavior(),
+                                      child: MyCustomCalender(
+                                        greenList: _greenList,
+                                        redList: _redList,
+                                        onDayPressed: (date) {
+                                          print(DateFormat('yyyy-MM-dd')
+                                              .format(date));
+                                          _checkIfIsLoggedIn(date);
+                                        },
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const MyFooter(),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const MyFooter(),
+                    ],
                   ),
                 ),
+              ),
             ),
           ],
         ),
@@ -161,7 +180,7 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   _checkIfIsLoggedIn(DateTime _date) {
-    if (_isLogedIn == false) {
+    if (globals.isLogedIn == false) {
       WarningPopup(context, globals.warning400);
     } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
