@@ -12,18 +12,18 @@ import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
-class LikedTeachers extends StatefulWidget {
+class LikedTeachersPage extends StatefulWidget {
   String? type;
   String? languages;
   String? level;
 
-  LikedTeachers({this.type, this.languages, this.level});
+  LikedTeachersPage({this.type, this.languages, this.level});
 
   @override
-  _LikedTeachersState createState() => _LikedTeachersState();
+  _LikedTeachersPageState createState() => _LikedTeachersPageState();
 }
 
-class _LikedTeachersState extends State<LikedTeachers> {
+class _LikedTeachersPageState extends State<LikedTeachersPage> {
   Timer? timer;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
@@ -36,7 +36,7 @@ class _LikedTeachersState extends State<LikedTeachers> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    globals.currentPage = "LikedTeachers";
+    globals.currentPage = "LikedTeachersPage";
     _choosedFilters();
     _loadNewPage();
   }

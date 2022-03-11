@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
-import '../../page/LikedTeachers.dart';
+import '../../page/LikedTeachersPage.dart';
 
 
 class TeacherCard extends StatefulWidget {
