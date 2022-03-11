@@ -3,6 +3,7 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyCoursesList extends StatelessWidget {
   List<List<String>> coursesList;
@@ -56,7 +57,7 @@ class MyCoursesItem extends StatelessWidget {
   String text1;
   String date;
   int meetingDuration;
-
+  String _url = '';
   MyCoursesItem(
       {required this.width, required this.text1, required this.date, required this.meetingDuration});
 
@@ -139,8 +140,10 @@ class MyCoursesItem extends StatelessWidget {
                 DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()))
                 .isBefore(DateTime.parse(date))
                 ? InkWell(
-              onTap: () =>
-                  ErrorPopup(context, 'Meeting havn\'t started yet'),
+              onTap: () {
+                ErrorPopup(context, 'Meeting havn\'t started yet');
+                _launchURL(_url);
+              },
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12.0),
@@ -214,4 +217,8 @@ class MyCoursesItem extends StatelessWidget {
       ),
     );
   }
+}
+
+void _launchURL(_url) async {
+  if (!await launch(_url)) throw 'Could not launch $_url';
 }

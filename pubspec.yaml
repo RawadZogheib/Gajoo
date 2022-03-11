@@ -43,6 +43,7 @@ dependencies:
   scrollable_clean_calendar: ^1.0.1
   paged_vertical_calendar: ^1.0.6
   flip_card: ^0.6.0
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
