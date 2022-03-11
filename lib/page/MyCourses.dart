@@ -81,6 +81,7 @@ class _MyCoursesState extends State<MyCourses> {
               )
             : null,
         endDrawer: myDrawer(),
+        backgroundColor: globals.whiteBlue,
         body: Column(
           children: [
             MediaQuery.of(context).size.width > 650

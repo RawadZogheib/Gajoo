@@ -81,6 +81,7 @@ class _CalenderPageState extends State<CalenderPage> {
               )
             : null,
         endDrawer: myDrawer(),
+        backgroundColor: globals.whiteBlue,
         body: Column(
           children: [
             MediaQuery.of(context).size.width > 650
