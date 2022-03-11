@@ -44,7 +44,7 @@ class MyCoursesList extends StatelessWidget {
                   text1: coursesList[index][0],
                   date: coursesList[index][1],
                   meetingDuration: int.parse(coursesList[index][2]),
-                  onTap: (){
+                  onTap: () {
                     coursesList[index][3]();
                   },
                 );
@@ -76,7 +76,7 @@ class MyCoursesItem extends StatelessWidget {
         onTap();
       },
       child: Container(
-        height: 70,
+        height: 90,
         width: width,
         margin: const EdgeInsets.all(12.0),
         padding: const EdgeInsets.all(8.0),
@@ -91,6 +91,7 @@ class MyCoursesItem extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     text1,
@@ -98,7 +99,6 @@ class MyCoursesItem extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 5,),
                   Text(
                     DateFormat('yyyy-MM-dd HH:mm').format(
                       DateFormat('yyyy-MM-dd HH:mm')
@@ -222,6 +222,9 @@ class MyCoursesItem extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              width: 10,
             ),
           ],
         ),
