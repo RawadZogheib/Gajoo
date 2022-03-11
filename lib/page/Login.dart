@@ -175,7 +175,7 @@ class _loginState extends State<login> {
                                       ),
                                       onTap: () {
                                         //_checkIfIsRegist();
-                                        Navigator.pushNamed(context, '/forgetPassword');
+                                        Navigator.pushNamedAndRemoveUntil(context, '/forgetPassword', (route) => false);
                                       },
                                     ),
                                   ),
@@ -194,7 +194,7 @@ class _loginState extends State<login> {
                                           ),
                                           onTap: () {
                                             _nullLogin();
-                                            Navigator.pushNamed(context, '/Registration');
+                                            Navigator.pushNamedAndRemoveUntil(context, '/Registration', (route) => false);
                                           },
                                         ),
                                       ],
@@ -346,7 +346,7 @@ class _loginState extends State<login> {
         //     "globpass = ${globals.passwordLogin} globEmail = ${globals.emailLogin} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
         //     "globDate = ${globals.dateOfBirth}");
 
-        Navigator.pushNamed(context, '/HomePage');
+        Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route)=> false);
 
         // Navigator.pushNamed(context, '/home');
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 
-import '../../page/LikedTeachers.dart';
+import '../../page/LikedTeachersPage.dart';
 
 
 class TeacherCard extends StatefulWidget {
@@ -87,7 +87,7 @@ class _TeacherCardState extends State<TeacherCard> {
                     children: [
                       IconButton(
                           onPressed: (){
-                            Navigator.pushNamed(context, '/CalendarPage');
+                            Navigator.pushNamedAndRemoveUntil(context, '/CalendarPage', (route) => false);
                           },
                           icon: const Icon(Icons.arrow_forward_ios,size: 20,),),
                     ],

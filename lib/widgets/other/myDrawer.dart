@@ -99,8 +99,8 @@ class myDrawer extends StatelessWidget {
         // ));
         break;
       case 2: // Liked Teachers
-        if (globals.currentPage != 'LikedTeachers') {
-          Navigator.of(context).pushNamedAndRemoveUntil('/LikedTeachers',  (route) => false);
+        if (globals.currentPage != 'LikedTeachersPage') {
+          Navigator.of(context).pushNamedAndRemoveUntil('/LikedTeachersPage',  (route) => false);
         }
         break;
       case 3: // Updates

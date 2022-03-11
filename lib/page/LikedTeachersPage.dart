@@ -1,59 +1,44 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
+import 'package:gajoo/widgets/button/myButton.dart';
+import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
 import 'package:gajoo/widgets/other/Responsive.dart';
+import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
-import '../hexColor/hexColor.dart';
-import '../widgets/button/myButton.dart';
-import '../widgets/other/MyCustomScrollBehavior.dart';
-import '../widgets/other/myDrawer.dart';
-
-Color type1 = HexColor('#dfe2e6');
-Color type2 = HexColor('#dfe2e6');
-Color type3 = HexColor('#dfe2e6');
-
-Color language1 = HexColor('#dfe2e6');
-Color language2 = HexColor('#dfe2e6');
-Color language3 = HexColor('#dfe2e6');
-
-Color level1 = HexColor('#dfe2e6');
-Color level2 = HexColor('#dfe2e6');
-Color level3 = HexColor('#dfe2e6');
-
-class Teacher extends StatefulWidget {
+class LikedTeachersPage extends StatefulWidget {
   String? type;
   String? languages;
   String? level;
 
-  Teacher({this.type, this.languages, this.level});
+  LikedTeachersPage({this.type, this.languages, this.level});
 
   @override
-  _TeacherState createState() => _TeacherState();
+  _LikedTeachersPageState createState() => _LikedTeachersPageState();
 }
 
-class _TeacherState extends State<Teacher> {
+class _LikedTeachersPageState extends State<LikedTeachersPage> {
   Timer? timer;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
 
-  final List<Widget> _TeacherCard = [];
+  final List<TeacherCard> _LikedTeacherCard = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    globals.currentPage = "Teacher";
+    globals.currentPage = "LikedTeachersPage";
     _choosedFilters();
     _loadNewPage();
-    //LikedTeachers(type: widget.type, languages: widget.languages, level: widget.level,);
   }
 
   @override
@@ -138,8 +123,10 @@ class _TeacherState extends State<Teacher> {
                                                 BorderRadius.circular(12.5),
                                             color: Colors.white70,
                                           ),
-                                          child: Wrap(
-                                            children: _TeacherCard,
+                                          child: Expanded(
+                                            child: Wrap(
+                                              children: _LikedTeacherCard,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -185,7 +172,7 @@ class _TeacherState extends State<Teacher> {
                         child: Row(
                           children: [
                             const Text(
-                              'Rawad Zogheib',
+                              'Liked Teachers',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
@@ -244,7 +231,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _LikedTeacherCard,
                                           ),
                                         ),
                                       ),
@@ -554,7 +541,7 @@ class _TeacherState extends State<Teacher> {
                         child: Row(
                           children: [
                             const Text(
-                              'Rawad Zogheib',
+                              'Liked Teachers',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
@@ -613,7 +600,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _LikedTeacherCard,
                                           ),
                                         ),
                                       ),
@@ -907,8 +894,8 @@ class _TeacherState extends State<Teacher> {
     print(
         '=========>>======================================================>>==================================================>>=========');
     timer?.cancel();
-    _loadTeachers(); //0
-    _loadPage(); //1 -> INFINI
+    _loadLikedTeachers(); //0
+    //_loadPage(); //1 -> INFINI
   }
 
   _loadPage() {
@@ -919,7 +906,7 @@ class _TeacherState extends State<Teacher> {
       print("30sec gone!!");
       if (mounted) {
         print("30sec gone, and _loadChildrenOnline!!");
-        _loadTeachers();
+        _loadLikedTeachers();
       } else {
         print(
             '=========<<======================================================<<==================================================<<=========');
@@ -927,155 +914,151 @@ class _TeacherState extends State<Teacher> {
     });
   }
 
-  void _loadTeachers() {
+  void _loadLikedTeachers() {
     // load from db
     setState(() {
-      _TeacherCard.clear();
-      _TeacherCard.addAll([
+      _LikedTeacherCard.clear();
+      _LikedTeacherCard.addAll([
         TeacherCard(
+            Id: "1",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
-            isHeartLikedTeacher: false,
+            isHeartLikedTeacher: true,
             isButton: true,
-            liked: false,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "2",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
-            isHeartLikedTeacher: false,
+            isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "3",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
-            isHeartLikedTeacher: false,
+            isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "4",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
-            isHeartLikedTeacher: false,
+            isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "5",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
-            isHeartLikedTeacher: false,
+            isHeartLikedTeacher: true,
             isButton: true,
-            liked: false,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "6",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
-            isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "7",
             text: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
             subtitle: 'Arabic, French, English',
             isHeart: true,
-            isHeartLikedTeacher: false,
             isButton: true,
-            liked: false,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "8",
             text: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'English, Arabic, French',
             isHeart: true,
-            isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                // for(int i = 0; i<_LikedTeacherCard.length; i++){
+                //   if(_LikedTeacherCard[i].Id == Id){
+                //     _LikedTeacherCard.removeAt(i);
+                //   }
+                // }
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "9",
             text: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
             subtitle: 'Arabic, French',
             isHeart: true,
-            isHeartLikedTeacher: false,
             isButton: true,
-            liked: false,
-            onPressed: () {}),
+            liked: true,
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
         TeacherCard(
+            Id: "10",
             text: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
             subtitle: 'ma 5asne bshi',
             isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: false,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Rima Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
-            isHeart: true,
-            isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Ghada Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
-            isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: true,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Michel Nachar',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            subtitle: 'Arabic, French',
-            isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: false,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Rawad Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'ma 5asne bshi',
-            isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: false,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Rima Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
-            isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: true,
-            onPressed: () {}),
-        TeacherCard(
-            text: 'Ghada Zogheib',
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
-            isHeart: true,
-            isHeartLikedTeacher: false,
-            isButton: true,
-            liked: false,
-            onPressed: () {}),
+            onPressed: (Id) {
+              setState(() {
+                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
+              });
+            }),
       ]);
     });
   }
@@ -1173,7 +1156,6 @@ class _TeacherState extends State<Teacher> {
   }
 
   _back() {
-    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
-
 }

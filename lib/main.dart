@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/page/CalendarPage.dart';
 import 'package:gajoo/page/HomePage.dart';
-import 'package:gajoo/page/LikedTeachers.dart';
+import 'package:gajoo/page/LikedTeachersPage.dart';
 import 'package:gajoo/page/Login.dart';
+import 'package:gajoo/page/MyAudio.dart';
 import 'package:gajoo/page/MyCourses.dart';
 import 'package:gajoo/page/Registration.dart';
 import 'package:gajoo/page/Teacher.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
           '/forgetPassword2': (context) => forgetPass2(),
           '/Teacher': (context) => Teacher(),
           '/MyCourses': (context) => MyCourses(),
-          '/LikedTeachers': (context) => LikedTeachers(),
+          '/LikedTeachersPage': (context) => LikedTeachersPage(),
+          '/MyAudio': (context) => MyAudio(),
         });
     //});
   }
