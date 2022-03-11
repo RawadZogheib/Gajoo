@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyCoursesList extends StatelessWidget {
-  List<List<String>> coursesList;
+  List<List<dynamic>> coursesList;
 
   MyCoursesList({
     required this.coursesList,
@@ -44,6 +44,9 @@ class MyCoursesList extends StatelessWidget {
                   text1: coursesList[index][0],
                   date: coursesList[index][1],
                   meetingDuration: int.parse(coursesList[index][2]),
+                  onTap: (){
+                    coursesList[index][3]();
+                  },
                 );
               }),
         ),
@@ -58,12 +61,20 @@ class MyCoursesItem extends StatelessWidget {
   String date;
   int meetingDuration;
   String _url = '';
-  MyCoursesItem(
-      {required this.width, required this.text1, required this.date, required this.meetingDuration});
+  var onTap;
+
+  MyCoursesItem({required this.width,
+    required this.text1,
+    required this.date,
+    required this.meetingDuration,
+    required this.onTap,});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        onTap();
+      },
       child: Container(
         height: 70,
         width: width,

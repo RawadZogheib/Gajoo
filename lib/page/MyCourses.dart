@@ -20,7 +20,7 @@ class MyCourses extends StatefulWidget {
 
 class _MyCoursesState extends State<MyCourses> {
   Timer? timer;
-  List<List<String>> _coursesList = [];
+  List<List<dynamic>> _coursesList = [];
   bool _clicked = false;
 
   @override
@@ -126,31 +126,35 @@ class _MyCoursesState extends State<MyCourses> {
                                 width: 60,
                               ),
                               _clicked == true
-                                  ? ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30),
-                                ),
-                                child: Container(
-                                  height:
-                                  MediaQuery.of(context).size.height *
-                                      0.8,
-                                  width: 500,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              )
-                                  : TeacherProfile(
-                                name: 'Rawad',
-                                age: '22',
-                                languages: 'Arabic, french, english',
-                                nbrOfCourses: '20',
-                                coursesReserved: '27',
-                                coursesLeft: '3',
-                              ),
+                                  ? TeacherProfile(
+                                      name: 'Rawad',
+                                      age: '22',
+                                      languages: 'Arabic, french, english',
+                                      nbrOfCourses: '20',
+                                      coursesReserved: '27',
+                                      coursesLeft: '3',
+                                      cancelButton: true,
+                                      onTap: (){
+                                        _offClicked();
+                                      },
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30),
+                                        bottomRight: Radius.circular(30),
+                                      ),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.8,
+                                        width: 500,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
                             ],
                           ),
                         ),
@@ -204,6 +208,9 @@ class _MyCoursesState extends State<MyCourses> {
                 .parse('2022-03-08 20:35:00.000', true),
           ),
           '40',
+          () {
+            _onClicked();
+          }
         ],
         [
           'English Course',
@@ -212,6 +219,9 @@ class _MyCoursesState extends State<MyCourses> {
                 .parse('2022-03-07 22:00:00.000', true),
           ),
           '40',
+          () {
+            _onClicked();
+          }
         ],
         [
           'English Course',
@@ -220,6 +230,9 @@ class _MyCoursesState extends State<MyCourses> {
                 .parse('2022-03-08 22:20:00.000', true),
           ),
           '40',
+          () {
+            _onClicked();
+          }
         ],
         [
           'Arabic Course',
@@ -228,8 +241,23 @@ class _MyCoursesState extends State<MyCourses> {
                 .parse('2022-03-09 18:20:00.000', true),
           ),
           '40',
+          () {
+            _onClicked();
+          }
         ],
       ]);
+    });
+  }
+
+  _onClicked() {
+    setState(() {
+      _clicked = true;
+    });
+  }
+  _offClicked() {
+    print('asdsad');
+    setState(() {
+      _clicked = false;
     });
   }
 

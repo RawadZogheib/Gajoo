@@ -22,7 +22,6 @@ class _CalenderPageState extends State<CalenderPage> {
   Timer? _timer;
   Set<String> _greenList = {};
   Set<String> _redList = {};
-  bool _clicked = false;
 
   @override
   void initState() {
@@ -102,32 +101,16 @@ class _CalenderPageState extends State<CalenderPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _clicked == true
-                                  ? ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30),
-                                        bottomLeft: Radius.circular(30),
-                                        bottomRight: Radius.circular(30),
-                                      ),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.8,
-                                        width: 500,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )
-                                  : TeacherProfile(
-                                      name: 'Rawad',
-                                      age: '22',
-                                      languages: 'Arabic, french, english',
-                                      nbrOfCourses: '20',
-                                      coursesReserved: '27',
-                                      coursesLeft: '3',
-                                    ),
+                              TeacherProfile(
+                                name: 'Rawad',
+                                age: '22',
+                                languages: 'Arabic, french, english',
+                                nbrOfCourses: '20',
+                                coursesReserved: '27',
+                                coursesLeft: '3',
+                                cancelButton: false,
+                                onTap: () => null,
+                              ),
                               const SizedBox(
                                 width: 60,
                               ),
