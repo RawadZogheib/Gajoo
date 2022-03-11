@@ -138,10 +138,8 @@ class _TeacherState extends State<Teacher> {
                                                 BorderRadius.circular(12.5),
                                             color: Colors.white70,
                                           ),
-                                          child: Expanded(
-                                            child: Wrap(
-                                              children: _TeacherCard,
-                                            ),
+                                          child: Wrap(
+                                            children: _TeacherCard,
                                           ),
                                         ),
                                       ),
