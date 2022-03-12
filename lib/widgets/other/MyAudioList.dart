@@ -123,7 +123,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
                       ),
                     ],
                   ),
-                  //MySlider(),
+                  MySlider(),
                 ],
               ),
             ),
