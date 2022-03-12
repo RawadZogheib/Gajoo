@@ -123,7 +123,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
                       ),
                     ],
                   ),
-                  MySlider(),
+                  //MySlider(),
                 ],
               ),
             ),
@@ -212,7 +212,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
     } else {
       // Play
       String _url =
-          'https://kwikcode.net/Gajoo_php/Audios/audio${widget.audioId}.mp3';
+          '${globals.myIP}Audios/audio${widget.audioId}.mp3';
       print(_url);
 
       var res = await _audioplayer.play(_url, isLocal: true);
