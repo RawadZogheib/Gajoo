@@ -72,10 +72,9 @@ class MyAudioItem extends StatefulWidget {
 
 class _MyAudioItemState extends State<MyAudioItem> {
   bool _isPlaying = false;
-
-  AudioPlayer audioplayer = AudioPlayer();
-  Duration duration = Duration();
-  Duration position = Duration();
+  AudioPlayer _audioplayer = AudioPlayer();
+  Duration _duration = Duration();
+  Duration _position = Duration();
 
   @override
   Widget build(BuildContext context) {
@@ -190,11 +189,11 @@ class _MyAudioItemState extends State<MyAudioItem> {
   Widget MySlider() {
     return Slider.adaptive(
       min: 0.0,
-      max: duration.inSeconds.toDouble(),
-      value: position.inSeconds.toDouble(),
+      value: _position.inSeconds.toDouble(),
+      max: _duration.inSeconds.toDouble(),
       onChanged: (double value) {
         setState(() {
-          audioplayer.seek(Duration(seconds: value.toInt()));
+          _audioplayer.seek(Duration(seconds: value.toInt()));
         });
       },
     );
@@ -206,7 +205,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
     print(_url);
     if (_isPlaying) {
       // Pause
-      var res = await audioplayer.pause();
+      var res = await _audioplayer.pause();
       if (res == 1) {
         setState(() {
           _isPlaying = true;
@@ -214,22 +213,22 @@ class _MyAudioItemState extends State<MyAudioItem> {
       }
     } else {
       // Play
-      var res = await audioplayer.play(_url, isLocal: true);
+      var res = await _audioplayer.play(_url, isLocal: true);
       if (res == 1) {
         setState(() {
           _isPlaying = true;
         });
       }
 
-      audioplayer.onDurationChanged.listen((Duration thisDuration) {
+      _audioplayer.onDurationChanged.listen((Duration thisDuration) {
         setState(() {
-          duration = thisDuration;
+          _duration = thisDuration;
         });
       });
 
-      audioplayer.onAudioPositionChanged.listen((Duration thisposition) {
+      _audioplayer.onAudioPositionChanged.listen((Duration thisPosition) {
         setState(() {
-          position = thisposition;
+          _position = thisPosition;
         });
       });
     }
