@@ -206,7 +206,7 @@ class _MyCoursesState extends State<MyCourses> {
           'Spanic Speaking',
           DateFormat('yyyy-MM-dd HH:mm').format(
             DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-08 20:35:00.000', true),
+                .parse('2022-03-15 20:35:00.000', true),
           ),
           '40',
           () {
@@ -228,7 +228,7 @@ class _MyCoursesState extends State<MyCourses> {
           'English Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
             DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-08 22:20:00.000', true),
+                .parse('2022-03-12 20:10:00.000', true),
           ),
           '40',
           () {
@@ -239,7 +239,7 @@ class _MyCoursesState extends State<MyCourses> {
           'Arabic Course',
           DateFormat('yyyy-MM-dd HH:mm').format(
             DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-09 18:20:00.000', true),
+                .parse('2022-03-28 18:20:00.000', true),
           ),
           '40',
           () {

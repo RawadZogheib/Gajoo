@@ -60,7 +60,7 @@ class MyCoursesItem extends StatelessWidget {
   String text1;
   String date;
   int meetingDuration;
-  String _url = '';
+  final String _url = '${globals.myIP}/jaas/?userName=rawad&room=1';
   var onTap;
 
   MyCoursesItem({required this.width,
@@ -126,6 +126,7 @@ class MyCoursesItem extends StatelessWidget {
                 ? InkWell(
               onTap: () {
                 SuccessPopup(context, 'Joined the meeting');
+                _launchURL(_url);
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
@@ -153,7 +154,6 @@ class MyCoursesItem extends StatelessWidget {
                 ? InkWell(
               onTap: () {
                 ErrorPopup(context, 'Meeting havn\'t started yet');
-                _launchURL(_url);
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
