@@ -186,10 +186,11 @@ class _MyAudioState extends State<MyAudio> {
   void _loadAudio() {
     setState(() {
       _audioList.clear();
-      _audioList.addAll([
+      _audioList.add(
         [
           '1',
           'Arabic Audio',
+          110.0,
           DateFormat('yyyy-MM-dd HH:mm').format(
             DateFormat('yyyy-MM-dd HH:mm')
                 .parse('2022-03-08 20:35:00.000', true),
@@ -198,18 +199,21 @@ class _MyAudioState extends State<MyAudio> {
             _onClicked();
           }
         ],
+      );
+      _audioList.add(
         [
           '2',
           'French Audio',
+          113.0,
           DateFormat('yyyy-MM-dd HH:mm').format(
             DateFormat('yyyy-MM-dd HH:mm')
                 .parse('2022-03-08 20:35:00.000', true),
           ),
-              () {
+          () {
             _onClicked();
           }
         ],
-      ]);
+      );
     });
   }
 

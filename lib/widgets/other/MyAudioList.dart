@@ -39,9 +39,10 @@ class MyAudioList extends StatelessWidget {
                   audioId: audiosList[index][0],
                   width: 400,
                   text: audiosList[index][1],
-                  date: audiosList[index][2],
+                  maxTime: audiosList[index][2],
+                  date: audiosList[index][3],
                   onTap: () {
-                    audiosList[index][3]();
+                    audiosList[index][4]();
                   },
                 );
               }),
@@ -55,6 +56,7 @@ class MyAudioItem extends StatefulWidget {
   String audioId;
   double width;
   String text;
+  double maxTime;
   String date;
   var onTap;
 
@@ -62,6 +64,7 @@ class MyAudioItem extends StatefulWidget {
     required this.audioId,
     required this.width,
     required this.text,
+    required this.maxTime,
     required this.date,
     required this.onTap,
   });
@@ -75,6 +78,9 @@ class _MyAudioItemState extends State<MyAudioItem> {
   AudioPlayer _audioplayer = AudioPlayer();
   Duration _duration = Duration();
   Duration _position = Duration();
+  Color _activeColor = Colors.grey;
+  Color _inactiveColor = Colors.grey.shade300;
+  Color _thumbColor = Colors.grey;
 
   @override
   Widget build(BuildContext context) {
@@ -162,11 +168,11 @@ class _MyAudioItemState extends State<MyAudioItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: const [
                             Icon(
-                              Icons.pause,
+                              Icons.stop,
                               color: Colors.white,
                             ),
                             Text(
-                              'Pause',
+                              'Stop',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -190,34 +196,44 @@ class _MyAudioItemState extends State<MyAudioItem> {
     return Slider.adaptive(
       min: 0.0,
       value: _position.inSeconds.toDouble(),
-      max: 111.0,//_duration.inSeconds.toDouble(),
+      max: widget.maxTime,
+      //_duration.inSeconds.toDouble(),
+      activeColor: _activeColor,
+      inactiveColor: _inactiveColor,
+      thumbColor: _thumbColor,
       onChanged: (double value) {
-        setState(() {
-          _audioplayer.seek(Duration(seconds: value.toInt()));
-        });
+        if (_isPlaying == true) {
+          setState(() {
+            _audioplayer.seek(Duration(seconds: value.toInt()));
+          });
+        }
       },
     );
   }
 
   _getAudio() async {
-
     if (_isPlaying) {
-      // Pause
-      var res = await _audioplayer.pause();
+      // Stop
+      var res = await _audioplayer.stop();
       if (res == 1) {
         setState(() {
+          _activeColor = Colors.grey;
+          _inactiveColor = Colors.grey.shade300;
+          _thumbColor = Colors.grey;
           _isPlaying = false;
         });
       }
     } else {
       // Play
-      String _url =
-          '${globals.myIP}Audios/audio${widget.audioId}.mp3';
+      String _url = '${globals.myIP}Audios/audio${widget.audioId}.mp3';
       print(_url);
 
       var res = await _audioplayer.play(_url, isLocal: true);
       if (res == 1) {
         setState(() {
+          _activeColor = Colors.blue;
+          _inactiveColor = Colors.blue.shade100;
+          _thumbColor = Colors.blue;
           _isPlaying = true;
         });
       }
@@ -231,7 +247,13 @@ class _MyAudioItemState extends State<MyAudioItem> {
       _audioplayer.onAudioPositionChanged.listen((Duration thisPosition) {
         setState(() {
           _position = thisPosition;
+          print(_position);
+          print(Duration(seconds: widget.maxTime.toInt()));
         });
+        if (_position >= Duration(seconds: widget.maxTime.toInt())) {
+          _isPlaying = true;
+          _getAudio();
+        }
       });
     }
   }
