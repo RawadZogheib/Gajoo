@@ -208,7 +208,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
       var res = await _audioplayer.pause();
       if (res == 1) {
         setState(() {
-          _isPlaying = true;
+          _isPlaying = false;
         });
       }
     } else {
