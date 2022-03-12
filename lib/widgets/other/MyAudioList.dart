@@ -123,7 +123,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
                       ),
                     ],
                   ),
-                  //MySlider(),
+                  MySlider(),
                 ],
               ),
             ),
@@ -190,7 +190,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
     return Slider.adaptive(
       min: 0.0,
       value: _position.inSeconds.toDouble(),
-      max: _duration.inSeconds.toDouble(),
+      max: 111.0,//_duration.inSeconds.toDouble(),
       onChanged: (double value) {
         setState(() {
           _audioplayer.seek(Duration(seconds: value.toInt()));
