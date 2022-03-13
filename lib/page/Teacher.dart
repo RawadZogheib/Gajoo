@@ -27,11 +27,11 @@ Color level2 = HexColor('#dfe2e6');
 Color level3 = HexColor('#dfe2e6');
 
 class Teacher extends StatefulWidget {
-  String? type;
-  String? languages;
-  String? level;
+  String type;
+  String languages;
+  String level;
 
-  Teacher({this.type, this.languages, this.level});
+  Teacher({required this.type,required this.languages,required this.level});
 
   @override
   _TeacherState createState() => _TeacherState();
@@ -44,14 +44,14 @@ class _TeacherState extends State<Teacher> {
     initialScrollOffset: 0.0,
   );
 
-  final List<Widget> _TeacherCard = [];
+  final List<TeacherCard> _TeacherCard = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     globals.currentPage = "Teacher";
-    _choosedFilters();
+
     _loadNewPage();
     //LikedTeachers(type: widget.type, languages: widget.languages, level: widget.level,);
   }
@@ -300,8 +300,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "red";
                                               type1 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -323,8 +325,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "yellow";
                                               type2 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -346,8 +350,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "green";
                                               type3 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -382,8 +388,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "english";
                                               language1 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -405,8 +413,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "french";
                                               language2 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -428,8 +438,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "arabic";
                                               language3 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -464,8 +476,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "beginner";
                                               level1 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -487,8 +501,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "intermediate";
                                               level2 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -510,8 +526,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "advanced";
                                               level3 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -669,8 +687,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "red";
                                               type1 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -692,8 +712,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "yellow";
                                               type2 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -715,8 +737,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorType();
                                           if (mounted) {
                                             setState(() {
+                                              widget.type = "green";
                                               type3 = Colors.yellowAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -751,8 +775,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "english";
                                               language1 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -774,8 +800,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "french";
                                               language2 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -797,8 +825,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLanguage();
                                           if (mounted) {
                                             setState(() {
+                                              widget.languages = "arabic";
                                               language3 = Colors.redAccent;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -833,8 +863,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "beginner";
                                               level1 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -856,8 +888,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "intermediate";
                                               level2 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -879,8 +913,10 @@ class _TeacherState extends State<Teacher> {
                                           _cleanColorLevel();
                                           if (mounted) {
                                             setState(() {
+                                              widget.level = "advanced";
                                               level3 = Colors.indigo;
                                             });
+                                            _checkFilter();
                                           }
                                         },
                                       ),
@@ -903,12 +939,16 @@ class _TeacherState extends State<Teacher> {
     );
   }
 
-  _loadNewPage() {
+  _loadNewPage() async {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    timer?.cancel();
-    _loadTeachers(); //0
-    _loadPage(); //1 -> INFINI
+    // timer?.cancel();
+    // _loadTeachers(); //0
+    // _loadPage(); //1 -> INFINI
+    await _loadTeachers();
+    _checkFilter();
+    _choosedFilters();
+
   }
 
   _loadPage() {
@@ -917,6 +957,9 @@ class _TeacherState extends State<Teacher> {
       print(
           '=========>>======================================================>>==================================================>>=========');
       print("30sec gone!!");
+      print("${widget.level} iasdhajsdbaksdbaskdhasdasd");
+      print("${widget.languages} ahsdiasdiaushdasd");
+      print("${widget.type} ajsdbaisdhasodias /n/n");
       if (mounted) {
         print("30sec gone, and _loadChildrenOnline!!");
         _loadTeachers();
@@ -927,7 +970,7 @@ class _TeacherState extends State<Teacher> {
     });
   }
 
-  void _loadTeachers() {
+  _loadTeachers() {
     // load from db
     setState(() {
       _TeacherCard.clear();
@@ -940,6 +983,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
@@ -949,6 +995,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'green',
+            languages: 'french',
+            level: 'advanced',
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
@@ -958,6 +1007,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'yellow',
+            languages: 'arabic',
+            level: 'beginner',
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
@@ -967,6 +1019,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
@@ -976,6 +1031,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
@@ -985,6 +1043,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
@@ -994,6 +1055,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
@@ -1003,6 +1067,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
@@ -1012,6 +1079,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
@@ -1021,6 +1091,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
@@ -1030,6 +1103,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
@@ -1039,6 +1115,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Michel Nachar',
@@ -1048,6 +1127,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rawad Zogheib',
@@ -1057,6 +1139,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'intermediate',
             onPressed: () {}),
         TeacherCard(
             text: 'Rima Zogheib',
@@ -1066,6 +1151,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: true,
+            type: 'green',
+            languages: 'arabic',
+            level: 'advanced',
             onPressed: () {}),
         TeacherCard(
             text: 'Ghada Zogheib',
@@ -1075,6 +1163,9 @@ class _TeacherState extends State<Teacher> {
             isHeartLikedTeacher: false,
             isButton: true,
             liked: false,
+            type: 'red',
+            languages: 'english',
+            level: 'beginner',
             onPressed: () {}),
       ]);
     });
@@ -1131,6 +1222,7 @@ class _TeacherState extends State<Teacher> {
       if (mounted) {
         setState(() {
           level2 = Colors.indigo;
+          print(widget.level);
         });
       }
     } else if (widget.level == "advanced") {
@@ -1140,6 +1232,32 @@ class _TeacherState extends State<Teacher> {
         });
       }
     }
+  }
+
+  _checkFilter() {
+      for (int i = 0; i < _TeacherCard.length; i++) {
+        print(widget.type);
+        print(_TeacherCard[i].type);
+        print(widget.languages);
+        print(_TeacherCard[i].languages);
+        print(widget.level);
+        print(_TeacherCard[i].level);
+
+        _TeacherCard[i].isHidden = false;
+
+        if (widget.type != _TeacherCard[i].type ||
+            widget.languages != _TeacherCard[i].languages ||
+            widget.level != _TeacherCard[i].level) {
+          _TeacherCard[i].isHidden = true;
+          print("trueeeeeeeeeeeee: $i");
+        }
+        print(i);
+        print("============================================================");
+      }
+      setState(() {
+        _TeacherCard;
+      });
+
   }
 
   _cleanColorType() {
@@ -1175,5 +1293,4 @@ class _TeacherState extends State<Teacher> {
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
-
 }

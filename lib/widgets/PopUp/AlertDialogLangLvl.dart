@@ -6,9 +6,9 @@ import '../button/myButton.dart';
 
 
 class AlertDialogLangLvl extends StatefulWidget {
-  String? types;
-  Color? pageColor;
-  AlertDialogLangLvl({this.types, this.pageColor});
+  String types;
+  Color pageColor;
+  AlertDialogLangLvl({required this.types,required this.pageColor});
 
   @override
   _AlertDialogLangLvlState createState() => _AlertDialogLangLvlState();
@@ -16,9 +16,9 @@ class AlertDialogLangLvl extends StatefulWidget {
 
 class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
   String _x = '0';
-  String? _type;
-  String? _languages;
-  String? _level;
+  late String _type;
+  late String _languages;
+  late String _level;
   String? _text = 'Choose The Language';
   Color? _btnColor;
 

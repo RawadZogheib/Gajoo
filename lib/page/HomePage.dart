@@ -47,6 +47,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: false,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Michel Nachar',
@@ -55,6 +58,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: false,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
   ];
 
@@ -66,6 +72,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: true,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Michel Nachar',
@@ -74,6 +83,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Rawad Zogheib',
@@ -82,6 +94,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: true,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Clara Zeidan',
@@ -90,6 +105,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Felix Gedeon',
@@ -98,6 +116,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Piere ElAsmar',
@@ -106,6 +127,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: true,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
       text: 'Philips Maalouf',
@@ -114,6 +138,9 @@ class _HomePageState extends State<HomePage> {
       isHeart: true,
       isButton: false,
       liked: false,
+      type: 'green',
+      languages: 'arabic',
+      level: 'advanced',
       onPressed: () {},
     ),
     TeacherCard(
@@ -123,6 +150,9 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: false,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
     TeacherCard(
         text: 'Nabil Kenaan',
@@ -131,14 +161,17 @@ class _HomePageState extends State<HomePage> {
         isHeart: true,
         isButton: false,
         liked: true,
+        type: 'green',
+        languages: 'arabic',
+        level: 'advanced',
         onPressed: () {}),
   ];
 
   int _currentActive = 0;
   late Timer _timer;
   final int _duration = 5;
-  String? _types;
-  Color? _pageColor;
+  late String _types;
+  late Color _pageColor;
 
   final double carouselItemMargin = 16;
   final InfiniteScrollController _infiniteController = InfiniteScrollController(

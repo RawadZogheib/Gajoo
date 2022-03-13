@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
           '/Registration': (context) => registration(),
           '/forgetPassword': (context) => forgetPass(),
           '/forgetPassword2': (context) => forgetPass2(),
-          '/Teacher': (context) => Teacher(),
           '/MyCourses': (context) => MyCourses(),
           '/LikedTeachersPage': (context) => LikedTeachersPage(),
           '/MyAudio': (context) => MyAudio(),
