@@ -2,7 +2,6 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCard extends StatefulWidget {
-  bool isHidden = false;
 
   final String? Id;
   final String text;
@@ -14,6 +13,7 @@ class TeacherCard extends StatefulWidget {
   late Set<String> type;
   late Set<String> languages;
   late Set<String> level;
+  bool isHidden = false;
   final bool isHidable;
   bool liked = false;
   var onPressed;
@@ -31,6 +31,7 @@ class TeacherCard extends StatefulWidget {
     required this.languages,
     required this.level,
     required this.isHidable,
+    required this.isHidden,
     required this.liked,
   });
 
