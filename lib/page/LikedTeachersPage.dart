@@ -928,9 +928,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red','yellow','green'},
+            languages: const {'english','french','arabic'},
+            level: const {'beginner','intermediate','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -945,9 +946,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'yellow','green'},
+            languages: const {'french','arabic'},
+            level: const {'intermediate','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -962,9 +964,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'yellow','green'},
+            languages: const {'english','arabic'},
+            level: const {'beginner','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -979,9 +982,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red'},
+            languages: const {'english',},
+            level: const {'advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -996,9 +1000,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeartLikedTeacher: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'green'},
+            languages: const {'english','french'},
+            level: const {'beginner','intermediate','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -1012,9 +1017,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeart: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red','green'},
+            languages: const {'french','arabic'},
+            level: const {'beginner','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -1028,9 +1034,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeart: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red','green'},
+            languages: const {'english','arabic'},
+            level: const {'beginner','intermediate'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -1044,9 +1051,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeart: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'green'},
+            languages: const {'arabic'},
+            level: const {'intermediate','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 // for(int i = 0; i<_LikedTeacherCard.length; i++){
@@ -1065,9 +1073,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeart: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red','yellow',},
+            languages: const {'english','french'},
+            level: const {'advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
@@ -1081,9 +1090,10 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             isHeart: true,
             isButton: true,
             liked: true,
-            type: 'green',
-            languages: 'arabic',
-            level: 'advanced',
+            type: const {'red','yellow','green'},
+            languages: const {'english'},
+            level: const {'intermediate','advanced'},
+            isHidable: true,
             onPressed: (Id) {
               setState(() {
                 _LikedTeacherCard.removeWhere((element) => element.Id == Id);
