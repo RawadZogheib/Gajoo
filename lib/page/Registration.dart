@@ -114,7 +114,37 @@ class _registrationState extends State<registration> {
           child: Center(
             child: Column(
                 children: [
-                  Padding(
+                  Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'Assets/HomePage/logo.png',
+                          height: 95,
+                          width: 300,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/Login', (route) => false);
+                        },
+                        child: Container(
+                          child: const Text(
+                            "BACK",
+                            style: TextStyle(
+                                fontSize: 35,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  const Padding(
                     padding: EdgeInsets.all(28.0),
                     child: Text(
                       "Create Your Account",

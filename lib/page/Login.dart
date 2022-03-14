@@ -56,159 +56,188 @@ class _loginState extends State<login> {
       child: Scaffold(
         backgroundColor: globals.whiteBlue,
         body: SingleChildScrollView(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-                child: Center(
-                  child: Container(
-                        width: 500,
-                        height: 670,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Colors.white,
+          child: Padding(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+            child: Center(
+              child: Container(
+                width: 500,
+                height: 670,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.white,
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 5,
+                      left: 5,
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/HomePage', (route) => false);
+                        },
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 28.0, left: 8.0, right: 8.0, bottom: 8.0),
+                          child: Container(
+                            width: 300,
+                            alignment: Alignment.topLeft,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              'Assets/HomePage/logo.png',
+                              height: 95,
+                              width: 300,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 28.0, left: 8.0,
-                                      right: 8.0, bottom: 8.0),
-                              child: Container(
-                                width: 300,
-                                alignment: Alignment.topLeft,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  'Assets/HomePage/logo.png',
-                                  height: 95,
-                                  width: 300,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text(
-                                "Login",
-                                style: const TextStyle(fontSize: 40.0, color: Colors.black),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.05, top: 18.0,
-                                  right: MediaQuery.of(context).size.width * 0.05, bottom: 8.0),
-                              child: Container(
-                                width: 400,
-                                height: 55,
-                                child: myTextInput(
-                                    textString: "Enter Your Email Address",
-                                    labelText: 'Enter Your Email Address',
-                                    colBlue: colEmail,
-                                    colBlue_1: colEmail_1,
-                                    colBlue_2: colEmail_2,
-                                    textInputAction: TextInputAction.next,
-                                    spaceAllowed: false,
-                                    obscure: false,
-                                    onChange: (value) {
-                                      globals.emailLogin = value;
-                                    }),
-                              )
-                            ),
-                            myErrorText(errorText: errTxtEmail, color: colErrTxtEmail),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.05, top: 8.0,
-                                  right: MediaQuery.of(context).size.width * 0.05, bottom: 8.0),
-                              child: Container(
-                                width: 500,
-                                height: 50,
-                                child: myTextInput(
-                                  textString: "Enter Your Password",
-                                  labelText: 'Enter Your Password',
-                                  colBlue: colPass,
-                                  colBlue_1: colPass_1,
-                                  colBlue_2: colPass_2,
-                                  maxLines: 1,
-                                  textInputAction: TextInputAction.none,
+                        const Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Text(
+                            "Login",
+                            style: const TextStyle(
+                                fontSize: 40.0, color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.05,
+                                top: 18.0,
+                                right: MediaQuery.of(context).size.width * 0.05,
+                                bottom: 8.0),
+                            child: Container(
+                              width: 400,
+                              height: 55,
+                              child: myTextInput(
+                                  textString: "Enter Your Email Address",
+                                  labelText: 'Enter Your Email Address',
+                                  colBlue: colEmail,
+                                  colBlue_1: colEmail_1,
+                                  colBlue_2: colEmail_2,
+                                  textInputAction: TextInputAction.next,
                                   spaceAllowed: false,
-                                  obscure: true,
+                                  obscure: false,
                                   onChange: (value) {
-                                    globals.passwordLogin = value;
-                                    //print(globals.Login);
+                                    globals.emailLogin = value;
+                                  }),
+                            )),
+                        myErrorText(
+                            errorText: errTxtEmail, color: colErrTxtEmail),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.05,
+                              top: 8.0,
+                              right: MediaQuery.of(context).size.width * 0.05,
+                              bottom: 8.0),
+                          child: Container(
+                            width: 500,
+                            height: 50,
+                            child: myTextInput(
+                              textString: "Enter Your Password",
+                              labelText: 'Enter Your Password',
+                              colBlue: colPass,
+                              colBlue_1: colPass_1,
+                              colBlue_2: colPass_2,
+                              maxLines: 1,
+                              textInputAction: TextInputAction.none,
+                              spaceAllowed: false,
+                              obscure: true,
+                              onChange: (value) {
+                                globals.passwordLogin = value;
+                                //print(globals.Login);
+                              },
+                            ),
+                          ),
+                        ),
+                        myErrorText(
+                            errorText: errTxtPass, color: colErrTxtPass),
+                        Padding(
+                          padding: const EdgeInsets.all(28.0),
+                          child: InkWell(
+                            child: btn(btnText: "Submit"),
+                            onTap: () {
+                              try {
+                                if (oneClick == 0) {
+                                  _LoginCtrl();
+                                }
+                              } catch (e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        ErrorAlertDialog(
+                                            message: globals.errorException));
+                              }
+                            },
+                          ),
+                        ),
+                        myErrorText(errorText: errTxt, color: colErrTxt),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.001),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(18.0),
+                                child: InkWell(
+                                  child: Text(
+                                    'Forget Password',
+                                    style: TextStyle(
+                                      color: globals.blue_1,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    //_checkIfIsRegist();
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        '/forgetPassword', (route) => false);
                                   },
                                 ),
                               ),
-                            ),
-                            myErrorText(errorText: errTxtPass, color: colErrTxtPass),
-                            Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: InkWell(
-                                child: btn(btnText: "Submit"),
-                                onTap: () {
-                                  try {
-                                    if (oneClick == 0) {
-                                      _LoginCtrl();
-                                    }
-                                  } catch (e) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) => ErrorAlertDialog(
-                                            message: globals.errorException));
-                                  }
-                                },
-                              ),
-                            ),
-                            myErrorText(errorText: errTxt, color: colErrTxt),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height * 0.001),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(18.0),
-                                    child: InkWell(
+                              Padding(
+                                padding: EdgeInsets.all(18.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text("didn't have an account? "),
+                                    InkWell(
                                       child: Text(
-                                        'Forget Password',
+                                        "create new one",
                                         style: TextStyle(
                                           color: globals.blue_1,
                                           decoration: TextDecoration.underline,
                                         ),
                                       ),
                                       onTap: () {
-                                        //_checkIfIsRegist();
-                                        Navigator.pushNamedAndRemoveUntil(context, '/forgetPassword', (route) => false);
+                                        _nullLogin();
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/Registration',
+                                            (route) => false);
                                       },
                                     ),
-                                  ),
-
-                                  Padding(
-                                    padding: EdgeInsets.all(18.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        const Text("didn't have an account? "),
-                                        InkWell(
-                                          child: Text(
-                                            "create new one",
-                                            style: TextStyle(color: globals.blue_1,
-                                              decoration: TextDecoration.underline,),
-                                          ),
-                                          onTap: () {
-                                            _nullLogin();
-                                            Navigator.pushNamedAndRemoveUntil(context, '/Registration', (route) => false);
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
+          ),
+        ),
       ),
     );
   }
@@ -346,7 +375,8 @@ class _loginState extends State<login> {
         //     "globpass = ${globals.passwordLogin} globEmail = ${globals.emailLogin} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
         //     "globDate = ${globals.dateOfBirth}");
 
-        Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route)=> false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/HomePage', (route) => false);
 
         // Navigator.pushNamed(context, '/home');
 

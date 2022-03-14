@@ -37,55 +37,105 @@ class _forgetPassState extends State<forgetPass> {
         onWillPop: () async => _back(),
     child: Scaffold(
       backgroundColor: globals.whiteBlue,
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Enter your email to continue'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+          child: Center(
+            child: Container(
+              width: 500,
+              height: 570,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: Colors.white,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myTextInput(
-                    textString: "Enter Your Email Address",
-                    labelText: 'Enter Your Email Address',
-                    colBlue: colEmail,
-                    colBlue_1: colEmail_1,
-                    colBlue_2: colEmail_2,
-                    textInputAction: TextInputAction.next,
-                    spaceAllowed: false,
-                    obscure: false,
-                    onChange: (value) {
-                      globals.emailForgetPass = value;
-                    }),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 5,
+                    left: 5,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/Login', (route) => false);
+                      },
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Image.asset(
+                        'Assets/HomePage/logo.png',
+                        height: 95,
+                        width: 300,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Forget Password?",style: TextStyle(fontSize: 30),),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Enter your email to continue'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: myTextInput(
+                            textString: "Enter Your Email Address",
+                            labelText: 'Enter Your Email Address',
+                            colBlue: colEmail,
+                            colBlue_1: colEmail_1,
+                            colBlue_2: colEmail_2,
+                            textInputAction: TextInputAction.next,
+                            spaceAllowed: false,
+                            obscure: false,
+                            onChange: (value) {
+                              globals.emailForgetPass = value;
+                            }),
+                      ),
+
+                      myErrorText(errorText: errEmailForget, color: colErrEmailForget),
+
+
+                      Padding(
+                        padding: const EdgeInsets.all(28.0),
+                        child: InkWell(
+                          child: btn(btnText: "Submit"),
+                          onTap: () {
+                            try {
+                              _verifAcc();
+                            } catch (e) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      ErrorAlertDialog(
+                                          message: globals.errorException));
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
+            ),
 
-              myErrorText(errorText: errEmailForget, color: colErrEmailForget),
 
-
-              Padding(
-                padding: const EdgeInsets.all(28.0),
-                child: InkWell(
-                  child: btn(btnText: "Submit"),
-                  onTap: () {
-                    try {
-                        _verifAcc();
-                    } catch (e) {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              ErrorAlertDialog(
-                                  message: globals.errorException));
-                    }
-                  },
-                ),
-              )],
-          )
-        ],
+          ),
+        ),
+        ),
       ),
-      ),
-    );
+      );
   }
 
   _verifAcc(){
