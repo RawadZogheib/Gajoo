@@ -45,6 +45,8 @@ class _TeacherState extends State<Teacher> {
   );
 
   final List<TeacherCard> _TeacherCard = [];
+  final List<TeacherCard> _TeacherCardShown = [];
+  final List<TeacherCard> _TeacherCardHidden = [];
 
   @override
   void initState() {
@@ -139,7 +141,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _TeacherCardShown + _TeacherCardHidden,
                                           ),
                                         ),
                                       ),
@@ -244,7 +246,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _TeacherCardShown + _TeacherCardHidden,
                                           ),
                                         ),
                                       ),
@@ -354,7 +356,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _TeacherCardShown + _TeacherCardHidden,
                                           ),
                                         ),
                                       ),
@@ -713,6 +715,8 @@ class _TeacherState extends State<Teacher> {
   }
 
   _checkFilter() {
+    _TeacherCardShown.clear();
+    _TeacherCardHidden.clear();
       for (int i = 0; i < _TeacherCard.length; i++) {
         print(widget.type);
         print(_TeacherCard[i].type);
@@ -721,19 +725,22 @@ class _TeacherState extends State<Teacher> {
         print(widget.level);
         print(_TeacherCard[i].level);
 
-        _TeacherCard[i].isHidden = false;
-
         if ( !_TeacherCard[i].type.contains(widget.type) ||
              !_TeacherCard[i].languages.contains(widget.languages) ||
              !_TeacherCard[i].level.contains(widget.level)) {
           _TeacherCard[i].isHidden = true;
+          _TeacherCardHidden.add(_TeacherCard[i]);
           print("trueeeeeeeeeeeee: $i");
+        }else{
+          _TeacherCard[i].isHidden = false;
+          _TeacherCardShown.add(_TeacherCard[i]);
         }
         print(i);
         print("============================================================");
       }
       setState(() {
-        _TeacherCard;
+        _TeacherCardShown;
+        _TeacherCardHidden;
       });
 
   }
