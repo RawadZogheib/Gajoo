@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 
 class TeacherCard extends StatefulWidget {
   final String? Id;
@@ -58,7 +59,7 @@ class _TeacherCardState extends State<TeacherCard> {
                     padding: const EdgeInsets.all(30.0),
                     margin: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: globals.whiteBlue,
                       borderRadius: BorderRadius.circular(12.5),
                       boxShadow: [
                         BoxShadow(
@@ -137,14 +138,14 @@ class _TeacherCardState extends State<TeacherCard> {
                 alignment: Alignment.topCenter,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(20),
                           topLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20),
                           bottomLeft: Radius.circular(20),
                         ),
-                        color: Colors.white),
+                        color: globals.whiteBlue,),
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.only(
                         top: 86.0, bottom: 8.0, right: 8.0, left: 8.0),
@@ -237,7 +238,7 @@ class _TeacherCardState extends State<TeacherCard> {
                 padding: const EdgeInsets.all(30.0),
                 margin: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.transparent.withOpacity(0.8),
+                  color: Colors.black.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(12.5),
                 ),
               )
