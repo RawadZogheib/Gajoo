@@ -42,6 +42,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    widget.type = '';
+    widget.languages = '';
+    widget.level = '';
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => _back(),
