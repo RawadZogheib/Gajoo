@@ -18,7 +18,9 @@ class TeacherCard extends StatefulWidget {
   bool liked = false;
   var onPressed;
 
+
   TeacherCard({
+    Key? key,
     this.Id,
     required this.text,
     required this.imageUrl,
@@ -33,7 +35,7 @@ class TeacherCard extends StatefulWidget {
     required this.isHidable,
     required this.isHidden,
     required this.liked,
-  });
+  }) : super(key: key);
 
   @override
   State<TeacherCard> createState() => _TeacherCardState();
@@ -145,7 +147,7 @@ class _TeacherCardState extends State<TeacherCard> {
                           bottomRight: Radius.circular(20),
                           bottomLeft: Radius.circular(20),
                         ),
-                        color: globals.whiteBlue,),
+                        color: globals.whiteBlue),
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.only(
                         top: 86.0, bottom: 8.0, right: 8.0, left: 8.0),

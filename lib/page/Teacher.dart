@@ -39,14 +39,14 @@ class Teacher extends StatefulWidget {
 
 class _TeacherState extends State<Teacher> {
   Timer? timer;
+  int _key = 0;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
 
-  final List<TeacherCard> _TeacherCard = [];
-  final List<TeacherCard> _TeacherCardShown = [];
-  final List<TeacherCard> _TeacherCardHidden = [];
+  List<TeacherCard> _TeacherCard = [];
+  List<TeacherCard> _TeacherCardList = [];
 
   @override
   void initState() {
@@ -150,7 +150,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCardShown + _TeacherCardHidden,
+                                            children: _TeacherCardList,
                                           ),
                                         ),
                                       ),
@@ -255,7 +255,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCardShown + _TeacherCardHidden,
+                                            children: _TeacherCardList,
                                           ),
                                         ),
                                       ),
@@ -365,7 +365,7 @@ class _TeacherState extends State<Teacher> {
                                             color: Colors.white70,
                                           ),
                                           child: Wrap(
-                                            children: _TeacherCardShown + _TeacherCardHidden,
+                                            children: _TeacherCardList,
                                           ),
                                         ),
                                       ),
@@ -724,8 +724,7 @@ class _TeacherState extends State<Teacher> {
   }
 
   _checkFilter() {
-    _TeacherCardShown.clear();
-    _TeacherCardHidden.clear();
+    _TeacherCardList.clear();
       for (int i = 0; i < _TeacherCard.length; i++) {
         print(widget.type);
         print(_TeacherCard[i].type);
@@ -737,19 +736,52 @@ class _TeacherState extends State<Teacher> {
         if ( !_TeacherCard[i].type.contains(widget.type) ||
              !_TeacherCard[i].languages.contains(widget.languages) ||
              !_TeacherCard[i].level.contains(widget.level)) {
-          _TeacherCard[i].isHidden = true;
-          _TeacherCardHidden.add(_TeacherCard[i]);
+
+
+          _TeacherCardList.add(
+            TeacherCard(
+              key: ValueKey(_key++),
+              text: _TeacherCard[i].text,
+              imageUrl: _TeacherCard[i].imageUrl,
+              subtitle: _TeacherCard[i].subtitle,
+              isHeart: _TeacherCard[i].isHeart,
+              isHeartLikedTeacher: _TeacherCard[i].isHeartLikedTeacher,
+              isButton: _TeacherCard[i].isButton,
+              liked: _TeacherCard[i].liked,
+              isHidden: true,
+              type: _TeacherCard[i].type,
+              languages: _TeacherCard[i].languages,
+              level: _TeacherCard[i].level,
+              isHidable: _TeacherCard[i].isHidable,
+              onPressed: () => _TeacherCard[i].onPressed(),),
+          );
+
           print("trueeeeeeeeeeeee: $i");
         }else{
-          _TeacherCard[i].isHidden = false;
-          _TeacherCardShown.add(_TeacherCard[i]);
+          _TeacherCardList.add(
+            TeacherCard(
+              key: ValueKey(_key++),
+              text: _TeacherCard[i].text,
+              imageUrl: _TeacherCard[i].imageUrl,
+              subtitle: _TeacherCard[i].subtitle,
+              isHeart: _TeacherCard[i].isHeart,
+              isHeartLikedTeacher: _TeacherCard[i].isHeartLikedTeacher,
+              isButton: _TeacherCard[i].isButton,
+              liked: _TeacherCard[i].liked,
+              isHidden: false,
+              type: _TeacherCard[i].type,
+              languages: _TeacherCard[i].languages,
+              level: _TeacherCard[i].level,
+              isHidable: _TeacherCard[i].isHidable,
+              onPressed: () => _TeacherCard[i].onPressed(),),
+          );
+
         }
         print(i);
         print("============================================================");
       }
       setState(() {
-        _TeacherCardShown;
-        _TeacherCardHidden;
+        _TeacherCardList;
       });
 
   }
