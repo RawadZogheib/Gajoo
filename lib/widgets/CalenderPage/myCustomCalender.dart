@@ -92,7 +92,7 @@ class MyCustomCalender extends StatelessWidget {
                           ),
                           alignment: Alignment.center,
                           margin: const EdgeInsets.all(4.0),
-                          child: StrikeThroughWidget(
+                          child: StrikeThroughWidget2(
                             child: Text(
                               DateFormat('d').format(date),
                               style:
@@ -207,9 +207,27 @@ class StrikeThroughWidget extends StatelessWidget {
       // this line is optional to make strikethrough effect outside a text
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('Assets/HomePage/graphics/strikethrough2.png'),
+            image: AssetImage('Assets/HomePage/graphics/strikethrough2.png',),
             fit: BoxFit.fitWidth),
       ),
+    );
+  }
+}
+
+class StrikeThroughWidget2 extends StatelessWidget {
+  final Widget _child;
+
+  StrikeThroughWidget2({Key? key, required Widget child})
+      : this._child = child,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Center(child: _child),
+        Center(child: Image.asset('Assets/HomePage/graphics/strikethrough2.png',width: 30,)),
+      ],
     );
   }
 }
