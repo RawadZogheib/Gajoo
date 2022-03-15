@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:math' as math;
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
@@ -24,6 +26,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int webViewsCounter = 2000;
+  int webStudentsEnrolled = 120;
+  int webTeachersCounter = 17;
+
   final List<CustomImage> _img = [
     CustomImage(
       imageName: 'Assets/HomePage/CoverImage/img1.webp',
@@ -391,9 +397,182 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 100,
                       ),
-
-
-
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(32.0),
+                                  topLeft: Radius.circular(32.0),
+                                  bottomRight: Radius.circular(32.0),
+                                  bottomLeft: Radius.circular(32.0),
+                                ),
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.45,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.45,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        'Assets/HomePage/Other/img1.png',
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(28.0),
+                                    alignment: Alignment.topCenter,
+                                    child: const Text(
+                                      'The history of textbooks dates back to ancient civilizations. For example, Ancient Greeks wrote educational texts. The modern textbook has its roots in the mass production made possible by the printing press. Johannes Gutenberg himself may have printed editions of Ars Minor, a schoolbook on Latin grammar by Aelius Donatus.',
+                                      style: TextStyle(fontSize: 30),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                'Who we are',
+                                style: TextStyle(
+                                  fontSize: 44,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.45 +
+                                      44,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  DefaultTextStyle(
+                                    style: const TextStyle(
+                                        fontSize: 44,
+                                        fontFamily: 'Bobbers',
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    child: AnimatedTextKit(
+                                      repeatForever: true,
+                                      animatedTexts: [
+                                        RotateAnimatedText('Views Counter:   '),
+                                        RotateAnimatedText(
+                                            'Students  Enrolled:   '),
+                                        RotateAnimatedText(
+                                            'Teachers Counter:   '),
+                                      ],
+                                    ),
+                                  ),
+                                  DefaultTextStyle(
+                                    style: const TextStyle(
+                                        fontSize: 120,
+                                        fontFamily: 'Bobbers',
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                    child: AnimatedTextKit(
+                                      repeatForever: true,
+                                      animatedTexts: [
+                                        RotateAnimatedText(
+                                            webViewsCounter.toString()),
+                                        RotateAnimatedText(
+                                            webStudentsEnrolled.toString()),
+                                        RotateAnimatedText(
+                                            webTeachersCounter.toString()),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(32.0),
+                          topLeft: Radius.circular(32.0),
+                          bottomRight: Radius.circular(32.0),
+                          bottomLeft: Radius.circular(32.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(32.0),
+                                    topLeft: Radius.circular(32.0),
+                                    bottomRight: Radius.circular(32.0),
+                                    bottomLeft: Radius.circular(32.0),
+                                  ),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.45,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.45,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          alignment: Alignment.bottomCenter,
+                                          image: AssetImage(
+                                            'Assets/HomePage/Other/img2.png',
+                                          ),
+                                          fit: BoxFit.fill),
+                                    ),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(28.0),
+                                      alignment: Alignment.topCenter,
+                                      child: const Text(
+                                        '\n The history of textbooks dates back to ancient civilizations. For example, Ancient Greeks wrote educational texts. ',
+                                        style: TextStyle(fontSize: 30),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: -160,
+                                  child: Transform.rotate(
+                                    angle: -math.pi / 2,
+                                    child: const Text(
+                                      'Our Mission',
+                                      style: TextStyle(
+                                        fontSize: 44,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 100,
                       ),
@@ -541,7 +720,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
   _checkIfIsLoggedInBlue() {
     if (globals.isLogedIn == false) {
       WarningPopup(context, globals.warning400);
@@ -549,8 +727,6 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushNamed(context, "/MyAudio");
     }
   }
-
-
 
   _back() {
     print('No back available.');
