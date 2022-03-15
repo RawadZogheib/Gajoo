@@ -29,10 +29,9 @@ class MyCustomCalender extends StatelessWidget {
         //border: Border.all(width: 1),
       ),
       child: PagedVerticalCalendar(
-        startDate: DateTime.now().toLocal().subtract(const Duration(days: 10)),
+        startDate: DateTime.now().toLocal().subtract(const Duration(days: 60)),
         onDayPressed: (date) => onDayPressed(date),
         scrollController: ScrollController(),
-
         /// customize the month header look by adding a week indicator
         monthBuilder: (context, month, year) {
           return Column(
@@ -226,7 +225,8 @@ class StrikeThroughWidget2 extends StatelessWidget {
     return Stack(
       children: [
         Center(child: _child),
-        Center(child: Image.asset('Assets/HomePage/graphics/strikethrough2.png',width: 30,)),
+        //Center(child: Image.asset('Assets/HomePage/graphics/strikethrough2.png',width: 40,)),
+        Center(child: Container(height: 1,width: 25,color: Colors.black,),)
       ],
     );
   }
