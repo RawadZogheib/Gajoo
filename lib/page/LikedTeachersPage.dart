@@ -7,6 +7,7 @@ import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
+import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/Responsive.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/other/myDrawerMobile.dart';
@@ -153,59 +154,13 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                     ),
                   ),
                 ),
+                const MyFooter(),
               ],
             ),
           ),
-          tablet: Builder(
-            builder: (context) => Column(
+          tablet: Column(
               children: [
-                SizedBox(
-                  height: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'Assets/HomePage/logo.png',
-                            height: 95,
-                            width: 300,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 20.0),
-                        child: Row(
-                          children: [
-                            const Text(
-                              'Liked Teachers',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              onTap: () => Scaffold.of(context).openEndDrawer(),
-                              child: CircleAvatar(
-                                backgroundColor: HexColor('#222222'),
-                                backgroundImage: const AssetImage(
-                                    'Assets/HomePage/ProfilePicture/img1.png'),
-                                maxRadius: 35,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const MyHeader(),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
@@ -524,57 +479,9 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                 ),
               ],
             ),
-          ),
-          desktop: Builder(
-            builder: (context) => Column(
+          desktop: Column(
               children: [
-                SizedBox(
-                  height: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.asset(
-                            'Assets/HomePage/logo.png',
-                            height: 95,
-                            width: 300,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(right: 20.0),
-                        child: Row(
-                          children: [
-                            const Text(
-                              'Liked Teachers',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              onTap: () => Scaffold.of(context).openEndDrawer(),
-                              child: CircleAvatar(
-                                backgroundColor: HexColor('#222222'),
-                                backgroundImage: const AssetImage(
-                                    'Assets/HomePage/ProfilePicture/img1.png'),
-                                maxRadius: 35,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const MyHeader(),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
@@ -895,8 +802,7 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   _loadNewPage() {
