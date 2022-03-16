@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/button/myButton.dart';
@@ -61,6 +62,15 @@ Color colRadioMale_1 = globals.blue_1;
 Color colRadioFem = globals.blue;
 Color colRadioFem_1 = globals.blue_1;
 
+Color colLanguages = globals.blue;
+Color colLanguages_1 = globals.blue_1;
+Color colLanguages_2 = globals.blue_2;
+
+
+Color colCountry = globals.blue;
+Color colCountry_1 = globals.blue_1;
+Color colCountry_2 = globals.blue_2;
+
 
 
 String errTxtFname = ''; // for error textFields
@@ -83,6 +93,10 @@ String errTxtDate = ''; //date ErrorText
 Color colErrTxtDate = globals.transparent;
 String errTxt = '';
 Color colErrTxt = globals.transparent;
+String errTxtLang = '';
+Color colErrTxtLang = globals.transparent;
+String errTxtCountry = '';
+Color colErrTxtCountry = globals.transparent;
 
 class registration extends StatefulWidget {
   const registration({Key? key}) : super(key: key);
@@ -92,6 +106,12 @@ class registration extends StatefulWidget {
 }
 
 class _registrationState extends State<registration> {
+
+  String? _languages;
+  String? _countries;
+
+  final controllerLanguages = TextEditingController();
+  final controllerCountries = TextEditingController();
 
   @override
   void initState() {
@@ -341,7 +361,7 @@ class _registrationState extends State<registration> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                        padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
                         child: myRadioButton(
                           text: ' Male ',
                           color: colRadioMale,
@@ -390,6 +410,31 @@ class _registrationState extends State<registration> {
                     child: myDateOfBirth(),
                   ),
                   myErrorText(errorText: errTxtDate, color: colErrTxtDate),
+
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3),
+                    child: Container(
+                      child: Languages(),
+                    ),
+                  ),
+
+                  myErrorText(errorText: errTxtLang, color: colErrTxtLang),
+
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        top: 8.0,
+                        right: MediaQuery.of(context).size.width * 0.3),
+                    child: Container(
+                      child: Countries(),
+                    ),
+                  ),
+
+                  myErrorText(errorText: errTxtCountry, color: colErrTxtCountry),
+
                   Padding(
                     padding: const EdgeInsets.all(28.0),
                     child: InkWell(
@@ -586,6 +631,47 @@ class _registrationState extends State<registration> {
           colDateOfBirth_1 = globals.red_1;
           colDateOfBirth_2 = globals.red_2;
           errTxtDate = globals.warning7;
+        });
+      }
+
+      if (_languages != null && _languages != '') {
+        print(_languages);
+        setState(() {
+          colLanguages = globals.blue;
+          colLanguages_1 = globals.blue_1;
+          colLanguages_2 = globals.blue_2;
+          errTxtLang = '';
+        });
+      } else {
+        isEmpty = true;
+        print(_languages);
+        setState(() {
+          colErrTxtLang = globals.red_1;
+          colLanguages = globals.red;
+          colLanguages_1 = globals.red_1;
+          colLanguages_2 = globals.red_2;
+          errTxtLang = globals.warning7;
+          WarningPopup(context, globals.warning7);
+        });
+      }
+
+
+      if (_countries != null && _countries != '') {
+        setState(() {
+          colErrTxtCountry = globals.transparent;
+          colCountry = globals.blue;
+          colCountry_1 = globals.blue_1;
+          colCountry_2 = globals.blue_2;
+        });
+      } else {
+        isEmpty = true;
+        setState(() {
+          colErrTxtCountry = globals.red_1;
+          colCountry = globals.red;
+          colCountry_1 = globals.red_1;
+          colCountry_2 = globals.red_2;
+          errTxtCountry = globals.warning7;
+          WarningPopup(context, globals.warning7);
         });
       }
 
@@ -984,5 +1070,111 @@ class _registrationState extends State<registration> {
      errTxt = '';
      colErrTxt = globals.transparent;
   }
+
+
+
+  Widget Languages() => TypeAheadFormField<dynamic>(
+    textFieldConfiguration: TextFieldConfiguration(
+      autofocus: true,
+      onEditingComplete: (){},
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: colLanguages),
+            borderRadius: BorderRadius.circular(10)),
+        filled: true,
+        fillColor: colLanguages,
+        hintText: "choose your language",
+        hintStyle: TextStyle(
+          fontSize: 15.0,
+          color: colLanguages_1,
+        ),
+        border: InputBorder.none,
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: colLanguages_1)),
+      ),
+      controller: controllerLanguages,
+    ),
+    suggestionsCallback: LanguageData.getSuggestions,
+    itemBuilder: (context, dynamic suggestion) => ListTile(
+      title: Text(suggestion!,style: TextStyle(color: colLanguages_1),),
+    ),
+    onSuggestionSelected: (dynamic suggestion) {
+      controllerLanguages.text = suggestion!;
+      _languages = controllerLanguages.text;
+      print(_languages);
+    },
+  );
+
+
+
+  Widget Countries() => TypeAheadFormField<dynamic>(
+    textFieldConfiguration: TextFieldConfiguration(
+      autofocus: true,
+      onEditingComplete: (){},
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: colCountry),
+            borderRadius: BorderRadius.circular(10)),
+        filled: true,
+        fillColor: colCountry,
+        hintText: "Choose your Country",
+        hintStyle: TextStyle(
+          fontSize: 15.0,
+          color: colCountry_1,
+        ),
+        border: InputBorder.none,
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: colCountry_1)),
+      ),
+      controller: controllerCountries,
+    ),
+    suggestionsCallback: CountryData.getSuggestions,
+    itemBuilder: (context, dynamic suggestion) => ListTile(
+      title: Text(suggestion!,style: TextStyle(color: colCountry_1),),
+    ),
+    onSuggestionSelected: (dynamic suggestion) {
+      controllerCountries.text = suggestion!;
+      _countries = suggestion!;
+      print(_countries);
+    },
+  );
+
+
+
+}
+
+
+
+
+class LanguageData {
+
+
+  static List getSuggestions(String query) =>
+      List.of(globals.Languages).where((language){
+
+        final languageLower = language.toLowerCase();
+        final queryLower = query.toLowerCase();
+        return languageLower.contains(queryLower);
+
+
+      }).toList();
+
+}
+
+
+class CountryData {
+
+
+  static List getSuggestions(String query) =>
+      List.of(globals.Languages).where((language){
+
+        final languageLower = language.toLowerCase();
+        final queryLower = query.toLowerCase();
+        return languageLower.contains(queryLower);
+
+
+      }).toList();
 
 }
