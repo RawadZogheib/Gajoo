@@ -169,6 +169,7 @@ class _TeacherState extends State<Teacher> {
                     ),
                   ),
                 ),
+                const MyFooter(),
               ],
             ),
           ),
