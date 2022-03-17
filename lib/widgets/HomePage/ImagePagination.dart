@@ -28,7 +28,7 @@ class _ImagePaginationState extends State<ImagePagination> {
           onTap: () => widget.onTapRed(),
           child: Container(
             height: 10,
-            width: 180,
+            width: MediaQuery.of(context).size.width * 0.18,
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               color: widget.currentActive == 0
@@ -47,7 +47,7 @@ class _ImagePaginationState extends State<ImagePagination> {
           onTap: () => widget.onTapYellow(),
           child: Container(
             height: 10,
-            width: 180,
+            width: MediaQuery.of(context).size.width * 0.18,
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               color: widget.currentActive == 1
@@ -66,7 +66,7 @@ class _ImagePaginationState extends State<ImagePagination> {
           onTap: () => widget.onTapBlue(),
           child: Container(
             height: 10,
-            width: 180,
+            width: MediaQuery.of(context).size.width * 0.18,
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               color: widget.currentActive == 2
@@ -85,7 +85,7 @@ class _ImagePaginationState extends State<ImagePagination> {
           onTap: () => widget.onTapGreen(),
           child: Container(
             height: 10,
-            width: 180,
+            width: MediaQuery.of(context).size.width * 0.18,
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               color: widget.currentActive == 3
