@@ -73,6 +73,7 @@ class _TeacherState extends State<Teacher> {
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
+        backgroundColor: globals.whiteBlue,
         appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
                 backgroundColor: globals.whiteBlue,
@@ -94,23 +95,9 @@ class _TeacherState extends State<Teacher> {
                     onPressed: () {
                       _back();
                     }),
-                actions: [
-                  Builder(
-                    builder: (context) => IconButton(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.menu,
-                        color: HexColor('#333333'),
-                      ),
-                      onPressed: () => Scaffold.of(context).openEndDrawer(),
-                    ),
-                  ),
-                ],
               )
             : null,
-        drawer: myDrawerMobile(
+        drawer: MyDrawerFilter(
           type: widget.type,
           languages: widget.languages,
           level: widget.level,
@@ -228,7 +215,7 @@ class _TeacherState extends State<Teacher> {
                             ),
                           ),
                         ),
-                        MyFilter(),
+                        //MyFilter(),
                       ],
                     ),
                   ),
@@ -253,7 +240,7 @@ class _TeacherState extends State<Teacher> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(
-                                      width: 250.0,
+                                      width: 100.0,
                                     ),
                                     Expanded(
                                       child: ClipRRect(
@@ -290,13 +277,21 @@ class _TeacherState extends State<Teacher> {
                             ),
                           ),
                         ),
-                        MyFilter(),
+                        //MyFilter(),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
+        ),
+
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            tooltip: 'Filter',
+            child: const Icon(Icons.add),
+          ),
         ),
       ),
     );
@@ -722,286 +717,583 @@ class _TeacherState extends State<Teacher> {
     }
   }
 
-  MyFilter() {
-    return Positioned(
-      left: 35,
-      child: Container(
-        padding: const EdgeInsets.all(18.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.5),
-            color: Colors.white),
-        width: 200,
-        height: 480,
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text('Type: '),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 6.0,
-                      left: 3.0,
-                      right: 3.0,
-                      bottom: 3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: type1,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'RED',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
+  // MyFilter() {
+  //   return Positioned(
+  //     left: 35,
+  //     child: Container(
+  //       padding: const EdgeInsets.all(18.0),
+  //       decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(12.5),
+  //           color: Colors.white),
+  //       width: 200,
+  //       height: 480,
+  //       child: Column(
+  //         children: [
+  //           const Padding(
+  //             padding: EdgeInsets.only(left: 8.0),
+  //             child: Text('Type: '),
+  //           ),
+  //           Column(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     top: 6.0,
+  //                     left: 3.0,
+  //                     right: 3.0,
+  //                     bottom: 3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: type1,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'RED',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorType();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.type = "red";
+  //                         type1 = Colors.yellowAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: type2,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'YELLOW',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorType();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.type = "yellow";
+  //                         type2 = Colors.yellowAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: type3,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'GREEN',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorType();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.type = "green";
+  //                         type3 = Colors.yellowAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           const Divider(color: Colors.black),
+  //           const Padding(
+  //             padding: EdgeInsets.only(left: 8.0),
+  //             child: Text('Language: '),
+  //           ),
+  //           Column(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     top: 6.0,
+  //                     left: 3.0,
+  //                     right: 3.0,
+  //                     bottom: 3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: language1,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'ENGLISH',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLanguage();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.languages = "english";
+  //                         language1 = Colors.redAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: language2,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'FRENCH',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLanguage();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.languages = "french";
+  //                         language2 = Colors.redAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: language3,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'ARABIC',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLanguage();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.languages = "arabic";
+  //                         language3 = Colors.redAccent;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           const Divider(color: Colors.black),
+  //           const Padding(
+  //             padding: EdgeInsets.all(8.0),
+  //             child: Text('Level: '),
+  //           ),
+  //           Column(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.only(
+  //                     top: 6.0,
+  //                     left: 3.0,
+  //                     right: 3.0,
+  //                     bottom: 3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: level1,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'BEGINNER',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLevel();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.level = "beginner";
+  //                         level1 = Colors.indigo;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: level2,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'INTERMEDIATE',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLevel();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.level = "intermediate";
+  //                         level2 = Colors.indigo;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.all(3.0),
+  //                 child: myBtn2(
+  //                   height: 25,
+  //                   width: 150,
+  //                   color1: level3,
+  //                   color2: Colors.black,
+  //                   btnText: const Text(
+  //                     'ADVANCED',
+  //                     style: TextStyle(
+  //                         fontWeight: FontWeight.bold,
+  //                         fontSize: 12),
+  //                   ),
+  //                   onPress: () {
+  //                     _cleanColorLevel();
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         widget.level = "advanced";
+  //                         level3 = Colors.indigo;
+  //                       });
+  //                       _checkFilter();
+  //                     }
+  //                   },
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
+  MyDrawerFilter({String? type, String? languages, String? level}){
+    return Drawer(
+      child: Material(
+        color: HexColor('#222222'),//globals.blue1,
+        child: ScrollConfiguration(
+          behavior: MyCustomScrollBehavior(),
+          child: ListView(
+            controller: ScrollController(),
+            children: <Widget>[
+              Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.asset(
+                      'Assets/HomePage/ProfilePicture/img1.png',
+                      fit: BoxFit.cover,
                     ),
-                    onPress: () {
-                      _cleanColorType();
-                      if (mounted) {
-                        setState(() {
-                          widget.type = "red";
-                          type1 = Colors.yellowAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: type2,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'YELLOW',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorType();
-                      if (mounted) {
-                        setState(() {
-                          widget.type = "yellow";
-                          type2 = Colors.yellowAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: type3,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'GREEN',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorType();
-                      if (mounted) {
-                        setState(() {
-                          widget.type = "green";
-                          type3 = Colors.yellowAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Type: '),
                   ),
-                ),
-              ],
-            ),
-            const Divider(color: Colors.black),
-            const Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text('Language: '),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 6.0,
-                      left: 3.0,
-                      right: 3.0,
-                      bottom: 3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: language1,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'ENGLISH',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLanguage();
-                      if (mounted) {
-                        setState(() {
-                          widget.languages = "english";
-                          language1 = Colors.redAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0,
+                            left: 3.0,
+                            right: 3.0,
+                            bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'RED',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                widget.type = "red";
+                                type1 = Colors.yellowAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'YELLOW',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                widget.type = "yellow";
+                                type2 = Colors.yellowAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'GREEN',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                widget.type = "green";
+                                type3 = Colors.yellowAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: language2,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'FRENCH',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLanguage();
-                      if (mounted) {
-                        setState(() {
-                          widget.languages = "french";
-                          language2 = Colors.redAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  const Divider(color: Colors.black),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Language: '),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: language3,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'ARABIC',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLanguage();
-                      if (mounted) {
-                        setState(() {
-                          widget.languages = "arabic";
-                          language3 = Colors.redAccent;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0,
+                            left: 3.0,
+                            right: 3.0,
+                            bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ENGLISH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                widget.languages = "english";
+                                language1 = Colors.redAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'FRENCH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                widget.languages = "french";
+                                language2 = Colors.redAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ARABIC',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                widget.languages = "arabic";
+                                language3 = Colors.redAccent;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const Divider(color: Colors.black),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Level: '),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 6.0,
-                      left: 3.0,
-                      right: 3.0,
-                      bottom: 3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: level1,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'BEGINNER',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLevel();
-                      if (mounted) {
-                        setState(() {
-                          widget.level = "beginner";
-                          level1 = Colors.indigo;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  const Divider(color: Colors.black),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Level: '),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: level2,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'INTERMEDIATE',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLevel();
-                      if (mounted) {
-                        setState(() {
-                          widget.level = "intermediate";
-                          level2 = Colors.indigo;
-                        });
-                        _checkFilter();
-                      }
-                    },
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0,
+                            left: 3.0,
+                            right: 3.0,
+                            bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'BEGINNER',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                widget.level = "beginner";
+                                level1 = Colors.indigo;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'INTERMEDIATE',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                widget.level = "intermediate";
+                                level2 = Colors.indigo;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ADVANCED',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                widget.level = "advanced";
+                                level3 = Colors.indigo;
+                              });
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: myBtn2(
-                    height: 25,
-                    width: 150,
-                    color1: level3,
-                    color2: Colors.black,
-                    btnText: const Text(
-                      'ADVANCED',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                    onPress: () {
-                      _cleanColorLevel();
-                      if (mounted) {
-                        setState(() {
-                          widget.level = "advanced";
-                          level3 = Colors.indigo;
-                        });
-                        _checkFilter();
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
