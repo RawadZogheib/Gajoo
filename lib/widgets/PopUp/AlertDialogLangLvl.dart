@@ -203,12 +203,12 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                     setState(() {
                                       _level = "beginner";
                                     });
-                                    Navigator.push(context,
+                                    Navigator.pushAndRemoveUntil(context,
                                       MaterialPageRoute(builder: (context) => Teacher(
                                         type: _type,
                                         languages: _languages,
                                         level: _level,
-                                      )));
+                                      )),(route) => false);
                                   }
                                   print("level: $_level");
                                 },
@@ -232,12 +232,12 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                     setState(() {
                                       _level = "intermediate";
                                     });
-                                    Navigator.push(context,
+                                    Navigator.pushAndRemoveUntil(context,
                                         MaterialPageRoute(builder: (context) => Teacher(
                                           type: _type,
                                           languages: _languages,
                                           level: _level,
-                                        )));
+                                        )),(route) => false);
                                   }
                                   print("level: $_level");
                                 },
@@ -261,12 +261,12 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                     setState(() {
                                       _level = "advanced";
                                     });
-                                    Navigator.push(context,
+                                    Navigator.pushAndRemoveUntil(context,
                                         MaterialPageRoute(builder: (context) => Teacher(
                                           type: _type,
                                           languages: _languages,
                                           level: _level,
-                                        )));
+                                        )), (route) => false);
                                   }
                                   print("level: $_level");
                                 },
