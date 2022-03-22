@@ -40,7 +40,8 @@ class MyHeader extends StatelessWidget {
                   width: 120,
                   margin: const EdgeInsets.only(right: 16.0),
                   child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pushNamed('/Login'),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/Login', (route) => false),
                     child: const Text('Login'),
                   ),
                 )
