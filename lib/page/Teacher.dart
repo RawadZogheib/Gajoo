@@ -288,7 +288,11 @@ class _TeacherState extends State<Teacher> {
 
         floatingActionButton: Builder(
           builder: (context) => FloatingActionButton(
-            onPressed: () => Scaffold.of(context).openDrawer(),
+            onPressed: () => MediaQuery.of(context).size.width < 650 ?
+                _open(
+                    type: widget.type,
+                    languages: widget.languages,
+                    level: widget.level) : Scaffold.of(context).openDrawer(),
             tooltip: 'Filter',
             child: const Icon(Icons.add),
           ),
@@ -1292,6 +1296,316 @@ class _TeacherState extends State<Teacher> {
       ),
     );
   }
+
+
+
+  _open({String? type, String? languages, String? level}) {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+            height: MediaQuery.of(context).size.height * 0.55,
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            decoration: BoxDecoration(
+              color: globals.white,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            child: Drawer(
+              child: Material(
+                color: HexColor('#222222'),//globals.blue1,
+                child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: ListView(
+                    controller: ScrollController(),
+                    children: <Widget>[
+                      Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text('Type: '),
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 6.0,
+                                    left: 3.0,
+                                    right: 3.0,
+                                    bottom: 3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: type1,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'RED',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorType();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.type = "red";
+                                        type1 = Colors.yellowAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: type2,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'YELLOW',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorType();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.type = "yellow";
+                                        type2 = Colors.yellowAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: type3,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'GREEN',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorType();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.type = "green";
+                                        type3 = Colors.yellowAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Divider(color: Colors.black),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text('Language: '),
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 6.0,
+                                    left: 3.0,
+                                    right: 3.0,
+                                    bottom: 3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: language1,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'ENGLISH',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLanguage();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.languages = "english";
+                                        language1 = Colors.redAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: language2,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'FRENCH',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLanguage();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.languages = "french";
+                                        language2 = Colors.redAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: language3,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'ARABIC',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLanguage();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.languages = "arabic";
+                                        language3 = Colors.redAccent;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Divider(color: Colors.black),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text('Level: '),
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 6.0,
+                                    left: 3.0,
+                                    right: 3.0,
+                                    bottom: 3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: level1,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'BEGINNER',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLevel();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.level = "beginner";
+                                        level1 = Colors.indigo;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: level2,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'INTERMEDIATE',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLevel();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.level = "intermediate";
+                                        level2 = Colors.indigo;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: myBtn2(
+                                  height: 25,
+                                  width: 150,
+                                  color1: level3,
+                                  color2: Colors.black,
+                                  btnText: const Text(
+                                    'ADVANCED',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  onPress: () {
+                                    _cleanColorLevel();
+                                    if (mounted) {
+                                      setState(() {
+                                        widget.level = "advanced";
+                                        level3 = Colors.indigo;
+                                      });
+                                      _checkFilter();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),);
+      },
+    ).then((exit) async {
+    });
+  }
+
+
+
 
 
   _back() {
