@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
@@ -65,11 +66,18 @@ class myDrawer extends StatelessWidget {
                           text: 'Notifications',
                           icon: Icons.notifications_outlined,
                           color: globals.whiteBlue,
-                          onClicked: () => selectedItem(context, 5),
+                          onClicked: () => selectedItem(context, 4),
                         ),
                         MenuItem(
                           text: 'Settings',
                           icon: Icons.settings,
+                          color: globals.whiteBlue,
+                          onClicked: () => selectedItem(context, 5),
+                        ),
+                        const SizedBox(height: 8),
+                        MenuItem(
+                          text: 'Logout',
+                          icon: Icons.logout,
                           color: globals.whiteBlue,
                           onClicked: () => selectedItem(context, 6),
                         ),
@@ -85,12 +93,13 @@ class myDrawer extends StatelessWidget {
     );
   }
 
-  void selectedItem(BuildContext context, int index) {
+  Future<void> selectedItem(BuildContext context, int index) async {
     Navigator.of(context).pop();
     switch (index) {
       case 0: // My Courses
         if (globals.currentPage != 'MyCourses') {
-          Navigator.of(context).pushNamedAndRemoveUntil('/MyCourses',  (route) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/MyCourses', (route) => false);
         }
         break;
       case 1: // Liked Courses
@@ -100,7 +109,8 @@ class myDrawer extends StatelessWidget {
         break;
       case 2: // Liked Teachers
         if (globals.currentPage != 'LikedTeachersPage') {
-          Navigator.of(context).pushNamedAndRemoveUntil('/LikedTeachersPage',  (route) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/LikedTeachersPage', (route) => false);
         }
         break;
       case 3: // Updates
@@ -117,6 +127,16 @@ class myDrawer extends StatelessWidget {
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 6
         // ));
+        break;
+
+      case 6: // Logout
+
+        globals.isLoggedIn = false;
+        await SessionManager().destroy();
+
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/HomePage', (route) => false);
+
         break;
     }
   }
