@@ -68,6 +68,7 @@ const String error401 = "Sorry, this day is full.";///////
 const String error402 = "Sorry, this day is not available.";///////
 const String error403 = "Sorry, this course is not available.";///////
 const String success404 = "New course added.";///////
+const String warning405 = 'There is no courses available.';
 //for AlertDialog
 String x = '0';
 
