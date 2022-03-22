@@ -42,7 +42,7 @@ class _FirstPage extends State<FirstPage> {
     // SharedPreferences localStorage = await SharedPreferences.getInstance();
     // await localStorage.clear();
     try {
-      globals.isLoggedIn = await SessionManager().get('token');
+      globals.isLoggedIn = await SessionManager().containsKey('token');
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
       });
