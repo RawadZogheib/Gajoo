@@ -112,7 +112,7 @@ class _sixCodeState extends State<sixCode> {
       List<dynamic> body = json.decode(res.body);
 
       if(body[0] == "true"){
-        Navigator.pushNamed(context, '/Login');
+        Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
       }else if(body[0] == "codeFailed"){
         setState(() {
           errCode = globals.codeFailed;

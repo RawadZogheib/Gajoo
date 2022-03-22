@@ -1482,7 +1482,7 @@ class _HomePageState extends State<HomePage> {
     if (globals.isLoggedIn == false) {
       WarningPopup(context, globals.warning400);
     } else {
-      Navigator.pushNamed(context, "/MyAudio");
+      Navigator.pushNamedAndRemoveUntil(context, "/MyAudio", (route) => false);
     }
   }
 

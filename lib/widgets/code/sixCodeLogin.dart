@@ -214,7 +214,7 @@ class _sixCodeLoginState extends State<sixCodeLogin> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
-        Navigator.pushNamed(context, '/Contrat');
+        Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
 
         SharedPreferences localStorage = await SharedPreferences.getInstance();
         localStorage.setString('token', body[1]);

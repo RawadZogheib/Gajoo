@@ -207,7 +207,7 @@ class _forgetPass2State extends State<forgetPass2> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "true") {
-        Navigator.pushNamed(context, '/Login');
+        Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
       }else if(body[0] == "error2_3"){
         setState(() {
           colPass = globals.red;

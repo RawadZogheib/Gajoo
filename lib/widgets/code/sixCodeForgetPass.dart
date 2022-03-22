@@ -209,7 +209,7 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "true") {
-        Navigator.pushNamed(context, '/forgetPassword2');
+        Navigator.pushNamedAndRemoveUntil(context, '/forgetPassword2',(route) => false);
       } else if (body[0] == "codeFailed") {
         setState(() {
           errCode = globals.codeFailed;
