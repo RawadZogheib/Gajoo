@@ -11,7 +11,7 @@ const String version = "v1.0";
 //Server Ip  (page[/my_api.dart])
 const String myIP = "https://kwikcode.net/gajoo_php";
 
-bool isLoggedIn = false;
+bool? isLoggedIn;
 String currentPage = 'HomePage';//HomePage//MyCourses//CalendarPage//Teacher//LikedTeachersPage//MyAudio
 
 //Colors
