@@ -348,6 +348,7 @@ class _loginState extends State<login> {
         await SessionManager().set('phoneNumber', body[2][5]);
         await SessionManager().set('gender', body[2][6]);
         await SessionManager().set('dateOfBirth', body[2][7]);
+        globals.isLoggedIn = true;
 
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
