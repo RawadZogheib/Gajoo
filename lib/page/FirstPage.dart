@@ -80,7 +80,7 @@ class _FirstPage extends State<FirstPage> {
         await SessionManager().set('lName', body[2][2]);
         await SessionManager().set('userName', body[2][3]);
         await SessionManager().set('email', body[2][4]);
-        await SessionManager().set('password', globals.passwordLogin);
+        await SessionManager().set('password', await SessionManager().get('password'),);
         await SessionManager().set('phoneNumber', body[2][5]);
         await SessionManager().set('gender', body[2][6]);
         await SessionManager().set('dateOfBirth', body[2][7]);

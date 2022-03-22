@@ -29,18 +29,18 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: FirstPage(),
-        initialRoute: '/HomePage',
+        initialRoute: '/FirstPage',
         routes: {
-          '/FirstPage': (context) => FirstPage(),
-          '/HomePage': (context) => HomePage(),
+          '/FirstPage': (context) => const FirstPage(),
+          '/HomePage': (context) => const HomePage(),
           '/CalendarPage': (context) => CalenderPage(),
-          '/Login': (context) => login(),
-          '/Registration': (context) => registration(),
-          '/forgetPassword': (context) => forgetPass(),
-          '/forgetPassword2': (context) => forgetPass2(),
-          '/MyCourses': (context) => MyCourses(),
+          '/Login': (context) => const login(),
+          '/Registration': (context) => const registration(),
+          '/forgetPassword': (context) => const forgetPass(),
+          '/forgetPassword2': (context) => const forgetPass2(),
+          '/MyCourses': (context) => const MyCourses(),
           '/LikedTeachersPage': (context) => LikedTeachersPage(),
-          '/MyAudio': (context) => MyAudio(),
+          '/MyAudio': (context) => const MyAudio(),
         });
     //});
   }
