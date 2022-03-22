@@ -11,7 +11,7 @@ const String version = "v1.0";
 //Server Ip  (page[/my_api.dart])
 const String myIP = "https://kwikcode.net/gajoo_php";
 
-bool isLogedIn = true;
+bool isLoggedIn = false;
 String currentPage = 'HomePage';//HomePage//MyCourses//CalendarPage//Teacher//LikedTeachersPage//MyAudio
 
 //Colors
@@ -104,42 +104,42 @@ List<dynamic> Countries = ['Afghanistan','Albania','Algeria','Andorra','Angola',
                           'United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
 
 //for 6 digit code
-String? sixCodeNb = null;
+String? sixCodeNb;
 
 //ForgetPassword
-String? emailForgetPass = null;
-String? newPassword = null;
-String? newPassword2 = null;
+String? emailForgetPass;
+String? newPassword;
+String? newPassword2;
 
 //Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
-String? Id = null;
-String? email = null;
-String? fName = null;
-String? lName = null;
-String? password = null;
-String? repassword = null;
-String? gender = null;
-String? phoneNumber = null;
-String? userName = null;
-String? dateOfBirth = null;
+String? Id;
+String? email;
+String? fName;
+String? lName;
+String? password;
+String? repassword;
+String? gender;
+String? phoneNumber;
+String? userName;
+String? dateOfBirth;
 String? isRegistered = '0'; // 0 -> false -> not registered
 
 
 //login  (page[/login.dart /login2.dart])
-String? emailLogin = null;
-String? passwordLogin = null;
+String? emailLogin;
+String? passwordLogin;
 
 
 //Contrat (page[/contrat])
-String? contrat_Id = null;
-String? contrat_name = null;
-String? contrat_dollar_per_hour = null;
-String? contrat_max_payment = null;
-String? contrat_description = null;
-String? contrat_code = null;
+String? contrat_Id;
+String? contrat_name;
+String? contrat_dollar_per_hour;
+String? contrat_max_payment;
+String? contrat_description;
+String? contrat_code;
 
 //Name of New Project (page[/popup/PopupProjectName.dart])
-String? ProjectName = null;
+String? ProjectName;
 
 /*
   print(globals.contrat_Id.toString() + " " +

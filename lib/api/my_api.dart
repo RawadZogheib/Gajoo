@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:gajoo/api/my_session.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
@@ -34,8 +35,10 @@ class CallApi{
   };
 
   _getToken() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    var token = localStorage.getString('token');
+    // SharedPreferences localStorage = await SharedPreferences.getInstance();
+    // var token = localStorage.getString('token');
+    // return '?token=$token';
+    var token = await SessionManager().get('token');
     return '?token=$token';
   }
 

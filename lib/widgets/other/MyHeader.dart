@@ -34,7 +34,7 @@ class MyHeader extends StatelessWidget {
               ),
             ),
           ),
-          globals.isLogedIn == false
+          globals.isLoggedIn == false
               ? Container(
                   height: 60,
                   width: 120,

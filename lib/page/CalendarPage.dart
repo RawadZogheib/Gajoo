@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
@@ -19,7 +22,7 @@ class CalenderPage extends StatefulWidget {
 }
 
 class _CalenderPageState extends State<CalenderPage> {
-  Timer? _timer;
+  //Timer? _timer;
   Set<String> _greenList = {};
   Set<String> _redList = {};
 
@@ -34,7 +37,7 @@ class _CalenderPageState extends State<CalenderPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    _timer?.cancel();
+    //_timer?.cancel();
     super.dispose();
   }
 
@@ -164,8 +167,10 @@ class _CalenderPageState extends State<CalenderPage> {
   }
 
   _checkIfIsLoggedIn(DateTime _date) {
-    if (globals.isLogedIn == false) {
-      WarningPopup(context, globals.warning400);
+    if (globals.isLoggedIn == false) {
+      if (mounted) {
+        WarningPopup(context, globals.warning400);
+      }
     } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
@@ -179,95 +184,107 @@ class _CalenderPageState extends State<CalenderPage> {
     } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
-      ErrorPopup(context, globals.error401);
+      if (mounted) {
+        ErrorPopup(context, globals.error401);
+      }
     } else {
-      ErrorPopup(context, globals.error402);
+      if (mounted) ErrorPopup(context, globals.error402);
     }
   }
 
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    _timer?.cancel();
+    //_timer?.cancel();
     _loadDates(); //0
-    _loadPage(); //1 -> INFINI
+    //_loadPage(); //1 -> INFINI
   }
 
-  _loadPage() {
-    _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-      print(
-          '=========>>======================================================>>==================================================>>=========');
-      print("30sec gone!!");
-      if (mounted) {
-        print("30sec gone, and _loadChildrenOnline!!");
-        _loadDates();
-      } else {
-        print(
-            '=========<<======================================================<<==================================================<<=========');
-      }
-    });
-  }
+  // _loadPage() {
+  //   _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+  //     print(
+  //         '=========>>======================================================>>==================================================>>=========');
+  //     print("30sec gone!!");
+  //     if (mounted) {
+  //       print("30sec gone, and _loadChildrenOnline!!");
+  //       _loadDates();
+  //     } else {
+  //       print(
+  //           '=========<<======================================================<<==================================================<<=========');
+  //     }
+  //   });
+  // }
 
-  void _loadDates() {
+  Future<void> _loadDates() async {
     // load from db
-    setState(() {
+    try {
+      print('load calendar');
+
+      var accountId = await SessionManager().get("account_Id");
+
+      var data = {
+        'version': globals.version,
+        'account_Id': accountId,
+      };
+
+      var res = await CallApi().postData(data, '(Control)loadTables.php');
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
       _greenList.clear();
       _redList.clear();
-      _greenList.addAll([
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-08 23:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-09 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-10 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-11 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-13 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-14 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-04-17 17:42:00.000', true)
-              .toLocal(),
-        ),
-      ]);
-      _redList.addAll([
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-12 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-03-18 17:42:00.000', true)
-              .toLocal(),
-        ),
-        DateFormat('yyyy-MM-dd').format(
-          DateFormat('yyyy-MM-dd HH:mm')
-              .parse('2022-04-22 17:42:00.000', true)
-              .toLocal(),
-        ),
-      ]);
-    });
+
+      if (body[0] == "success") {
+        _greenList.addAll([
+          DateFormat('yyyy-MM-dd').format(
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-08 23:42:00.000', true)
+                .toLocal(),
+          ),
+        ]);
+
+        _redList.addAll([
+          DateFormat('yyyy-MM-dd').format(
+            DateFormat('yyyy-MM-dd HH:mm')
+                .parse('2022-03-12 17:42:00.000', true)
+                .toLocal(),
+          ),
+        ]);
+
+        if (mounted) {
+          setState(() {
+            _greenList;
+            _redList;
+          });
+        }
+      } else if (body[0] == "empty") {
+        WarningPopup(context, globals.warning405);
+      } else if (body[0] == "errorVersion") {
+        if (mounted) {
+          ErrorPopup(context, globals.errorVersion);
+        }
+      } else if (body[0] == "errorToken") {
+        if (mounted) {
+          ErrorPopup(context, globals.errorToken);
+        }
+      } else if (body[0] == "error7") {
+        if (mounted) {
+          WarningPopup(context, globals.warning7);
+        }
+      } else {
+        if (mounted) {
+          ErrorPopup(context, globals.errorElse);
+        }
+      }
+    } catch (e) {
+      print(e);
+      if (mounted) {
+        ErrorPopup(context, globals.errorException);
+      }
+    }
+    print('load library end!!!');
+    print(
+        '=========<<======================================================<<==================================================<<=========');
   }
 
   _back() {

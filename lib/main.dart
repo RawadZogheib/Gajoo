@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gajoo/page/CalendarPage.dart';
+import 'package:gajoo/page/FirstPage.dart';
 import 'package:gajoo/page/HomePage.dart';
 import 'package:gajoo/page/LikedTeachersPage.dart';
 import 'package:gajoo/page/Login.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         //home: FirstPage(),
         initialRoute: '/HomePage',
         routes: {
+          '/FirstPage': (context) => FirstPage(),
           '/HomePage': (context) => HomePage(),
           '/CalendarPage': (context) => CalenderPage(),
           '/Login': (context) => login(),

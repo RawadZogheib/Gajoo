@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
@@ -320,10 +321,8 @@ class _loginState extends State<login> {
       };
 
       var res =
-          await CallApi().postData(data, 'Login/Control/(Control)Login.php');
-      print(res);
+          await CallApi().postData(data, '/Login/Control/(Control)Login.php');
       print(res.body);
-      //print("pppppp");
       List<dynamic> body = json.decode(res.body);
 
       //print(body[1]);
@@ -340,51 +339,19 @@ class _loginState extends State<login> {
           }
         });
       } else if (body[0] == "success") {
-        SharedPreferences localStorage = await SharedPreferences.getInstance();
-        localStorage.setString('token', body[1]);
-        localStorage.setString('Id', body[2][0]);
-        localStorage.setString('fName', body[2][1]);
-        //print(localStorage.getString('fname'));
-        localStorage.setString('lName', body[2][2]);
-        localStorage.setString('userName', body[2][3]);
-        localStorage.setString('email', body[2][4]);
-        localStorage.setString('phoneNumber', body[2][5]);
-        localStorage.setString('gender', body[2][6]);
-        localStorage.setString('dateOfBirth', body[2][7]);
-
-        //print(body[1][0]);
-
-        // //print(body[1][1]);
-        // globals.Id = body[1][1].toString();
-        // //print(body[1][2]);
-        // globals.fName = body[1][2].toString();
-        // //print(body[1][3]);
-        // globals.lName = body[1][3].toString();
-        // //print(body[1][4]);
-        // globals.userName = body[1][4].toString();
-        // //print(body[1][5]);
-        // globals.email = body[1][5].toString();
-        // //print(body[1][6]);
-        // globals.phoneNumber = body[1][6].toString();
-        // //print(body[1][7]);
-        // globals.gender = body[1][7].toString();
-        // //print(body[1][8]);
-        // globals.dateOfBirth = body[1][8].toString();
-
-        // print("globalsId = ${globals.Id} globFName = ${globals.fName} \n globLName = ${globals.lName} globUsernm = ${globals.userName} \n"
-        //     "globpass = ${globals.passwordLogin} globEmail = ${globals.emailLogin} globPhone = ${globals.phoneNumber} globGend = ${globals.gender} \n"
-        //     "globDate = ${globals.dateOfBirth}");
+        await SessionManager().set('token', body[1]);
+        await SessionManager().set('Id', body[2][0]);
+        await SessionManager().set('fName', body[2][1]);
+        await SessionManager().set('lName', body[2][2]);
+        await SessionManager().set('userName', body[2][3]);
+        await SessionManager().set('email', body[2][4]);
+        await SessionManager().set('phoneNumber', body[2][5]);
+        await SessionManager().set('gender', body[2][6]);
+        await SessionManager().set('dateOfBirth', body[2][7]);
 
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
 
-        // Navigator.pushNamed(context, '/home');
-
-        // }else if (body[0] == "errorToken") {
-        //   setState(() {
-        //     errTxt = globals.errorToken;
-        //     colErrTxt = globals.red_1;
-        //   });
       } else if (body[0] == "errorVersion") {
         if (mounted) {
           setState(() {

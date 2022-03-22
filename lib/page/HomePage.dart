@@ -1459,7 +1459,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _checkIfIsLoggedIn() {
-    if (globals.isLogedIn == false) {
+    if (globals.isLoggedIn == false) {
       WarningPopup(context, globals.warning400);
     } else {
       showDialog(
@@ -1479,7 +1479,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _checkIfIsLoggedInBlue() {
-    if (globals.isLogedIn == false) {
+    if (globals.isLoggedIn == false) {
       WarningPopup(context, globals.warning400);
     } else {
       Navigator.pushNamed(context, "/MyAudio");
