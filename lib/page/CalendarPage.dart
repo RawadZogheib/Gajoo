@@ -220,11 +220,9 @@ class _CalenderPageState extends State<CalenderPage> {
     try {
       print('load calendar');
 
-      var accountId = await SessionManager().get("account_Id");
-
       var data = {
         'version': globals.version,
-        'account_Id': accountId,
+        'account_Id': await SessionManager().get("account_Id"),
       };
 
       var res = await CallApi().postData(data, '(Control)loadTables.php');
