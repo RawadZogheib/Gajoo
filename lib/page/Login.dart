@@ -12,7 +12,6 @@ import 'package:gajoo/widgets/code/codeDialogLogin.dart';
 import 'package:gajoo/widgets/other/errorAlertDialog.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -317,7 +316,7 @@ class _loginState extends State<login> {
       var data = {
         'version': globals.version,
         'email': globals.emailLogin,
-        'password': globals.passwordLogin
+        'password': globals.passwordLogin,
       };
 
       var res =
@@ -345,6 +344,7 @@ class _loginState extends State<login> {
         await SessionManager().set('lName', body[2][2]);
         await SessionManager().set('userName', body[2][3]);
         await SessionManager().set('email', body[2][4]);
+        await SessionManager().set('password', globals.passwordLogin);
         await SessionManager().set('phoneNumber', body[2][5]);
         await SessionManager().set('gender', body[2][6]);
         await SessionManager().set('dateOfBirth', body[2][7]);
@@ -352,7 +352,6 @@ class _loginState extends State<login> {
 
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
-
       } else if (body[0] == "errorVersion") {
         if (mounted) {
           setState(() {
