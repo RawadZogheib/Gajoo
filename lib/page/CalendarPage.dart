@@ -22,7 +22,6 @@ class CalenderPage extends StatefulWidget {
 }
 
 class _CalenderPageState extends State<CalenderPage> {
-  //Timer? _timer;
   Set<String> _greenList = {};
   Set<String> _redList = {};
 
@@ -32,13 +31,6 @@ class _CalenderPageState extends State<CalenderPage> {
     globals.currentPage = 'CalendarPage';
     _loadNewPage();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    //_timer?.cancel();
-    super.dispose();
   }
 
   @override
@@ -195,25 +187,8 @@ class _CalenderPageState extends State<CalenderPage> {
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    //_timer?.cancel();
     _loadDates(); //0
-    //_loadPage(); //1 -> INFINI
   }
-
-  // _loadPage() {
-  //   _timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-  //     print(
-  //         '=========>>======================================================>>==================================================>>=========');
-  //     print("30sec gone!!");
-  //     if (mounted) {
-  //       print("30sec gone, and _loadChildrenOnline!!");
-  //       _loadDates();
-  //     } else {
-  //       print(
-  //           '=========<<======================================================<<==================================================<<=========');
-  //     }
-  //   });
-  // }
 
   Future<void> _loadDates() async {
     // load from db
