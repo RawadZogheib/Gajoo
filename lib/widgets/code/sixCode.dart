@@ -106,7 +106,7 @@ class _sixCodeState extends State<sixCode> {
       };
 
       var res = await CallApi().postData(
-          data, 'Registration/Control/(Control)checkCode.php');
+          data, '/Registration/Control/(Control)checkCode.php');
       //print(res);
       print(res.body);
       List<dynamic> body = json.decode(res.body);
@@ -145,7 +145,7 @@ class _sixCodeState extends State<sixCode> {
     };
 
     var res = await CallApi().postData(
-        data, 'Login/Control/(Control)resendMail.php');
+        data, '/Login/Control/(Control)resendMail.php');
     print(res);
     //print("pppppp");
     List<dynamic> body = json.decode(res.body);
