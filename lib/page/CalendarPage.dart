@@ -219,11 +219,11 @@ class _CalenderPageState extends State<CalenderPage> {
           ]);
         }
 
-        for (int j = 0; j < body[1].length; j++) {
+        for (int j = 0; j < body[2].length; j++) {
           _redList.addAll([
             DateFormat('yyyy-MM-dd').format(
               DateFormat('yyyy-MM-dd HH:mm')
-                  .parse('${body[1][j]}.000', true)
+                  .parse('${body[2][j]}.000', true)
                   .toLocal(),
             ),
           ]);
