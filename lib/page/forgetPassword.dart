@@ -175,7 +175,7 @@ class _forgetPassState extends State<forgetPass> {
       };
 
       var res =
-          await CallApi().postData(data, 'Login/Control/(Control)checkIfIsRegist.php');
+          await CallApi().postData(data, '/Login/Control/(Control)checkIfIsRegist.php');
       print(res);
       print(res.body);
 

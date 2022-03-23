@@ -30,10 +30,10 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
     return Container(
         child: Column(children: [
       Padding(
-        padding: EdgeInsets.only(top: 18.0),
+        padding: const EdgeInsets.only(top: 18.0),
         child: Column(
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(bottom: 28.0),
               child: Text(
                 "Message Sent, check your email",
@@ -43,7 +43,7 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
               ),
             ),
             myCode(
-              keybType: TextInputType.numberWithOptions(decimal: true),
+              keybType: const TextInputType.numberWithOptions(decimal: true),
               onChange: (value) {
                 globals.sixCodeNb = value;
                 print(globals.sixCodeNb);
@@ -51,13 +51,13 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
             ),
             myErrorText(errorText: errCode, color: colErrCode),
             Padding(
-              padding: EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15),
               child: Row(
                 children: [
                   Row(
                     children: [
                       InkWell(
-                        child: Text(
+                        child: const Text(
                           "Resend Code",
                           style: TextStyle(color: Colors.blue),
                         ),
@@ -203,7 +203,7 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
       };
 
       var res = await CallApi()
-          .postData(data, 'Login/Control/(Control)checkCodeForgetPass.php');
+          .postData(data, '/Login/Control/(Control)checkCodeForgetPass.php');
       //print(res);
       print(res.body);
       List<dynamic> body = json.decode(res.body);
@@ -239,7 +239,7 @@ class _sixCodeForgetPassState extends State<sixCodeForgetPass> {
     };
 
     var res = await CallApi()
-        .postData(data, 'Login/Control/(Control)resendMailForgPass.php');
+        .postData(data, '/Login/Control/(Control)resendMailForgPass.php');
     print(res);
     //print("pppppp");
     List<dynamic> body = json.decode(res.body);

@@ -200,7 +200,7 @@ class _forgetPass2State extends State<forgetPass2> {
 
       var res =
           await CallApi().postData(
-          data, 'Login/Control/(Control)checkNewPassword.php');
+          data, '/Login/Control/(Control)checkNewPassword.php');
       print(res);
       print(res.body);
 

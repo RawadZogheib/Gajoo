@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/Code/codeDialog.dart';
@@ -798,6 +799,8 @@ class _registrationState extends State<registration> {
           'dateOfBirth': globals.dateOfBirth,
           'phoneNumber': globals.phoneNumber,
           'gender': globals.gender,
+          'country': _countries,
+          'language': _languages,
           'isRegistered' : globals.isRegistered,
         };
 
@@ -815,7 +818,7 @@ class _registrationState extends State<registration> {
 
         //print("ooooooo");
         var res = await CallApi()
-            .postData(data, 'Registration/Control/(Control)registration.php');
+            .postData(data, '/Registration/Control/(Control)registration.php');
 
         print(res.body);
         //print("printed");
@@ -825,11 +828,10 @@ class _registrationState extends State<registration> {
         if (body[0] == "true") {
 
           //print("helooooooooo");
-          SharedPreferences localStorage = await SharedPreferences.getInstance();
-          localStorage.setString('Id', body[1][0]);
-          localStorage.setString('email', body[1][1]);
-          print(localStorage.getString('Id'));
-          print(localStorage.getString('email'));
+          await SessionManager().set("Id", body[1][0]);
+          await SessionManager().set("email", body[1][1]);
+          print(SessionManager().get('Id'));
+          print(SessionManager().get('email'));
           //Navigator.pushNamed(context, '/Login');
           //Navigator.pushNamed(context, '/home');
           showDialog(
@@ -1168,11 +1170,11 @@ class CountryData {
 
 
   static List getSuggestions(String query) =>
-      List.of(globals.Languages).where((language){
+      List.of(globals.Countries).where((country){
 
-        final languageLower = language.toLowerCase();
+        final countryLower = country.toLowerCase();
         final queryLower = query.toLowerCase();
-        return languageLower.contains(queryLower);
+        return countryLower.contains(queryLower);
 
 
       }).toList();
