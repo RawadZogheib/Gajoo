@@ -225,7 +225,8 @@ class _CalenderPageState extends State<CalenderPage> {
         'account_Id': await SessionManager().get("Id"),
       };
 
-      var res = await CallApi().postData(data, '/Calendar/Control/(Control)loadDates.php');
+      var res = await CallApi()
+          .postData(data, '/Calendar/Control/(Control)loadDates.php');
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
@@ -233,18 +234,19 @@ class _CalenderPageState extends State<CalenderPage> {
       _redList.clear();
 
       if (body[0] == "success") {
-        _greenList.addAll([
-          DateFormat('yyyy-MM-dd').format(
-            DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-08 23:42:00.000', true)
-                .toLocal(),
-          ),
-        ]);
-
+        for (int i = 0; i < body[1].length; i++) {
+          _greenList.addAll([
+            DateFormat('yyyy-MM-dd').format(
+              DateFormat('yyyy-MM-dd HH:mm')
+                  .parse('${body[1][i]}.000', true)
+                  .toLocal(),
+            ),
+          ]);
+        }
         _redList.addAll([
           DateFormat('yyyy-MM-dd').format(
             DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-12 17:42:00.000', true)
+                .parse('2022-03-29 17:42:00.000', true)
                 .toLocal(),
           ),
         ]);
