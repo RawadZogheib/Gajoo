@@ -222,10 +222,10 @@ class _CalenderPageState extends State<CalenderPage> {
 
       var data = {
         'version': globals.version,
-        'account_Id': await SessionManager().get("account_Id"),
+        'account_Id': await SessionManager().get("Id"),
       };
 
-      var res = await CallApi().postData(data, '/(Control)loadDates.php');
+      var res = await CallApi().postData(data, '/Calendar/Control/(Control)loadDates.php');
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
