@@ -3,13 +3,19 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CalenderHours extends StatefulWidget {
+  String courseStudents;
+  String courseMaxStudents;
   String fromTime;
   String toTime;
+  bool isTaken;
   var onTap;
 
   CalenderHours({
+    required this.courseStudents,
+    required this.courseMaxStudents,
     required this.fromTime,
     required this.toTime,
+    required this.isTaken,
     required this.onTap,
   });
 
@@ -80,7 +86,7 @@ class _CalenderHoursState extends State<CalenderHours> {
               )
             ],
           ),
-          widget.onTap != null
+          widget.isTaken != false
               ? InkWell(
                   onTap: () {
                     widget.onTap();

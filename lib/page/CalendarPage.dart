@@ -22,9 +22,9 @@ class CalenderPage extends StatefulWidget {
 }
 
 class _CalenderPageState extends State<CalenderPage> {
+  bool _isLoading = false;
   Set<String> _greenList = {};
   Set<String> _redList = {};
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -161,12 +161,17 @@ class _CalenderPageState extends State<CalenderPage> {
 
   _checkIfIsLoggedIn(DateTime _date) {
     if (globals.isLoggedIn == false) {
+      // Is loggedIn
       if (mounted) {
         WarningPopup(context, globals.warning400);
       }
+    } else if (_date.isBefore(DateTime.parse(
+        DateFormat('yyyy-MM-dd').format(DateTime.now().toLocal())))) {
+      if (mounted) ErrorPopup(context, globals.error402); // _date < today
     } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
+      //_greenList contains _date
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialogCalender(
@@ -179,17 +184,18 @@ class _CalenderPageState extends State<CalenderPage> {
     } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
+      // _redList contains _date
       if (mounted) {
         ErrorPopup(context, globals.error401);
       }
     } else {
-      if (mounted) ErrorPopup(context, globals.error402);
+      // Error else
+      if (mounted) ErrorPopup(context, globals.errorElse);
     }
   }
 
-
   Future<void> _loadDates() async {
-    // load from db
+    // Load from db
     if (_isLoading == false) {
       try {
         print(
@@ -212,23 +218,23 @@ class _CalenderPageState extends State<CalenderPage> {
 
         if (body[0] == "success") {
           for (int i = 0; i < body[1].length; i++) {
-            _greenList.addAll([
+            _greenList.add(
               DateFormat('yyyy-MM-dd').format(
                 DateFormat('yyyy-MM-dd HH:mm')
                     .parse('${body[1][i]}.000', true)
                     .toLocal(),
               ),
-            ]);
+            );
           }
 
           for (int j = 0; j < body[2].length; j++) {
-            _redList.addAll([
+            _redList.add(
               DateFormat('yyyy-MM-dd').format(
                 DateFormat('yyyy-MM-dd HH:mm')
                     .parse('${body[2][j]}.000', true)
                     .toLocal(),
               ),
-            ]);
+            );
           }
 
           if (mounted) {
@@ -270,6 +276,7 @@ class _CalenderPageState extends State<CalenderPage> {
           '=========<<======================================================<<==================================================<<=========');
     }
   }
+
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
