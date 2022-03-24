@@ -113,7 +113,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
                         widget.text,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 19, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         DateFormat('yyyy-MM-dd HH:mm')

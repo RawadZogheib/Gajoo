@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/other/AudioText.dart';
 import 'package:gajoo/widgets/other/MyAudioList.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
@@ -121,11 +122,17 @@ class _MyAudioState extends State<MyAudio> {
                                     ),
                                   ),
                                 ),
+
                               ),
-                              const SizedBox(
-                                width: 60,
-                              ),
-                              ClipRRect(
+                              _clicked == true ?
+                                AudioText(
+                                    textAudio: 'ksjdhffjdm \n ugsdifgusdfiaksdgaisdugiasdugaisdguiasdgi',
+                                    cancelButton: true,
+                                    onTap: () {
+                                      _offClicked();
+                                    }
+                                )
+                                  : ClipRRect(
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(30),
                                   topRight: Radius.circular(30),
@@ -134,12 +141,16 @@ class _MyAudioState extends State<MyAudio> {
                                 ),
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.8,
+                                  MediaQuery.of(context).size.height *
+                                      0.8,
                                   width: 500,
                                   decoration: const BoxDecoration(
                                     color: Colors.white,
                                   ),
                                 ),
+                              ),
+                              const SizedBox(
+                                width: 60,
                               ),
                             ],
                           ),
@@ -220,6 +231,13 @@ class _MyAudioState extends State<MyAudio> {
   _onClicked() {
     setState(() {
       _clicked = true;
+    });
+  }
+
+  _offClicked() {
+    print('asdsad');
+    setState(() {
+      _clicked = false;
     });
   }
 
