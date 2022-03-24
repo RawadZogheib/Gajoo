@@ -24,12 +24,13 @@ class CalenderPage extends StatefulWidget {
 class _CalenderPageState extends State<CalenderPage> {
   Set<String> _greenList = {};
   Set<String> _redList = {};
+  bool _isLoading = false;
 
   @override
   void initState() {
     // TODO: implement initState
     globals.currentPage = 'CalendarPage';
-    _loadNewPage();
+    _loadDates();
     super.initState();
   }
 
@@ -172,7 +173,9 @@ class _CalenderPageState extends State<CalenderPage> {
           color: Colors.green,
           date: _date,
         ),
-      );
+      ).then((value) {
+        _loadDates();
+      });
     } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
@@ -184,87 +187,89 @@ class _CalenderPageState extends State<CalenderPage> {
     }
   }
 
-  _loadNewPage() {
-    print(
-        '=========>>======================================================>>==================================================>>=========');
-    _loadDates(); //0
-  }
 
   Future<void> _loadDates() async {
     // load from db
-    try {
-      print('load calendar');
+    if (_isLoading == false) {
+      try {
+        print(
+            '=========>>======================================================>>==================================================>>=========');
+        _isLoading = true;
+        print('load calendar');
 
-      var data = {
-        'version': globals.version,
-        'account_Id': await SessionManager().get("Id"),
-      };
+        var data = {
+          'version': globals.version,
+          'account_Id': await SessionManager().get("Id"),
+        };
 
-      var res = await CallApi()
-          .postData(data, '/Calendar/Control/(Control)loadDates.php');
-      print(res.body);
-      List<dynamic> body = json.decode(res.body);
+        var res = await CallApi()
+            .postData(data, '/Calendar/Control/(Control)loadDates.php');
+        print(res.body);
+        List<dynamic> body = json.decode(res.body);
 
-      _greenList.clear();
-      _redList.clear();
+        _greenList.clear();
+        _redList.clear();
 
-      if (body[0] == "success") {
-        for (int i = 0; i < body[1].length; i++) {
-          _greenList.addAll([
-            DateFormat('yyyy-MM-dd').format(
-              DateFormat('yyyy-MM-dd HH:mm')
-                  .parse('${body[1][i]}.000', true)
-                  .toLocal(),
-            ),
-          ]);
+        if (body[0] == "success") {
+          for (int i = 0; i < body[1].length; i++) {
+            _greenList.addAll([
+              DateFormat('yyyy-MM-dd').format(
+                DateFormat('yyyy-MM-dd HH:mm')
+                    .parse('${body[1][i]}.000', true)
+                    .toLocal(),
+              ),
+            ]);
+          }
+
+          for (int j = 0; j < body[2].length; j++) {
+            _redList.addAll([
+              DateFormat('yyyy-MM-dd').format(
+                DateFormat('yyyy-MM-dd HH:mm')
+                    .parse('${body[2][j]}.000', true)
+                    .toLocal(),
+              ),
+            ]);
+          }
+
+          if (mounted) {
+            setState(() {
+              _greenList;
+              _redList;
+            });
+          }
+        } else if (body[0] == "empty") {
+          WarningPopup(context, globals.warning405);
+        } else if (body[0] == "errorVersion") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorVersion);
+          }
+        } else if (body[0] == "errorToken") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorToken);
+          }
+        } else if (body[0] == "error7") {
+          if (mounted) {
+            WarningPopup(context, globals.warning7);
+          }
+        } else {
+          _isLoading = false;
+          if (mounted) {
+            ErrorPopup(context, globals.errorElse);
+          }
         }
-
-        for (int j = 0; j < body[2].length; j++) {
-          _redList.addAll([
-            DateFormat('yyyy-MM-dd').format(
-              DateFormat('yyyy-MM-dd HH:mm')
-                  .parse('${body[2][j]}.000', true)
-                  .toLocal(),
-            ),
-          ]);
-        }
-
+        _isLoading = false;
+      } catch (e) {
+        print(e);
+        _isLoading = false;
         if (mounted) {
-          setState(() {
-            _greenList;
-            _redList;
-          });
-        }
-      } else if (body[0] == "empty") {
-        WarningPopup(context, globals.warning405);
-      } else if (body[0] == "errorVersion") {
-        if (mounted) {
-          ErrorPopup(context, globals.errorVersion);
-        }
-      } else if (body[0] == "errorToken") {
-        if (mounted) {
-          ErrorPopup(context, globals.errorToken);
-        }
-      } else if (body[0] == "error7") {
-        if (mounted) {
-          WarningPopup(context, globals.warning7);
-        }
-      } else {
-        if (mounted) {
-          ErrorPopup(context, globals.errorElse);
+          ErrorPopup(context, globals.errorException);
         }
       }
-    } catch (e) {
-      print(e);
-      if (mounted) {
-        ErrorPopup(context, globals.errorException);
-      }
+      print('load library end!!!');
+      print(
+          '=========<<======================================================<<==================================================<<=========');
     }
-    print('load library end!!!');
-    print(
-        '=========<<======================================================<<==================================================<<=========');
   }
-
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
   }
