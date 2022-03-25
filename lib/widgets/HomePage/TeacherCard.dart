@@ -14,6 +14,10 @@ class Characteristic_t {
 class TeacherCard extends StatefulWidget {
   final String? Id;
   final String name;
+  final String age;
+  final String NbOfCourses;
+  final String NbOfCoursesReserved;
+  final String NbOfCoursesLeft;
   final String imageUrl;
   final bool isHeart;
   final Set<String> languageView;
@@ -33,6 +37,10 @@ class TeacherCard extends StatefulWidget {
     Key? key,
     this.Id,
     required this.name,
+    required this.age,
+    required this.NbOfCourses,
+    required this.NbOfCoursesReserved,
+    required this.NbOfCoursesLeft,
     required this.imageUrl,
     required this.languageView,
     required this.isHeart,
@@ -174,7 +182,7 @@ class _TeacherCardState extends State<TeacherCard> {
                         color: globals.whiteBlue),
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.only(
-                        top: 86.0, bottom: 8.0, right: 8.0, left: 8.0),
+                        top: 166.0, bottom: 8.0, right: 8.0, left: 8.0),
                     child: Container(
                       padding: const EdgeInsets.only(top: 6.0, bottom: 5.0),
                       decoration: BoxDecoration(
@@ -190,13 +198,27 @@ class _TeacherCardState extends State<TeacherCard> {
                               children: [
                                 Container(
                                   margin: const EdgeInsets.only(right: 8.0),
-                                  child: const Text(
-                                    "Description: ",
-                                    textDirection: TextDirection.ltr,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "Number Of Courses Reserved: ",
+                                        textDirection: TextDirection.ltr,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          widget.NbOfCoursesReserved,
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -207,9 +229,9 @@ class _TeacherCardState extends State<TeacherCard> {
                     ),
                   ),
                   Container(
-                    height: 30,
-                    width: 100,
-                    margin: const EdgeInsets.only(top: 26.0, right: 145),
+                    height: 55,
+                    width: 110,
+                    margin: const EdgeInsets.only(top: 26.0,right: 140),
                     padding: const EdgeInsets.only(top: 6.0, bottom: 5.0),
                     decoration: BoxDecoration(
                       color: Colors.transparent.withOpacity(0.2),
@@ -217,23 +239,35 @@ class _TeacherCardState extends State<TeacherCard> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                      child: Row(
-                        children: const [
-                          Text(
-                            "Price: ",
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Age: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                widget.age,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   Container(
-                    height: 30,
-                    width: 100,
-                    margin: const EdgeInsets.only(top: 26.0, left: 135),
+                    height: 55,
+                    width: 110,
+                    margin: const EdgeInsets.only(top: 26.0, left: 140),
                     padding: const EdgeInsets.only(top: 6.0, bottom: 5.0),
                     decoration: BoxDecoration(
                       color: Colors.transparent.withOpacity(0.2),
@@ -241,16 +275,64 @@ class _TeacherCardState extends State<TeacherCard> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                      child: Row(
-                        children: const [
-                          Text(
-                            "Code: ",
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Courses Left: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                widget.NbOfCoursesLeft,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 55,
+                    width: 250,
+                    margin: const EdgeInsets.only(top: 100.0),
+                    padding: const EdgeInsets.only(top: 6.0, bottom: 5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Number Of Courses: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                widget.NbOfCourses,
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
