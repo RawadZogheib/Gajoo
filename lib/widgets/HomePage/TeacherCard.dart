@@ -2,36 +2,47 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 
+class Characteristic_t {
+  String type;
+  String language;
+  String level;
+
+  Characteristic_t(
+      {required this.type, required this.language, required this.level});
+}
+
 class TeacherCard extends StatefulWidget {
   final String? Id;
-  final String text;
+  final String name;
   final String imageUrl;
-  final String subtitle;
   final bool isHeart;
+  final Set<String> languageView;
   final bool? isHeartLikedTeacher;
   final bool isButton;
-  late Set<String> type;
-  late Set<String> languages;
-  late Set<String> level;
+
+  // late Set<String> type;
+  // late Set<String> languages;
+  // late Set<String> level;
+  List<Characteristic_t> listOfCharacteristic_t;
   bool isHidden = false;
   final bool isHidable;
   bool liked = false;
   var onPressed;
 
-
   TeacherCard({
     Key? key,
     this.Id,
-    required this.text,
+    required this.name,
     required this.imageUrl,
-    required this.subtitle,
+    required this.languageView,
     required this.isHeart,
     this.isHeartLikedTeacher,
     required this.isButton,
     required this.onPressed,
-    required this.type,
-    required this.languages,
-    required this.level,
+    // required this.type,
+    // required this.languages,
+    // required this.level,
+    required this.listOfCharacteristic_t,
     required this.isHidable,
     required this.isHidden,
     required this.liked,
@@ -76,7 +87,7 @@ class _TeacherCardState extends State<TeacherCard> {
                         Image.asset(widget.imageUrl,
                             height: 90, fit: BoxFit.cover),
                         const Spacer(),
-                        Text(widget.text,
+                        Text(widget.name,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.black,
@@ -84,7 +95,19 @@ class _TeacherCardState extends State<TeacherCard> {
                               fontSize: 18,
                             )),
                         Text(
-                          widget.subtitle,
+                            (widget.languageView.contains('Arabic') ||
+                                widget.languageView.contains('arabic')
+                                ? 'Arabic' + (widget.languageView.contains('French') ||
+                                widget.languageView.contains('french') || widget.languageView.contains('English') ||
+                                widget.languageView.contains('english')? ', ':'')
+                                    : '') + (widget.languageView.contains('French') ||
+                                widget.languageView.contains('french')
+                                ? 'French' + (widget.languageView.contains('English') ||
+                                widget.languageView.contains('english')? ', ':'')
+                                    : '') + (widget.languageView.contains('English') ||
+                                widget.languageView.contains('english')
+                                ? 'English'
+                                : ''),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Colors.grey,
@@ -123,7 +146,8 @@ class _TeacherCardState extends State<TeacherCard> {
                               setState(() {
                                 widget.liked = !widget.liked;
                                 if (widget.isHeartLikedTeacher != false &&
-                                    widget.liked == false && widget.onPressed != null) {
+                                    widget.liked == false &&
+                                    widget.onPressed != null) {
                                   widget.onPressed(widget.Id);
                                 }
                               });
@@ -160,7 +184,8 @@ class _TeacherCardState extends State<TeacherCard> {
                       child: ListView(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                            padding:
+                                const EdgeInsets.only(right: 8.0, left: 8.0),
                             child: Column(
                               children: [
                                 Container(
@@ -235,15 +260,15 @@ class _TeacherCardState extends State<TeacherCard> {
           ),
           widget.isHidden == true
               ? Container(
-                height: 230,
-                width: 250,
-                padding: const EdgeInsets.all(30.0),
-                margin: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(12.5),
-                ),
-              )
+                  height: 230,
+                  width: 250,
+                  padding: const EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(12.5),
+                  ),
+                )
               : const SizedBox(
                   height: 0,
                   width: 0,

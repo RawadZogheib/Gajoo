@@ -83,7 +83,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                               setState(() {
                                 _x = '1';
                                 _text = 'Choose Your Level';
-                                _languages = "english";
+                                _languages = "English";
                                 _type = widget.types;
                               });
                             }
@@ -108,7 +108,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                             setState(() {
                               _x = '1';
                               _text = 'Choose Your Level';
-                              _languages = "french";
+                              _languages = "French";
                               _type = widget.types;
                             });
                           }
@@ -134,7 +134,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                             setState(() {
                               _x = '1';
                               _text = 'Choose Your Level';
-                              _languages = "arabic";
+                              _languages = "Arabic";
                               _type = widget.types;
                             });
                           }
