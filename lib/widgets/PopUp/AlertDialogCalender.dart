@@ -92,7 +92,7 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
   Future<void> _loadHoursMins() async {
     // Load from db
     if (_isLoading == false) {
-      try {
+      //try {
         print(
             '=========>>======================================================>>==================================================>>=========');
         _isLoading = true;
@@ -118,16 +118,16 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
                 id: body[1][i][0],
                 fromTime: DateFormat('HH:mm')
                     .format(
-                      DateFormat('HH:mm')
+                      DateFormat('yyyy-MM-dd HH:mm')
                           .parse('${body[1][i][1]}.000', true)
                           .toLocal(),
                     )
                     .toString(),
                 toTime: DateFormat('HH:mm')
                     .format(
-                      DateFormat('HH:mm')
+                      DateFormat('yyyy-MM-dd HH:mm')
                           .parse('${body[1][i][1]}.000', true)
-                          .add(Duration(minutes: body[1][i][4]))
+                          .add(Duration(minutes: int.parse(body[1][i][4])))
                           .toLocal(),
                     )
                     .toString(),
@@ -170,13 +170,13 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
           }
         }
         _isLoading = false;
-      } catch (e) {
-        print(e);
-        _isLoading = false;
-        if (mounted) {
-          ErrorPopup(context, globals.errorException);
-        }
-      }
+      // } catch (e) {
+      //   print(e);
+      //   _isLoading = false;
+      //   if (mounted) {
+      //     ErrorPopup(context, globals.errorException);
+      //   }
+      // }
       print('load library end!!!');
       print(
           '=========<<======================================================<<==================================================<<=========');

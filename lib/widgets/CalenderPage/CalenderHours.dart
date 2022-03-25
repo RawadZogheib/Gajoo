@@ -33,7 +33,7 @@ class _CalenderHoursState extends State<CalenderHours> {
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 35.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: widget.onTap != null ? Colors.green : Colors.red,
+        color: widget.isTaken != false ? Colors.green : Colors.red,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(22.0),
           bottomRight: Radius.circular(22.0),
