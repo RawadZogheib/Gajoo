@@ -237,60 +237,57 @@ class _TeacherState extends State<Teacher> {
             children: [
               const MyHeader(),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                  child: Stack(
-                    children: [
-                      ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: SingleChildScrollView(
-                          controller: ScrollController(),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    width: 100.0,
-                                  ),
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(12.5),
-                                        topLeft: Radius.circular(12.5),
-                                        //
-                                        bottomRight: Radius.circular(12.5),
-                                        bottomLeft: Radius.circular(12.5),
+                child: Stack(
+                  children: [
+                    ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: SingleChildScrollView(
+                        controller: ScrollController(),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 100.0,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12.5),
+                                      topLeft: Radius.circular(12.5),
+                                      //
+                                      bottomRight: Radius.circular(12.5),
+                                      bottomLeft: Radius.circular(12.5),
+                                    ),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(12.5),
+                                        color: Colors.white70,
                                       ),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(12.5),
-                                          color: Colors.white70,
-                                        ),
-                                        child: Wrap(
-                                          children: _TeacherCard,
-                                        ),
+                                      child: Wrap(
+                                        children: _TeacherCard,
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 100,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              const MyFooter(),
-                            ],
-                          ),
+                                ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            MyFooter(),
+                          ],
                         ),
                       ),
-                      //MyFilter(),
-                    ],
-                  ),
+                    ),
+                    //MyFilter(),
+                  ],
                 ),
               ),
             ],
@@ -374,6 +371,10 @@ class _TeacherState extends State<Teacher> {
               TeacherCard(
                   Id: body[1][i][0],
                   name: body[1][i][1],
+                  age: '22',
+                  NbOfCourses: '43',
+                  NbOfCoursesReserved: '24',
+                  NbOfCoursesLeft: '19',
                   imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
                   languageView: _tempLanguageView,
                   isHeart: true,
