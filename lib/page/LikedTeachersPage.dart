@@ -836,17 +836,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
       _LikedTeacherCard.addAll([
         TeacherCard(
             Id: "1",
-            text: 'Michel Nachar',
+            name: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            subtitle: 'Arabic, French',
+            languageView: {},
             isHeart: true,
             isHeartLikedTeacher: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red','yellow','green'},
-            languages: const {'english','french','arabic'},
-            level: const {'beginner','intermediate','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -855,17 +853,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "2",
-            text: 'Rawad Zogheib',
+            name: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'ma 5asne bshi',
+            languageView: {},
             isHeart: true,
             isHeartLikedTeacher: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'yellow','green'},
-            languages: const {'french','arabic'},
-            level: const {'intermediate','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -874,17 +870,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "3",
-            text: 'Rima Zogheib',
+            name: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
+            languageView: {},
             isHeart: true,
             isHeartLikedTeacher: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'yellow','green'},
-            languages: const {'english','arabic'},
-            level: const {'beginner','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -893,17 +887,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "4",
-            text: 'Ghada Zogheib',
+            name: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
+            languageView: {},
             isHeart: true,
             isHeartLikedTeacher: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red'},
-            languages: const {'english',},
-            level: const {'advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -912,17 +904,15 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "5",
-            text: 'Michel Nachar',
+            name: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            subtitle: 'Arabic, French',
+            languageView: {},
             isHeart: true,
             isHeartLikedTeacher: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'green'},
-            languages: const {'english','french'},
-            level: const {'beginner','intermediate','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -931,16 +921,14 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "6",
-            text: 'Rawad Zogheib',
+            name: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'ma 5asne bshi',
+            languageView: {},
             isHeart: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red','green'},
-            languages: const {'french','arabic'},
-            level: const {'beginner','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -949,16 +937,14 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "7",
-            text: 'Rima Zogheib',
+            name: 'Rima Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            subtitle: 'Arabic, French, English',
+            languageView: {},
             isHeart: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red','green'},
-            languages: const {'english','arabic'},
-            level: const {'beginner','intermediate'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -967,16 +953,14 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "8",
-            text: 'Ghada Zogheib',
+            name: 'Ghada Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'English, Arabic, French',
+            languageView: {},
             isHeart: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'green'},
-            languages: const {'arabic'},
-            level: const {'intermediate','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -990,16 +974,14 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "9",
-            text: 'Michel Nachar',
+            name: 'Michel Nachar',
             imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            subtitle: 'Arabic, French',
+            languageView: {},
             isHeart: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red','yellow',},
-            languages: const {'english','french'},
-            level: const {'advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -1008,16 +990,14 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             }),
         TeacherCard(
             Id: "10",
-            text: 'Rawad Zogheib',
+            name: 'Rawad Zogheib',
             imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            subtitle: 'ma 5asne bshi',
+            languageView: {},
             isHeart: true,
             isButton: true,
+            listOfCharacteristic_t: [],
             liked: true,
             isHidden: false,
-            type: const {'red','yellow','green'},
-            languages: const {'english'},
-            level: const {'intermediate','advanced'},
             isHidable: true,
             onPressed: (Id) {
               setState(() {
@@ -1049,19 +1029,19 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
       }
     }
 
-    if (widget.languages == "english") {
+    if (widget.languages == "English") {
       if (mounted) {
         setState(() {
           language1 = Colors.redAccent;
         });
       }
-    } else if (widget.languages == "french") {
+    } else if (widget.languages == "French") {
       if (mounted) {
         setState(() {
           language2 = Colors.redAccent;
         });
       }
-    } else if (widget.languages == "arabic") {
+    } else if (widget.languages == "Arabic") {
       if (mounted) {
         setState(() {
           language3 = Colors.redAccent;

@@ -363,19 +363,19 @@ class _myDrawerMobileState extends State<myDrawerMobile> {
       }
     }
 
-    if (widget.languages == "english") {
+    if (widget.languages == "English") {
       if (mounted) {
         setState(() {
           language1 = Colors.redAccent;
         });
       }
-    } else if (widget.languages == "french") {
+    } else if (widget.languages == "French") {
       if (mounted) {
         setState(() {
           language2 = Colors.redAccent;
         });
       }
-    } else if (widget.languages == "arabic") {
+    } else if (widget.languages == "Arabic") {
       if (mounted) {
         setState(() {
           language3 = Colors.redAccent;
