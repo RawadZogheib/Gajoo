@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
-class CalenderHours extends StatefulWidget {
+class CalendarHours extends StatefulWidget {
   String id;
   String courseStudents;
   String courseMaxStudents;
@@ -11,7 +11,7 @@ class CalenderHours extends StatefulWidget {
   bool isTaken;
   var onTap;
 
-  CalenderHours({
+  CalendarHours({
     required this.id,
     required this.courseStudents,
     required this.courseMaxStudents,
@@ -22,10 +22,10 @@ class CalenderHours extends StatefulWidget {
   });
 
   @override
-  State<CalenderHours> createState() => _CalenderHoursState();
+  State<CalendarHours> createState() => _CalendarHoursState();
 }
 
-class _CalenderHoursState extends State<CalenderHours> {
+class _CalendarHoursState extends State<CalendarHours> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -134,6 +134,99 @@ class _CalenderHoursState extends State<CalenderHours> {
                     ),
                   ),
                 ),
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingCalendarHours extends StatelessWidget {
+  Color color1;
+  Color color2;
+
+  LoadingCalendarHours({Key? key, required this.color1, required this.color2})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 75,
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 35.0),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: color1,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(22.0),
+          bottomRight: Radius.circular(22.0),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: const [
+                  Text(
+                    'From ',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Text(
+                    '-',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '  to ',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 17,
+                    ),
+                  ),
+                  Text(
+                    '-',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const Text(
+                '- -',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+              )
+            ],
+          ),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(12.0),
+              bottomRight: Radius.circular(12.0),
+            ),
+            child: Container(
+              height: 35,
+              width: 100,
+              alignment: Alignment.center,
+              color: Colors.white,
+              child: Text(
+                '-',
+                style: TextStyle(
+                  color: color2,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
