@@ -115,24 +115,25 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
           for (int i = 0; i < body[1].length; i++) {
             _availableTime.add(
               CalenderHours(
-                isTaken: int.parse(body[1][i][1]) < int.parse(body[1][i][0]),
-                courseStudents: body[1][i][0],
-                courseMaxStudents: body[1][i][1],
+                id: body[1][i][0],
                 fromTime: DateFormat('HH:mm')
                     .format(
                       DateFormat('HH:mm')
-                          .parse('${body[1][i][2]}.000', true)
+                          .parse('${body[1][i][1]}.000', true)
                           .toLocal(),
                     )
                     .toString(),
                 toTime: DateFormat('HH:mm')
                     .format(
                       DateFormat('HH:mm')
-                          .parse('${body[1][i][2]}.000', true)
-                          .add(Duration(minutes: body[1][i][3]))
+                          .parse('${body[1][i][1]}.000', true)
+                          .add(Duration(minutes: body[1][i][4]))
                           .toLocal(),
                     )
                     .toString(),
+                courseStudents: body[1][i][2],
+                courseMaxStudents: body[1][i][3],
+                isTaken: int.parse(body[1][i][2]) < int.parse(body[1][i][3]),
                 onTap: () {
                   print('ssa'); //or null
                 },

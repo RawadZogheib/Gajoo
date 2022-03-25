@@ -99,31 +99,31 @@ class MyCustomCalender extends StatelessWidget {
                             ),
                           )),
                     )
-                  : greenList.contains(DateFormat('yyyy-MM-dd').format(date))
-                      ? Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade100,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12.0),
+                    : greenList.contains(DateFormat('yyyy-MM-dd').format(date))
+                        ? Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade100,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(12.0),
+                                ),
+                                border: date.isAtSameMomentAs(DateTime.parse(
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(DateTime.now().toLocal())))
+                                    ? Border.all(width: 2, color: Colors.green)
+                                    : null,
                               ),
-                              border: date.isAtSameMomentAs(DateTime.parse(
-                                      DateFormat('yyyy-MM-dd')
-                                          .format(DateTime.now().toLocal())))
-                                  ? Border.all(width: 2, color: Colors.green)
-                                  : null,
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(4.0),
+                              child: Text(
+                                DateFormat('d').format(date),
+                                style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.all(4.0),
-                            child: Text(
-                              DateFormat('d').format(date),
-                              style: const TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        )
-                      : redList.contains(DateFormat('yyyy-MM-dd').format(date))
+                          )
+                        : redList.contains(DateFormat('yyyy-MM-dd').format(date))
                           ? Expanded(
                               child: Container(
                                 decoration: BoxDecoration(

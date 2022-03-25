@@ -185,9 +185,18 @@ class _CalenderPageState extends State<CalenderPage> {
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
       // _redList contains _date
-      if (mounted) {
-        ErrorPopup(context, globals.error401);
-      }
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialogCalender(
+          color: Colors.red,
+          date: _date,
+        ),
+      ).then((value) {
+        _loadDates();
+      });
+      // if (mounted) {
+      //   ErrorPopup(context, globals.error401);
+      // }
     } else {
       // Error else
       if (mounted) ErrorPopup(context, globals.errorElse);
