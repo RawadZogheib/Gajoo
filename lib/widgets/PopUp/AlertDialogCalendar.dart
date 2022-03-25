@@ -10,17 +10,18 @@ import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:intl/intl.dart';
 
-class AlertDialogCalender extends StatefulWidget {
+class AlertDialogCalendar extends StatefulWidget {
+  String teacherId;
   Color color;
   DateTime date;
 
-  AlertDialogCalender({required this.color, required this.date});
+  AlertDialogCalendar({required this.teacherId, required this.color, required this.date});
 
   @override
-  State<AlertDialogCalender> createState() => _AlertDialogCalenderState();
+  State<AlertDialogCalendar> createState() => _AlertDialogCalendarState();
 }
 
-class _AlertDialogCalenderState extends State<AlertDialogCalender> {
+class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
   bool _isLoading = false;
   List<CalendarHours> _availableTime = [];
   List<Widget> _availableTimeLoading = [];
@@ -29,7 +30,6 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
   @override
   void initState() {
     // TODO: implement initState
-    _loadScreen();
     _loadHoursMins();
     super.initState();
   }
@@ -117,6 +117,7 @@ class _AlertDialogCalenderState extends State<AlertDialogCalender> {
       var data = {
         'version': globals.version,
         'account_Id': await SessionManager().get("Id"),
+        'teacher_Id': widget.teacherId,
         'date': DateFormat('yyyy-MM-dd').format(widget.date),
       };
 

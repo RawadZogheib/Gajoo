@@ -7,7 +7,7 @@ import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/CalenderPage/myCustomCalender.dart';
-import 'package:gajoo/widgets/PopUp/AlertDialogCalender.dart';
+import 'package:gajoo/widgets/PopUp/AlertDialogCalendar.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
@@ -16,12 +16,16 @@ import 'package:gajoo/widgets/other/TeacherProfile.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:intl/intl.dart';
 
-class CalenderPage extends StatefulWidget {
+class CalendarPage extends StatefulWidget {
+  String teacherId;
+
+  CalendarPage({Key? key, required this.teacherId}) : super(key: key);
+
   @override
-  _CalenderPageState createState() => _CalenderPageState();
+  _CalendarPageState createState() => _CalendarPageState();
 }
 
-class _CalenderPageState extends State<CalenderPage> {
+class _CalendarPageState extends State<CalendarPage> {
   bool _isLoading = false;
   Set<String> _greenList = {};
   Set<String> _redList = {};
@@ -174,7 +178,8 @@ class _CalenderPageState extends State<CalenderPage> {
       //_greenList contains _date
       showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialogCalender(
+        builder: (BuildContext context) => AlertDialogCalendar(
+          teacherId: widget.teacherId,
           color: Colors.green,
           date: _date,
         ),
@@ -187,7 +192,8 @@ class _CalenderPageState extends State<CalenderPage> {
       // _redList contains _date
       showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialogCalender(
+        builder: (BuildContext context) => AlertDialogCalendar(
+          teacherId: widget.teacherId,
           color: Colors.red,
           date: _date,
         ),
@@ -215,6 +221,7 @@ class _CalenderPageState extends State<CalenderPage> {
         var data = {
           'version': globals.version,
           'account_Id': await SessionManager().get("Id"),
+          'teacher_Id': widget.teacherId,
         };
 
         var res = await CallApi()

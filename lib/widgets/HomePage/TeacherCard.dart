@@ -1,6 +1,7 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/page/CalendarPage.dart';
 
 class Characteristic_t {
   String type;
@@ -12,7 +13,7 @@ class Characteristic_t {
 }
 
 class TeacherCard extends StatefulWidget {
-  final String? Id;
+  final String Id;
   final String name;
   final String imageUrl;
   final bool isHeart;
@@ -31,7 +32,7 @@ class TeacherCard extends StatefulWidget {
 
   TeacherCard({
     Key? key,
-    this.Id,
+    required this.Id,
     required this.name,
     required this.imageUrl,
     required this.languageView,
@@ -120,8 +121,12 @@ class _TeacherCardState extends State<TeacherCard> {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          '/CalendarPage', (route) => false);
+                                      Navigator.pushAndRemoveUntil(context,
+                                          MaterialPageRoute(builder: (context) => CalendarPage(
+                                            teacherId: widget.Id,
+                                          )), (route) => false);
+                                      // Navigator.pushNamedAndRemoveUntil(context,
+                                      //     '/CalendarPage', (route) => false);
                                     },
                                     icon: const Icon(
                                       Icons.arrow_forward_ios,

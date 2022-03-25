@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _coreTeam = [
     TeacherCard(
+        Id: '1',
         name: 'Ghada Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         languageView: {},
@@ -64,6 +65,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {},),
     TeacherCard(
+        Id: '1',
         name: 'Michel Nachar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         languageView: {},
@@ -78,6 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _teachers = [
     TeacherCard(
+        Id: '1',
         name: 'Ghada Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         languageView: {},
@@ -89,6 +92,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Michel Nachar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         languageView: {},
@@ -100,6 +104,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Rawad Zogheib',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         languageView: {},
@@ -111,6 +116,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Clara Zeidan',
         imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
         languageView: {},
@@ -122,6 +128,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Felix Gedeon',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         languageView: {},
@@ -133,6 +140,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Piere ElAsmar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         languageView: {},
@@ -144,6 +152,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+      Id: '1',
       name: 'Philips Maalouf',
       imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
       languageView: {},
@@ -156,6 +165,7 @@ class _HomePageState extends State<HomePage> {
       onPressed: (Id) {},
     ),
     TeacherCard(
+        Id: '1',
         name: 'Joe Skandar',
         imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
         languageView: {},
@@ -167,6 +177,7 @@ class _HomePageState extends State<HomePage> {
         isHidable: false,
         onPressed: (Id) {}),
     TeacherCard(
+        Id: '1',
         name: 'Nabil Kenaan',
         imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
         languageView: {},
