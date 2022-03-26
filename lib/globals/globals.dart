@@ -70,6 +70,7 @@ const String error403 = "Sorry, this course is not available.";///////
 const String success404 = "New course added.";///////
 const String error405 = 'This teacher has no courses yet.';
 const String error406 = 'There is no courses available on this day.';
+const String warning407 = 'There is no teacehrs available.';
 //for AlertDialog
 String x = '0';
 
