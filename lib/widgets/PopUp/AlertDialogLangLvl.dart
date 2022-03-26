@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/page/Teacher.dart';
 
 import '../button/myButton.dart';
@@ -284,11 +285,11 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
 
   _pageColorClick(){
     if(widget.types == "red"){
-      _btnColor = Colors.redAccent;
+      _btnColor = HexColor("#ec3227");
     }else if(widget.types == "yellow"){
-      _btnColor = Colors.yellowAccent;
+      _btnColor = HexColor("#f3b70c");
     }else if(widget.types == "green"){
-      _btnColor = Colors.green;
+      _btnColor = HexColor("#37ae44");
     }
   }
 }

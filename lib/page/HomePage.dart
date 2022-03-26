@@ -582,13 +582,13 @@ class _HomePageState extends State<HomePage> {
                           child: AnimatedLogo(
                             onTapRed: () {
                               _types = "red";
-                              _pageColor = Colors.redAccent;
+                              _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
                               print('Red');
                             },
                             onTapYellow: () {
                               _types = "yellow";
-                              _pageColor = Colors.yellowAccent;
+                              _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
                               print('Yellow');
                             },
@@ -600,7 +600,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             onTapGreen: () {
                               _types = "green";
-                              _pageColor = Colors.green;
+                              _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
                               print('Green');
                             },
@@ -958,13 +958,13 @@ class _HomePageState extends State<HomePage> {
                           child: AnimatedLogo(
                             onTapRed: () {
                               _types = "red";
-                              _pageColor = Colors.redAccent;
+                              _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
                               print('Red');
                             },
                             onTapYellow: () {
                               _types = "yellow";
-                              _pageColor = Colors.yellowAccent;
+                              _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
                               print('Yellow');
                             },
@@ -976,7 +976,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             onTapGreen: () {
                               _types = "green";
-                              _pageColor = Colors.green;
+                              _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
                               print('Green');
                             },
@@ -1372,13 +1372,13 @@ class _HomePageState extends State<HomePage> {
                           child: AnimatedLogo(
                             onTapRed: () {
                               _types = "red";
-                              _pageColor = Colors.redAccent;
+                              _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
                               print('Red');
                             },
                             onTapYellow: () {
                               _types = "yellow";
-                              _pageColor = Colors.yellowAccent;
+                              _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
                               print('Yellow');
                             },
@@ -1390,7 +1390,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             onTapGreen: () {
                               _types = "green";
-                              _pageColor = Colors.green;
+                              _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
                               print('Green');
                             },
