@@ -143,6 +143,9 @@ String? contrat_code;
 //Name of New Project (page[/popup/PopupProjectName.dart])
 String? ProjectName;
 
+//myDrawer
+bool isLoading = false;
+
 /*
   print(globals.contrat_Id.toString() + " " +
   globals.contrat_name.toString() + " " +

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
@@ -13,14 +12,14 @@ import 'package:gajoo/widgets/other/errorAlertDialog.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
 
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _loginState createState() => _loginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
   Color colEmail = globals.blue; //email
   Color colEmail_1 = globals.blue_1;
   Color colEmail_2 = globals.blue_2;
@@ -103,7 +102,7 @@ class _loginState extends State<login> {
                           padding: EdgeInsets.all(12.0),
                           child: Text(
                             "Login",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 40.0, color: Colors.black),
                           ),
                         ),
@@ -113,7 +112,7 @@ class _loginState extends State<login> {
                                 top: 18.0,
                                 right: MediaQuery.of(context).size.width * 0.05,
                                 bottom: 8.0),
-                            child: Container(
+                            child: SizedBox(
                               width: 400,
                               height: 55,
                               child: myTextInput(
@@ -137,7 +136,7 @@ class _loginState extends State<login> {
                               top: 8.0,
                               right: MediaQuery.of(context).size.width * 0.05,
                               bottom: 8.0),
-                          child: Container(
+                          child: SizedBox(
                             width: 500,
                             height: 50,
                             child: myTextInput(
@@ -166,7 +165,7 @@ class _loginState extends State<login> {
                             onTap: () {
                               try {
                                 if (oneClick == 0) {
-                                  _LoginCtrl();
+                                  _loginCtrl();
                                 }
                               } catch (e) {
                                 showDialog(
@@ -186,7 +185,7 @@ class _loginState extends State<login> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(18.0),
                                 child: InkWell(
                                   child: Text(
                                     'Forget Password',
@@ -203,7 +202,7 @@ class _loginState extends State<login> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(18.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -242,7 +241,7 @@ class _loginState extends State<login> {
     );
   }
 
-  _LoginCtrl() async {
+  _loginCtrl() async {
     oneClick = 1;
     bool isEmpty = false;
 
@@ -348,6 +347,11 @@ class _loginState extends State<login> {
         await SessionManager().set('phoneNumber', body[2][5]);
         await SessionManager().set('gender', body[2][6]);
         await SessionManager().set('dateOfBirth', body[2][7]);
+        // //payment ticket
+        // await SessionManager().set('redTicket', body[2][8]);
+        // await SessionManager().set('yellowTicket', body[2][9]);
+        // await SessionManager().set('blueTicket', body[2][10]);
+        // await SessionManager().set('greenTicket', body[2][11]);
         globals.isLoggedIn = true;
 
         Navigator.pushNamedAndRemoveUntil(

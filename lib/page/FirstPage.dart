@@ -58,7 +58,7 @@ class _FirstPage extends State<FirstPage> {
 
   _verifc() async {
     try {
-      print("hey");
+      print("Load login");
 
       var data = {
         'version': globals.version,
@@ -83,6 +83,11 @@ class _FirstPage extends State<FirstPage> {
         await SessionManager().set('phoneNumber', body[2][5]);
         await SessionManager().set('gender', body[2][6]);
         await SessionManager().set('dateOfBirth', body[2][7]);
+        // //payment ticket
+        // await SessionManager().set('redTicket', body[2][8]);
+        // await SessionManager().set('yellowTicket', body[2][9]);
+        // await SessionManager().set('blueTicket', body[2][10]);
+        // await SessionManager().set('greenTicket', body[2][11]);
         globals.isLoggedIn = true;
 
         Navigator.pushNamedAndRemoveUntil(

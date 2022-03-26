@@ -216,7 +216,7 @@ class _CalendarPageState extends State<CalendarPage> {
         print(
             '=========>>======================================================>>==================================================>>=========');
         _isLoading = true;
-        print('load calendar');
+        print('Load calendar');
 
         var data = {
           'version': globals.version,

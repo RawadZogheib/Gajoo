@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 
 class myDrawer extends StatefulWidget {
@@ -10,10 +14,17 @@ class myDrawer extends StatefulWidget {
 }
 
 class _myDrawerState extends State<myDrawer> {
-  String _redTicket = '0';
-  String _yellowTicket = '0';
-  String _blueTicket = '0';
-  String _greenTicket = '0';
+  int? _redTicket;
+  int? _yellowTicket;
+  int? _blueTicket;
+  int? _greenTicket;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getTickets();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,81 +52,164 @@ class _myDrawerState extends State<myDrawer> {
                       children: [
                         const SizedBox(height: 12),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  _redTicket,
-                                  style: TextStyle(
-                                    color: HexColor('#ec3227'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: globals.isLoading == true
+                                      ? SizedBox(
+                                          height: 10.0,
+                                          width: 10.0,
+                                          child: CircularProgressIndicator(
+                                              color: HexColor('#ec3227')))
+                                      : Text(
+                                          _redTicket == null
+                                              ? '-'
+                                              : _redTicket.toString(),
+                                          style: TextStyle(
+                                            color: HexColor('#ec3227'),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                                 const SizedBox(width: 5),
-                                const Image(
-                                  image: AssetImage('Assets/Tickets/redTicket.png'),
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'Assets/Tickets/redTicket.png'),
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                Text(
-                                  _yellowTicket,
-                                  style: TextStyle(
-                                    color: HexColor('#f3b70c'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: globals.isLoading == true
+                                      ? SizedBox(
+                                          height: 10.0,
+                                          width: 10.0,
+                                          child: CircularProgressIndicator(
+                                              color: HexColor('#f3b70c')))
+                                      : Text(
+                                          _yellowTicket == null
+                                              ? '-'
+                                              : _yellowTicket.toString(),
+                                          style: TextStyle(
+                                            color: HexColor('#f3b70c'),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                                 const SizedBox(width: 5),
-                                const Image(
-                                  image:
-                                  AssetImage('Assets/Tickets/yellowTicket.png'),
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'Assets/Tickets/yellowTicket.png'),
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                Text(
-                                  _blueTicket,
-                                  style: TextStyle(
-                                    color: HexColor('#5576c3'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: globals.isLoading == true
+                                      ? SizedBox(
+                                          height: 10.0,
+                                          width: 10.0,
+                                          child: CircularProgressIndicator(
+                                              color: HexColor('#5576c3')))
+                                      : Text(
+                                          _blueTicket == null
+                                              ? '-'
+                                              : _blueTicket.toString(),
+                                          style: TextStyle(
+                                            color: HexColor('#5576c3'),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                                 const SizedBox(width: 5),
-                                const Image(
-                                  image: AssetImage('Assets/Tickets/blueTicket.png'),
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'Assets/Tickets/blueTicket.png'),
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                Text(
-                                  _greenTicket,
-                                  style: TextStyle(
-                                    color: HexColor('#37ae44'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: globals.isLoading == true
+                                      ? SizedBox(
+                                          height: 10.0,
+                                          width: 10.0,
+                                          child: CircularProgressIndicator(
+                                              color: HexColor('#37ae44')))
+                                      : Text(
+                                          _greenTicket == null
+                                              ? '-'
+                                              : _greenTicket.toString(),
+                                          style: TextStyle(
+                                            color: HexColor('#37ae44'),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                                 const SizedBox(width: 5),
-                                const Image(
-                                  image: AssetImage('Assets/Tickets/greenTicket.png'),
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () => _goToPaymentPage(),
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'Assets/Tickets/greenTicket.png'),
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ],
                             ),
@@ -230,6 +324,93 @@ class _myDrawerState extends State<myDrawer> {
             .pushNamedAndRemoveUntil('/HomePage', (route) => false);
 
         break;
+    }
+  }
+
+  _goToPaymentPage() {
+    print('goToPaymentPage');
+  }
+
+  Future<void> _getTickets() async {
+    if (globals.isLoading == false) {
+      try {
+        print(
+            '=========>>======================================================>>==================================================>>=========');
+        if(mounted){
+          setState(() {
+            globals.isLoading = true;
+          });
+        }else{
+          globals.isLoading = true;
+        }
+        print('Load tickets');
+
+        var data = {
+          'version': globals.version,
+          'account_Id': await SessionManager().get("Id"),
+        };
+
+        var res = await CallApi()
+            .postData(data, '/Payment/Control/(Control)loadTickets.php');
+        print(res.body);
+        List<dynamic> body = json.decode(res.body);
+
+        if (body[0] == "success") {
+          if (mounted) {
+            setState(() {
+              _redTicket = int.parse(body[1][0]);
+              _yellowTicket = int.parse(body[1][1]);
+              _blueTicket = int.parse(body[1][2]);
+              _greenTicket = int.parse(body[1][3]);
+            });
+          }
+        } else if (body[0] == "empty") {
+          WarningPopup(context, globals.error405);
+        } else if (body[0] == "errorVersion") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorVersion);
+          }
+        } else if (body[0] == "errorToken") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorToken);
+          }
+        } else if (body[0] == "error7") {
+          if (mounted) {
+            WarningPopup(context, globals.warning7);
+          }else{
+            globals.isLoading = true;
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              globals.isLoading = false;
+            });
+            ErrorPopup(context, globals.errorElse);
+          }else{
+            globals.isLoading = false;
+          }
+        }
+        if(mounted){
+          setState(() {
+            globals.isLoading = false;
+          });
+        }else{
+          globals.isLoading = false;
+        }
+      } catch (e) {
+        print(e);
+        if (mounted) {
+          setState(() {
+            globals.isLoading = false;
+          });
+          ErrorPopup(context, globals.errorException);
+        }else{
+          globals.isLoading = false;
+        }
+      }
+      print('load library end!!!');
+      print(
+          '=========<<======================================================<<==================================================<<=========');
     }
   }
 }
