@@ -7,6 +7,11 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String _redTicket = '0';
+    String _yellowTicket = '0';
+    String _blueTicket = '0';
+    String _greenTicket = '0';
+
     return Container(
       height: 100,
       color: globals.whiteBlue,
@@ -49,6 +54,83 @@ class MyHeader extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 20.0),
                   child: Row(
                     children: [
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       _redTicket,
+                      //       style: TextStyle(
+                      //         color: HexColor('#ec3227'),
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     const Image(
+                      //       image: AssetImage('Assets/Tickets/redTicket.png'),
+                      //       height: 40,
+                      //       width: 40,
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(width: 15),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       _yellowTicket,
+                      //       style: TextStyle(
+                      //         color: HexColor('#f3b70c'),
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     const Image(
+                      //       image:
+                      //           AssetImage('Assets/Tickets/yellowTicket.png'),
+                      //       height: 40,
+                      //       width: 40,
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(width: 15),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       _blueTicket,
+                      //       style: TextStyle(
+                      //         color: HexColor('#5576c3'),
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     const Image(
+                      //       image: AssetImage('Assets/Tickets/blueTicket.png'),
+                      //       height: 40,
+                      //       width: 40,
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(width: 15),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       _greenTicket,
+                      //       style: TextStyle(
+                      //         color: HexColor('#37ae44'),
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     const Image(
+                      //       image: AssetImage('Assets/Tickets/greenTicket.png'),
+                      //       height: 40,
+                      //       width: 40,
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(width: 30),
                       const Text(
                         'Rawad Zogheib',
                         style: TextStyle(

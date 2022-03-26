@@ -4,7 +4,17 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 
-class myDrawer extends StatelessWidget {
+class myDrawer extends StatefulWidget {
+  @override
+  State<myDrawer> createState() => _myDrawerState();
+}
+
+class _myDrawerState extends State<myDrawer> {
+  String _redTicket = '0';
+  String _yellowTicket = '0';
+  String _blueTicket = '0';
+  String _greenTicket = '0';
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,6 +40,88 @@ class myDrawer extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  _redTicket,
+                                  style: TextStyle(
+                                    color: HexColor('#ec3227'),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage('Assets/Tickets/redTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                Text(
+                                  _yellowTicket,
+                                  style: TextStyle(
+                                    color: HexColor('#f3b70c'),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image:
+                                  AssetImage('Assets/Tickets/yellowTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                Text(
+                                  _blueTicket,
+                                  style: TextStyle(
+                                    color: HexColor('#5576c3'),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage('Assets/Tickets/blueTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                Text(
+                                  _greenTicket,
+                                  style: TextStyle(
+                                    color: HexColor('#37ae44'),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage('Assets/Tickets/greenTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 22),
                         const SearchFieldDrawer(),
                         const SizedBox(height: 12),
                         MenuItem(
