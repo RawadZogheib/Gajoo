@@ -92,6 +92,11 @@ flutter:
      - Assets/Tickets/yellowTicket.png
      - Assets/Tickets/blueTicket.png
      - Assets/Tickets/greenTicket.png
+     - Assets/Tickets/imageTicket0.png
+     - Assets/Tickets/imageTicket1.png
+     - Assets/Tickets/imageTicket2.png
+     - Assets/Tickets/imageTicket3.png
+     - Assets/Tickets/imageTicket4.png
 
 
 

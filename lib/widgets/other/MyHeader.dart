@@ -7,10 +7,10 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _redTicket = '0';
-    String _yellowTicket = '0';
-    String _blueTicket = '0';
-    String _greenTicket = '0';
+    String _redCoupon = '0';
+    String _yellowCoupon = '0';
+    String _blueCoupon = '0';
+    String _greenCoupon = '0';
 
     return Container(
       height: 100,
