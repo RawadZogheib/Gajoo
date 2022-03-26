@@ -107,7 +107,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
   Future<void> _loadHoursMins() async {
     // Load from db
     if (_isLoading == false) {
-      //try {
+      try {
       print(
           '=========>>======================================================>>==================================================>>=========');
       _isLoading = true;
@@ -178,20 +178,27 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           WarningPopup(context, globals.warning7);
         }
       } else {
-        _isLoading = false;
-        setState(() {});
         if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
           ErrorPopup(context, globals.errorElse);
         }
       }
-      _isLoading = false;
-      // } catch (e) {
-      //   print(e);
-      //   _isLoading = false;
-      //   if (mounted) {
-      //     ErrorPopup(context, globals.errorException);
-      //   }
-      // }
+      if(mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+      } catch (e) {
+        print(e);
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+          ErrorPopup(context, globals.errorException);
+        }
+      }
       print('load library end!!!');
       print(
           '=========<<======================================================<<==================================================<<=========');
