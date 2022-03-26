@@ -164,7 +164,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           });
         }
       } else if (body[0] == "empty") {
-        WarningPopup(context, globals.warning405);
+        WarningPopup(context, globals.error406);
       } else if (body[0] == "errorVersion") {
         if (mounted) {
           ErrorPopup(context, globals.errorVersion);

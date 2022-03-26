@@ -205,7 +205,7 @@ class _CalendarPageState extends State<CalendarPage> {
       // }
     } else {
       // Error else
-      if (mounted) ErrorPopup(context, globals.errorElse);
+      if (mounted) ErrorPopup(context, globals.error406);
     }
   }
 
@@ -260,7 +260,7 @@ class _CalendarPageState extends State<CalendarPage> {
             });
           }
         } else if (body[0] == "empty") {
-          WarningPopup(context, globals.warning405);
+          WarningPopup(context, globals.error405);
         } else if (body[0] == "errorVersion") {
           if (mounted) {
             ErrorPopup(context, globals.errorVersion);
