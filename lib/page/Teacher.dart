@@ -133,14 +133,22 @@ class _TeacherState extends State<Teacher> {
                                           bottomLeft: Radius.circular(12.5),
                                         ),
                                         child: Container(
+                                          height: MediaQuery.of(context).size.height *
+                                              0.7,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(12.5),
                                             color: Colors.white70,
                                           ),
-                                          child: Wrap(
-                                            children: _TeacherCard,
+                                          child: ScrollConfiguration(
+                                            behavior: MyCustomScrollBehavior(),
+                                            child: SingleChildScrollView(
+                                              controller: ScrollController(),
+                                              child: Wrap(
+                                                children: _TeacherCard,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -166,60 +174,66 @@ class _TeacherState extends State<Teacher> {
             children: [
               const MyHeader(),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                  child: Stack(
-                    children: [
-                      ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: SingleChildScrollView(
-                          controller: ScrollController(),
-                          child: Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    width: 250.0,
-                                  ),
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(12.5),
-                                        topLeft: Radius.circular(12.5),
-                                        //
-                                        bottomRight: Radius.circular(12.5),
-                                        bottomLeft: Radius.circular(12.5),
+                child: Stack(
+                  children: [
+                    ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: SingleChildScrollView(
+                        controller: ScrollController(),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 250.0,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12.5),
+                                      topLeft: Radius.circular(12.5),
+                                      //
+                                      bottomRight: Radius.circular(12.5),
+                                      bottomLeft: Radius.circular(12.5),
+                                    ),
+                                    child: Container(
+                                      height:
+                                      MediaQuery.of(context).size.height *
+                                          0.7,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(12.5),
+                                        color: Colors.white70,
                                       ),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12.5),
-                                          color: Colors.white70,
-                                        ),
-                                        child: Wrap(
-                                          children: _TeacherCard,
+                                      child: ScrollConfiguration(
+                                        behavior: MyCustomScrollBehavior(),
+                                        child: SingleChildScrollView(
+                                          controller: ScrollController(),
+                                          child: Wrap(
+                                            children: _TeacherCard,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 100,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              const MyFooter(),
-                            ],
-                          ),
+                                ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            const MyFooter(),
+                          ],
                         ),
                       ),
-                      //MyFilter(),
-                    ],
-                  ),
+                    ),
+                    //MyFilter(),
+                  ],
                 ),
               ),
             ],
