@@ -63,7 +63,7 @@ const String errorException = "OOPs! Something went wrong. Try again in few seco
 const String codeFailed = "your code is incorrect";
 const String codeException = "Oops Something went wrong! please try to login again!";
 
-const String warning400 = "You must Login!";///////
+const String warning400 = "You must login first!";///////
 const String error401 = "Sorry, this day is full.";///////
 const String error402 = "Sorry, this day is not available.";///////
 const String error403 = "Sorry, this course is not available.";///////
