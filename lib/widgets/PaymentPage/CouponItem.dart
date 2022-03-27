@@ -283,15 +283,17 @@ class _CouponItemState extends State<CouponItem> {
                           )),
                         ],
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: widget.color1,
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(
-                          child: Text(
-                            widget.buttonText,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 16.0),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          color: widget.color1,
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Center(
+                            child: Text(
+                              widget.buttonText,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16.0),
+                            ),
                           ),
                         ),
                       )
