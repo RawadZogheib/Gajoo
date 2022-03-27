@@ -6,6 +6,7 @@ import 'package:gajoo/page/LikedTeachersPage.dart';
 import 'package:gajoo/page/Login.dart';
 import 'package:gajoo/page/MyAudio.dart';
 import 'package:gajoo/page/MyCourses.dart';
+import 'package:gajoo/page/MySettings.dart';
 import 'package:gajoo/page/PaymentPage.dart';
 import 'package:gajoo/page/Registration.dart';
 import 'package:gajoo/page/Teacher.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/LikedTeachersPage': (context) => LikedTeachersPage(),
           '/MyAudio': (context) => const MyAudio(),
           '/PaymentPage': (context) => const PaymentPage(),
+          '/MySettings': (context) => const MySettings(),
         });
     //});
   }
