@@ -12,7 +12,7 @@ const String version = "v1.0";
 const String myIP = "https://kwikcode.net/gajoo_php";
 
 bool? isLoggedIn;
-String currentPage = 'HomePage';//HomePage//MyCourses//CalendarPage//Teacher//LikedTeachersPage//MyAudio//PaymentPage
+String currentPage = 'HomePage';//HomePage//MyCourses//CalendarPage//Teacher//LikedTeachersPage//MyAudio//PaymentPage//MySettings
 
 //Colors
 final Color blue = Colors.blue.shade50;
