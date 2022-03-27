@@ -47,6 +47,7 @@ dependencies:
   audioplayers: ^0.20.1
   animated_text_kit: ^4.2.1
   flutter_typeahead: ^3.2.4
+  flutter_placeholder_textlines: ^1.1.2
 
 dev_dependencies:
   flutter_test:

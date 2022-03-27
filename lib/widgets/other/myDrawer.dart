@@ -342,8 +342,10 @@ class _myDrawerState extends State<myDrawer> {
   }
 
   _goToPaymentPage() {
-    Navigator.of(context)
+    if(globals.currentPage != 'PaymentPage') {
+      Navigator.of(context)
         .pushNamedAndRemoveUntil('/PaymentPage', (route) => false);
+    }
   }
 
   Future<void> _getCoupon() async {

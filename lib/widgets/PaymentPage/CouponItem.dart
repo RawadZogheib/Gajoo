@@ -1,12 +1,18 @@
+import 'dart:async';
+
 import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 
 class CouponItem extends StatefulWidget {
   int index;
+  String title;
+  String buttonText;
   String image;
   int val;
-  int? price;
-  int? price2;
+  String price;
+  double sliderValue;
   double imageWidth;
   Color color1;
   bool buttonEnabled;
@@ -14,10 +20,12 @@ class CouponItem extends StatefulWidget {
   CouponItem({
     Key? key,
     required this.index,
+    required this.title,
+    required this.buttonText,
     required this.image,
     this.val = 0,
+    this.sliderValue = 0.3,
     required this.price,
-    this.price2,
     required this.imageWidth,
     required this.color1,
     required this.buttonEnabled,
@@ -28,16 +36,33 @@ class CouponItem extends StatefulWidget {
 }
 
 class _CouponItemState extends State<CouponItem> {
+  FlipCardController flipCardController = FlipCardController();
+  bool _isFlipping = false;
+  bool _isFront = true;
+  bool _isLoadText = true;
+  Timer? _timer;
+  int k = 0;
+
   @override
   void initState() {
     // TODO: implement initState
-    _chooseText(widget.index);
     super.initState();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FlipCard(
-      front: Container(
+    print(k++);
+    return InkWell(
+      onTap: () => _hoverFlipperOnTap(),
+      onHover: (boolVal) => _hoverFlipperOnHover(boolVal),
+      child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
         child: SizedBox(
           width: 375,
@@ -48,22 +73,92 @@ class _CouponItemState extends State<CouponItem> {
               const SizedBox(
                 height: 30.0,
               ),
-              Ticket(
-                innerRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0)),
-                outerRadius: const BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 4.0),
-                    blurRadius: 2.0,
-                    spreadRadius: 2.0,
-                    color: Color.fromRGBO(196, 196, 196, .76),
-                  )
-                ],
-                child: Image.asset(
-                  widget.image,
-                  width: widget.imageWidth,
+              FlipCard(
+                controller: flipCardController,
+                flipOnTouch: false,
+                front: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Ticket(
+                      innerRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0)),
+                      outerRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(0, 4.0),
+                          blurRadius: 2.0,
+                          spreadRadius: 2.0,
+                          color: Color.fromRGBO(196, 196, 196, .76),
+                        )
+                      ],
+                      child: Image.asset(
+                        widget.image,
+                        width: widget.imageWidth,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      child: Text(
+                        widget.title,
+                        style: TextStyle(fontSize: 18, color: widget.color1),
+                      ),
+                    ),
+                  ],
+                ),
+                back: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Ticket(
+                      innerRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0)),
+                      outerRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(0, 4.0),
+                          blurRadius: 2.0,
+                          spreadRadius: 2.0,
+                          color: Color.fromRGBO(196, 196, 196, .76),
+                        )
+                      ],
+                      child: Container(
+                        height: widget.imageWidth,
+                        width: widget.imageWidth,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _isLoadText == true
+                                ? _isFront == false
+                                    ? SizedBox(
+                                        width: 300,
+                                        child: PlaceholderLines(
+                                          maxWidth: 0.95,
+                                          minWidth: 0.62,
+                                          count: 5,
+                                          animate: true,
+                                          align: TextAlign.center,
+                                          color: widget.color1,
+                                        ),
+                                      )
+                                    : Container()
+                                : _chooseText(widget.index),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      child: Text(
+                        widget.title,
+                        style: TextStyle(fontSize: 18, color: widget.color1),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Ticket(
@@ -91,20 +186,21 @@ class _CouponItemState extends State<CouponItem> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            widget.val > 0 && widget.buttonEnabled == true
+                            widget.buttonEnabled == true
                                 ? InkWell(
                                     onTap: () => setState(() {
-                                      widget.val--;
+                                      widget.val > 0
+                                          ? widget.val--
+                                          : widget.val;
                                     }),
                                     child: Icon(
                                       Icons.remove,
-                                      color: widget.color1,
+                                      color: widget.val > 0
+                                          ? widget.color1
+                                          : Colors.grey,
                                     ),
                                   )
-                                : const Icon(
-                                    Icons.remove,
-                                    color: Colors.grey,
-                                  ),
+                                : Container(),
                             Text(
                               ('${widget.val} COUPON') +
                                   (widget.val > 1 ? 'S' : ''),
@@ -120,10 +216,7 @@ class _CouponItemState extends State<CouponItem> {
                                       color: widget.color1,
                                     ),
                                   )
-                                : const Icon(
-                                    Icons.add,
-                                    color: Colors.grey,
-                                  ),
+                                : Container(),
                           ],
                         ),
                       ),
@@ -134,7 +227,7 @@ class _CouponItemState extends State<CouponItem> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: const <Widget>[
                                   Text('Date'),
                                   FittedBox(
@@ -153,7 +246,7 @@ class _CouponItemState extends State<CouponItem> {
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: const <Widget>[
                                 Text('Time'),
                                 FittedBox(
@@ -171,13 +264,14 @@ class _CouponItemState extends State<CouponItem> {
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 const Text('Price'),
                                 FittedBox(
                                   child: Text(
-                                    widget.price != null
-                                        ? '\$${widget.price}'
+                                    widget.price != 'Free' &&
+                                            widget.price != 'free'
+                                        ? '${widget.price}€'
                                         : 'Free',
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -193,10 +287,11 @@ class _CouponItemState extends State<CouponItem> {
                         width: double.infinity,
                         color: widget.color1,
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'BUY COUPONS',
-                            style: TextStyle(color: Colors.white, fontSize: 16.0),
+                            widget.buttonText,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16.0),
                           ),
                         ),
                       )
@@ -208,91 +303,165 @@ class _CouponItemState extends State<CouponItem> {
           ),
         ),
       ),
-      back: Container(
-        margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
-        child: SizedBox(
-          width: 375,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(
-                height: 30.0,
-              ),
-              Ticket(
-                innerRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0)),
-                outerRadius: const BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 4.0),
-                    blurRadius: 2.0,
-                    spreadRadius: 2.0,
-                    color: Color.fromRGBO(196, 196, 196, .76),
-                  )
-                ],
-                child: Image.asset(
-                  widget.image,
-                  width: widget.imageWidth,
-                ),
-              ),
-              Ticket(
-                innerRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0)),
-                outerRadius: const BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 4),
-                    blurRadius: 2.0,
-                    spreadRadius: 2.0,
-                    color: Color.fromRGBO(196, 196, 196, .76),
-                  )
-                ],
-                child: Container(
-                  color: Colors.white,
-                  height: 152,
-                  width: 300,
-                  child: Column(
-                    children: [
-
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 
-  void _chooseText(int index) {
+  Widget _chooseText(int index) {
+    Widget? myWidget;
     switch (index) {
-      case 0: // Free Offre
-
+      case 0: // Free Offer
+        myWidget = Center(
+          child: Text(
+            'First trial session\nfree of charge (30min).',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: widget.color1,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        );
         break;
       case 1: // 15$
-
+        myWidget = Center(
+          child: Text(
+            'Normal individual\nsession (45min).',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: widget.color1,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        );
         break;
       case 2: // 100
-
+        myWidget = Center(
+          child: Text(
+            'If you book 6hours/week\n100Euro instead of 120Euro.',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: widget.color1,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        );
         break;
       case 3: // 10% discount
-
+        myWidget = Center(
+          child: Column(
+            children: [
+              Text(
+                'If you book monthly in advance\n(min. 12sessions/month)\nyou will get 10% discount.',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: widget.color1,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    thumbShape:
+                        const RoundSliderThumbShape(enabledThumbRadius: 0.0),
+                    overlayShape:
+                        const RoundSliderThumbShape(enabledThumbRadius: 0.0),
+                  ),
+                  child: Slider(
+                    value: widget.sliderValue,
+                    max: 12,
+                    activeColor: widget.color1,
+                    onChanged: (double value) {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
         break;
-      case 4: // Group 9y to 15y
-
-        break;
-      case 5: // Group 16yto 25y
-
-        break;
-
-      case 6: // Group 26y+
-
+      case 4: // Group 9y to 15y, 16yto 25y, 26y+
+        myWidget = Center(
+          child: Text(
+            '\n>  Age condition:'
+            '\n           From 9y to 15y.'
+            '\n           From 16y to 25y.'
+            '\n           Above 26y.'
+            '\n>Members (3-5 person).',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: widget.color1,
+            ),
+            textAlign: TextAlign.start,
+          ),
+        );
         break;
     }
+
+    myWidget ??= Container();
+    return myWidget;
+  }
+
+  _hoverFlipperOnTap() async {
+    if (_isFlipping == false) {
+      _isFlipping = true;
+      _timer?.cancel();
+      if (flipCardController.state?.isFront == true) {
+        setState(() {
+          _isLoadText = true;
+          _isFront = false;
+        });
+        await flipCardController.controller?.forward();
+        flipCardController.state?.isFront = false;
+        _timer?.cancel();
+        _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+          setState(() {
+            _isLoadText = false;
+          });
+          _timer?.cancel();
+        });
+      } else {
+        _timer?.cancel();
+        await flipCardController.controller?.reverse();
+        setState(() {
+          _isFront = true;
+          flipCardController.state?.isFront = true;
+        });
+      }
+      _isFlipping = false;
+    }
+  }
+
+  _hoverFlipperOnHover(bool boolVal) async {
+    _isFlipping = true;
+    _timer?.cancel();
+    if (boolVal == true) {
+      setState(() {
+        _isLoadText = true;
+        _isFront = false;
+      });
+      await flipCardController.controller?.forward();
+      flipCardController.state?.isFront = false;
+      _timer?.cancel();
+      _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+        setState(() {
+          _isLoadText = false;
+        });
+        _timer?.cancel();
+      });
+    } else {
+      _timer?.cancel();
+      await flipCardController.controller?.reverse();
+      setState(() {
+        _isFront = true;
+        flipCardController.state?.isFront = true;
+      });
+    }
+    _isFlipping = false;
   }
 }
 
@@ -452,8 +621,12 @@ class ClipShadow extends StatelessWidget {
   /// The [Widget] below this widget in the tree.
   final Widget child;
 
-  ClipShadow(
-      {required this.boxShadow, required this.clipper, required this.child});
+  const ClipShadow(
+      {Key? key,
+      required this.boxShadow,
+      required this.clipper,
+      required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
