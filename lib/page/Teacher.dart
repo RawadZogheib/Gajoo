@@ -388,7 +388,7 @@ class _TeacherState extends State<Teacher> {
               age: _age.toString(),
               NbOfCourses: body[1][i][3],
               NbOfCoursesReserved: body[1][i][4],
-              NbOfCoursesLeft: '19',
+              NbOfCoursesLeft: (int.parse(body[1][i][3]) - int.parse(body[1][i][4])).toString(),
               imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
               languageView: _tempLanguageView,
               isHeart: true,

@@ -323,6 +323,10 @@ class _myDrawerState extends State<myDrawer> {
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 6
         // ));
+        if (globals.currentPage != 'MySettings') {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/MySettings', (route) => false);
+        }
         break;
 
       case 6: // Logout
