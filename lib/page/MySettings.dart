@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -53,194 +51,202 @@ class _MySettingsState extends State<MySettings> {
     super.initState();
     globals.currentPage = "MySettings";
     _sessionGet();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => _back(),
-        child: Scaffold(
-          backgroundColor: globals.whiteBlue,
-          appBar: MediaQuery.of(context).size.width < 650
-              ? AppBar(
-            backgroundColor: globals.whiteBlue,
-            elevation: 0,
-            title: Center(
-              child: Text(
-                'Gajoo',
-                style: TextStyle(
-                  fontSize: 28,
-                  color: HexColor('#333333'),
+      onWillPop: () async => _back(),
+      child: Scaffold(
+        backgroundColor: globals.whiteBlue,
+        appBar: MediaQuery.of(context).size.width < 650
+            ? AppBar(
+                backgroundColor: globals.whiteBlue,
+                elevation: 0,
+                title: Center(
+                  child: Text(
+                    'Gajoo',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: HexColor('#333333'),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: HexColor('#333333'),
-                ),
-                onPressed: () {
-                  _back();
-                }),
-          )
-              : null,
-          endDrawer: myDrawer(),
-          body: SingleChildScrollView(
-            child: Stack(
-              children: [
-                Column(
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: HexColor('#333333'),
+                    ),
+                    onPressed: () {
+                      _back();
+                    }),
+              )
+            : null,
+        endDrawer: myDrawer(),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  const MyHeader(),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.48,
+                    height: MediaQuery.of(context).size.height * 0.415,
+                    color: globals.whiteBlue,
+                    child: Image.asset('Assets/SettingsPage/books.jpg'),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.478,
+                    height: MediaQuery.of(context).size.height * 0.9,
+                    color: Colors.white70,
+                    child: Column(
                       children: [
-                        const MyHeader(),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.48,
-                          height: MediaQuery.of(context).size.height * 0.415,
-                          color: globals.whiteBlue,
-
-                          child: Image.asset('Assets/SettingsPage/books.jpg'),
+                        const SizedBox(
+                          height: 60,
                         ),
-
-
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.478,
-                          height: MediaQuery.of(context).size.height * 0.9,
-                          color: Colors.white70,
-
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 60,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3, top: 30),
-                                child: myTextInput2(
-                                  initialValue: FName,
-                                  textString: 'Enter your First Name',
-                                  labelText: 'Enter your First Name',
-                                  spaceAllowed: true,
-                                  enterAllowed: false,
-                                  obscure: false,
-                                  colBlue: colFName,
-                                  colBlue_1: colFName_1,
-                                  colBlue_2: colFName_2,
-                                  onChange: (value) {
-                                    FName = value;
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              myErrorText(errorText: errFName, color: colErrFName),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
-                                child: myTextInput2(
-                                  initialValue: LName,
-                                  textString: 'Enter your Last Name',
-                                  labelText: 'Enter your Last Name',
-                                  spaceAllowed: true,
-                                  enterAllowed: false,
-                                  obscure: false,
-                                  colBlue: colLName,
-                                  colBlue_1: colLName_1,
-                                  colBlue_2: colLName_2,
-                                  onChange: (value) {
-                                    LName = value;
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              myErrorText(errorText: errLName, color: colErrLName),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.2,
-                                  height: 50,
-
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    color: globals.blue,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Text('Email:',style: TextStyle(color: globals.blue_1),),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Text(Email,style: TextStyle(color: globals.blue_2)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(
-                                height: 35,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
-                                child: myTextInput2(
-                                  initialValue: UserName,
-                                  textString: 'Enter your UserName',
-                                  labelText: 'Enter your UserName',
-                                  spaceAllowed: true,
-                                  enterAllowed: false,
-                                  obscure: false,
-                                  colBlue: colUserName,
-                                  colBlue_1: colUserName_1,
-                                  colBlue_2: colUserName_2,
-                                  onChange: (value) {
-                                    UserName = value;
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              myErrorText(errorText: errUserName, color: colErrUserName),
-                              const SizedBox(
-                                height: 10,
-                              ),
-
-                              myBtn2(
-                                btnText: const Text("Confirm Changes",style: TextStyle(fontWeight: FontWeight.bold),),
-                                height: 40,
-                                width: 150,
-                                color1: globals.blue,
-                                color2: globals.blue_1,
-                                onPress: (){
-                                  _check();
-                                },
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              myErrorText(errorText: errTxt, color: colErrTxt),
-                            ],
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.3,
+                              top: 30),
+                          child: myTextInput2(
+                            initialValue: FName,
+                            textString: 'Enter your First Name',
+                            labelText: 'Enter your First Name',
+                            spaceAllowed: true,
+                            enterAllowed: false,
+                            obscure: false,
+                            colBlue: colFName,
+                            colBlue_1: colFName_1,
+                            colBlue_2: colFName_2,
+                            onChange: (value) {
+                              FName = value;
+                            },
                           ),
                         ),
-
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(errorText: errFName, color: colErrFName),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.3),
+                          child: myTextInput2(
+                            initialValue: LName,
+                            textString: 'Enter your Last Name',
+                            labelText: 'Enter your Last Name',
+                            spaceAllowed: true,
+                            enterAllowed: false,
+                            obscure: false,
+                            colBlue: colLName,
+                            colBlue_1: colLName_1,
+                            colBlue_2: colLName_2,
+                            onChange: (value) {
+                              LName = value;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(errorText: errLName, color: colErrLName),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.3),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              color: globals.blue,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(
+                                    'Email:',
+                                    style: TextStyle(color: globals.blue_1),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(Email,
+                                      style: TextStyle(color: globals.blue_2)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 35,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.3),
+                          child: myTextInput2(
+                            initialValue: UserName,
+                            textString: 'Enter your UserName',
+                            labelText: 'Enter your UserName',
+                            spaceAllowed: true,
+                            enterAllowed: false,
+                            obscure: false,
+                            colBlue: colUserName,
+                            colBlue_1: colUserName_1,
+                            colBlue_2: colUserName_2,
+                            onChange: (value) {
+                              UserName = value;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(
+                            errorText: errUserName, color: colErrUserName),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        myBtn2(
+                          btnText: const Text(
+                            "Confirm Changes",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          height: 40,
+                          width: 150,
+                          color1: globals.blue,
+                          color2: globals.blue_1,
+                          onPress: () {
+                            _check();
+                          },
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(errorText: errTxt, color: colErrTxt),
                       ],
                     ),
-                Positioned(
-                    left: MediaQuery.of(context).size.width * 0.435,
-                    top: MediaQuery.of(context).size.height * 0.45,
-                    child: const Icon(Icons.account_circle_rounded,size: 200,color: Colors.blueGrey,)),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Positioned(
+                  left: MediaQuery.of(context).size.width * 0.435,
+                  top: MediaQuery.of(context).size.height * 0.42,
+                  child: const Icon(
+                    Icons.account_circle_rounded,
+                    size: 200,
+                    color: Colors.blueGrey,
+                  )),
+            ],
           ),
         ),
+      ),
     );
   }
 
@@ -254,11 +260,15 @@ class _MySettingsState extends State<MySettings> {
     errUserName = '';
     colErrUserName = globals.transparent;
 
+    print(FName);
+    print(LName);
+    print(UserName);
+
     if (FName != '' && FName != null && FName != 'null') {
       setState(() {
-        colFName = Colors.amber.shade50;
-        colFName_1 = Colors.amber.shade900;
-        colFName_2 = Colors.amber.shade900.withOpacity(0.5);
+        colFName = Colors.red.shade50;
+        colFName_1 = Colors.red.shade900;
+        colFName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     } else {
       isEmpty = true;
@@ -273,9 +283,9 @@ class _MySettingsState extends State<MySettings> {
 
     if (LName != '' && LName != null && LName != 'null') {
       setState(() {
-        colLName = Colors.amber.shade50;
-        colLName_1 = Colors.amber.shade900;
-        colLName_2 = Colors.amber.shade900.withOpacity(0.5);
+        colLName = Colors.red.shade50;
+        colLName_1 = Colors.red.shade900;
+        colLName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     } else {
       isEmpty = true;
@@ -290,9 +300,9 @@ class _MySettingsState extends State<MySettings> {
 
     if (UserName != '' && UserName != null && UserName != 'null') {
       setState(() {
-        colUserName = Colors.amber.shade50;
-        colUserName_1 = Colors.amber.shade900;
-        colUserName_2 = Colors.amber.shade900.withOpacity(0.5);
+        colUserName = Colors.red.shade50;
+        colUserName_1 = Colors.red.shade900;
+        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
       });
     } else {
       isEmpty = true;
@@ -304,13 +314,13 @@ class _MySettingsState extends State<MySettings> {
         colErrUserName = globals.red_1;
       });
     }
-    if(UserName.length > 8){
+    if (UserName.length > 8) {
       setState(() {
-        colUserName = Colors.amber.shade50;
-        colUserName_1 = Colors.amber.shade900;
-        colUserName_2 = Colors.amber.shade900.withOpacity(0.5);
+        colUserName = Colors.red.shade50;
+        colUserName_1 = Colors.red.shade900;
+        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
       });
-    }else{
+    } else {
       isEmpty = true;
       setState(() {
         colUserName = Colors.red.shade50;
@@ -322,16 +332,14 @@ class _MySettingsState extends State<MySettings> {
     }
 
     if (isEmpty == false) {
-
       _changeDb();
-
     }
   }
 
   _changeDb() async {
     errTxt = '';
 
-    try{
+    try {
       var data = {
         'version': globals.version,
         'email': Email,
@@ -340,8 +348,8 @@ class _MySettingsState extends State<MySettings> {
         'username': UserName,
       };
 
-      var res =
-          await CallApi().postData(data, '/Login/Control/(Control)Login.php');
+      var res = await CallApi()
+          .postData(data, '/Settings/Control/(Control)ChangeData.php');
       print(res.body);
       List<dynamic> body = json.decode(res.body);
 
@@ -351,8 +359,7 @@ class _MySettingsState extends State<MySettings> {
         await SessionManager().set('fName', FName);
         await SessionManager().set('lName', LName);
         await SessionManager().set('userName', UserName);
-
-      }else if(body[0] == "errorToken"){
+      } else if (body[0] == "errorToken") {
         if (mounted) {
           setState(() {
             errTxt = globals.errorElse;
@@ -360,7 +367,7 @@ class _MySettingsState extends State<MySettings> {
             ErrorPopup(context, globals.errorToken);
           });
         }
-      }else if(body[0] == "errorVersion"){
+      } else if (body[0] == "errorVersion") {
         if (mounted) {
           setState(() {
             errTxt = "Your version: " +
@@ -371,13 +378,19 @@ class _MySettingsState extends State<MySettings> {
             ErrorPopup(context, globals.errorVersion);
           });
         }
-      }else if(body[0] == "error7"){
+      } else if (body[0] == "error7") {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = globals.warning7;
           WarningPopup(context, globals.warning7);
         });
-      }else{
+      } else if (body[0] == "error4") {
+        setState(() {
+          colErrTxt = globals.red_1;
+          errTxt = globals.warning7;
+          WarningPopup(context, globals.error4);
+        });
+      } else {
         if (mounted) {
           setState(() {
             errTxt = globals.errorElse;
@@ -386,7 +399,7 @@ class _MySettingsState extends State<MySettings> {
           });
         }
       }
-    }catch(e){
+    } catch (e) {
       print(e);
       if (mounted) {
         setState(() {
@@ -403,35 +416,34 @@ class _MySettingsState extends State<MySettings> {
     LName = await SessionManager().get("lName");
     Email = await SessionManager().get("email");
     UserName = await SessionManager().get("userName");
-    if(FName == null || FName == '' || FName == 'null'){
+    if (FName == null || FName == '' || FName == 'null') {
       //do nothing
-    }else{
+    } else {
       setState(() {
         FName;
       });
     }
-    if(LName == null || LName == '' || LName == 'null'){
+    if (LName == null || LName == '' || LName == 'null') {
       //do nothing
-    }else{
+    } else {
       setState(() {
         LName;
       });
     }
-    if(Email == null || Email == '' || Email == 'null'){
+    if (Email == null || Email == '' || Email == 'null') {
       //do nothing
-    }else{
+    } else {
       setState(() {
         Email;
       });
     }
-    if(UserName == null || UserName == '' || UserName == 'null'){
+    if (UserName == null || UserName == '' || UserName == 'null') {
       //do nothing
-    }else{
+    } else {
       setState(() {
         UserName;
       });
     }
-
   }
 
   _back() {
