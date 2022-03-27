@@ -266,7 +266,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               title: 'OPTIMUM',
                               buttonText: 'BUY COUPONS',
                               image: 'Assets/Tickets/imageTicket3.png',
-                              price: '220',
+                              price: '200',
                               imageWidth: 300,
                               color1: HexColor('#5576c3'),
                               buttonEnabled: true,

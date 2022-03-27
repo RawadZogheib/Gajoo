@@ -382,7 +382,8 @@ class _myDrawerState extends State<myDrawer> {
             });
           }
         } else if (body[0] == "empty") {
-          WarningPopup(context, globals.error405);
+          print('There is no coupons');
+          //WarningPopup(context, globals.error405);
         } else if (body[0] == "errorVersion") {
           if (mounted) {
             ErrorPopup(context, globals.errorVersion);

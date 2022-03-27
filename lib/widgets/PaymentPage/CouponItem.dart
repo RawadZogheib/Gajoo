@@ -268,14 +268,48 @@ class _CouponItemState extends State<CouponItem> {
                               children: <Widget>[
                                 const Text('Price'),
                                 FittedBox(
-                                  child: Text(
-                                    widget.price != 'Free' &&
-                                            widget.price != 'free'
-                                        ? '${widget.price}€'
-                                        : 'Free',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18.0),
+                                  child: Row(
+                                    children: [
+                                      widget.price == '100'
+                                          ? const Padding(
+                                              padding: EdgeInsets.only(
+                                                  right: 4.0),
+                                              child: StrikeThroughWidget2(
+                                                child: Text(
+                                                  '120€',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 18.0),
+                                                ),
+                                              ),
+                                            )
+                                          : widget.price == '200'
+                                              ? const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(
+                                                          right: 4.0),
+                                                  child: StrikeThroughWidget2(
+                                                    child: Text(
+                                                      '240€',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 18.0),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
+                                      Text(
+                                        widget.price != 'Free' &&
+                                                widget.price != 'free'
+                                            ? '${widget.price}€'
+                                            : 'Free',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18.0),
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],
@@ -639,6 +673,32 @@ class ClipShadow extends StatelessWidget {
         clipper: clipper,
         child: child,
       ),
+    );
+  }
+}
+
+class StrikeThroughWidget2 extends StatelessWidget {
+  final Widget _child;
+
+  const StrikeThroughWidget2({Key? key, required Widget child})
+      : _child = child,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Center(child: _child),
+        //Center(child: Image.asset('Assets/HomePage/graphics/strikethrough2.png',width: 40,)),
+        Center(
+          child: Container(
+            height: 2,
+            width: 45,
+            color: Colors.black.withOpacity(0.6),
+          ),
+        ),
+      ],
     );
   }
 }
