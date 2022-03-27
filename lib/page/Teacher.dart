@@ -43,6 +43,7 @@ class Teacher extends StatefulWidget {
 class _TeacherState extends State<Teacher> {
   Timer? timer;
   int _key = 0;
+  var _age;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
@@ -355,32 +356,36 @@ class _TeacherState extends State<Teacher> {
       //print(body[1]);
 
       for (int i = 0; i < body[1].length; i++) {
+        _age = DateTime.now().year - DateTime.parse(body[1][i][2]).year;
+        print(_age);
+
         Set<String> _tempLanguageView = {};
         List<Characteristic_t> _tempListOfCharacteristic_t = [];
         //print(body[1][i][3] + "hhhhhhhhhhhhh");
-        for (int j = 0; j < body[1][i][2].length; j++) {
-          if (body[1][i][2][j][1] == "Arabic" ||
-              body[1][i][2][j][1] == "arabic") {
+        for (int j = 0; j < body[1][i][3].length; j++) {
+          if (body[1][i][3][j][1] == "Arabic" ||
+              body[1][i][3][j][1] == "arabic") {
             //for language
             _tempLanguageView.add("Arabic");
-          } else if (body[1][i][2][j][1] == "French" ||
-              body[1][i][2][j][1] == "french") {
+          } else if (body[1][i][3][j][1] == "French" ||
+              body[1][i][3][j][1] == "french") {
             _tempLanguageView.add("French");
-          } else if (body[1][i][2][j][1] == "English" ||
-              body[1][i][2][j][1] == "english") {
+          } else if (body[1][i][3][j][1] == "English" ||
+              body[1][i][3][j][1] == "english") {
             _tempLanguageView.add("English");
           }
           _tempListOfCharacteristic_t.add(Characteristic_t(
-              type: body[1][i][2][j][0],
-              language: body[1][i][2][j][1],
-              level: body[1][i][2][j][2]));
+              type: body[1][i][3][j][0],
+              language: body[1][i][3][j][1],
+              level: body[1][i][3][j][2]));
         }
+
 
         _TeacherCard.add(
           TeacherCard(
               Id: body[1][i][0],
               name: body[1][i][1],
-              age: '22',
+              age: _age.toString(),
               NbOfCourses: '43',
               NbOfCoursesReserved: '24',
               NbOfCoursesLeft: '19',
