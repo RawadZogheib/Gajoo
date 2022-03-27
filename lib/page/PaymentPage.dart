@@ -24,8 +24,9 @@ class _PaymentPageState extends State<PaymentPage> {
   int? _yellowCoupon;
   int? _blueCoupon;
   int? _greenCoupon;
-
+  int _key = 0;
   bool _isLoading = false;
+
 
   @override
   void initState() {
@@ -224,6 +225,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         child: Wrap(
                           children: [
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 0,
                               image: 'Assets/Tickets/imageTicket0.png',
                               val: 1,
@@ -233,6 +235,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: false,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 1,
                               image: 'Assets/Tickets/imageTicket1.png',
                               price: 20,
@@ -241,6 +244,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: true,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 2,
                               image: 'Assets/Tickets/imageTicket2.png',
                               price: 100,
@@ -250,6 +254,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: true,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 3,
                               image: 'Assets/Tickets/imageTicket3.png',
                               price: 15,
@@ -258,6 +263,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: true,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 4,
                               image: 'Assets/Tickets/imageTicket4.png',
                               price: 13,
@@ -266,6 +272,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: true,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 5,
                               image: 'Assets/Tickets/imageTicket4.png',
                               price: 13,
@@ -274,6 +281,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               buttonEnabled: true,
                             ),
                             CouponItem(
+                              key: ValueKey(_key++),
                               index: 6,
                               image: 'Assets/Tickets/imageTicket4.png',
                               price: 13,
