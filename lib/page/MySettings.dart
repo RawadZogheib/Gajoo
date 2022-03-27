@@ -1,12 +1,18 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
+import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
+import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
 
 class MySettings extends StatefulWidget {
@@ -21,6 +27,8 @@ class _MySettingsState extends State<MySettings> {
   String LName = '';
   String UserName = '';
   String Email = '';
+  String errTxt = '';
+  Color colErrTxt = globals.transparent;
 
   String errFName = '';
   Color colErrFName = globals.transparent;
@@ -42,10 +50,9 @@ class _MySettingsState extends State<MySettings> {
   @override
   void initState() {
     // TODO: implement initState
-    _sessionGet();
     super.initState();
     globals.currentPage = "MySettings";
-
+    _sessionGet();
 
   }
 
@@ -80,94 +87,351 @@ class _MySettingsState extends State<MySettings> {
               : null,
           endDrawer: myDrawer(),
           body: SingleChildScrollView(
-            child: Column(
-                  children: [
-                    const MyHeader(),
-                    Image.asset('Assets/SettingsPage/books.jpg',width: MediaQuery.of(context).size.width *
-                        1,height: MediaQuery.of(context).size.height *
-                        0.5,),
+            child: Stack(
+              children: [
+                Column(
+                      children: [
+                        const MyHeader(),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.48,
+                          height: MediaQuery.of(context).size.height * 0.415,
+                          color: globals.whiteBlue,
 
-                    Container(
-                      width: MediaQuery.of(context).size.width * 1,
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      color: globals.whiteBlue,
+                          child: Image.asset('Assets/SettingsPage/books.jpg'),
+                        ),
 
-                      child: Column(
-                        children: [
-                          myTextInput2(
-                            initialValue: FName,
-                            textString: 'Enter your First Name',
-                            labelText: 'Enter your First Name',
-                            spaceAllowed: true,
-                            enterAllowed: false,
-                            obscure: false,
-                            colBlue: colFName,
-                            colBlue_1: colFName_1,
-                            colBlue_2: colFName_2,
-                            onChange: (value) {
-                              FName = value;
-                            },
+
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.478,
+                          height: MediaQuery.of(context).size.height * 0.9,
+                          color: Colors.white70,
+
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3, top: 30),
+                                child: myTextInput2(
+                                  initialValue: FName,
+                                  textString: 'Enter your First Name',
+                                  labelText: 'Enter your First Name',
+                                  spaceAllowed: true,
+                                  enterAllowed: false,
+                                  obscure: false,
+                                  colBlue: colFName,
+                                  colBlue_1: colFName_1,
+                                  colBlue_2: colFName_2,
+                                  onChange: (value) {
+                                    FName = value;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              myErrorText(errorText: errFName, color: colErrFName),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
+                                child: myTextInput2(
+                                  initialValue: LName,
+                                  textString: 'Enter your Last Name',
+                                  labelText: 'Enter your Last Name',
+                                  spaceAllowed: true,
+                                  enterAllowed: false,
+                                  obscure: false,
+                                  colBlue: colLName,
+                                  colBlue_1: colLName_1,
+                                  colBlue_2: colLName_2,
+                                  onChange: (value) {
+                                    LName = value;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              myErrorText(errorText: errLName, color: colErrLName),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.2,
+                                  height: 50,
+
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    color: globals.blue,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Text('Email:',style: TextStyle(color: globals.blue_1),),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Text(Email,style: TextStyle(color: globals.blue_2)),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 35,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.3),
+                                child: myTextInput2(
+                                  initialValue: UserName,
+                                  textString: 'Enter your UserName',
+                                  labelText: 'Enter your UserName',
+                                  spaceAllowed: true,
+                                  enterAllowed: false,
+                                  obscure: false,
+                                  colBlue: colUserName,
+                                  colBlue_1: colUserName_1,
+                                  colBlue_2: colUserName_2,
+                                  onChange: (value) {
+                                    UserName = value;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              myErrorText(errorText: errUserName, color: colErrUserName),
+                              const SizedBox(
+                                height: 10,
+                              ),
+
+                              myBtn2(
+                                btnText: const Text("Confirm Changes",style: TextStyle(fontWeight: FontWeight.bold),),
+                                height: 40,
+                                width: 150,
+                                color1: globals.blue,
+                                color2: globals.blue_1,
+                                onPress: (){
+                                  _check();
+                                },
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              myErrorText(errorText: errTxt, color: colErrTxt),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          myTextInput2(
-                            initialValue: LName,
-                            textString: 'Enter your Last Name',
-                            labelText: 'Enter your Last Name',
-                            spaceAllowed: true,
-                            enterAllowed: false,
-                            obscure: false,
-                            colBlue: colLName,
-                            colBlue_1: colLName_1,
-                            colBlue_2: colLName_2,
-                            onChange: (value) {
-                              LName = value;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          const Text('Email:'),
-                          Text(Email),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          myTextInput2(
-                            initialValue: UserName,
-                            textString: 'Enter your UserName',
-                            labelText: 'Enter your UserName',
-                            spaceAllowed: true,
-                            enterAllowed: false,
-                            obscure: false,
-                            colBlue: colUserName,
-                            colBlue_1: colUserName_1,
-                            colBlue_2: colUserName_2,
-                            onChange: (value) {
-                              UserName = value;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                        ],
-                      ),
+                        ),
+
+                      ],
                     ),
-
-                  ],
-                ),
+                Positioned(
+                    left: MediaQuery.of(context).size.width * 0.435,
+                    top: MediaQuery.of(context).size.height * 0.45,
+                    child: const Icon(Icons.account_circle_rounded,size: 200,color: Colors.blueGrey,)),
+              ],
+            ),
           ),
         ),
     );
   }
 
+  _check() {
+    bool isEmpty = false;
 
+    errFName = '';
+    colErrFName = globals.transparent;
+    errLName = '';
+    colErrLName = globals.transparent;
+    errUserName = '';
+    colErrUserName = globals.transparent;
+
+    if (FName != '' && FName != null && FName != 'null') {
+      setState(() {
+        colFName = Colors.amber.shade50;
+        colFName_1 = Colors.amber.shade900;
+        colFName_2 = Colors.amber.shade900.withOpacity(0.5);
+      });
+    } else {
+      isEmpty = true;
+      setState(() {
+        colFName = Colors.red.shade50;
+        colFName_1 = Colors.red.shade900;
+        colFName_2 = Colors.red.shade900.withOpacity(0.5);
+        errFName = globals.warning7;
+        colErrFName = globals.red_1;
+      });
+    }
+
+    if (LName != '' && LName != null && LName != 'null') {
+      setState(() {
+        colLName = Colors.amber.shade50;
+        colLName_1 = Colors.amber.shade900;
+        colLName_2 = Colors.amber.shade900.withOpacity(0.5);
+      });
+    } else {
+      isEmpty = true;
+      setState(() {
+        colLName = Colors.red.shade50;
+        colLName_1 = Colors.red.shade900;
+        colLName_2 = Colors.red.shade900.withOpacity(0.5);
+        errLName = globals.warning7;
+        colErrLName = globals.red_1;
+      });
+    }
+
+    if (UserName != '' && UserName != null && UserName != 'null') {
+      setState(() {
+        colUserName = Colors.amber.shade50;
+        colUserName_1 = Colors.amber.shade900;
+        colUserName_2 = Colors.amber.shade900.withOpacity(0.5);
+      });
+    } else {
+      isEmpty = true;
+      setState(() {
+        colUserName = Colors.red.shade50;
+        colUserName_1 = Colors.red.shade900;
+        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
+        errUserName = globals.warning7;
+        colErrUserName = globals.red_1;
+      });
+    }
+    if(UserName.length > 8){
+      setState(() {
+        colUserName = Colors.amber.shade50;
+        colUserName_1 = Colors.amber.shade900;
+        colUserName_2 = Colors.amber.shade900.withOpacity(0.5);
+      });
+    }else{
+      isEmpty = true;
+      setState(() {
+        colUserName = Colors.red.shade50;
+        colUserName_1 = Colors.red.shade900;
+        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
+        errUserName = globals.warning2_1;
+        colErrUserName = globals.red_1;
+      });
+    }
+
+    if (isEmpty == false) {
+
+      _changeDb();
+
+    }
+  }
+
+  _changeDb() async {
+    errTxt = '';
+
+    try{
+      var data = {
+        'version': globals.version,
+        'email': Email,
+        'fname': FName,
+        'lname': LName,
+        'username': UserName,
+      };
+
+      var res =
+          await CallApi().postData(data, '/Login/Control/(Control)Login.php');
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
+      //print(body[1]);
+      //print("welcome");
+      if (body[0] == "success") {
+        await SessionManager().set('fName', FName);
+        await SessionManager().set('lName', LName);
+        await SessionManager().set('userName', UserName);
+
+      }else if(body[0] == "errorToken"){
+        if (mounted) {
+          setState(() {
+            errTxt = globals.errorElse;
+            colErrTxt = globals.red_1;
+            ErrorPopup(context, globals.errorToken);
+          });
+        }
+      }else if(body[0] == "errorVersion"){
+        if (mounted) {
+          setState(() {
+            errTxt = "Your version: " +
+                globals.version +
+                "\n" +
+                globals.errorVersion;
+            colErrTxt = globals.red_1;
+            ErrorPopup(context, globals.errorVersion);
+          });
+        }
+      }else if(body[0] == "error7"){
+        setState(() {
+          colErrTxt = globals.red_1;
+          errTxt = globals.warning7;
+          WarningPopup(context, globals.warning7);
+        });
+      }else{
+        if (mounted) {
+          setState(() {
+            errTxt = globals.errorElse;
+            colErrTxt = globals.red_1;
+            ErrorPopup(context, globals.errorElse);
+          });
+        }
+      }
+    }catch(e){
+      print(e);
+      if (mounted) {
+        setState(() {
+          errTxt = globals.errorException;
+          colErrTxt = globals.red_1;
+          ErrorPopup(context, globals.errorException);
+        });
+      }
+    }
+  }
 
   _sessionGet() async {
     FName = await SessionManager().get("fName");
     LName = await SessionManager().get("lName");
     Email = await SessionManager().get("email");
     UserName = await SessionManager().get("userName");
+    if(FName == null || FName == '' || FName == 'null'){
+      //do nothing
+    }else{
+      setState(() {
+        FName;
+      });
+    }
+    if(LName == null || LName == '' || LName == 'null'){
+      //do nothing
+    }else{
+      setState(() {
+        LName;
+      });
+    }
+    if(Email == null || Email == '' || Email == 'null'){
+      //do nothing
+    }else{
+      setState(() {
+        Email;
+      });
+    }
+    if(UserName == null || UserName == '' || UserName == 'null'){
+      //do nothing
+    }else{
+      setState(() {
+        UserName;
+      });
+    }
+
   }
 
   _back() {
