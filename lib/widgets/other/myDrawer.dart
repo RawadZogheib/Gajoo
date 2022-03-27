@@ -14,15 +14,15 @@ class myDrawer extends StatefulWidget {
 }
 
 class _myDrawerState extends State<myDrawer> {
-  int? _redTicket;
-  int? _yellowTicket;
-  int? _blueTicket;
-  int? _greenTicket;
+  int? _redCoupon;
+  int? _yellowCoupon;
+  int? _blueCoupon;
+  int? _greenCoupon;
 
   @override
   void initState() {
     // TODO: implement initState
-    _getTickets();
+    _getCoupon();
     super.initState();
   }
 
@@ -73,9 +73,9 @@ class _myDrawerState extends State<myDrawer> {
                                               child: CircularProgressIndicator(
                                                   color: HexColor('#ec3227')))
                                           : Text(
-                                              _redTicket == null
+                                              _redCoupon == null
                                                   ? '-'
-                                                  : _redTicket.toString(),
+                                                  : _redCoupon.toString(),
                                               style: TextStyle(
                                                 color: HexColor('#ec3227'),
                                                 fontWeight: FontWeight.bold,
@@ -113,9 +113,9 @@ class _myDrawerState extends State<myDrawer> {
                                               child: CircularProgressIndicator(
                                                   color: HexColor('#f3b70c')))
                                           : Text(
-                                              _yellowTicket == null
+                                              _yellowCoupon == null
                                                   ? '-'
-                                                  : _yellowTicket.toString(),
+                                                  : _yellowCoupon.toString(),
                                               style: TextStyle(
                                                 color: HexColor('#f3b70c'),
                                                 fontWeight: FontWeight.bold,
@@ -153,9 +153,9 @@ class _myDrawerState extends State<myDrawer> {
                                               child: CircularProgressIndicator(
                                                   color: HexColor('#5576c3')))
                                           : Text(
-                                              _blueTicket == null
+                                              _blueCoupon == null
                                                   ? '-'
-                                                  : _blueTicket.toString(),
+                                                  : _blueCoupon.toString(),
                                               style: TextStyle(
                                                 color: HexColor('#5576c3'),
                                                 fontWeight: FontWeight.bold,
@@ -193,9 +193,9 @@ class _myDrawerState extends State<myDrawer> {
                                               child: CircularProgressIndicator(
                                                   color: HexColor('#37ae44')))
                                           : Text(
-                                              _greenTicket == null
+                                              _greenCoupon == null
                                                   ? '-'
-                                                  : _greenTicket.toString(),
+                                                  : _greenCoupon.toString(),
                                               style: TextStyle(
                                                 color: HexColor('#37ae44'),
                                                 fontWeight: FontWeight.bold,
@@ -342,7 +342,7 @@ class _myDrawerState extends State<myDrawer> {
         .pushNamedAndRemoveUntil('/PaymentPage', (route) => false);
   }
 
-  Future<void> _getTickets() async {
+  Future<void> _getCoupon() async {
     if (globals.isLoading == false) {
       try {
         print(
@@ -354,7 +354,7 @@ class _myDrawerState extends State<myDrawer> {
         } else {
           globals.isLoading = true;
         }
-        print('Load tickets');
+        print('Load coupons');
 
         var data = {
           'version': globals.version,
@@ -362,17 +362,17 @@ class _myDrawerState extends State<myDrawer> {
         };
 
         var res = await CallApi()
-            .postData(data, '/Payment/Control/(Control)loadTickets.php');
+            .postData(data, '/Payment/Control/(Control)loadCoupons.php');
         print(res.body);
         List<dynamic> body = json.decode(res.body);
 
         if (body[0] == "success") {
           if (mounted) {
             setState(() {
-              _redTicket = int.parse(body[1][0]);
-              _yellowTicket = int.parse(body[1][1]);
-              _blueTicket = int.parse(body[1][2]);
-              _greenTicket = int.parse(body[1][3]);
+              _redCoupon = int.parse(body[1][0]);
+              _yellowCoupon = int.parse(body[1][1]);
+              _blueCoupon = int.parse(body[1][2]);
+              _greenCoupon = int.parse(body[1][3]);
             });
           }
         } else if (body[0] == "empty") {
@@ -388,8 +388,6 @@ class _myDrawerState extends State<myDrawer> {
         } else if (body[0] == "error7") {
           if (mounted) {
             WarningPopup(context, globals.warning7);
-          } else {
-            globals.isLoading = true;
           }
         } else {
           if (mounted) {
