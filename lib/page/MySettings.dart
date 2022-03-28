@@ -266,9 +266,9 @@ class _MySettingsState extends State<MySettings> {
 
     if (FName != '' && FName != null && FName != 'null') {
       setState(() {
-        colFName = Colors.red.shade50;
-        colFName_1 = Colors.red.shade900;
-        colFName_2 = Colors.red.shade900.withOpacity(0.5);
+        colFName = globals.blue;
+        colFName_1 = globals.blue_1;
+        colFName_2 = globals.blue_2;
       });
     } else {
       isEmpty = true;
@@ -283,9 +283,9 @@ class _MySettingsState extends State<MySettings> {
 
     if (LName != '' && LName != null && LName != 'null') {
       setState(() {
-        colLName = Colors.red.shade50;
-        colLName_1 = Colors.red.shade900;
-        colLName_2 = Colors.red.shade900.withOpacity(0.5);
+        colLName = globals.blue;
+        colLName_1 = globals.blue_1;
+        colLName_2 = globals.blue_2;
       });
     } else {
       isEmpty = true;
@@ -300,9 +300,9 @@ class _MySettingsState extends State<MySettings> {
 
     if (UserName != '' && UserName != null && UserName != 'null') {
       setState(() {
-        colUserName = Colors.red.shade50;
-        colUserName_1 = Colors.red.shade900;
-        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
+        colUserName = globals.blue;
+        colUserName_1 = globals.blue_1;
+        colUserName_2 = globals.blue_2;
       });
     } else {
       isEmpty = true;
@@ -316,9 +316,9 @@ class _MySettingsState extends State<MySettings> {
     }
     if (UserName.length > 8) {
       setState(() {
-        colUserName = Colors.red.shade50;
-        colUserName_1 = Colors.red.shade900;
-        colUserName_2 = Colors.red.shade900.withOpacity(0.5);
+        colUserName = globals.blue;
+        colUserName_1 = globals.blue_1;
+        colUserName_2 = globals.blue_2;
       });
     } else {
       isEmpty = true;
@@ -359,10 +359,11 @@ class _MySettingsState extends State<MySettings> {
         await SessionManager().set('fName', FName);
         await SessionManager().set('lName', LName);
         await SessionManager().set('userName', UserName);
+
       } else if (body[0] == "errorToken") {
         if (mounted) {
           setState(() {
-            errTxt = globals.errorElse;
+            errTxt = globals.errorToken;
             colErrTxt = globals.red_1;
             ErrorPopup(context, globals.errorToken);
           });
@@ -387,7 +388,7 @@ class _MySettingsState extends State<MySettings> {
       } else if (body[0] == "error4") {
         setState(() {
           colErrTxt = globals.red_1;
-          errTxt = globals.warning7;
+          errTxt = globals.error4;
           WarningPopup(context, globals.error4);
         });
       } else {
