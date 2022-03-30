@@ -14,6 +14,7 @@ class myDrawer extends StatefulWidget {
 }
 
 class _myDrawerState extends State<myDrawer> {
+  int? _freeCoupon;
   int? _redCoupon;
   int? _yellowCoupon;
   int? _blueCoupon;
@@ -218,6 +219,48 @@ class _myDrawerState extends State<myDrawer> {
                                     ),
                                   ],
                                 ),
+                                const SizedBox(width: 10),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      onTap: () => _goToPaymentPage(),
+                                      child: globals.isLoading == true
+                                          ? SizedBox(
+                                              height: 10.0,
+                                              width: 10.0,
+                                              child: CircularProgressIndicator(
+                                                  color: HexColor('#898989')))
+                                          : Text(
+                                              _freeCoupon == null
+                                                  ? '-'
+                                                  : _freeCoupon == 1
+                                                      ? _freeCoupon.toString()
+                                                      : '0',
+                                              style: TextStyle(
+                                                color: HexColor('#898989'),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      onTap: () => _goToPaymentPage(),
+                                      child: const Image(
+                                        image: AssetImage(
+                                            'Assets/Tickets/freeTicket.png'),
+                                        height: 35,
+                                        width: 35,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -342,9 +385,9 @@ class _myDrawerState extends State<myDrawer> {
   }
 
   _goToPaymentPage() {
-    if(globals.currentPage != 'PaymentPage') {
+    if (globals.currentPage != 'PaymentPage') {
       Navigator.of(context)
-        .pushNamedAndRemoveUntil('/PaymentPage', (route) => false);
+          .pushNamedAndRemoveUntil('/PaymentPage', (route) => false);
     }
   }
 
@@ -375,10 +418,11 @@ class _myDrawerState extends State<myDrawer> {
         if (body[0] == "success") {
           if (mounted) {
             setState(() {
-              _redCoupon = int.parse(body[1][0]);
-              _yellowCoupon = int.parse(body[1][1]);
-              _blueCoupon = int.parse(body[1][2]);
-              _greenCoupon = int.parse(body[1][3]);
+              _freeCoupon = int.parse(body[1][0]);
+              _redCoupon = int.parse(body[1][1]);
+              _yellowCoupon = int.parse(body[1][2]);
+              _blueCoupon = int.parse(body[1][3]);
+              _greenCoupon = int.parse(body[1][4]);
             });
           }
         } else if (body[0] == "empty") {

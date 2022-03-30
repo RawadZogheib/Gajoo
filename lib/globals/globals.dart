@@ -72,6 +72,7 @@ const String error405 = 'This teacher has no courses yet.';
 const String error406 = 'There is no courses available on this day.';
 const String warning407 = 'There is no teacehrs available.';
 const String success408 = "Payment Done Successfully.";///////
+const String error409 = 'Coupon already claimed!';
 //for AlertDialog
 String x = '0';
 

@@ -89,6 +89,7 @@ flutter:
      - Assets/HomePage/ProfilePicture/img2.png
      - Assets/HomePage/ProfilePicture/img3.png
      - Assets/HomePage/graphics/strikethrough2.png
+     - Assets/Tickets/freeTicket.png
      - Assets/Tickets/redTicket.png
      - Assets/Tickets/yellowTicket.png
      - Assets/Tickets/blueTicket.png

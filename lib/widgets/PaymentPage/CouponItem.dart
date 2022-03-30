@@ -22,6 +22,7 @@ class CouponItem extends StatefulWidget {
   double sliderValue;
   double imageWidth;
   Color color1;
+  bool enabled;
   bool buttonEnabled;
   var onBuy;
 
@@ -38,6 +39,7 @@ class CouponItem extends StatefulWidget {
     required this.price,
     required this.imageWidth,
     required this.color1,
+    this.enabled = true,
     required this.buttonEnabled,
     required this.onBuy,
   }) : super(key: key);
@@ -69,288 +71,322 @@ class _CouponItemState extends State<CouponItem> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => _hoverFlipperOnTap(),
-      onHover: (boolVal) => _hoverFlipperOnHover(boolVal),
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
-        child: SizedBox(
-          width: 375,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(
-                height: 30.0,
-              ),
-              FlipCard(
-                controller: flipCardController,
-                flipOnTouch: false,
-                front: Stack(
-                  alignment: Alignment.center,
-                  children: [
+    return IgnorePointer(
+      ignoring: false, //!widget.enabled,
+      child: Stack(
+        clipBehavior: Clip.antiAlias,
+        children: [
+          InkWell(
+            onTap: () => _hoverFlipperOnTap(),
+            onHover: (boolVal) => _hoverFlipperOnHover(boolVal),
+            child: Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
+              child: SizedBox(
+                width: 375,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    FlipCard(
+                      controller: flipCardController,
+                      flipOnTouch: false,
+                      front: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Ticket(
+                            innerRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0)),
+                            outerRadius:
+                                const BorderRadius.all(Radius.circular(10.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(0, 4.0),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Color.fromRGBO(196, 196, 196, .76),
+                              )
+                            ],
+                            child: Image.asset(
+                              widget.image,
+                              width: widget.imageWidth,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Positioned(
+                            top: 10,
+                            child: Text(
+                              widget.title,
+                              style:
+                                  TextStyle(fontSize: 18, color: widget.color1),
+                            ),
+                          ),
+                        ],
+                      ),
+                      back: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Ticket(
+                            innerRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0)),
+                            outerRadius:
+                                const BorderRadius.all(Radius.circular(10.0)),
+                            boxShadow: const [
+                              BoxShadow(
+                                offset: Offset(0, 4.0),
+                                blurRadius: 2.0,
+                                spreadRadius: 2.0,
+                                color: Color.fromRGBO(196, 196, 196, .76),
+                              )
+                            ],
+                            child: Container(
+                              height: widget.imageWidth,
+                              width: widget.imageWidth,
+                              color: Colors.white,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _isLoadText == true
+                                      ? _isFront == false
+                                          ? SizedBox(
+                                              width: 300,
+                                              child: PlaceholderLines(
+                                                maxWidth: 0.95,
+                                                minWidth: 0.62,
+                                                count: 5,
+                                                animate: true,
+                                                align: TextAlign.center,
+                                                color: widget.color1,
+                                              ),
+                                            )
+                                          : Container()
+                                      : _chooseText(widget.index),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 10,
+                            child: Text(
+                              widget.title,
+                              style:
+                                  TextStyle(fontSize: 18, color: widget.color1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     Ticket(
                       innerRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0)),
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0)),
                       outerRadius:
                           const BorderRadius.all(Radius.circular(10.0)),
                       boxShadow: const [
                         BoxShadow(
-                          offset: Offset(0, 4.0),
-                          blurRadius: 2.0,
-                          spreadRadius: 2.0,
-                          color: Color.fromRGBO(196, 196, 196, .76),
-                        )
-                      ],
-                      child: Image.asset(
-                        widget.image,
-                        width: widget.imageWidth,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      child: Text(
-                        widget.title,
-                        style: TextStyle(fontSize: 18, color: widget.color1),
-                      ),
-                    ),
-                  ],
-                ),
-                back: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Ticket(
-                      innerRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0)),
-                      outerRadius:
-                          const BorderRadius.all(Radius.circular(10.0)),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, 4.0),
+                          offset: Offset(0, 4),
                           blurRadius: 2.0,
                           spreadRadius: 2.0,
                           color: Color.fromRGBO(196, 196, 196, .76),
                         )
                       ],
                       child: Container(
-                        height: widget.imageWidth,
-                        width: widget.imageWidth,
                         color: Colors.white,
+                        height: 152,
+                        width: 300,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _isLoadText == true
-                                ? _isFront == false
-                                    ? SizedBox(
-                                        width: 300,
-                                        child: PlaceholderLines(
-                                          maxWidth: 0.95,
-                                          minWidth: 0.62,
-                                          count: 5,
-                                          animate: true,
-                                          align: TextAlign.center,
-                                          color: widget.color1,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  widget.buttonEnabled == true
+                                      ? InkWell(
+                                          onTap: () => setState(() {
+                                            widget.val > widget.valInit
+                                                ? widget.val -= widget.valInit
+                                                : widget.val;
+                                          }),
+                                          child: Icon(
+                                            Icons.remove,
+                                            color: widget.val > widget.valInit
+                                                ? widget.color1
+                                                : Colors.grey,
+                                          ),
+                                        )
+                                      : Container(),
+                                  Text(
+                                    ('${widget.val} COUPON') +
+                                        (widget.val > 1 ? 'S' : ''),
+                                    style: const TextStyle(fontSize: 18.0),
+                                  ),
+                                  widget.buttonEnabled == true
+                                      ? InkWell(
+                                          onTap: () => setState(() {
+                                            widget.val += widget.valInit;
+                                          }),
+                                          child: Icon(
+                                            Icons.add,
+                                            color: widget.color1,
+                                          ),
+                                        )
+                                      : Container(),
+                                ],
+                              ),
+                            ),
+                            const Divider(height: 0.0),
+                            Row(
+                              children: <Widget>[
+                                // Expanded(
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(8.0),
+                                //     child: Column(
+                                //       crossAxisAlignment: CrossAxisAlignment.center,
+                                //       children: const <Widget>[
+                                //         Text('Date'),
+                                //         FittedBox(
+                                //           child: Text(
+                                //             '08/17   ',
+                                //             style: TextStyle(
+                                //                 fontWeight: FontWeight.w600,
+                                //                 fontSize: 18.0),
+                                //           ),
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                                // Expanded(
+                                //     child: Padding(
+                                //   padding: const EdgeInsets.all(8.0),
+                                //   child: Column(
+                                //     crossAxisAlignment: CrossAxisAlignment.center,
+                                //     children: const <Widget>[
+                                //       Text('Time'),
+                                //       FittedBox(
+                                //         child: Text(
+                                //           '9:00PM',
+                                //           style: TextStyle(
+                                //               fontWeight: FontWeight.w600,
+                                //               fontSize: 18.0),
+                                //         ),
+                                //       )
+                                //     ],
+                                //   ),
+                                // )),
+                                Expanded(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Text('Price:'),
+                                      FittedBox(
+                                        child: Row(
+                                          children: [
+                                            widget.valInit == 6
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 4.0),
+                                                    child: StrikeThroughWidget2(
+                                                      child: Text(
+                                                        '${widget.val * int.parse(widget.price)}€',
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 18.0),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : widget.valInit == 12
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 4.0),
+                                                        child:
+                                                            StrikeThroughWidget2(
+                                                          child: Text(
+                                                            '${widget.val * int.parse(widget.price)}€',
+                                                            style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 18.0),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Container(),
+                                            Text(
+                                              widget.price != 'Free' &&
+                                                      widget.price != 'free'
+                                                  ? '${(widget.val - widget.couponDiscount) * int.parse(widget.price)}€'
+                                                  : 'Free',
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18.0),
+                                            ),
+                                          ],
                                         ),
                                       )
-                                    : Container()
-                                : _chooseText(widget.index),
+                                    ],
+                                  ),
+                                )),
+                              ],
+                            ),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () => _saveToken(),
+                                child: Container(
+                                  width: double.infinity,
+                                  color: widget.color1,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Center(
+                                    child: Text(
+                                      widget.buttonText,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 16.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: 10,
-                      child: Text(
-                        widget.title,
-                        style: TextStyle(fontSize: 18, color: widget.color1),
-                      ),
+                    const SizedBox(
+                      height: 30.0,
                     ),
                   ],
                 ),
               ),
-              Ticket(
-                innerRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0)),
-                outerRadius: const BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 4),
-                    blurRadius: 2.0,
-                    spreadRadius: 2.0,
-                    color: Color.fromRGBO(196, 196, 196, .76),
-                  )
-                ],
-                child: Container(
-                  color: Colors.white,
-                  height: 152,
-                  width: 300,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            widget.buttonEnabled == true
-                                ? InkWell(
-                                    onTap: () => setState(() {
-                                      widget.val > widget.valInit
-                                          ? widget.val -= widget.valInit
-                                          : widget.val;
-                                    }),
-                                    child: Icon(
-                                      Icons.remove,
-                                      color: widget.val > widget.valInit
-                                          ? widget.color1
-                                          : Colors.grey,
-                                    ),
-                                  )
-                                : Container(),
-                            Text(
-                              ('${widget.val} COUPON') +
-                                  (widget.val > 1 ? 'S' : ''),
-                              style: const TextStyle(fontSize: 18.0),
-                            ),
-                            widget.buttonEnabled == true
-                                ? InkWell(
-                                    onTap: () => setState(() {
-                                      widget.val += widget.valInit;
-                                    }),
-                                    child: Icon(
-                                      Icons.add,
-                                      color: widget.color1,
-                                    ),
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      ),
-                      const Divider(height: 0.0),
-                      Row(
-                        children: <Widget>[
-                          // Expanded(
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.all(8.0),
-                          //     child: Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.center,
-                          //       children: const <Widget>[
-                          //         Text('Date'),
-                          //         FittedBox(
-                          //           child: Text(
-                          //             '08/17   ',
-                          //             style: TextStyle(
-                          //                 fontWeight: FontWeight.w600,
-                          //                 fontSize: 18.0),
-                          //           ),
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          // Expanded(
-                          //     child: Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child: Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.center,
-                          //     children: const <Widget>[
-                          //       Text('Time'),
-                          //       FittedBox(
-                          //         child: Text(
-                          //           '9:00PM',
-                          //           style: TextStyle(
-                          //               fontWeight: FontWeight.w600,
-                          //               fontSize: 18.0),
-                          //         ),
-                          //       )
-                          //     ],
-                          //   ),
-                          // )),
-                          Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                const Text('Price:'),
-                                FittedBox(
-                                  child: Row(
-                                    children: [
-                                      widget.valInit == 6
-                                          ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 4.0),
-                                              child: StrikeThroughWidget2(
-                                                child: Text(
-                                                  '${widget.val * int.parse(widget.price)}€',
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 18.0),
-                                                ),
-                                              ),
-                                            )
-                                          : widget.valInit == 12
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 4.0),
-                                                  child: StrikeThroughWidget2(
-                                                    child: Text(
-                                                      '${widget.val * int.parse(widget.price)}€',
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 18.0),
-                                                    ),
-                                                  ),
-                                                )
-                                              : Container(),
-                                      Text(
-                                        widget.price != 'Free' &&
-                                                widget.price != 'free'
-                                            ? '${(widget.val - widget.couponDiscount) * int.parse(widget.price)}€'
-                                            : 'Free',
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 18.0),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )),
-                        ],
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () => _saveToken(),
-                          child: Container(
-                            width: double.infinity,
-                            color: widget.color1,
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Center(
-                              child: Text(
-                                widget.buttonText,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 16.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          widget.enabled == false
+              ? IgnorePointer(
+                  child: Container(
+                    height: 535,
+                    width: 385,
+                    color: Colors.grey.withOpacity(.3),
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                  width: 0,
+                ),
+        ],
       ),
     );
   }
@@ -514,60 +550,64 @@ class _CouponItemState extends State<CouponItem> {
   }
 
   Future<void> _saveToken() async {
-    if (_isSending == false) {
-      try {
-        print(
-            '=========>>======================================================>>==================================================>>=========');
-        _isSending = true;
-        print('Send payment');
+    if (widget.val > 0) {
+      if (_isSending == false) {
+        try {
+          print(
+              '=========>>======================================================>>==================================================>>=========');
+          _isSending = true;
+          print('Send payment');
 
-        var data = {
-          'version': globals.version,
-          'account_Id': await SessionManager().get("Id"),
-          'payment_code': (widget.index + 1).toString(),
-          'coupon_amount': widget.val.toString(),
-        };
+          var data = {
+            'version': globals.version,
+            'account_Id': await SessionManager().get("Id"),
+            'payment_code': (widget.index + 1).toString(),
+            'coupon_amount': widget.val.toString(),
+          };
 
-        var res = await CallApi()
-            .postData(data, '/Payment/Control/(Control)sendPayment.php');
-        print(res.body);
-        List<dynamic> body = json.decode(res.body);
+          var res = await CallApi()
+              .postData(data, '/Payment/Control/(Control)sendPayment.php');
+          print(res.body);
+          List<dynamic> body = json.decode(res.body);
 
-        if (body[0] == "success") {
-          widget.onBuy(widget.index,widget.val);
-          widget.val = widget.valInit;
-          SuccessPopup(context, globals.success408);
-        } else if (body[0] == "empty") {
-          WarningPopup(context, globals.error405);
-        } else if (body[0] == "errorVersion") {
-          if (mounted) {
-            ErrorPopup(context, globals.errorVersion);
+          if (body[0] == "success") {
+            widget.onBuy(widget.index, widget.val);
+            widget.val = widget.valInit;
+            SuccessPopup(context, globals.success408);
+          } else if (body[0] == "empty") {
+            WarningPopup(context, globals.error405);
+          } else if (body[0] == "errorVersion") {
+            if (mounted) {
+              ErrorPopup(context, globals.errorVersion);
+            }
+          } else if (body[0] == "errorToken") {
+            if (mounted) {
+              ErrorPopup(context, globals.errorToken);
+            }
+          } else if (body[0] == "error7") {
+            if (mounted) {
+              WarningPopup(context, globals.warning7);
+            }
+          } else {
+            _isSending = false;
+            if (mounted) {
+              ErrorPopup(context, globals.errorElse);
+            }
           }
-        } else if (body[0] == "errorToken") {
-          if (mounted) {
-            ErrorPopup(context, globals.errorToken);
-          }
-        } else if (body[0] == "error7") {
-          if (mounted) {
-            WarningPopup(context, globals.warning7);
-          }
-        } else {
+          _isSending = false;
+        } catch (e) {
+          print(e);
           _isSending = false;
           if (mounted) {
-            ErrorPopup(context, globals.errorElse);
+            ErrorPopup(context, globals.errorException);
           }
         }
-        _isSending = false;
-      } catch (e) {
-        print(e);
-        _isSending = false;
-        if (mounted) {
-          ErrorPopup(context, globals.errorException);
-        }
+        print('send payment end!!!');
+        print(
+            '=========<<======================================================<<==================================================<<=========');
       }
-      print('send payment end!!!');
-      print(
-          '=========<<======================================================<<==================================================<<=========');
+    }else{
+      ErrorPopup(context, globals.error409);
     }
   }
 }

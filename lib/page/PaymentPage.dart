@@ -20,6 +20,7 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  int? _freeCoupon;
   int? _redCoupon;
   int? _yellowCoupon;
   int? _blueCoupon;
@@ -28,7 +29,6 @@ class _PaymentPageState extends State<PaymentPage> {
   bool _isLoading = false;
 
   List<CouponItem> _children = [];
-
 
   @override
   void initState() {
@@ -46,40 +46,40 @@ class _PaymentPageState extends State<PaymentPage> {
       child: Scaffold(
         appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
-          backgroundColor: globals.whiteBlue,
-          elevation: 0,
-          title: Center(
-            child: Text(
-              'Gajoo',
-              style: TextStyle(
-                fontSize: 28,
-                color: HexColor('#333333'),
-              ),
-            ),
-          ),
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: HexColor('#333333'),
-              ),
-              onPressed: () {
-                _back();
-              }),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                icon: Icon(
-                  Icons.menu,
-                  color: HexColor('#333333'),
+                backgroundColor: globals.whiteBlue,
+                elevation: 0,
+                title: Center(
+                  child: Text(
+                    'Gajoo',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: HexColor('#333333'),
+                    ),
+                  ),
                 ),
-                onPressed: () => Scaffold.of(context).openEndDrawer(),
-              ),
-            ),
-          ],
-        )
+                leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: HexColor('#333333'),
+                    ),
+                    onPressed: () {
+                      _back();
+                    }),
+                actions: [
+                  Builder(
+                    builder: (context) => IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.menu,
+                        color: HexColor('#333333'),
+                      ),
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    ),
+                  ),
+                ],
+              )
             : null,
         endDrawer: myDrawer(),
         backgroundColor: globals.whiteBlue,
@@ -108,19 +108,49 @@ class _PaymentPageState extends State<PaymentPage> {
                               children: [
                                 _isLoading == true
                                     ? SizedBox(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    child: CircularProgressIndicator(
-                                        color: HexColor('#ec3227')))
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#898989')))
                                     : Text(
-                                  _redCoupon == null
-                                      ? '-'
-                                      : _redCoupon.toString(),
-                                  style: TextStyle(
-                                    color: HexColor('#ec3227'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                        _freeCoupon == null
+                                            ? '-'
+                                            : _freeCoupon == 1
+                                                ? _freeCoupon.toString()
+                                                : '0',
+                                        style: TextStyle(
+                                          color: HexColor('#898989'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/freeTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
                                 ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                _isLoading == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#ec3227')))
+                                    : Text(
+                                        _redCoupon == null
+                                            ? '-'
+                                            : _redCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#ec3227'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                 const SizedBox(width: 5),
                                 const Image(
                                   image: AssetImage(
@@ -136,19 +166,19 @@ class _PaymentPageState extends State<PaymentPage> {
                               children: [
                                 _isLoading == true
                                     ? SizedBox(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    child: CircularProgressIndicator(
-                                        color: HexColor('#f3b70c')))
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#f3b70c')))
                                     : Text(
-                                  _yellowCoupon == null
-                                      ? '-'
-                                      : _yellowCoupon.toString(),
-                                  style: TextStyle(
-                                    color: HexColor('#f3b70c'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                        _yellowCoupon == null
+                                            ? '-'
+                                            : _yellowCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#f3b70c'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                 const SizedBox(width: 5),
                                 const Image(
                                   image: AssetImage(
@@ -164,19 +194,19 @@ class _PaymentPageState extends State<PaymentPage> {
                               children: [
                                 _isLoading == true
                                     ? SizedBox(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    child: CircularProgressIndicator(
-                                        color: HexColor('#5576c3')))
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#5576c3')))
                                     : Text(
-                                  _blueCoupon == null
-                                      ? '-'
-                                      : _blueCoupon.toString(),
-                                  style: TextStyle(
-                                    color: HexColor('#5576c3'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                        _blueCoupon == null
+                                            ? '-'
+                                            : _blueCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#5576c3'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                 const SizedBox(width: 5),
                                 const Image(
                                   image: AssetImage(
@@ -192,19 +222,19 @@ class _PaymentPageState extends State<PaymentPage> {
                               children: [
                                 _isLoading == true
                                     ? SizedBox(
-                                    height: 10.0,
-                                    width: 10.0,
-                                    child: CircularProgressIndicator(
-                                        color: HexColor('#37ae44')))
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#37ae44')))
                                     : Text(
-                                  _greenCoupon == null
-                                      ? '-'
-                                      : _greenCoupon.toString(),
-                                  style: TextStyle(
-                                    color: HexColor('#37ae44'),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                        _greenCoupon == null
+                                            ? '-'
+                                            : _greenCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#37ae44'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                 const SizedBox(width: 5),
                                 const Image(
                                   image: AssetImage(
@@ -224,7 +254,8 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                       Container(
                         constraints: BoxConstraints(
-                          minHeight: MediaQuery.of(context).size.height*0.6,),
+                          minHeight: MediaQuery.of(context).size.height * 0.6,
+                        ),
                         alignment: Alignment.center,
                         child: Wrap(
                           alignment: WrapAlignment.center,
@@ -272,10 +303,28 @@ class _PaymentPageState extends State<PaymentPage> {
       if (body[0] == "success") {
         if (mounted) {
           setState(() {
-            _redCoupon = int.parse(body[1][0]);
-            _yellowCoupon = int.parse(body[1][1]);
-            _blueCoupon = int.parse(body[1][2]);
-            _greenCoupon = int.parse(body[1][3]);
+            _freeCoupon = int.parse(body[1][0]);
+            _redCoupon = int.parse(body[1][1]);
+            _yellowCoupon = int.parse(body[1][2]);
+            _blueCoupon = int.parse(body[1][3]);
+            _greenCoupon = int.parse(body[1][4]);
+
+            _children.insert(
+              0,
+              CouponItem(
+                index: 0,
+                title: 'STARTER',
+                buttonText: 'FREE COUPON',
+                image: 'Assets/Tickets/imageTicket0.png',
+                val: _freeCoupon == 0 ? 1 : 0,
+                price: 'Free',
+                imageWidth: 300,
+                color1: HexColor('#8e8e8e'),
+                enabled: _freeCoupon! == 0 ? true : false,
+                buttonEnabled: false,
+                onBuy: (index, val) => _updateMyCoupons(index, val),
+              ),
+            );
           });
         }
       } else if (body[0] == "empty") {
@@ -319,22 +368,9 @@ class _PaymentPageState extends State<PaymentPage> {
         '=========<<======================================================<<==================================================<<=========');
   }
 
-
   void _getOffers() {
     setState(() {
       _children = [
-        CouponItem(
-          index: 0,
-          title: 'STARTER',
-          buttonText: 'FREE COUPON',
-          image: 'Assets/Tickets/imageTicket0.png',
-          val: 1,
-          price: 'Free',
-          imageWidth: 300,
-          color1: HexColor('#8e8e8e'),
-          buttonEnabled: false,
-          onBuy: (index, val) => _updateMyCoupons(index, val),
-        ),
         CouponItem(
           index: 1,
           title: 'GO BASIC',
@@ -391,20 +427,35 @@ class _PaymentPageState extends State<PaymentPage> {
 
   _updateMyCoupons(int index, int val) {
     setState(() {
-      if(index == 0){
-
-      }else if(index == 1){
+      if (index == 0) {
+        _freeCoupon = 1;
+        setState(() {
+          _children.removeAt(0);
+          _children.insert(
+            0,
+            CouponItem(
+              index: 0,
+              title: 'STARTER',
+              buttonText: 'FREE COUPON',
+              image: 'Assets/Tickets/imageTicket0.png',
+              val: _freeCoupon == 0 ? 1 : 0,
+              price: 'Free',
+              imageWidth: 300,
+              color1: HexColor('#8e8e8e'),
+              enabled: _freeCoupon! == 0 ? true : false,
+              buttonEnabled: false,
+              onBuy: (index, val) => _updateMyCoupons(index, val),
+            ),
+          );
+        });
+      } else if (index == 1) {
         _redCoupon = _redCoupon! + val;
-
-      }else if(index == 2){
+      } else if (index == 2) {
         _yellowCoupon = _yellowCoupon! + val;
-
-      }else if(index == 3){
+      } else if (index == 3) {
         _blueCoupon = _blueCoupon! + val;
-
-      }else if(index == 4){
+      } else if (index == 4) {
         _greenCoupon = _greenCoupon! + val;
-
       }
     });
   }
@@ -412,5 +463,4 @@ class _PaymentPageState extends State<PaymentPage> {
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
-
 }
