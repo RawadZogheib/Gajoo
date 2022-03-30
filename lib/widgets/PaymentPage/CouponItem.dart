@@ -23,6 +23,7 @@ class CouponItem extends StatefulWidget {
   double imageWidth;
   Color color1;
   bool buttonEnabled;
+  var onBuy;
 
   CouponItem({
     Key? key,
@@ -38,6 +39,7 @@ class CouponItem extends StatefulWidget {
     required this.imageWidth,
     required this.color1,
     required this.buttonEnabled,
+    required this.onBuy,
   }) : super(key: key);
 
   @override
@@ -532,6 +534,7 @@ class _CouponItemState extends State<CouponItem> {
         List<dynamic> body = json.decode(res.body);
 
         if (body[0] == "success") {
+          widget.onBuy(widget.index,widget.val);
           widget.val = widget.valInit;
           SuccessPopup(context, globals.success408);
         } else if (body[0] == "empty") {

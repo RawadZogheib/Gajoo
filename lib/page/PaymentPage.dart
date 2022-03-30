@@ -27,71 +27,14 @@ class _PaymentPageState extends State<PaymentPage> {
   final int _key = 0;
   bool _isLoading = false;
 
-  final List<CouponItem> _children = [
-    CouponItem(
-      index: 0,
-      title: 'STARTER',
-      buttonText: 'FREE COUPON',
-      image: 'Assets/Tickets/imageTicket0.png',
-      val: 1,
-      price: 'Free',
-      imageWidth: 300,
-      color1: HexColor('#8e8e8e'),
-      buttonEnabled: false,
-    ),
-    CouponItem(
-      index: 1,
-      title: 'GO BASIC',
-      buttonText: 'BUY COUPONS',
-      image: 'Assets/Tickets/imageTicket1.png',
-      price: '20',
-      imageWidth: 300,
-      color1: HexColor('#ec3227'),
-      buttonEnabled: true,
-    ),
-    CouponItem(
-      index: 2,
-      title: 'DELUXE',
-      buttonText: 'BUY COUPONS',
-      image: 'Assets/Tickets/imageTicket2.png',
-      price: '20',
-      val: 6,
-      valInit: 6,
-      couponDiscount: 1,
-      imageWidth: 300,
-      color1: HexColor('#f3b70c'),
-      buttonEnabled: true,
-    ),
-    CouponItem(
-      index: 3,
-      title: 'OPTIMUM',
-      buttonText: 'BUY COUPONS',
-      image: 'Assets/Tickets/imageTicket3.png',
-      price: '20',
-      val: 12,
-      valInit: 12,
-      couponDiscount: 2,
-      imageWidth: 300,
-      color1: HexColor('#5576c3'),
-      buttonEnabled: true,
-    ),
-    CouponItem(
-      index: 4,
-      title: 'MAGNUM (Group Session Pack)',
-      buttonText: 'BUY COUPONS',
-      image: 'Assets/Tickets/imageTicket4.png',
-      price: '13',
-      imageWidth: 300,
-      color1: HexColor('#37ae44'),
-      buttonEnabled: true,
-    ),
-  ];
+  List<CouponItem> _children = [];
 
 
   @override
   void initState() {
     // TODO: implement initState
     globals.currentPage = 'PaymentPage';
+    _getOffers();
     _getCoupons();
     super.initState();
   }
@@ -376,7 +319,96 @@ class _PaymentPageState extends State<PaymentPage> {
         '=========<<======================================================<<==================================================<<=========');
   }
 
+
+  void _getOffers() {
+    _children = [
+      CouponItem(
+        index: 0,
+        title: 'STARTER',
+        buttonText: 'FREE COUPON',
+        image: 'Assets/Tickets/imageTicket0.png',
+        val: 1,
+        price: 'Free',
+        imageWidth: 300,
+        color1: HexColor('#8e8e8e'),
+        buttonEnabled: false,
+        onBuy: (index, val) => _updateMyCoupons(index, val),
+      ),
+      CouponItem(
+        index: 1,
+        title: 'GO BASIC',
+        buttonText: 'BUY COUPONS',
+        image: 'Assets/Tickets/imageTicket1.png',
+        price: '20',
+        imageWidth: 300,
+        color1: HexColor('#ec3227'),
+        buttonEnabled: true,
+        onBuy: (index, val) => _updateMyCoupons(index, val),
+      ),
+      CouponItem(
+        index: 2,
+        title: 'DELUXE',
+        buttonText: 'BUY COUPONS',
+        image: 'Assets/Tickets/imageTicket2.png',
+        price: '20',
+        val: 6,
+        valInit: 6,
+        couponDiscount: 1,
+        imageWidth: 300,
+        color1: HexColor('#f3b70c'),
+        buttonEnabled: true,
+        onBuy: (index, val) => _updateMyCoupons(index, val),
+      ),
+      CouponItem(
+        index: 3,
+        title: 'OPTIMUM',
+        buttonText: 'BUY COUPONS',
+        image: 'Assets/Tickets/imageTicket3.png',
+        price: '20',
+        val: 12,
+        valInit: 12,
+        couponDiscount: 2,
+        imageWidth: 300,
+        color1: HexColor('#5576c3'),
+        buttonEnabled: true,
+        onBuy: (index, val) => _updateMyCoupons(index, val),
+      ),
+      CouponItem(
+        index: 4,
+        title: 'MAGNUM (Group Session Pack)',
+        buttonText: 'BUY COUPONS',
+        image: 'Assets/Tickets/imageTicket4.png',
+        price: '13',
+        imageWidth: 300,
+        color1: HexColor('#37ae44'),
+        buttonEnabled: true,
+        onBuy: (index, val) => _updateMyCoupons(index, val),
+      ),
+    ];
+  }
+
+  _updateMyCoupons(int index, int val) {
+    setState(() {
+      if(index == 0){
+
+      }else if(index == 1){
+        _redCoupon = _redCoupon! + val;
+
+      }else if(index == 2){
+        _yellowCoupon = _yellowCoupon! + val;
+
+      }else if(index == 3){
+        _blueCoupon = _blueCoupon! + val;
+
+      }else if(index == 4){
+        _greenCoupon = _greenCoupon! + val;
+
+      }
+    });
+  }
+
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
+
 }
