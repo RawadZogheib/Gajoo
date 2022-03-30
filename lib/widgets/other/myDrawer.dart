@@ -91,14 +91,14 @@ class _myDrawerState extends State<myDrawer> {
                                       child: const Image(
                                         image: AssetImage(
                                             'Assets/Tickets/redTicket.png'),
-                                        height: 40,
-                                        width: 40,
+                                        height: 35,
+                                        width: 35,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(width: 15),
+                                const SizedBox(width: 10),
                                 Row(
                                   children: [
                                     InkWell(
@@ -131,14 +131,14 @@ class _myDrawerState extends State<myDrawer> {
                                       child: const Image(
                                         image: AssetImage(
                                             'Assets/Tickets/yellowTicket.png'),
-                                        height: 40,
-                                        width: 40,
+                                        height: 35,
+                                        width: 35,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(width: 15),
+                                const SizedBox(width: 10),
                                 Row(
                                   children: [
                                     InkWell(
@@ -171,14 +171,14 @@ class _myDrawerState extends State<myDrawer> {
                                       child: const Image(
                                         image: AssetImage(
                                             'Assets/Tickets/blueTicket.png'),
-                                        height: 40,
-                                        width: 40,
+                                        height: 35,
+                                        width: 35,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(width: 15),
+                                const SizedBox(width: 10),
                                 Row(
                                   children: [
                                     InkWell(
@@ -211,8 +211,8 @@ class _myDrawerState extends State<myDrawer> {
                                       child: const Image(
                                         image: AssetImage(
                                             'Assets/Tickets/greenTicket.png'),
-                                        height: 40,
-                                        width: 40,
+                                        height: 35,
+                                        width: 35,
                                         fit: BoxFit.cover,
                                       ),
                                     ),

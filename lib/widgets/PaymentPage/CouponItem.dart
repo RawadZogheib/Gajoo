@@ -532,7 +532,7 @@ class _CouponItemState extends State<CouponItem> {
         List<dynamic> body = json.decode(res.body);
 
         if (body[0] == "success") {
-          widget.val = 0;
+          widget.val = widget.valInit;
           SuccessPopup(context, globals.success408);
         } else if (body[0] == "empty") {
           WarningPopup(context, globals.error405);
