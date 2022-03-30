@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CouponItem extends StatefulWidget {
   int index;
@@ -11,6 +16,8 @@ class CouponItem extends StatefulWidget {
   String buttonText;
   String image;
   int val;
+  int valInit;
+  int couponDiscount;
   String price;
   double sliderValue;
   double imageWidth;
@@ -23,7 +30,9 @@ class CouponItem extends StatefulWidget {
     required this.title,
     required this.buttonText,
     required this.image,
-    this.val = 0,
+    this.val = 1,
+    this.valInit = 1,
+    this.couponDiscount = 0,
     this.sliderValue = 0.3,
     required this.price,
     required this.imageWidth,
@@ -40,8 +49,8 @@ class _CouponItemState extends State<CouponItem> {
   bool _isFlipping = false;
   bool _isFront = true;
   bool _isLoadText = true;
+  bool _isSending = false;
   Timer? _timer;
-  int k = 0;
 
   @override
   void initState() {
@@ -58,7 +67,6 @@ class _CouponItemState extends State<CouponItem> {
 
   @override
   Widget build(BuildContext context) {
-    print(k++);
     return InkWell(
       onTap: () => _hoverFlipperOnTap(),
       onHover: (boolVal) => _hoverFlipperOnHover(boolVal),
@@ -189,13 +197,13 @@ class _CouponItemState extends State<CouponItem> {
                             widget.buttonEnabled == true
                                 ? InkWell(
                                     onTap: () => setState(() {
-                                      widget.val > 0
-                                          ? widget.val--
+                                      widget.val > widget.valInit
+                                          ? widget.val -= widget.valInit
                                           : widget.val;
                                     }),
                                     child: Icon(
                                       Icons.remove,
-                                      color: widget.val > 0
+                                      color: widget.val > widget.valInit
                                           ? widget.color1
                                           : Colors.grey,
                                     ),
@@ -209,7 +217,7 @@ class _CouponItemState extends State<CouponItem> {
                             widget.buttonEnabled == true
                                 ? InkWell(
                                     onTap: () => setState(() {
-                                      widget.val++;
+                                      widget.val += widget.valInit;
                                     }),
                                     child: Icon(
                                       Icons.add,
@@ -223,76 +231,76 @@ class _CouponItemState extends State<CouponItem> {
                       const Divider(height: 0.0),
                       Row(
                         children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const <Widget>[
-                                  Text('Date'),
-                                  FittedBox(
-                                    child: Text(
-                                      '08/17   ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18.0),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const <Widget>[
-                                Text('Time'),
-                                FittedBox(
-                                  child: Text(
-                                    '9:00PM',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18.0),
-                                  ),
-                                )
-                              ],
-                            ),
-                          )),
+                          // Expanded(
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(8.0),
+                          //     child: Column(
+                          //       crossAxisAlignment: CrossAxisAlignment.center,
+                          //       children: const <Widget>[
+                          //         Text('Date'),
+                          //         FittedBox(
+                          //           child: Text(
+                          //             '08/17   ',
+                          //             style: TextStyle(
+                          //                 fontWeight: FontWeight.w600,
+                          //                 fontSize: 18.0),
+                          //           ),
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          // Expanded(
+                          //     child: Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     children: const <Widget>[
+                          //       Text('Time'),
+                          //       FittedBox(
+                          //         child: Text(
+                          //           '9:00PM',
+                          //           style: TextStyle(
+                          //               fontWeight: FontWeight.w600,
+                          //               fontSize: 18.0),
+                          //         ),
+                          //       )
+                          //     ],
+                          //   ),
+                          // )),
                           Expanded(
                               child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                const Text('Price'),
+                                const Text('Price:'),
                                 FittedBox(
                                   child: Row(
                                     children: [
-                                      widget.price == '100'
-                                          ? const Padding(
-                                              padding: EdgeInsets.only(
+                                      widget.valInit == 6
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
                                                   right: 4.0),
                                               child: StrikeThroughWidget2(
                                                 child: Text(
-                                                  '120€',
-                                                  style: TextStyle(
+                                                  '${widget.val * int.parse(widget.price)}€',
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       fontSize: 18.0),
                                                 ),
                                               ),
                                             )
-                                          : widget.price == '200'
-                                              ? const Padding(
+                                          : widget.valInit == 12
+                                              ? Padding(
                                                   padding:
-                                                      EdgeInsets.only(
+                                                      const EdgeInsets.only(
                                                           right: 4.0),
                                                   child: StrikeThroughWidget2(
                                                     child: Text(
-                                                      '240€',
-                                                      style: TextStyle(
+                                                      '${widget.val * int.parse(widget.price)}€',
+                                                      style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontSize: 18.0),
@@ -303,7 +311,7 @@ class _CouponItemState extends State<CouponItem> {
                                       Text(
                                         widget.price != 'Free' &&
                                                 widget.price != 'free'
-                                            ? '${widget.price}€'
+                                            ? '${(widget.val - widget.couponDiscount) * int.parse(widget.price)}€'
                                             : 'Free',
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w600,
@@ -318,15 +326,18 @@ class _CouponItemState extends State<CouponItem> {
                         ],
                       ),
                       Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          color: widget.color1,
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Center(
-                            child: Text(
-                              widget.buttonText,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16.0),
+                        child: InkWell(
+                          onTap: () => _saveToken(),
+                          child: Container(
+                            width: double.infinity,
+                            color: widget.color1,
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Center(
+                              child: Text(
+                                widget.buttonText,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 16.0),
+                              ),
                             ),
                           ),
                         ),
@@ -397,24 +408,24 @@ class _CouponItemState extends State<CouponItem> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    thumbShape:
-                        const RoundSliderThumbShape(enabledThumbRadius: 0.0),
-                    overlayShape:
-                        const RoundSliderThumbShape(enabledThumbRadius: 0.0),
-                  ),
-                  child: Slider(
-                    value: widget.sliderValue,
-                    max: 12,
-                    activeColor: widget.color1,
-                    onChanged: (double value) {},
-                  ),
-                ),
-              ),
+              // const SizedBox(height: 10),
+              // Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: SliderTheme(
+              //     data: SliderTheme.of(context).copyWith(
+              //       thumbShape:
+              //           const RoundSliderThumbShape(enabledThumbRadius: 0.0),
+              //       overlayShape:
+              //           const RoundSliderThumbShape(enabledThumbRadius: 0.0),
+              //     ),
+              //     child: Slider(
+              //       value: widget.sliderValue,
+              //       max: 12,
+              //       activeColor: widget.color1,
+              //       onChanged: (double value) {},
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );
@@ -498,6 +509,63 @@ class _CouponItemState extends State<CouponItem> {
       });
     }
     _isFlipping = false;
+  }
+
+  Future<void> _saveToken() async {
+    if (_isSending == false) {
+      try {
+        print(
+            '=========>>======================================================>>==================================================>>=========');
+        _isSending = true;
+        print('Send payment');
+
+        var data = {
+          'version': globals.version,
+          'account_Id': await SessionManager().get("Id"),
+          'payment_code': (widget.index + 1).toString(),
+          'coupon_amount': widget.val.toString(),
+        };
+
+        var res = await CallApi()
+            .postData(data, '/Payment/Control/(Control)sendPayment.php');
+        print(res.body);
+        List<dynamic> body = json.decode(res.body);
+
+        if (body[0] == "success") {
+          widget.val = 0;
+          SuccessPopup(context, globals.success408);
+        } else if (body[0] == "empty") {
+          WarningPopup(context, globals.error405);
+        } else if (body[0] == "errorVersion") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorVersion);
+          }
+        } else if (body[0] == "errorToken") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorToken);
+          }
+        } else if (body[0] == "error7") {
+          if (mounted) {
+            WarningPopup(context, globals.warning7);
+          }
+        } else {
+          _isSending = false;
+          if (mounted) {
+            ErrorPopup(context, globals.errorElse);
+          }
+        }
+        _isSending = false;
+      } catch (e) {
+        print(e);
+        _isSending = false;
+        if (mounted) {
+          ErrorPopup(context, globals.errorException);
+        }
+      }
+      print('send payment end!!!');
+      print(
+          '=========<<======================================================<<==================================================<<=========');
+    }
   }
 }
 
