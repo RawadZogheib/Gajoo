@@ -8,6 +8,7 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
+import 'package:gajoo/widgets/code/codeDialogChangePass.dart';
 import 'package:gajoo/widgets/other/MyHeader.dart';
 import 'package:gajoo/widgets/other/myDrawer.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
@@ -45,16 +46,20 @@ class _MySettingsState extends State<MySettings> {
   Color colUserName_1 = globals.blue_1;
   Color colUserName_2 = globals.blue_2;
 
+  bool _isgreen = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     globals.currentPage = "MySettings";
     _sessionGet();
+    //_checkColor();
   }
 
   @override
   Widget build(BuildContext context) {
+    //print("michel");
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
@@ -120,6 +125,7 @@ class _MySettingsState extends State<MySettings> {
                             colBlue_2: colFName_2,
                             onChange: (value) {
                               FName = value;
+                              _checkColor();
                             },
                           ),
                         ),
@@ -145,6 +151,7 @@ class _MySettingsState extends State<MySettings> {
                             colBlue_2: colLName_2,
                             onChange: (value) {
                               LName = value;
+                              _checkColor();
                             },
                           ),
                         ),
@@ -152,14 +159,64 @@ class _MySettingsState extends State<MySettings> {
                           height: 5,
                         ),
                         myErrorText(errorText: errLName, color: colErrLName),
-                        const SizedBox(
-                          height: 10,
-                        ),
+
                         Padding(
                           padding: EdgeInsets.only(
                               right: MediaQuery.of(context).size.width * 0.3),
+                          child: myTextInput2(
+                            initialValue: UserName,
+                            textString: 'Enter your UserName',
+                            labelText: 'Enter your UserName',
+                            spaceAllowed: true,
+                            enterAllowed: false,
+                            obscure: false,
+                            colBlue: colUserName,
+                            colBlue_1: colUserName_1,
+                            colBlue_2: colUserName_2,
+                            onChange: (value) {
+                              UserName = value;
+                              _checkColor();
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(
+                            errorText: errUserName, color: colErrUserName),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: _isgreen == true ? Colors.green : Colors.grey,
+                            ),
+                            onPressed: (){
+                              _isgreen == true ? _check() : null;
+                            },
+                            child: Text("Confirm Changes",
+                              style: TextStyle(
+                                color: _isgreen == true ? Colors.green.shade200 : Colors.grey.shade200,
+                              ),
+                            ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        myErrorText(errorText: errTxt, color: colErrTxt),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Divider(color: Colors.black,),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.215),
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.2,
+                            width: MediaQuery.of(context).size.width * 0.25,
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12.0),
@@ -187,49 +244,62 @@ class _MySettingsState extends State<MySettings> {
                         const SizedBox(
                           height: 35,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * 0.3),
-                          child: myTextInput2(
-                            initialValue: UserName,
-                            textString: 'Enter your UserName',
-                            labelText: 'Enter your UserName',
-                            spaceAllowed: true,
-                            enterAllowed: false,
-                            obscure: false,
-                            colBlue: colUserName,
-                            colBlue_1: colUserName_1,
-                            colBlue_2: colUserName_2,
-                            onChange: (value) {
-                              UserName = value;
-                            },
-                          ),
-                        ),
+                        const Divider(color: Colors.black,),
                         const SizedBox(
-                          height: 5,
-                        ),
-                        myErrorText(
-                            errorText: errUserName, color: colErrUserName),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        myBtn2(
-                          btnText: const Text(
-                            "Confirm Changes",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
                           height: 40,
-                          width: 150,
-                          color1: globals.blue,
-                          color2: globals.blue_1,
-                          onPress: () {
-                            _check();
-                          },
                         ),
-                        const SizedBox(
-                          height: 5,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  color: globals.blue,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        'Password:',
+                                        style: TextStyle(color: globals.blue_1),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text("*************",
+                                          style: TextStyle(color: globals.blue_2)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.green,
+                                  ),
+                                  onPressed: (){
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) => const codeDialogChangePass())
+                                        .then((exit) {
+                                      if (mounted) {
+                                        setState(() {
+                                          //_nullTextCode();
+                                        });
+                                      }
+                                    });
+                                  },
+                                  child: const Text("Change Password",
+                                    style: TextStyle(color: Colors.white70),))
+                            ],
+                          ),
                         ),
-                        myErrorText(errorText: errTxt, color: colErrTxt),
+
                       ],
                     ),
                   ),
@@ -250,7 +320,7 @@ class _MySettingsState extends State<MySettings> {
     );
   }
 
-  _check() {
+  _check() async {
     bool isEmpty = false;
 
     errFName = '';
@@ -332,8 +402,9 @@ class _MySettingsState extends State<MySettings> {
     }
 
     if (isEmpty == false) {
-      _changeDb();
+        _changeDb();
     }
+
   }
 
   _changeDb() async {
@@ -342,7 +413,7 @@ class _MySettingsState extends State<MySettings> {
     try {
       var data = {
         'version': globals.version,
-        'email': Email,
+        'account_Id': await SessionManager().get("Id"),
         'fname': FName,
         'lname': LName,
         'username': UserName,
@@ -355,10 +426,13 @@ class _MySettingsState extends State<MySettings> {
 
       //print(body[1]);
       //print("welcome");
+      //print(body[0]);
       if (body[0] == "success") {
         await SessionManager().set('fName', FName);
         await SessionManager().set('lName', LName);
         await SessionManager().set('userName', UserName);
+        _sessionGet();
+        _checkColor();
 
       } else if (body[0] == "errorToken") {
         if (mounted) {
@@ -444,6 +518,27 @@ class _MySettingsState extends State<MySettings> {
       setState(() {
         UserName;
       });
+    }
+  }
+
+
+  _checkColor() async {
+    if (FName !=  await SessionManager().get("fName") ||
+        LName !=  await SessionManager().get("lName") ||
+        UserName !=  await SessionManager().get("userName")){
+      //make  green
+      if (_isgreen == false){
+        setState(() {
+          _isgreen = true;
+        });
+      }
+    }else{
+    //make  grey
+      if (_isgreen == true){
+        setState(() {
+          _isgreen = false;
+        });
+      }
     }
   }
 
