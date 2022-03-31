@@ -41,13 +41,15 @@ class MyCoursesList extends StatelessWidget {
                 //     DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now().toUtc())));
                 return MyCoursesItem(
                   width: 400,
-                  text1: coursesList[index][0],
-                  date: coursesList[index][1],
-                  meetingDuration: int.parse(coursesList[index][2]),
+                  courseId: coursesList[index][0],
+                  courseName: coursesList[index][1],
+                  date: coursesList[index][2],
+                  courseDuration: int.parse(coursesList[index][3]),
+                  teacherId: coursesList[index][4],
+                  teacherName: coursesList[index][5],
                   onTap: () {
-                    coursesList[index][3]();
-                  },
-                );
+                    coursesList[index][11]();
+                  },);
               }),
         ),
       ),
@@ -57,16 +59,22 @@ class MyCoursesList extends StatelessWidget {
 
 class MyCoursesItem extends StatelessWidget {
   double width;
-  String text1;
+  String courseId;
+  String courseName;
   String date;
-  int meetingDuration;
+  int courseDuration;
+  String teacherId;
+  String teacherName;
   final String _url = '${globals.myIP}/jaas/?userName=rawad&room=1';
   var onTap;
 
   MyCoursesItem({required this.width,
-    required this.text1,
+    required this.courseId,
+    required this.courseName,
     required this.date,
-    required this.meetingDuration,
+    required this.courseDuration,
+    required this.teacherId,
+    required this.teacherName,
     required this.onTap,});
 
   @override
@@ -94,7 +102,7 @@ class MyCoursesItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    text1,
+                    courseName,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
@@ -118,7 +126,7 @@ class MyCoursesItem extends StatelessWidget {
                     DateFormat('yyyy-MM-dd HH:mm').format(
                         DateTime.now().toUtc()))
                     .isBefore(DateTime.parse(date)
-                    .add(Duration(minutes: meetingDuration)))) ||
+                    .add(Duration(minutes: courseDuration)))) ||
                 DateTime.parse(
                     DateFormat('yyyy-MM-dd HH:mm').format(
                         DateTime.now().toUtc()))
@@ -178,7 +186,7 @@ class MyCoursesItem extends StatelessWidget {
                 : DateTime.parse(DateFormat('yyyy-MM-dd HH:mm')
                 .format(DateTime.now()))
                 .isAfter(
-                DateTime.parse(date).add(Duration(minutes: meetingDuration)))
+                DateTime.parse(date).add(Duration(minutes: courseDuration)))
                 ? InkWell(
               onTap: () => ErrorPopup(context, 'Meeting Expired'),
               child: ClipRRect(
