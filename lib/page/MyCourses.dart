@@ -261,7 +261,6 @@ class _MyCoursesState extends State<MyCourses> {
                 }
               ],
             );
-            print(_coursesList);
           }
 
           if (mounted) {
