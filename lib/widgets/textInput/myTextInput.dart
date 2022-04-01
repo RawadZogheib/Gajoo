@@ -108,6 +108,7 @@ class myTextInput2 extends StatelessWidget {
     return TextFormField(
       key: Key(initialValue),
       initialValue: initialValue!,
+      autofocus: true,
       onChanged: onChange,
       textAlign: TextAlign.left,
       cursorColor: Colors.black,

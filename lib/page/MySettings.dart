@@ -489,7 +489,7 @@ class _MySettingsState extends State<MySettings> {
   _sessionGet() async {
     FName = await SessionManager().get("fName");
     LName = await SessionManager().get("lName");
-    Email = await SessionManager().get("email");
+    Email = (await SessionManager().get("email")).toString();
     UserName = await SessionManager().get("userName");
     if (FName == null || FName == '' || FName == 'null') {
       //do nothing
