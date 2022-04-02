@@ -106,7 +106,7 @@ class _MyCoursesState extends State<MyCourses> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           controller: ScrollController(),
-                          child: Row(
+                          child: _coursesList.isNotEmpty?Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
@@ -169,6 +169,14 @@ class _MyCoursesState extends State<MyCourses> {
                                       ),
                                     ),
                             ],
+                          ):SizedBox(
+                            height: MediaQuery.of(context).size.height *
+                                0.8,
+                            width: 900,
+                            child: Image.asset(
+                            'Assets/noCoursesFound.png',
+                            fit: BoxFit.contain,
+                        ),
                           ),
                         ),
                       ),
