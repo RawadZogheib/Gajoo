@@ -90,22 +90,18 @@ class _MySettingsState extends State<MySettings> {
         endDrawer: myDrawer(),
         body: SingleChildScrollView(
           child: Stack(
+            alignment: Alignment.center,
             children: [
               Column(
                 children: [
                   const MyHeader(),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.48,
-                    height: MediaQuery.of(context).size.height * 0.415,
-                    color: globals.whiteBlue,
-                    child: Image.asset('Assets/SettingsPage/books.jpg'),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.478,
-                    height: MediaQuery.of(context).size.height * 0.9,
+                    width: 730,
+                    height: 1120,
                     color: Colors.white70,
                     child: Column(
                       children: [
+                        Image.asset('Assets/SettingsPage/books.jpg'),
                         const SizedBox(
                           height: 60,
                         ),
@@ -212,33 +208,29 @@ class _MySettingsState extends State<MySettings> {
                         const SizedBox(
                           height: 40,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * 0.215),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.25,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: globals.blue,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    'Email:',
-                                    style: TextStyle(color: globals.blue_1),
-                                  ),
+                        Container(
+                          width: 300,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: globals.blue,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  'Email:',
+                                  style: TextStyle(color: globals.blue_1),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(Email,
-                                      style: TextStyle(color: globals.blue_2)),
-                                ),
-                              ],
-                            ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(Email,
+                                    style: TextStyle(color: globals.blue_2)),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(
@@ -254,7 +246,7 @@ class _MySettingsState extends State<MySettings> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.2,
+                                width: 200,
                                 height: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -305,10 +297,9 @@ class _MySettingsState extends State<MySettings> {
                   ),
                 ],
               ),
-              Positioned(
-                  left: MediaQuery.of(context).size.width * 0.435,
-                  top: MediaQuery.of(context).size.height * 0.42,
-                  child: const Icon(
+              const Positioned(
+                  top: 330,
+                  child: Icon(
                     Icons.account_circle_rounded,
                     size: 200,
                     color: Colors.blueGrey,
@@ -330,9 +321,9 @@ class _MySettingsState extends State<MySettings> {
     errUserName = '';
     colErrUserName = globals.transparent;
 
-    print(FName);
-    print(LName);
-    print(UserName);
+    // print(FName);
+    // print(LName);
+    // print(UserName);
 
     if (FName != '' && FName != null && FName != 'null') {
       setState(() {
