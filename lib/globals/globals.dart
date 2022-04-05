@@ -107,6 +107,12 @@ List<dynamic> Countries = ['Afghanistan','Albania','Algeria','Andorra','Angola',
                           'Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom',
                           'United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
 
+//for type,language,level
+String? type;
+String? language;
+String? level;
+
+
 //for 6 digit code
 String? sixCodeNb;
 
