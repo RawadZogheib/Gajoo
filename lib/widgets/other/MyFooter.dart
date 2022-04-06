@@ -3,9 +3,14 @@ import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/other/Responsive.dart';
 
-class MyFooter extends StatelessWidget {
+class MyFooter extends StatefulWidget {
   const MyFooter({Key? key}) : super(key: key);
 
+  @override
+  State<MyFooter> createState() => _MyFooterState();
+}
+
+class _MyFooterState extends State<MyFooter> {
   @override
   Widget build(BuildContext context) {
     return Responsive(
@@ -43,7 +48,7 @@ class MyFooter extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () => null,
+                        onTap: () => _goToPaymentPage(),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
@@ -218,7 +223,7 @@ class MyFooter extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () => null,
+                        onTap: () => _goToPaymentPage(),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
@@ -393,7 +398,7 @@ class MyFooter extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () => null,
+                        onTap: () => _goToPaymentPage(),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
@@ -535,5 +540,12 @@ class MyFooter extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _goToPaymentPage() {
+    if (globals.currentPage != 'PaymentPage') {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/PaymentPage', (route) => false);
+    }
   }
 }

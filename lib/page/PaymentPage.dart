@@ -25,8 +25,7 @@ class _PaymentPageState extends State<PaymentPage> {
   int? _yellowCoupon;
   int? _blueCoupon;
   int? _greenCoupon;
-  final int _key = 0;
-  bool _isLoading = false;
+  bool _isLoadingTickets = false;
 
   List<CouponItem> _children = [];
 
@@ -106,7 +105,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           children: [
                             Row(
                               children: [
-                                _isLoading == true
+                                _isLoadingTickets == true
                                     ? SizedBox(
                                         height: 10.0,
                                         width: 10.0,
@@ -136,7 +135,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                _isLoading == true
+                                _isLoadingTickets == true
                                     ? SizedBox(
                                         height: 10.0,
                                         width: 10.0,
@@ -164,7 +163,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                _isLoading == true
+                                _isLoadingTickets == true
                                     ? SizedBox(
                                         height: 10.0,
                                         width: 10.0,
@@ -192,7 +191,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                _isLoading == true
+                                _isLoadingTickets == true
                                     ? SizedBox(
                                         height: 10.0,
                                         width: 10.0,
@@ -220,7 +219,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             const SizedBox(width: 15),
                             Row(
                               children: [
-                                _isLoading == true
+                                _isLoadingTickets == true
                                     ? SizedBox(
                                         height: 10.0,
                                         width: 10.0,
@@ -285,7 +284,7 @@ class _PaymentPageState extends State<PaymentPage> {
           '=========>>======================================================>>==================================================>>=========');
       if (mounted) {
         setState(() {
-          _isLoading = true;
+          _isLoadingTickets = true;
         });
       }
       print('Load tickets');
@@ -344,21 +343,21 @@ class _PaymentPageState extends State<PaymentPage> {
       } else {
         if (mounted) {
           setState(() {
-            _isLoading = false;
+            _isLoadingTickets = false;
           });
           ErrorPopup(context, globals.errorElse);
         }
       }
       if (mounted) {
         setState(() {
-          _isLoading = false;
+          _isLoadingTickets = false;
         });
       }
     } catch (e) {
       print(e);
       if (mounted) {
         setState(() {
-          _isLoading = false;
+          _isLoadingTickets = false;
         });
         ErrorPopup(context, globals.errorException);
       }

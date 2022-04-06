@@ -30,11 +30,19 @@ class _CalendarPageState extends State<CalendarPage> {
   Set<String> _greenList = {};
   Set<String> _redList = {};
 
+  int? _freeCoupon;
+  int? _redCoupon;
+  int? _yellowCoupon;
+  int? _blueCoupon;
+  int? _greenCoupon;
+  bool _isLoadingTickets = false;
+
   @override
   void initState() {
     // TODO: implement initState
     globals.currentPage = 'CalendarPage';
     _loadDates();
+    _getCoupons();
     super.initState();
   }
 
@@ -94,6 +102,155 @@ class _CalendarPageState extends State<CalendarPage> {
                   controller: ScrollController(),
                   child: Column(
                     children: [
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              children: [
+                                _isLoadingTickets == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#898989')))
+                                    : Text(
+                                        _freeCoupon == null
+                                            ? '-'
+                                            : _freeCoupon == 1
+                                                ? _freeCoupon.toString()
+                                                : '0',
+                                        style: TextStyle(
+                                          color: HexColor('#898989'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/freeTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                _isLoadingTickets == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#ec3227')))
+                                    : Text(
+                                        _redCoupon == null
+                                            ? '-'
+                                            : _redCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#ec3227'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/redTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                _isLoadingTickets == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#f3b70c')))
+                                    : Text(
+                                        _yellowCoupon == null
+                                            ? '-'
+                                            : _yellowCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#f3b70c'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/yellowTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                _isLoadingTickets == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#5576c3')))
+                                    : Text(
+                                        _blueCoupon == null
+                                            ? '-'
+                                            : _blueCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#5576c3'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/blueTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 15),
+                            Row(
+                              children: [
+                                _isLoadingTickets == true
+                                    ? SizedBox(
+                                        height: 10.0,
+                                        width: 10.0,
+                                        child: CircularProgressIndicator(
+                                            color: HexColor('#37ae44')))
+                                    : Text(
+                                        _greenCoupon == null
+                                            ? '-'
+                                            : _greenCoupon.toString(),
+                                        style: TextStyle(
+                                          color: HexColor('#37ae44'),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                const SizedBox(width: 5),
+                                const Image(
+                                  image: AssetImage(
+                                      'Assets/Tickets/greenTicket.png'),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       ScrollConfiguration(
                         behavior: MyCustomScrollBehavior(),
                         child: SingleChildScrollView(
@@ -291,6 +448,79 @@ class _CalendarPageState extends State<CalendarPage> {
       print(
           '=========<<======================================================<<==================================================<<=========');
     }
+  }
+
+  Future<void> _getCoupons() async {
+    try {
+      print(
+          '=========>>======================================================>>==================================================>>=========');
+      if (mounted) {
+        setState(() {
+          _isLoadingTickets = true;
+        });
+      }
+      print('Load tickets');
+
+      var data = {
+        'version': globals.version,
+        'account_Id': await SessionManager().get("Id"),
+      };
+
+      var res = await CallApi()
+          .postData(data, '/Payment/Control/(Control)loadCoupons.php');
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
+      if (body[0] == "success") {
+        if (mounted) {
+          setState(() {
+            _freeCoupon = int.parse(body[1][0]);
+            _redCoupon = int.parse(body[1][1]);
+            _yellowCoupon = int.parse(body[1][2]);
+            _blueCoupon = int.parse(body[1][3]);
+            _greenCoupon = int.parse(body[1][4]);
+
+          });
+        }
+      } else if (body[0] == "empty") {
+        WarningPopup(context, globals.error405);
+      } else if (body[0] == "errorVersion") {
+        if (mounted) {
+          ErrorPopup(context, globals.errorVersion);
+        }
+      } else if (body[0] == "errorToken") {
+        if (mounted) {
+          ErrorPopup(context, globals.errorToken);
+        }
+      } else if (body[0] == "error7") {
+        if (mounted) {
+          WarningPopup(context, globals.warning7);
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _isLoadingTickets = false;
+          });
+          ErrorPopup(context, globals.errorElse);
+        }
+      }
+      if (mounted) {
+        setState(() {
+          _isLoadingTickets = false;
+        });
+      }
+    } catch (e) {
+      print(e);
+      if (mounted) {
+        setState(() {
+          _isLoadingTickets = false;
+        });
+        ErrorPopup(context, globals.errorException);
+      }
+    }
+    print('load library end!!!');
+    print(
+        '=========<<======================================================<<==================================================<<=========');
   }
 
   _back() {
