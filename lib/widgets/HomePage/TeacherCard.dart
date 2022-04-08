@@ -94,7 +94,7 @@ class _TeacherCardState extends State<TeacherCard> {
                     child: Column(
                       children: [
                         Image.asset(widget.imageUrl,
-                            height: 90, fit: BoxFit.cover),
+                            height: 87, fit: BoxFit.cover),
                         const Spacer(),
                         Text(widget.name,
                             textAlign: TextAlign.center,

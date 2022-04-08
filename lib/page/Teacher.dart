@@ -38,7 +38,6 @@ class _TeacherState extends State<Teacher> {
   Timer? timer;
   int _key = 0;
   var _age;
-  var _id;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,

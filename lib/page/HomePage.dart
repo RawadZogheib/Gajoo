@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomImage.dart';
@@ -86,154 +88,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: (Id) {}),
   ];
 
-  final List<Widget> _teachers = [
-    TeacherCard(
-        Id: '1',
-        name: 'Ghada Zogheib',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: true,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Michel Nachar',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: false,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Rawad Zogheib',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: true,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Clara Zeidan',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: false,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Felix Gedeon',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: false,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Piere ElAsmar',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: true,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-      Id: '1',
-      name: 'Philips Maalouf',
-      age: "24",
-      NbOfCourses: "45",
-      NbOfCoursesReserved: "40",
-      NbOfCoursesLeft: "5",
-      imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-      languageView: {},
-      isHeart: false,
-      isButton: false,
-      listOfCharacteristic_t: [],
-      liked: false,
-      isHidden: false,
-      isHidable: false,
-      onPressed: (Id) {},
-    ),
-    TeacherCard(
-        Id: '1',
-        name: 'Joe Skandar',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: false,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-    TeacherCard(
-        Id: '1',
-        name: 'Nabil Kenaan',
-        age: "24",
-        NbOfCourses: "45",
-        NbOfCoursesReserved: "40",
-        NbOfCoursesLeft: "5",
-        imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-        languageView: {},
-        isHeart: false,
-        isButton: false,
-        listOfCharacteristic_t: [],
-        liked: true,
-        isHidden: false,
-        isHidable: false,
-        onPressed: (Id) {}),
-  ];
 
+  List<TeacherCard> _TeacherCardList = [];
+  var _age;
+  int _key = 0;
   int _currentActive = 0;
   late Timer _timer;
   final int _duration = 5;
@@ -254,6 +112,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     globals.currentPage = 'HomePage';
     super.initState();
+    _loadTeachers();
 
     //_pageController = PageController(initialPage: 0, viewportFraction: .2);
     _timer = Timer.periodic(Duration(seconds: _duration), (Timer t) async {
@@ -678,7 +537,7 @@ class _HomePageState extends State<HomePage> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       //print(index % _teachers.length);
-                                      return _teachers[index % _teachers.length];
+                                      return _TeacherCardList[index % _TeacherCardList.length];
                                     }),
                               ),
                             ),
@@ -1054,7 +913,7 @@ class _HomePageState extends State<HomePage> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       //print(index % _teachers.length);
-                                      return _teachers[index % _teachers.length];
+                                      return _TeacherCardList[index % _TeacherCardList.length];
                                     }),
                               ),
                             ),
@@ -1468,7 +1327,7 @@ class _HomePageState extends State<HomePage> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       //print(index % _teachers.length);
-                                      return _teachers[index % _teachers.length];
+                                      return _TeacherCardList[index % _TeacherCardList.length];
                                     }),
                               ),
                             ),
@@ -1488,6 +1347,113 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+
+  _loadTeachers() async {
+    // load from db
+
+    //try {
+    print('load Teacher');
+
+    var data = {
+      'version': globals.version,
+    };
+
+    var res = await CallApi()
+        .postData(data, '/Teacher/Control/(Control)getTeacherInfo.php');
+    print(res.body);
+    List<dynamic> body = json.decode(res.body);
+
+    _TeacherCardList.clear();
+
+    if (body[0] == "success") {
+      //print(body[1]);
+
+      for (int i = 0; i < body[1].length; i++) {
+        Set<String> _tempLanguageView = {};
+        List<Characteristic_t> _tempListOfCharacteristic_t = [];
+        _age = DateTime.now().year - DateTime.parse(body[1][i][2]).year;
+        print(_age);
+
+        //print(body[1][i][3] + "hhhhhhhhhhhhh");
+        for (int j = 0; j < body[1][i][5].length; j++) {
+          if (body[1][i][5][j][1] == "Arabic" ||
+              body[1][i][5][j][1] == "arabic") {
+            //for language
+            _tempLanguageView.add("Arabic");
+          } else if (body[1][i][5][j][1] == "French" ||
+              body[1][i][5][j][1] == "french") {
+            _tempLanguageView.add("French");
+          } else if (body[1][i][5][j][1] == "English" ||
+              body[1][i][5][j][1] == "english") {
+            _tempLanguageView.add("English");
+          }
+          _tempListOfCharacteristic_t.add(Characteristic_t(
+              type: body[1][i][5][j][0],
+              language: body[1][i][5][j][1],
+              level: body[1][i][5][j][2]));
+        }
+
+        _TeacherCardList.add(
+          TeacherCard(
+              key: ValueKey(_key++),
+              Id: body[1][i][0],
+              name: body[1][i][1],
+              age: _age.toString(),
+              NbOfCourses: body[1][i][3],
+              NbOfCoursesReserved: body[1][i][4],
+              NbOfCoursesLeft:
+              (int.parse(body[1][i][3]) - int.parse(body[1][i][4]))
+                  .toString(),
+              imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+              languageView: _tempLanguageView,
+              isHeart: false,
+              isHeartLikedTeacher: false,
+              isButton: true,
+              liked: false,
+              isHidden: false,
+              listOfCharacteristic_t: _tempListOfCharacteristic_t,
+              isHidable: true,
+              onPressed: () {}),
+        );
+      }
+
+      setState(() {
+        _TeacherCardList;
+      });
+
+      // if (mounted) {
+      //   setState(() {
+      //     _greenList;
+      //     _redList;
+      //   });
+      // }
+    } else if (body[0] == "empty") {
+      WarningPopup(context, globals.warning407);
+    } else if (body[0] == "errorVersion") {
+      if (mounted) {
+        ErrorPopup(context, globals.errorVersion);
+      }
+    } else if (body[0] == "errorToken") {
+      if (mounted) {
+        ErrorPopup(context, globals.errorToken);
+      }
+    } else if (body[0] == "error7") {
+      if (mounted) {
+        WarningPopup(context, globals.warning7);
+      }
+    } else {
+      if (mounted) {
+        ErrorPopup(context, globals.errorElse);
+      }
+    }
+    // } catch (e) {
+    //   print(e);
+    //   if (mounted) {
+    //     ErrorPopup(context, globals.errorException);
+    //   }
+    // }
   }
 
   _checkIfIsLoggedIn() {
