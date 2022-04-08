@@ -30,12 +30,6 @@ Color level2 = HexColor('#dfe2e6');
 Color level3 = HexColor('#dfe2e6');
 
 class Teacher extends StatefulWidget {
-  String type;
-  String languages;
-  String level;
-
-  Teacher({required this.type, required this.languages, required this.level});
-
   @override
   _TeacherState createState() => _TeacherState();
 }
@@ -44,13 +38,14 @@ class _TeacherState extends State<Teacher> {
   Timer? timer;
   int _key = 0;
   var _age;
+  var _id;
 
   final InfiniteScrollController _infiniteController = InfiniteScrollController(
     initialScrollOffset: 0.0,
   );
 
-  List<TeacherCard> _TeacherCard = [];
   List<TeacherCard> _TeacherCardList = [];
+  List<TeacherCard> _TeacherCardListFiltered = [];
 
   @override
   void initState() {
@@ -65,9 +60,6 @@ class _TeacherState extends State<Teacher> {
   @override
   void dispose() {
     // TODO: implement dispose
-    widget.type = '';
-    widget.languages = '';
-    widget.level = '';
     super.dispose();
   }
 
@@ -100,11 +92,7 @@ class _TeacherState extends State<Teacher> {
                     }),
               )
             : null,
-        drawer: MyDrawerFilter(
-          type: widget.type,
-          languages: widget.languages,
-          level: widget.level,
-        ),
+        drawer: MyDrawerFilter(),
         endDrawer: myDrawer(),
         body: Responsive(
           mobile: Builder(
@@ -134,7 +122,9 @@ class _TeacherState extends State<Teacher> {
                                           bottomLeft: Radius.circular(12.5),
                                         ),
                                         child: Container(
-                                          height: MediaQuery.of(context).size.height *
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.7,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
@@ -147,7 +137,8 @@ class _TeacherState extends State<Teacher> {
                                             child: SingleChildScrollView(
                                               controller: ScrollController(),
                                               child: Wrap(
-                                                children: _TeacherCard,
+                                                children:
+                                                    _TeacherCardListFiltered,
                                               ),
                                             ),
                                           ),
@@ -200,8 +191,8 @@ class _TeacherState extends State<Teacher> {
                                     ),
                                     child: Container(
                                       height:
-                                      MediaQuery.of(context).size.height *
-                                          0.7,
+                                          MediaQuery.of(context).size.height *
+                                              0.7,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius:
@@ -213,7 +204,7 @@ class _TeacherState extends State<Teacher> {
                                         child: SingleChildScrollView(
                                           controller: ScrollController(),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _TeacherCardListFiltered,
                                           ),
                                         ),
                                       ),
@@ -281,7 +272,7 @@ class _TeacherState extends State<Teacher> {
                                         child: SingleChildScrollView(
                                           controller: ScrollController(),
                                           child: Wrap(
-                                            children: _TeacherCard,
+                                            children: _TeacherCardListFiltered,
                                           ),
                                         ),
                                       ),
@@ -311,10 +302,7 @@ class _TeacherState extends State<Teacher> {
         floatingActionButton: Builder(
           builder: (context) => FloatingActionButton(
             onPressed: () => MediaQuery.of(context).size.width < 650
-                ? _open(
-                    type: widget.type,
-                    languages: widget.languages,
-                    level: widget.level)
+                ? _open()
                 : Scaffold.of(context).openDrawer(),
             tooltip: 'Filter',
             child: const Icon(Icons.add),
@@ -331,7 +319,7 @@ class _TeacherState extends State<Teacher> {
     // _loadTeachers(); //0
     // _loadPage(); //1 -> INFINI
     await _loadTeachers();
-    //_checkFilter();
+    _checkFilter();
     _choosedFilters();
   }
 
@@ -350,17 +338,17 @@ class _TeacherState extends State<Teacher> {
     print(res.body);
     List<dynamic> body = json.decode(res.body);
 
-    _TeacherCard.clear();
+    _TeacherCardList.clear();
 
     if (body[0] == "success") {
       //print(body[1]);
 
       for (int i = 0; i < body[1].length; i++) {
+        Set<String> _tempLanguageView = {};
+        List<Characteristic_t> _tempListOfCharacteristic_t = [];
         _age = DateTime.now().year - DateTime.parse(body[1][i][2]).year;
         print(_age);
 
-        Set<String> _tempLanguageView = {};
-        List<Characteristic_t> _tempListOfCharacteristic_t = [];
         //print(body[1][i][3] + "hhhhhhhhhhhhh");
         for (int j = 0; j < body[1][i][5].length; j++) {
           if (body[1][i][5][j][1] == "Arabic" ||
@@ -380,15 +368,17 @@ class _TeacherState extends State<Teacher> {
               level: body[1][i][5][j][2]));
         }
 
-
-        _TeacherCard.add(
+        _TeacherCardList.add(
           TeacherCard(
+              key: ValueKey(_key++),
               Id: body[1][i][0],
               name: body[1][i][1],
               age: _age.toString(),
               NbOfCourses: body[1][i][3],
               NbOfCoursesReserved: body[1][i][4],
-              NbOfCoursesLeft: (int.parse(body[1][i][3]) - int.parse(body[1][i][4])).toString(),
+              NbOfCoursesLeft:
+                  (int.parse(body[1][i][3]) - int.parse(body[1][i][4]))
+                      .toString(),
               imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
               languageView: _tempLanguageView,
               isHeart: true,
@@ -401,10 +391,10 @@ class _TeacherState extends State<Teacher> {
               onPressed: () {}),
         );
       }
-
-      setState(() {
-        _TeacherCard;
-      });
+      //
+      // setState(() {
+      //   _TeacherCard;
+      // });
 
       // if (mounted) {
       //   setState(() {
@@ -440,130 +430,166 @@ class _TeacherState extends State<Teacher> {
   }
 
   _choosedFilters() {
-    if (widget.type == "red") {
+    if (globals.type == "Language Lessons") {
       if (mounted) {
         setState(() {
           type1 = Colors.yellowAccent;
+          _checkFilter();
         });
       }
-    } else if (widget.type == "yellow") {
+    } else if (globals.type == "Native Speaking") {
       if (mounted) {
         setState(() {
           type2 = Colors.yellowAccent;
+          _checkFilter();
         });
       }
-    } else if (widget.type == "green") {
+    } else if (globals.type == "Diploma Certificate") {
       if (mounted) {
         setState(() {
           type3 = Colors.yellowAccent;
+          _checkFilter();
         });
       }
     }
 
-    if (widget.languages == "English") {
+    if (globals.language == "English") {
       if (mounted) {
         setState(() {
           language1 = Colors.redAccent;
+          _checkFilter();
         });
       }
-    } else if (widget.languages == "French") {
+    } else if (globals.language == "French") {
       if (mounted) {
         setState(() {
           language2 = Colors.redAccent;
+          _checkFilter();
         });
       }
-    } else if (widget.languages == "Arabic") {
+    } else if (globals.language == "Arabic") {
       if (mounted) {
         setState(() {
           language3 = Colors.redAccent;
+          _checkFilter();
         });
       }
     }
 
-    if (widget.level == "beginner") {
+    if (globals.level == "beginner") {
       if (mounted) {
         setState(() {
           level1 = Colors.indigo;
+          _checkFilter();
         });
       }
-    } else if (widget.level == "intermediate") {
+    } else if (globals.level == "intermediate") {
       if (mounted) {
         setState(() {
           level2 = Colors.indigo;
-          print(widget.level);
+          _checkFilter();
+          print(globals.level);
         });
       }
-    } else if (widget.level == "advanced") {
+    } else if (globals.level == "advanced") {
       if (mounted) {
         setState(() {
           level3 = Colors.indigo;
+          _checkFilter();
         });
       }
     }
   }
 
-  // _checkFilter() {
-  //   _TeacherCardList.clear();
-  //     for (int i = 0; i < _TeacherCard.length; i++) {
-  //       print(widget.type);
-  //       print(_TeacherCard[i].type);
-  //       print(widget.languages);
-  //       print(_TeacherCard[i].languages);
-  //       print(widget.level);
-  //       print(_TeacherCard[i].level);
-  //
-  //       if ( !_TeacherCard[i].type.contains(widget.type) ||
-  //            !_TeacherCard[i].languages.contains(widget.languages) ||
-  //            !_TeacherCard[i].level.contains(widget.level)) {
-  //
-  //
-  //         _TeacherCardList.add(
-  //           TeacherCard(
-  //             key: ValueKey(_key++),
-  //             name: _TeacherCard[i].name,
-  //             imageUrl: _TeacherCard[i].imageUrl,
-  //             languageView: _TeacherCard[i].languageView,
-  //             isHeart: _TeacherCard[i].isHeart,
-  //             isHeartLikedTeacher: _TeacherCard[i].isHeartLikedTeacher,
-  //             isButton: _TeacherCard[i].isButton,
-  //             liked: _TeacherCard[i].liked,
-  //             isHidden: true,
-  //             type: _TeacherCard[i].type,
-  //             languages: _TeacherCard[i].languages,
-  //             level: _TeacherCard[i].level,
-  //             isHidable: _TeacherCard[i].isHidable,
-  //             onPressed: () => _TeacherCard[i].onPressed(),),
-  //         );
-  //
-  //         print("trueeeeeeeeeeeee: $i");
-  //       }else{
-  //         _TeacherCardList.add(
-  //           TeacherCard(
-  //             key: ValueKey(_key++),
-  //             name: _TeacherCard[i].name,
-  //             imageUrl: _TeacherCard[i].imageUrl,
-  //             languageView: _TeacherCard[i].languageView,
-  //             isHeart: _TeacherCard[i].isHeart,
-  //             isHeartLikedTeacher: _TeacherCard[i].isHeartLikedTeacher,
-  //             isButton: _TeacherCard[i].isButton,
-  //             liked: _TeacherCard[i].liked,
-  //             isHidden: false,
-  //             type: _TeacherCard[i].type,
-  //             languages: _TeacherCard[i].languages,
-  //             level: _TeacherCard[i].level,
-  //             isHidable: _TeacherCard[i].isHidable,
-  //             onPressed: () => _TeacherCard[i].onPressed(),),
-  //         );
-  //
-  //       }
-  //       print(i);
-  //       print("============================================================");
-  //     }
-  //     setState(() {
-  //       _TeacherCardList;
-  //     });
-  //
-  // }
+  _checkFilter() {
+    _TeacherCardListFiltered.clear();
+    for (int i = 0; i < _TeacherCardList.length; i++) {
+      // print(widget.type);
+      print(_TeacherCardList[i].Id + " " + _TeacherCardList[i].name);
+
+      //print(_TeacherCard[i].listOfCharacteristic_t.length);
+
+      for (int j = 0;
+          j < _TeacherCardList[i].listOfCharacteristic_t.length;
+          j++) {
+        //print(_TeacherCard[i].listOfCharacteristic_t[j].type);
+
+        print(_TeacherCardList[i].listOfCharacteristic_t[j].type +
+            " " +
+            j.toString() +
+            " " +
+            _TeacherCardList[i].listOfCharacteristic_t[j].language +
+            " " +
+            j.toString() +
+            " " +
+            _TeacherCardList[i].listOfCharacteristic_t[j].level +
+            " " +
+            j.toString() +
+            " " +
+            _TeacherCardList[i].age);
+        // print(widget.languages);
+        // print(widget.level);
+        if (_TeacherCardList[i].listOfCharacteristic_t[j].type !=
+                globals.type ||
+            _TeacherCardList[i].listOfCharacteristic_t[j].language !=
+                globals.language ||
+            _TeacherCardList[i].listOfCharacteristic_t[j].level !=
+                globals.level) {
+          _TeacherCardListFiltered.add(
+            TeacherCard(
+                key: ValueKey(_key++),
+                Id: _TeacherCardList[i].Id,
+                name: _TeacherCardList[i].name,
+                age: _TeacherCardList[i].age,
+                NbOfCourses: _TeacherCardList[i].NbOfCourses,
+                NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
+                NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
+                imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+                languageView: _TeacherCardList[i].languageView,
+                isHeart: true,
+                isHeartLikedTeacher: false,
+                isButton: true,
+                liked: false,
+                isHidden: true,
+                listOfCharacteristic_t:
+                    _TeacherCardList[i].listOfCharacteristic_t,
+                isHidable: true,
+                onPressed: () {}),
+          );
+
+          print("trueeeeeeeeeeeee: $i");
+        } else {
+          _TeacherCardListFiltered.add(
+            TeacherCard(
+                key: ValueKey(_key++),
+                Id: _TeacherCardList[i].Id,
+                name: _TeacherCardList[i].name,
+                age: _TeacherCardList[i].age,
+                NbOfCourses: _TeacherCardList[i].NbOfCourses,
+                NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
+                NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
+                imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+                languageView: _TeacherCardList[i].languageView,
+                isHeart: true,
+                isHeartLikedTeacher: false,
+                isButton: true,
+                liked: false,
+                isHidden: false,
+                listOfCharacteristic_t:
+                    _TeacherCardList[i].listOfCharacteristic_t,
+                isHidable: true,
+                onPressed: () {}),
+          );
+        }
+      }
+      print(i);
+      print(
+          "========================================================================================================");
+    }
+    setState(() {
+      _TeacherCardListFiltered;
+    });
+  }
 
   _cleanColorType() {
     if (mounted) {
@@ -595,7 +621,7 @@ class _TeacherState extends State<Teacher> {
     }
   }
 
-  MyDrawerFilter({String? type, String? languages, String? level}) {
+  MyDrawerFilter() {
     return Drawer(
       child: Material(
         color: HexColor('#222222'), //globals.blue1,
@@ -640,10 +666,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                widget.type = "red";
+                                globals.type = "Language Lessons";
                                 type1 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -664,10 +690,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                widget.type = "yellow";
+                                globals.type = "Native Speaking";
                                 type2 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -688,10 +714,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                widget.type = "green";
+                                globals.type = "Diploma Certificate";
                                 type3 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -722,10 +748,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLanguage();
                             if (mounted) {
                               setState(() {
-                                widget.languages = "English";
+                                globals.language = "English";
                                 language1 = Colors.redAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -746,10 +772,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLanguage();
                             if (mounted) {
                               setState(() {
-                                widget.languages = "French";
+                                globals.language = "French";
                                 language2 = Colors.redAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -770,10 +796,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLanguage();
                             if (mounted) {
                               setState(() {
-                                widget.languages = "Arabic";
+                                globals.language = "Arabic";
                                 language3 = Colors.redAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -804,10 +830,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLevel();
                             if (mounted) {
                               setState(() {
-                                widget.level = "beginner";
+                                globals.level = "beginner";
                                 level1 = Colors.indigo;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -828,10 +854,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLevel();
                             if (mounted) {
                               setState(() {
-                                widget.level = "intermediate";
+                                globals.level = "intermediate";
                                 level2 = Colors.indigo;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -852,10 +878,10 @@ class _TeacherState extends State<Teacher> {
                             _cleanColorLevel();
                             if (mounted) {
                               setState(() {
-                                widget.level = "advanced";
+                                globals.level = "advanced";
                                 level3 = Colors.indigo;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -871,7 +897,7 @@ class _TeacherState extends State<Teacher> {
     );
   }
 
-  _open({String? type, String? languages, String? level}) {
+  _open() {
     showModalBottomSheet<void>(
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -925,10 +951,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      widget.type = "red";
+                                      globals.type = "Language Lessons";
                                       type1 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -950,10 +976,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      widget.type = "yellow";
+                                      globals.type = "Native Speaking";
                                       type2 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -975,10 +1001,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      widget.type = "green";
+                                      globals.type = "Diploma Certificate";
                                       type3 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1010,10 +1036,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLanguage();
                                   if (mounted) {
                                     setState(() {
-                                      widget.languages = "English";
+                                      globals.language = "English";
                                       language1 = Colors.redAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1035,10 +1061,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLanguage();
                                   if (mounted) {
                                     setState(() {
-                                      widget.languages = "French";
+                                      globals.language = "French";
                                       language2 = Colors.redAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1060,10 +1086,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLanguage();
                                   if (mounted) {
                                     setState(() {
-                                      widget.languages = "Arabic";
+                                      globals.language = "Arabic";
                                       language3 = Colors.redAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1095,10 +1121,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLevel();
                                   if (mounted) {
                                     setState(() {
-                                      widget.level = "beginner";
+                                      globals.level = "beginner";
                                       level1 = Colors.indigo;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1120,10 +1146,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLevel();
                                   if (mounted) {
                                     setState(() {
-                                      widget.level = "intermediate";
+                                      globals.level = "intermediate";
                                       level2 = Colors.indigo;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -1145,10 +1171,10 @@ class _TeacherState extends State<Teacher> {
                                   _cleanColorLevel();
                                   if (mounted) {
                                     setState(() {
-                                      widget.level = "advanced";
+                                      globals.level = "advanced";
                                       level3 = Colors.indigo;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
