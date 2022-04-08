@@ -343,19 +343,19 @@ class _myDrawerMobileState extends State<myDrawerMobile> {
   }
 
   _choosedFilters() {
-    if (widget.type == "red") {
+    if (widget.type == "Language Lessons") {
       if (mounted) {
         setState(() {
           type1 = Colors.yellowAccent;
         });
       }
-    } else if (widget.type == "yellow") {
+    } else if (widget.type == "Native Speaking") {
       if (mounted) {
         setState(() {
           type2 = Colors.yellowAccent;
         });
       }
-    } else if (widget.type == "green") {
+    } else if (widget.type == "Diploma Certificate") {
       if (mounted) {
         setState(() {
           type3 = Colors.yellowAccent;

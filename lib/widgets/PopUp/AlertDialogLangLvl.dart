@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/page/Teacher.dart';
 
 import '../button/myButton.dart';
 
-
 class AlertDialogLangLvl extends StatefulWidget {
-  String types;
   Color pageColor;
-  AlertDialogLangLvl({required this.types,required this.pageColor});
+
+  AlertDialogLangLvl({required this.pageColor});
 
   @override
   _AlertDialogLangLvlState createState() => _AlertDialogLangLvlState();
@@ -18,8 +17,6 @@ class AlertDialogLangLvl extends StatefulWidget {
 class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
   String _x = '0';
   late String _type;
-  late String _languages;
-  late String _level;
   String? _text = 'Choose The Language';
   Color? _btnColor;
 
@@ -33,14 +30,16 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
         topLeft: Radius.circular(32.0),
         topRight: Radius.circular(32.0),
         bottomLeft: Radius.circular(32.0),
         bottomRight: Radius.circular(32.0),
       )),
       backgroundColor: widget.pageColor,
-      contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
+      contentPadding:
+          const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
       title: Center(
         child: Text(_text!,
             style: const TextStyle(
@@ -59,7 +58,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                   bottomLeft: Radius.circular(32.0),
                   bottomRight: Radius.circular(32.0),
                 ),
-                  color: Colors.white,
+                color: Colors.white,
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -80,15 +79,15 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                           height: 65,
                           width: 200,
                           onPress: () {
-                            if(mounted) {
+                            if (mounted) {
                               setState(() {
                                 _x = '1';
                                 _text = 'Choose Your Level';
-                                _languages = "English";
-                                _type = widget.types;
+                                globals.language = "English";
+                                _type = globals.type!;
                               });
                             }
-                            print("language: $_languages");
+                            print("language: ${globals.language}");
                             print("types: $_type");
                           }),
                     ),
@@ -105,15 +104,15 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                         height: 65,
                         width: 200,
                         onPress: () {
-                          if(mounted) {
+                          if (mounted) {
                             setState(() {
                               _x = '1';
                               _text = 'Choose Your Level';
-                              _languages = "French";
-                              _type = widget.types;
+                              globals.language = "French";
+                              _type = globals.type!;
                             });
                           }
-                          print("language: $_languages");
+                          print("language: ${globals.language}");
                           print("types: $_type");
                         },
                       ),
@@ -131,15 +130,15 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                         height: 65,
                         width: 200,
                         onPress: () {
-                          if(mounted) {
+                          if (mounted) {
                             setState(() {
                               _x = '1';
                               _text = 'Choose Your Level';
-                              _languages = "Arabic";
-                              _type = widget.types;
+                              globals.language = "Arabic";
+                              _type = globals.type!;
                             });
                           }
-                          print("language: $_languages");
+                          print("language: ${globals.language}");
                           print("types: $_type");
                         },
                       ),
@@ -159,8 +158,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                         bottomLeft: Radius.circular(32.0),
                         bottomRight: Radius.circular(32.0),
                       ),
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                   child: SingleChildScrollView(
                     child: Container(
                       child: Center(
@@ -170,7 +168,7 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if(mounted) {
+                                    if (mounted) {
                                       setState(() {
                                         _x = '0';
                                         _text = 'Choose The Language';
@@ -178,10 +176,14 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                     }
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, top: 8.0),
                                     child: Container(
                                         alignment: Alignment.topLeft,
-                                        child: const Icon(Icons.arrow_back, size: 23,)),
+                                        child: const Icon(
+                                          Icons.arrow_back,
+                                          size: 23,
+                                        )),
                                   ),
                                 ),
                               ],
@@ -200,18 +202,17 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                 height: 65,
                                 width: 200,
                                 onPress: () {
-                                  if(mounted) {
+                                  if (mounted) {
                                     setState(() {
-                                      _level = "beginner";
+                                      globals.level = "beginner";
                                     });
-                                    Navigator.pushAndRemoveUntil(context,
-                                      MaterialPageRoute(builder: (context) => Teacher(
-                                        type: _type,
-                                        languages: _languages,
-                                        level: _level,
-                                      )),(route) => false);
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Teacher()),
+                                        (route) => false);
                                   }
-                                  print("level: $_level");
+                                  print("level: ${globals.level}");
                                 },
                               ),
                             ),
@@ -229,18 +230,17 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                 height: 65,
                                 width: 200,
                                 onPress: () {
-                                  if(mounted) {
+                                  if (mounted) {
                                     setState(() {
-                                      _level = "intermediate";
+                                      globals.level = "intermediate";
                                     });
-                                    Navigator.pushAndRemoveUntil(context,
-                                        MaterialPageRoute(builder: (context) => Teacher(
-                                          type: _type,
-                                          languages: _languages,
-                                          level: _level,
-                                        )),(route) => false);
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Teacher()),
+                                        (route) => false);
                                   }
-                                  print("level: $_level");
+                                  print("level: ${globals.level}");
                                 },
                               ),
                             ),
@@ -258,18 +258,17 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
                                 height: 65,
                                 width: 200,
                                 onPress: () {
-                                  if(mounted) {
+                                  if (mounted) {
                                     setState(() {
-                                      _level = "advanced";
+                                      globals.level = "advanced";
                                     });
-                                    Navigator.pushAndRemoveUntil(context,
-                                        MaterialPageRoute(builder: (context) => Teacher(
-                                          type: _type,
-                                          languages: _languages,
-                                          level: _level,
-                                        )), (route) => false);
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Teacher()),
+                                        (route) => false);
                                   }
-                                  print("level: $_level");
+                                  print("level: ${globals.level}");
                                 },
                               ),
                             ),
@@ -283,12 +282,12 @@ class _AlertDialogLangLvlState extends State<AlertDialogLangLvl> {
     );
   }
 
-  _pageColorClick(){
-    if(widget.types == "red"){
+  _pageColorClick() {
+    if (globals.type == "Language Lessons") {
       _btnColor = HexColor("#ec3227");
-    }else if(widget.types == "yellow"){
+    } else if (globals.type == "Native Speaking") {
       _btnColor = HexColor("#f3b70c");
-    }else if(widget.types == "green"){
+    } else if (globals.type == "Diploma Certificate") {
       _btnColor = HexColor("#37ae44");
     }
   }

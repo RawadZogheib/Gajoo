@@ -237,7 +237,6 @@ class _HomePageState extends State<HomePage> {
   int _currentActive = 0;
   late Timer _timer;
   final int _duration = 5;
-  late String _types;
   late Color _pageColor;
 
   final double carouselItemMargin = 16;
@@ -581,28 +580,28 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: AnimatedLogo(
                             onTapRed: () {
-                              _types = "red";
+                              globals.type = "Language Lessons";
                               _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
-                              print('Red');
+                              print('Language Lessons');
                             },
                             onTapYellow: () {
-                              _types = "yellow";
+                              globals.type = "Native Speaking";
                               _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
-                              print('Yellow');
+                              print('Native Speaking');
                             },
                             onTapBlue: () {
-                              _types = "blue";
+                              globals.type = "Audio Books";
                               _pageColor = Colors.blueAccent;
                               _checkIfIsLoggedInBlue();
-                              print('Blue');
+                              print('Audio Books');
                             },
                             onTapGreen: () {
-                              _types = "green";
+                              globals.type = "Diploma Certificate";
                               _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
-                              print('Green');
+                              print('Diploma Certificate');
                             },
                           ),
                         ),
@@ -957,28 +956,28 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: AnimatedLogo(
                             onTapRed: () {
-                              _types = "red";
+                              globals.type = "Language Lessons";
                               _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
-                              print('Red');
+                              print('Language Lessons');
                             },
                             onTapYellow: () {
-                              _types = "yellow";
+                              globals.type = "Native Speaking";
                               _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
-                              print('Yellow');
+                              print('Native Speaking');
                             },
                             onTapBlue: () {
-                              _types = "blue";
+                              globals.type = "Audio Books";
                               _pageColor = Colors.blueAccent;
                               _checkIfIsLoggedInBlue();
-                              print('Blue');
+                              print('Audio Books');
                             },
                             onTapGreen: () {
-                              _types = "green";
+                              globals.type = "Diploma Certificate";
                               _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
-                              print('Green');
+                              print('Diploma Certificate');
                             },
                           ),
                         ),
@@ -1371,28 +1370,28 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: AnimatedLogo(
                             onTapRed: () {
-                              _types = "red";
+                              globals.type = "Language Lessons";
                               _pageColor = HexColor("#ec3227");
                               _checkIfIsLoggedIn();
-                              print('Red');
+                              print('Language Lessons');
                             },
                             onTapYellow: () {
-                              _types = "yellow";
+                              globals.type = "Native Speaking";
                               _pageColor = HexColor("#f3b70c");
                               _checkIfIsLoggedIn();
-                              print('Yellow');
+                              print('Native Speaking');
                             },
                             onTapBlue: () {
-                              _types = "blue";
+                              globals.type = "Audio Books";
                               _pageColor = Colors.blueAccent;
                               _checkIfIsLoggedInBlue();
-                              print('Blue');
+                              print('Audio Books');
                             },
                             onTapGreen: () {
-                              _types = "green";
+                              globals.type = "Diploma Certificate";
                               _pageColor = HexColor("#37ae44");
                               _checkIfIsLoggedIn();
-                              print('Green');
+                              print('Diploma Certificate');
                             },
                           ),
                         ),
@@ -1498,7 +1497,6 @@ class _HomePageState extends State<HomePage> {
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialogLangLvl(
-          types: _types,
           pageColor: _pageColor,
         ),
       ).then((exit) {
