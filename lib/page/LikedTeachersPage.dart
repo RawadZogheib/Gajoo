@@ -56,48 +56,31 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
     return WillPopScope(
       onWillPop: () async => _back(),
       child: Scaffold(
+        backgroundColor: globals.whiteBlue,
         appBar: MediaQuery.of(context).size.width < 650
             ? AppBar(
-                backgroundColor: globals.whiteBlue,
-                elevation: 0,
-                title: Center(
-                  child: Text(
-                    'Gajoo',
-                    style: TextStyle(
-                      fontSize: 28,
-                      color: HexColor('#333333'),
-                    ),
-                  ),
-                ),
-                leading: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: HexColor('#333333'),
-                    ),
-                    onPressed: () {
-                      _back();
-                    }),
-                actions: [
-                  Builder(
-                    builder: (context) => IconButton(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      icon: Icon(
-                        Icons.menu,
-                        color: HexColor('#333333'),
-                      ),
-                      onPressed: () => Scaffold.of(context).openEndDrawer(),
-                    ),
-                  ),
-                ],
-              )
+          backgroundColor: globals.whiteBlue,
+          elevation: 0,
+          title: Center(
+            child: Text(
+              'Gajoo',
+              style: TextStyle(
+                fontSize: 28,
+                color: HexColor('#333333'),
+              ),
+            ),
+          ),
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: HexColor('#333333'),
+              ),
+              onPressed: () {
+                _back();
+              }),
+        )
             : null,
-        drawer: myDrawerMobile(
-          type: widget.type,
-          languages: widget.languages,
-          level: widget.level,
-        ),
+        drawer: MyDrawerFilter(),
         endDrawer: myDrawer(),
         body: Responsive(
           mobile: Builder(
@@ -127,15 +110,24 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                                           bottomLeft: Radius.circular(12.5),
                                         ),
                                         child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height *
+                                              0.7,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(12.5),
+                                            BorderRadius.circular(12.5),
                                             color: Colors.white70,
                                           ),
-                                          child: Expanded(
-                                            child: Wrap(
-                                              children: _LikedTeacherCard,
+                                          child: ScrollConfiguration(
+                                            behavior: MyCustomScrollBehavior(),
+                                            child: SingleChildScrollView(
+                                              controller: ScrollController(),
+                                              child: Wrap(
+                                                children:
+                                                _LikedTeacherCard,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -159,648 +151,152 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
             ),
           ),
           tablet: Column(
-              children: [
-                const MyHeader(),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                    child: Stack(
-                      children: [
-                        ScrollConfiguration(
-                          behavior: MyCustomScrollBehavior(),
-                          child: SingleChildScrollView(
-                            controller: ScrollController(),
-                            child: Column(
+            children: [
+              const MyHeader(),
+              Expanded(
+                child: Stack(
+                  children: [
+                    ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: SingleChildScrollView(
+                        controller: ScrollController(),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      width: 250.0,
+                                const SizedBox(
+                                  width: 250.0,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12.5),
+                                      topLeft: Radius.circular(12.5),
+                                      //
+                                      bottomRight: Radius.circular(12.5),
+                                      bottomLeft: Radius.circular(12.5),
                                     ),
-                                    Expanded(
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(12.5),
-                                          topLeft: Radius.circular(12.5),
-                                          //
-                                          bottomRight: Radius.circular(12.5),
-                                          bottomLeft: Radius.circular(12.5),
-                                        ),
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12.5),
-                                            color: Colors.white70,
-                                          ),
+                                    child: Container(
+                                      height:
+                                      MediaQuery.of(context).size.height *
+                                          0.7,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(12.5),
+                                        color: Colors.white70,
+                                      ),
+                                      child: ScrollConfiguration(
+                                        behavior: MyCustomScrollBehavior(),
+                                        child: SingleChildScrollView(
+                                          controller: ScrollController(),
                                           child: Wrap(
                                             children: _LikedTeacherCard,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 100,
-                                    ),
-                                  ],
+                                  ),
                                 ),
                                 const SizedBox(
-                                  height: 50,
-                                ),
-                                const MyFooter(),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 35,
-                          child: Container(
-                            padding: const EdgeInsets.all(18.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.5),
-                                color: Colors.white),
-                            width: 200,
-                            height: 480,
-                            child: Column(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: Text('Type: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'RED',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type1 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'YELLOW',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type2 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'GREEN',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type3 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(color: Colors.black),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: Text('Language: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ENGLISH',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language1 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'FRENCH',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language2 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ARABIC',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language3 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(color: Colors.black),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Level: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'BEGINNER',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level1 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'INTERMEDIATE',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level2 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ADVANCED',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level3 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
+                                  width: 100,
                                 ),
                               ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            const MyFooter(),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    //MyFilter(),
+                  ],
                 ),
-              ],
-            ),
-          desktop: Column(
-              children: [
-                const MyHeader(),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
-                    child: Stack(
-                      children: [
-                        ScrollConfiguration(
-                          behavior: MyCustomScrollBehavior(),
-                          child: SingleChildScrollView(
-                            controller: ScrollController(),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      width: 250.0,
-                                    ),
-                                    Expanded(
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(12.5),
-                                          topLeft: Radius.circular(12.5),
-                                          //
-                                          bottomRight: Radius.circular(12.5),
-                                          bottomLeft: Radius.circular(12.5),
-                                        ),
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12.5),
-                                            color: Colors.white70,
-                                          ),
-                                          child: Wrap(
-                                            children: _LikedTeacherCard,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 100,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 50,
-                                ),
-                                const MyFooter(),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 35,
-                          child: Container(
-                            padding: const EdgeInsets.all(18.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.5),
-                                color: Colors.white),
-                            width: 200,
-                            height: 480,
-                            child: Column(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: Text('Type: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'RED',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type1 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'YELLOW',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type2 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: type3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'GREEN',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorType();
-                                          if (mounted) {
-                                            setState(() {
-                                              type3 = Colors.yellowAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(color: Colors.black),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 8.0),
-                                  child: Text('Language: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ENGLISH',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language1 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'FRENCH',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language2 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: language3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ARABIC',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLanguage();
-                                          if (mounted) {
-                                            setState(() {
-                                              language3 = Colors.redAccent;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(color: Colors.black),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Level: '),
-                                ),
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0,
-                                          left: 3.0,
-                                          right: 3.0,
-                                          bottom: 3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level1,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'BEGINNER',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level1 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level2,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'INTERMEDIATE',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level2 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: myBtn2(
-                                        height: 25,
-                                        width: 150,
-                                        color1: level3,
-                                        color2: Colors.black,
-                                        btnText: const Text(
-                                          'ADVANCED',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        onPress: () {
-                                          _cleanColorLevel();
-                                          if (mounted) {
-                                            setState(() {
-                                              level3 = Colors.indigo;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
+
+          desktop: Column(
+            children: [
+              const MyHeader(),
+              Expanded(
+                child: Stack(
+                  children: [
+                    ScrollConfiguration(
+                      behavior: MyCustomScrollBehavior(),
+                      child: SingleChildScrollView(
+                        controller: ScrollController(),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  width: 100.0,
+                                ),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12.5),
+                                      topLeft: Radius.circular(12.5),
+                                      //
+                                      bottomRight: Radius.circular(12.5),
+                                      bottomLeft: Radius.circular(12.5),
+                                    ),
+                                    child: Container(
+                                      height:
+                                      MediaQuery.of(context).size.height *
+                                          0.7,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(12.5),
+                                        color: Colors.white70,
+                                      ),
+                                      child: ScrollConfiguration(
+                                        behavior: MyCustomScrollBehavior(),
+                                        child: SingleChildScrollView(
+                                          controller: ScrollController(),
+                                          child: Wrap(
+                                            children: _LikedTeacherCard,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            MyFooter(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    //MyFilter(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          ),
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () => MediaQuery.of(context).size.width < 650
+                ? _open()
+                : Scaffold.of(context).openDrawer(),
+            tooltip: 'Filter',
+            child: const Icon(Icons.add),
+          ),
+        ),
         ),
       );
   }
@@ -1049,65 +545,648 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
   }
 
   _choosedFilters() {
-    if (widget.type == "Language Lessons") {
+    if (globals.type == "Language Lessons") {
       if (mounted) {
         setState(() {
           type1 = Colors.yellowAccent;
+          //_checkFilter();
         });
       }
-    } else if (widget.type == "Native Speaking") {
+    } else if (globals.type == "Native Speaking") {
       if (mounted) {
         setState(() {
           type2 = Colors.yellowAccent;
+          //_checkFilter();
         });
       }
-    } else if (widget.type == "Diploma Certificate") {
+    } else if (globals.type == "Diploma Certificate") {
       if (mounted) {
         setState(() {
           type3 = Colors.yellowAccent;
+          //_checkFilter();
         });
       }
     }
 
-    if (widget.languages == "English") {
+    if (globals.language == "English") {
       if (mounted) {
         setState(() {
           language1 = Colors.redAccent;
+          //_checkFilter();
         });
       }
-    } else if (widget.languages == "French") {
+    } else if (globals.language == "French") {
       if (mounted) {
         setState(() {
           language2 = Colors.redAccent;
+          //_checkFilter();
         });
       }
-    } else if (widget.languages == "Arabic") {
+    } else if (globals.language == "Arabic") {
       if (mounted) {
         setState(() {
           language3 = Colors.redAccent;
+          //_checkFilter();
         });
       }
     }
 
-    if (widget.level == "beginner") {
+    if (globals.level == "beginner") {
       if (mounted) {
         setState(() {
           level1 = Colors.indigo;
+          //_checkFilter();
         });
       }
-    } else if (widget.level == "intermediate") {
+    } else if (globals.level == "intermediate") {
       if (mounted) {
         setState(() {
           level2 = Colors.indigo;
+          //_checkFilter();
         });
       }
-    } else if (widget.level == "advanced") {
+    } else if (globals.level == "advanced") {
       if (mounted) {
         setState(() {
           level3 = Colors.indigo;
+          //_checkFilter();
         });
       }
     }
+  }
+
+
+  MyDrawerFilter() {
+    return Drawer(
+      child: Material(
+        color: HexColor('#222222'), //globals.blue1,
+        child: ScrollConfiguration(
+          behavior: MyCustomScrollBehavior(),
+          child: ListView(
+            controller: ScrollController(),
+            children: <Widget>[
+              Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.asset(
+                      'Assets/HomePage/ProfilePicture/img1.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Type: '),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'RED',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.type = "Language Lessons";
+                                type1 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'YELLOW',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.type = "Native Speaking";
+                                type2 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'GREEN',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.type = "Diploma Certificate";
+                                type3 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Colors.black),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Language: '),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ENGLISH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                globals.language = "English";
+                                language1 = Colors.redAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'FRENCH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                globals.language = "French";
+                                language2 = Colors.redAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: language3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ARABIC',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLanguage();
+                            if (mounted) {
+                              setState(() {
+                                globals.language = "Arabic";
+                                language3 = Colors.redAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Colors.black),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Level: '),
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'BEGINNER',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                globals.level = "beginner";
+                                level1 = Colors.indigo;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'INTERMEDIATE',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                globals.level = "intermediate";
+                                level2 = Colors.indigo;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: level3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ADVANCED',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorLevel();
+                            if (mounted) {
+                              setState(() {
+                                globals.level = "advanced";
+                                level3 = Colors.indigo;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+  _open() {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.55,
+          padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          decoration: BoxDecoration(
+            color: globals.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Drawer(
+            child: Material(
+              color: HexColor('#222222'), //globals.blue1,
+              child: ScrollConfiguration(
+                behavior: MyCustomScrollBehavior(),
+                child: ListView(
+                  controller: ScrollController(),
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text('Type: '),
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type1,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'RED',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.type = "Language Lessons";
+                                      type1 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type2,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'YELLOW',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.type = "Native Speaking";
+                                      type2 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type3,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'GREEN',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.type = "Diploma Certificate";
+                                      type3 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(color: Colors.black),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text('Language: '),
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: language1,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'ENGLISH',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLanguage();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.language = "English";
+                                      language1 = Colors.redAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: language2,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'FRENCH',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLanguage();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.language = "French";
+                                      language2 = Colors.redAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: language3,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'ARABIC',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLanguage();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.language = "Arabic";
+                                      language3 = Colors.redAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(color: Colors.black),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text('Level: '),
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: level1,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'BEGINNER',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLevel();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.level = "beginner";
+                                      level1 = Colors.indigo;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: level2,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'INTERMEDIATE',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLevel();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.level = "intermediate";
+                                      level2 = Colors.indigo;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: level3,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'ADVANCED',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorLevel();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.level = "advanced";
+                                      level3 = Colors.indigo;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ).then((exit) async {});
   }
 
   _cleanColorType() {
@@ -1141,6 +1220,6 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
   }
 
   _back() {
-    Navigator.pushNamedAndRemoveUntil(context, '/Teacher', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
 }
