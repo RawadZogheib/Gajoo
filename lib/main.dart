@@ -12,6 +12,7 @@ import 'package:gajoo/page/Registration.dart';
 import 'package:gajoo/page/Teacher.dart';
 import 'package:gajoo/page/forgetPassword.dart';
 import 'package:gajoo/page/forgetPassword2.dart';
+import 'package:gajoo/page/testPage.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: FirstPage(),
-        initialRoute: '/FirstPage',
+        initialRoute: '/TestPage',
         routes: {
           '/FirstPage': (context) => const FirstPage(),
           '/HomePage': (context) => const HomePage(),
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/MyAudio': (context) => const MyAudio(),
           '/PaymentPage': (context) => const PaymentPage(),
           '/MySettings': (context) => const MySettings(),
+          '/TestPage': (context) => const TestPage(),
         });
     //});
   }
