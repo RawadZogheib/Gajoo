@@ -828,10 +828,11 @@ class _registrationState extends State<registration> {
         if (body[0] == "true") {
 
           //print("helooooooooo");
-          await SessionManager().set("Id", body[1][0]);
-          await SessionManager().set("email", body[1][1]);
-          print(SessionManager().get('Id'));
-          print(SessionManager().get('email'));
+          SharedPreferences localStorage = await SharedPreferences.getInstance();
+          localStorage.setString("Id", body[1][0]);
+          localStorage.setString("email", body[1][1]);
+          print(localStorage.get('Id'));
+          print(localStorage.get('email'));
           //Navigator.pushNamed(context, '/Login');
           //Navigator.pushNamed(context, '/home');
           showDialog(

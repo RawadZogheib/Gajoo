@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/code/myCode.dart';
@@ -28,6 +29,7 @@ class _sixCodeLoginState extends State<sixCodeLogin> {
     super.initState();
 
     errCode = '';
+    globals.sixCodeNb = '';
   }
   Widget build(BuildContext context) {
     return Container(
@@ -201,6 +203,8 @@ class _sixCodeLoginState extends State<sixCodeLogin> {
     try {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       globals.email = localStorage.getString('email');
+      print(globals.sixCodeNb);
+      print(globals.email);
       var data = {
         'version': globals.version,
         'code': globals.sixCodeNb,
@@ -216,17 +220,30 @@ class _sixCodeLoginState extends State<sixCodeLogin> {
       if (body[0] == "success") {
         Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
 
-        SharedPreferences localStorage = await SharedPreferences.getInstance();
-        localStorage.setString('token', body[1]);
-        localStorage.setString('Id', body[2][0]);
-        localStorage.setString('fName', body[2][1]);
-        //print(localStorage.getString('fname'));
-        localStorage.setString('lName', body[2][2]);
-        localStorage.setString('userName', body[2][3]);
-        localStorage.setString('email', body[2][4]);
-        localStorage.setString('phoneNumber', body[2][5]);
-        localStorage.setString('gender', body[2][6]);
-        localStorage.setString('dateOfBirth', body[2][7]);
+        await SessionManager().set('token', body[1]);
+        await SessionManager().set('Id', body[2][0]);
+        await SessionManager().set('fName', body[2][1]);
+        await SessionManager().set('lName', body[2][2]);
+        await SessionManager().set('userName', body[2][3]);
+        await SessionManager().set('email', body[2][4]);
+        await SessionManager().set('password', globals.passwordLogin);
+        await SessionManager().set('phoneNumber', body[2][5]);
+        await SessionManager().set('gender', body[2][6]);
+        await SessionManager().set('dateOfBirth', body[2][7]);
+
+        globals.isLoggedIn = true;
+
+        //SharedPreferences localStorage = await SharedPreferences.getInstance();
+        // localStorage.setString('token', body[1]);
+        // localStorage.setString('Id', body[2][0]);
+        // localStorage.setString('fName', body[2][1]);
+        // //print(localStorage.getString('fname'));
+        // localStorage.setString('lName', body[2][2]);
+        // localStorage.setString('userName', body[2][3]);
+        // localStorage.setString('email', body[2][4]);
+        // localStorage.setString('phoneNumber', body[2][5]);
+        // localStorage.setString('gender', body[2][6]);
+        // localStorage.setString('dateOfBirth', body[2][7]);
       } else if (body[0] == "codeFailed") {
         setState(() {
           errCode = globals.codeFailed;
