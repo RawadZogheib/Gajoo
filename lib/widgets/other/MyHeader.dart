@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 
-class MyHeader extends StatelessWidget {
+class MyHeader extends StatefulWidget {
   const MyHeader({Key? key}) : super(key: key);
 
   @override
+  State<MyHeader> createState() => _MyHeaderState();
+}
+
+class _MyHeaderState extends State<MyHeader> {
+  bool _isLoggedIn = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loadIsLoggedIn();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     String _redCoupon = '0';
     String _yellowCoupon = '0';
     String _blueCoupon = '0';
@@ -39,7 +55,7 @@ class MyHeader extends StatelessWidget {
               ),
             ),
           ),
-          globals.isLoggedIn == false
+          _isLoggedIn == false
               ? Container(
                   height: 60,
                   width: 120,
@@ -157,5 +173,19 @@ class MyHeader extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _loadIsLoggedIn() async {
+    SessionManager session = SessionManager();
+    if(await session.containsKey('isLoggedIn')) {
+      _isLoggedIn = await session.get('isLoggedIn');
+      setState(() {
+        _isLoggedIn;
+      });
+    }else{
+      setState(() {
+        _isLoggedIn = false;
+      });
+    }
   }
 }

@@ -1,36 +1,33 @@
 
-
-
-
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/button/myButton.dart';
+import 'package:gajoo/widgets/code/codeDialogForgetPass.dart';
+import 'package:gajoo/widgets/other/errorAlertDialog.dart';
+import 'package:gajoo/widgets/textInput/myErrorText.dart';
+import 'package:gajoo/widgets/textInput/myTextInput.dart';
 
-import '../api/my_api.dart';
-import '../widgets/button/myButton.dart';
-import '../widgets/code/codeDialogForgetPass.dart';
-import '../widgets/other/errorAlertDialog.dart';
-import '../widgets/textInput/myErrorText.dart';
-import '../widgets/textInput/myTextInput.dart';
-import 'Login.dart';
-
-Color colEmail = globals.blue; //email
-Color colEmail_1 = globals.blue_1;
-Color colEmail_2 = globals.blue_2;
-
-String errEmailForget = ''; //email error
-Color colErrEmailForget = globals.transparent;
-
-class forgetPass extends StatefulWidget {
-  const forgetPass({Key? key}) : super(key: key);
+class ForgetPass extends StatefulWidget {
+  const ForgetPass({Key? key}) : super(key: key);
 
   @override
-  _forgetPassState createState() => _forgetPassState();
+  _ForgetPassState createState() => _ForgetPassState();
 }
 
-class _forgetPassState extends State<forgetPass> {
+class _ForgetPassState extends State<ForgetPass> {
+
+  String? _emailForgetPass;
+
+  Color _colEmail = globals.blue; //email
+  Color _colEmail_1 = globals.blue_1;
+  Color _colEmail_2 = globals.blue_2;
+
+  String _errEmailForget = ''; //email error
+  Color _colErrEmailForget = globals.transparent;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -93,18 +90,18 @@ class _forgetPassState extends State<forgetPass> {
                         child: myTextInput(
                             textString: "Enter Your Email Address",
                             labelText: 'Enter Your Email Address',
-                            colBlue: colEmail,
-                            colBlue_1: colEmail_1,
-                            colBlue_2: colEmail_2,
+                            colBlue: _colEmail,
+                            colBlue_1: _colEmail_1,
+                            colBlue_2: _colEmail_2,
                             textInputAction: TextInputAction.next,
                             spaceAllowed: false,
                             obscure: false,
                             onChange: (value) {
-                              globals.emailForgetPass = value;
+                              _emailForgetPass = value;
                             }),
                       ),
 
-                      myErrorText(errorText: errEmailForget, color: colErrEmailForget),
+                      myErrorText(errorText: _errEmailForget, color: _colErrEmailForget),
 
 
                       Padding(
@@ -139,23 +136,23 @@ class _forgetPassState extends State<forgetPass> {
   }
 
   _verifAcc(){
-    errEmailForget = '';
+    _errEmailForget = '';
     bool isEmpty = false;
 
-    if (globals.emailForgetPass != null && globals.emailForgetPass != '') {
+    if (_emailForgetPass != null && _emailForgetPass != '') {
       setState(() {
-        colEmail = Colors.blue.shade50;
-        colEmail_1 = Colors.blue.shade900;
-        colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+        _colEmail = Colors.blue.shade50;
+        _colEmail_1 = Colors.blue.shade900;
+        _colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
       });
     } else {
       isEmpty = true;
       setState(() {
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
-        errEmailForget = globals.warning7;
-        colErrEmailForget = globals.red_1;
+        _colEmail = Colors.red.shade50;
+        _colEmail_1 = Colors.red.shade900;
+        _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        _errEmailForget = globals.warning7;
+        _colErrEmailForget = globals.red_1;
       });
     }
     if (isEmpty == false) {
@@ -167,73 +164,72 @@ class _forgetPassState extends State<forgetPass> {
   }
 
   _checkIsRegist() async {
-    errEmailForget = '';
+    _errEmailForget = '';
     try {
       var data = {
         'version': globals.version,
-        'email': globals.emailForgetPass,
+        'email': _emailForgetPass,
       };
 
       var res =
           await CallApi().postData(data, '/Login/Control/(Control)checkIfIsRegist.php');
-      print(res);
-      print(res.body);
+      debugPrint(res.body);
 
       List<dynamic> body = json.decode(res.body);
 
-      if (body[0] == "true") {
+      if (body[0] == "success") {
         showDialog(
             context: context,
-            builder: (BuildContext context) => codeDialogForgetPass()).then((exit) {
+            builder: (BuildContext context) => const CodeDialogForgetPass()).then((exit) {
           setState(() {
             //_nullTextCode();
           });
         });
       }else if(body[0] == "error7"){
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        _colEmail = Colors.red.shade50;
+        _colEmail_1 = Colors.red.shade900;
+        _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
         setState(() {
-          errEmailForget = globals.warning7;
-          colErrEmailForget = globals.red_1;
+          _errEmailForget = globals.warning7;
+          _colErrEmailForget = globals.red_1;
         });
       }else if(body[0] == "error11"){
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        _colEmail = Colors.red.shade50;
+        _colEmail_1 = Colors.red.shade900;
+        _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
         setState(() {
-          errEmailForget = globals.error11;
-          colErrEmailForget = globals.red_1;
+          _errEmailForget = globals.error11;
+          _colErrEmailForget = globals.red_1;
         });
       }else if(body[0] == "error12"){
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        _colEmail = Colors.red.shade50;
+        _colEmail_1 = Colors.red.shade900;
+        _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
         setState(() {
-          errEmailForget = globals.error12;
-          colErrEmailForget = globals.red_1;
+          _errEmailForget = globals.error12;
+          _colErrEmailForget = globals.red_1;
         });
       }
     }catch(e){
-      print(e);
+      debugPrint(e.toString());
       setState(() {
-        errEmailForget = globals.errorException;
-        colErrEmailForget = globals.red_1;
+        _errEmailForget = globals.errorException;
+        _colErrEmailForget = globals.red_1;
       });
     }
   }
 
   _back(){
     setState(() {
-      globals.emailForgetPass = null;
+      _emailForgetPass = null;
     });
 
-    errEmailForget = '';
-    colErrEmailForget = globals.transparent;
+    _errEmailForget = '';
+    _colErrEmailForget = globals.transparent;
 
-    colEmail = globals.blue; //email
-    colEmail_1 = globals.blue_1;
-    colEmail_2 = globals.blue_2;
+    _colEmail = globals.blue; //email
+    _colEmail_1 = globals.blue_1;
+    _colEmail_2 = globals.blue_2;
 
 
     Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);

@@ -5,6 +5,7 @@ import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
+import 'package:gajoo/widgets/code/codeDialogLogin.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -41,8 +42,10 @@ class _FirstPage extends State<FirstPage> {
     // SharedPreferences localStorage = await SharedPreferences.getInstance();
     // await localStorage.clear();
     try {
-      globals.isLoggedIn = await SessionManager().containsKey('token');
-      if (globals.isLoggedIn == true) {
+      SessionManager session = SessionManager();
+
+      print(await session.get('isLoggedIn'));
+      if (await session.get('isLoggedIn') == true) {
         _verifc();
       } else {
         Navigator.pushNamedAndRemoveUntil(
@@ -57,6 +60,8 @@ class _FirstPage extends State<FirstPage> {
   }
 
   _verifc() async {
+    SessionManager session = SessionManager();
+
     try {
       print("Load login");
 
@@ -72,45 +77,53 @@ class _FirstPage extends State<FirstPage> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
-        await SessionManager().set('token', body[1]);
-        await SessionManager().set('Id', body[2][0]);
-        await SessionManager().set('fName', body[2][1]);
-        await SessionManager().set('lName', body[2][2]);
-        await SessionManager().set('userName', body[2][3]);
-        await SessionManager().set('email', body[2][4]);
-        await SessionManager()
-            .set('password', await SessionManager().get('password'));
-        await SessionManager().set('phoneNumber', body[2][5]);
-        await SessionManager().set('gender', body[2][6]);
-        await SessionManager().set('dateOfBirth', body[2][7]);
-        // //payment ticket
-        // await SessionManager().set('redTicket', body[2][8]);
-        // await SessionManager().set('yellowTicket', body[2][9]);
-        // await SessionManager().set('blueTicket', body[2][10]);
-        // await SessionManager().set('greenTicket', body[2][11]);
-        globals.isLoggedIn = true;
 
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/HomePage', (route) => false);
-      } else if (body[0] == "errorVersion") {
+
+        if(body[1]== "1") {
+          SessionManager session = SessionManager();
+          await session.set('token', body[2]);
+          await session.set('Id', body[3][0]);
+          await session.set('fName', body[3][1]);
+          await session.set('lName', body[3][2]);
+          await session.set('userName', body[3][3]);
+          await session.set('phoneNumber', body[3][4]);
+          await session.set('gender', body[3][5]);
+          await session.set('dateOfBirth', body[3][6]);
+          await session.set('isLoggedIn', true);
+          //print(await session.get('isLoggedIn'));
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/HomePage', (route) => false);
+        }else{
+          showDialog(
+              context: context,
+              builder: (BuildContext context) => const CodeDialogLogin())
+              .then((exit) {
+            if (mounted) {
+              setState(() {
+                _nullTextCode();
+              });
+            }
+          });
+        }
+      }else if (body[0] == "errorVersion") {
         if (mounted) {
           ErrorPopup(context, globals.errorVersion);
         }
-        globals.isLoggedIn = false;
+        await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
       } else if (body[0] == "error8") {
         if (mounted) {
           WarningPopup(context, globals.warning8);
         }
-        globals.isLoggedIn = false;
+        await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
       } else {
         if (mounted) {
           ErrorPopup(context, globals.errorElse);
         }
-        globals.isLoggedIn = false;
+        await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
       }
@@ -119,8 +132,13 @@ class _FirstPage extends State<FirstPage> {
       if (mounted) {
         ErrorPopup(context, globals.errorException);
       }
-      globals.isLoggedIn = false;
+      await session.set('isLoggedIn', false);
       Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
     }
   }
+
+  _nullTextCode() {
+    globals.sixCodeNb = null;
+  }
+
 }

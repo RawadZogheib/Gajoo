@@ -1,175 +1,150 @@
 import 'dart:convert';
 
-import 'package:gajoo/api/my_api.dart';
-import 'package:gajoo/widgets/button/myButton.dart';
-import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'myCode.dart';
 
-
-String errCode = '';
-Color colErrCode = globals.transparent;
-
-
-
-class sixCode extends StatefulWidget {
-  const sixCode({Key? key}) : super(key: key);
+class SixCode extends StatefulWidget {
+  const SixCode({Key? key}) : super(key: key);
 
   @override
-  _sixCodeState createState() => _sixCodeState();
+  _SixCodeState createState() => _SixCodeState();
 }
 
-class _sixCodeState extends State<sixCode> {
+class _SixCodeState extends State<SixCode> {
+  String _errCode = '';
+  Color _colErrCode = globals.transparent;
+
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    errCode = '';
-  }
   Widget build(BuildContext context) {
-    return Container(
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.only(top: 18.0),
         child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 18.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 28.0),
-                      child: Text("Message Sent, check your email",style: TextStyle(
-                        color: Colors.blueAccent,
-                      ),),
-                    ),
-                    myCode(
-                      keybType: TextInputType.numberWithOptions(decimal: true),
-                      onChange: (value){
-                        globals.sixCodeNb = value;
-                        print(globals.sixCodeNb);
-                      },
-                    ),
-
-                    myErrorText(errorText: errCode, color: colErrCode),
-
-                    Padding(
-                      padding: EdgeInsets.only(top: 15),
-                      child: Row(
-                        children: [
-                          Row(
-                            children: [
-                              InkWell(
-                                child: Text("Resend Code",style: TextStyle(
-                                    color: Colors.blue
-                                ),),
-                                onTap: (){
-                                  //_nullLogin();
-                                  //Navigator.pushNamed(context, '/Registration');
-                                  _resendCode();
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
-
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                          child: InkWell(
-                            child: btn(btnText: 'Send'),
-                            onTap: (){
-                              print(globals.sixCodeNb);
-                              _checkCode();
-                            },
-                          )),
-                    ),
-                  ],
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 28.0),
+              child: Text(
+                "Message Sent, check your email",
+                style: TextStyle(
+                  color: Colors.blueAccent,
                 ),
-              )]));
+              ),
+            ),
+            myCode(
+              keybType: const TextInputType.numberWithOptions(decimal: true),
+              onChange: (value) {
+                globals.sixCodeNb = value;
+              },
+            ),
+            myErrorText(errorText: _errCode, color: _colErrCode),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        child: const Text(
+                          "Resend Code",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () {
+                          _resendCode();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: InkWell(
+                child: btn(btnText: 'Send'),
+                onTap: () {
+                  _checkCode();
+                },
+              ),
+            ),
+          ],
+        ),
+      )
+    ]);
   }
 
-
-  _checkCode() async{
-    errCode = '';
+  _checkCode() async {
+    String? _email;
+    _errCode = '';
     try {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
-      globals.email = localStorage.getString('email');
+      _email = localStorage.getString('email');
       var data = {
         'version': globals.version,
         'code': globals.sixCodeNb,
-        'email': globals.email
+        'email': _email
       };
 
-      var res = await CallApi().postData(
-          data, '/Registration/Control/(Control)checkCode.php');
-      //print(res);
-      print(res.body);
+      var res = await CallApi()
+          .postData(data, '/Registration/Control/(Control)checkCode.php');
+      debugPrint(res.body);
       List<dynamic> body = json.decode(res.body);
 
-      if(body[0] == "true"){
+      if (body[0] == "success") {
         Navigator.pushNamedAndRemoveUntil(context, '/Login', (route) => false);
-      }else if(body[0] == "codeFailed"){
+      } else if (body[0] == "codeFailed") {
         setState(() {
-          errCode = globals.codeFailed;
-          colErrCode = globals.red_1;
+          _errCode = globals.codeFailed;
+          _colErrCode = globals.red_1;
         });
-      }else if(body[0] == "error7"){
+      } else if (body[0] == "error7") {
         setState(() {
-          errCode = globals.warning7;
-          colErrCode = globals.red_1;
+          _errCode = globals.warning7;
+          _colErrCode = globals.red_1;
         });
       }
-
-
-    }catch(e){
-      errCode = globals.errorException;
-      colErrCode = globals.red_1;
+    } catch (e) {
+      _errCode = globals.errorException;
+      _colErrCode = globals.red_1;
     }
   }
 
-
-  _resendCode() async{
-    errCode = "";
-    colErrCode = globals.transparent;
+  _resendCode() async {
+    String? _email;
+    _errCode = "";
+    _colErrCode = globals.transparent;
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    globals.email = localStorage.getString('email');
+    _email = localStorage.getString('email');
     var data = {
       'version': globals.version,
-      'email': globals.email,
+      'email': _email,
     };
 
-    var res = await CallApi().postData(
-        data, '/Login/Control/(Control)resendMail.php');
-    print(res);
-    //print("pppppp");
+    var res = await CallApi()
+        .postData(data, '/Login/Control/(Control)resendMail.php');
+    debugPrint(res.body);
     List<dynamic> body = json.decode(res.body);
-    print(res.body);
 
-    // if(body[0] == "true"){
-    //   //do nothing
-    // }else
-      if(body[0] == "error2_5"){
-      errCode = globals.warning2_5;
-      colErrCode = globals.red_1;
-    }else if(body[0] == "codeException"){
-      errCode = globals.codeException;
-      colErrCode = globals.red_1;
-    }else if(body[0] == "error7"){
-      errCode = globals.warning7;
-      colErrCode = globals.red_1;
-    } else{
+    if (body[0] == "error2_5") {
+      _errCode = globals.warning2_5;
+      _colErrCode = globals.red_1;
+    } else if (body[0] == "codeException") {
+      _errCode = globals.codeException;
+      _colErrCode = globals.red_1;
+    } else if (body[0] == "error7") {
+      _errCode = globals.warning7;
+      _colErrCode = globals.red_1;
+    } else {
       setState(() {
-        errCode = globals.errorElse;
-        colErrCode = globals.red_1;
+        _errCode = globals.errorElse;
+        _colErrCode = globals.red_1;
       });
     }
-
   }
-
 }

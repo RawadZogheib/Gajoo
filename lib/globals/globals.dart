@@ -9,9 +9,10 @@ import 'package:gajoo/hexColor/hexColor.dart';
 const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
-const String myIP = "https://kwikcode.net/gajoo_php";
+const String myIP = "http://127.0.0.1/Gajoo_php";
 
-bool? isLoggedIn;
+// bool? isLoggedIn;
+
 String currentPage = 'HomePage';//HomePage//MyCourses//CalendarPage//Teacher//LikedTeachersPage//MyAudio//PaymentPage//MySettings
 
 //Colors
@@ -107,112 +108,21 @@ List<dynamic> Countries = ['Afghanistan','Albania','Algeria','Andorra','Angola',
                           'Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom',
                           'United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
 
+//Date Of Birth registration
+String? dateOfBirth;
+
 //for type,language,level
 String? type;
 String? language;
 String? level;
 
-
 //for 6 digit code
 String? sixCodeNb;
 
 //ForgetPassword
-String? emailForgetPass;
-String? newPassword;
-String? newPassword2;
-
-//Registration  (page[/signup.dart /registration.dart /registration2.dart /registration3.dart])
-String? Id;
-String? email;
-String? fName;
-String? lName;
-String? password;
-String? repassword;
-String? gender;
-String? phoneNumber;
-String? userName;
-String? dateOfBirth;
-String? isRegistered = '0'; // 0 -> false -> not registered
-
-
-//login  (page[/login.dart /login2.dart])
-String? emailLogin;
-String? passwordLogin;
-
-
-//Contrat (page[/contrat])
-String? contrat_Id;
-String? contrat_name;
-String? contrat_dollar_per_hour;
-String? contrat_max_payment;
-String? contrat_description;
-String? contrat_code;
-
-//Name of New Project (page[/popup/PopupProjectName.dart])
-String? ProjectName;
+// String? emailForgetPass;
+// String? newPassword;
+// String? newPassword2;
 
 //myDrawer
 bool isLoading = false;
-
-/*
-  print(globals.contrat_Id.toString() + " " +
-  globals.contrat_name.toString() + " " +
-  globals.contrat_dollar_per_hour.toString() + " " +
-  globals.contrat_max_payment.toString() + " " +
-  globals.contrat_description.toString() + " " +
-  globals.contrat_code.toString());
-
-*/
-
-clearRegist(){
-  fName = null;
-  lName = null;
-  userName = null;
-  email = null;
-  password = null;
-  repassword = null;
-  phoneNumber = null;
-  gender = null;
-  dateOfBirth = null;
-}
-
-clearContrat(){
-  contrat_Id = null;
-  contrat_name = null;
-  contrat_dollar_per_hour = null;
-  contrat_max_payment = null;
-  contrat_description = null;
-  contrat_code = null;
-}
-
-clearLogin(){
-  emailLogin = null;
-  passwordLogin = null;
-}
-
-clearAll(){
-  Id = null;
-  fName = null;
-  lName = null;
-  userName = null;
-  email = null;
-  password = null;
-  repassword = null;
-  phoneNumber = null;
-  gender = null;
-  dateOfBirth = null;
-  contrat_Id = null;
-  contrat_name = null;
-  contrat_dollar_per_hour = null;
-  contrat_max_payment = null;
-  contrat_description = null;
-  contrat_code = null;
-  ProjectName = null;
-  emailLogin = null;
-  passwordLogin = null;
-  sixCodeNb = null;
-  isRegistered = '0';
-  emailForgetPass = null;
-  newPassword = null;
-  newPassword2 = null;
-}

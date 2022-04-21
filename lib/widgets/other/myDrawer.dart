@@ -14,6 +14,7 @@ class myDrawer extends StatefulWidget {
 }
 
 class _myDrawerState extends State<myDrawer> {
+  bool _isLoggedIn = false;
   int? _freeCoupon;
   int? _redCoupon;
   int? _yellowCoupon;
@@ -23,6 +24,7 @@ class _myDrawerState extends State<myDrawer> {
   @override
   void initState() {
     // TODO: implement initState
+    _loadIsLoggedIn();
     _getCoupon();
     super.initState();
   }
@@ -373,9 +375,8 @@ class _myDrawerState extends State<myDrawer> {
         break;
 
       case 6: // Logout
-
-        globals.isLoggedIn = false;
-        await SessionManager().destroy();
+        SessionManager session = SessionManager();
+        await session.destroy();
 
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/HomePage', (route) => false);
@@ -471,6 +472,20 @@ class _myDrawerState extends State<myDrawer> {
       print('load library end!!!');
       print(
           '=========<<======================================================<<==================================================<<=========');
+    }
+  }
+
+  Future<void> _loadIsLoggedIn() async {
+    SessionManager session = SessionManager();
+    if(await session.containsKey('isLoggedIn')) {
+      _isLoggedIn = await session.get('isLoggedIn');
+      setState(() {
+        _isLoggedIn;
+      });
+    }else{
+      setState(() {
+        _isLoggedIn = false;
+      });
     }
   }
 }

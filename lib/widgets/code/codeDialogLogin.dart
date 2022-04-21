@@ -1,30 +1,25 @@
 
 import 'package:flutter/material.dart';
-import 'package:gajoo/widgets/code/sixCode.dart';
 import 'package:gajoo/widgets/code/sixCodeLogin.dart';
-import 'package:sizer/sizer.dart';
 
-class codeDialogLogin extends StatefulWidget {
-  const codeDialogLogin({Key? key}) : super(key: key);
+class CodeDialogLogin extends StatefulWidget {
+  const CodeDialogLogin({Key? key}) : super(key: key);
 
   @override
-  _codeDialogLoginState createState() => _codeDialogLoginState();
+  _CodeDialogLoginState createState() => _CodeDialogLoginState();
 }
 
-class _codeDialogLoginState extends State<codeDialogLogin> {
+class _CodeDialogLoginState extends State<CodeDialogLogin> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.5)),
-      content: Container(
+      content: SizedBox(
         height: 300, //300
         width: 400, //400
-        child: ListView(
-            padding: EdgeInsets.all(8.0),
-            children: [
-              sixCodeLogin(),
-            ]
-        ),
+        child: ListView(padding: const EdgeInsets.all(8.0), children: const [
+          SixCodeLogin(),
+        ]),
       ),
     );
   }

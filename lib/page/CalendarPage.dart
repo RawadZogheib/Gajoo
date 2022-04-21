@@ -320,8 +320,10 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  _checkIfIsLoggedIn(DateTime _date) {
-    if (globals.isLoggedIn == false) {
+  _checkIfIsLoggedIn(DateTime _date) async {
+    SessionManager session = SessionManager();
+
+    if (await session.get('isLoggedIn') == false) {
       // Is loggedIn
       if (mounted) {
         WarningPopup(context, globals.warning400);

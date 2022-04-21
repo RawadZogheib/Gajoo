@@ -1,6 +1,6 @@
+
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
@@ -20,32 +20,33 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  Color colEmail = globals.blue; //email
-  Color colEmail_1 = globals.blue_1;
-  Color colEmail_2 = globals.blue_2;
 
-  Color colPass = globals.blue; //password
-  Color colPass_1 = globals.blue_1;
-  Color colPass_2 = globals.blue_2;
+  String? _emailLogin;
+  String? _passwordLogin;
 
-  String errTxtEmail = ''; //email error
-  Color colErrTxtEmail = globals.transparent;
-  String errTxtPass = ''; //password error
-  Color colErrTxtPass = globals.transparent;
-  String errTxt = ''; //else error
-  Color colErrTxt = globals.transparent;
+  Color _colEmail = globals.blue; //email
+  Color _colEmail_1 = globals.blue_1;
+  Color _colEmail_2 = globals.blue_2;
 
-  String errTxtForgetPass = '';
-  Color colErrForgetPass = globals.transparent;
+  Color _colPass = globals.blue; //password
+  Color _colPass_1 = globals.blue_1;
+  Color _colPass_2 = globals.blue_2;
 
-  var oneClick = 0;
+  String _errTxtEmail = ''; //email error
+  Color _colErrTxtEmail = globals.transparent;
+  String _errTxtPass = ''; //password error
+  Color _colErrTxtPass = globals.transparent;
+  String _errTxt = ''; //else error
+  Color _colErrTxt = globals.transparent;
+
+  var _oneClick = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    oneClick = 0;
-    globals.clearLogin();
+    //_oneClick = 0;
+    _clearLogin();
   }
 
   @override
@@ -118,18 +119,18 @@ class _LoginState extends State<Login> {
                               child: myTextInput(
                                   textString: "Enter Your Email Address",
                                   labelText: 'Enter Your Email Address',
-                                  colBlue: colEmail,
-                                  colBlue_1: colEmail_1,
-                                  colBlue_2: colEmail_2,
+                                  colBlue: _colEmail,
+                                  colBlue_1: _colEmail_1,
+                                  colBlue_2: _colEmail_2,
                                   textInputAction: TextInputAction.next,
                                   spaceAllowed: false,
                                   obscure: false,
                                   onChange: (value) {
-                                    globals.emailLogin = value;
+                                    _emailLogin = value;
                                   }),
                             )),
                         myErrorText(
-                            errorText: errTxtEmail, color: colErrTxtEmail),
+                            errorText: _errTxtEmail, color: _colErrTxtEmail),
                         Padding(
                           padding: EdgeInsets.only(
                               left: MediaQuery.of(context).size.width * 0.05,
@@ -142,29 +143,29 @@ class _LoginState extends State<Login> {
                             child: myTextInput(
                               textString: "Enter Your Password",
                               labelText: 'Enter Your Password',
-                              colBlue: colPass,
-                              colBlue_1: colPass_1,
-                              colBlue_2: colPass_2,
+                              colBlue: _colPass,
+                              colBlue_1: _colPass_1,
+                              colBlue_2: _colPass_2,
                               maxLines: 1,
                               textInputAction: TextInputAction.none,
                               spaceAllowed: false,
                               obscure: true,
                               onChange: (value) {
-                                globals.passwordLogin = value;
+                                _passwordLogin = value;
                                 //print(globals.Login);
                               },
                             ),
                           ),
                         ),
                         myErrorText(
-                            errorText: errTxtPass, color: colErrTxtPass),
+                            errorText: _errTxtPass, color: _colErrTxtPass),
                         Padding(
                           padding: const EdgeInsets.all(28.0),
                           child: InkWell(
                             child: btn(btnText: "Submit"),
                             onTap: () {
                               try {
-                                if (oneClick == 0) {
+                                if (_oneClick == 0) {
                                   _loginCtrl();
                                 }
                               } catch (e) {
@@ -177,7 +178,7 @@ class _LoginState extends State<Login> {
                             },
                           ),
                         ),
-                        myErrorText(errorText: errTxt, color: colErrTxt),
+                        myErrorText(errorText: _errTxt, color: _colErrTxt),
                         Padding(
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height * 0.001),
@@ -242,55 +243,55 @@ class _LoginState extends State<Login> {
   }
 
   _loginCtrl() async {
-    oneClick = 1;
+    _oneClick = 1;
     bool isEmpty = false;
 
-    errTxtEmail = '';
-    colErrTxtEmail = globals.transparent;
-    errTxtPass = '';
-    colErrTxtPass = globals.transparent;
-    errTxt = '';
-    colErrTxt = globals.transparent;
+    _errTxtEmail = '';
+    _colErrTxtEmail = globals.transparent;
+    _errTxtPass = '';
+    _colErrTxtPass = globals.transparent;
+    _errTxt = '';
+    _colErrTxt = globals.transparent;
 
-    if (globals.emailLogin != null && globals.emailLogin != '') {
+    if (_emailLogin != null && _emailLogin != '') {
       if (mounted) {
         setState(() {
-          colEmail = Colors.blue.shade50;
-          colEmail_1 = Colors.blue.shade900;
-          colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
+          _colEmail = Colors.blue.shade50;
+          _colEmail_1 = Colors.blue.shade900;
+          _colEmail_2 = Colors.blue.shade900.withOpacity(0.5);
         });
       }
     } else {
       isEmpty = true;
       if (mounted) {
         setState(() {
-          colEmail = Colors.red.shade50;
-          colEmail_1 = Colors.red.shade900;
-          colEmail_2 = Colors.red.shade900.withOpacity(0.5);
-          errTxtEmail = globals.warning7;
-          colErrTxtEmail = globals.red_1;
+          _colEmail = Colors.red.shade50;
+          _colEmail_1 = Colors.red.shade900;
+          _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+          _errTxtEmail = globals.warning7;
+          _colErrTxtEmail = globals.red_1;
           WarningPopup(context, globals.warning7);
         });
       }
     }
 
-    if (globals.passwordLogin != null && globals.passwordLogin != '') {
+    if (_passwordLogin != null && _passwordLogin != '') {
       if (mounted) {
         setState(() {
-          colPass = Colors.blue.shade50;
-          colPass_1 = Colors.blue.shade900;
-          colPass_2 = Colors.blue.shade900.withOpacity(0.5);
+          _colPass = Colors.blue.shade50;
+          _colPass_1 = Colors.blue.shade900;
+          _colPass_2 = Colors.blue.shade900.withOpacity(0.5);
         });
       }
     } else {
       isEmpty = true;
       if (mounted) {
         setState(() {
-          colPass = Colors.red.shade50;
-          colPass_1 = Colors.red.shade900;
-          colPass_2 = Colors.red.shade900.withOpacity(0.5);
-          errTxtPass = globals.warning7;
-          colErrTxtPass = globals.red_1;
+          _colPass = Colors.red.shade50;
+          _colPass_1 = Colors.red.shade900;
+          _colPass_2 = Colors.red.shade900.withOpacity(0.5);
+          _errTxtPass = globals.warning7;
+          _colErrTxtPass = globals.red_1;
           WarningPopup(context, globals.warning7);
         });
       }
@@ -301,101 +302,95 @@ class _LoginState extends State<Login> {
     } else {
       //do nothing
     }
-    oneClick = 0;
+    _oneClick = 0;
   }
 
   _verifc() async {
-    errTxt = '';
+    _errTxt = '';
 
     try {
-      print("hey");
-      // if(globals.emailLogin != null && globals.passwordLogin != null){
-      // print(globals.emailLogin);
-      // print(globals.passwordLogin);
       var data = {
         'version': globals.version,
-        'email': globals.emailLogin,
-        'password': globals.passwordLogin,
+        'email': _emailLogin,
+        'password': _passwordLogin,
       };
 
       var res =
           await CallApi().postData(data, '/Login/Control/(Control)Login.php');
-      print(res.body);
+      debugPrint(res.body);
       List<dynamic> body = json.decode(res.body);
 
-      //print(body[1]);
-      //print("welcome");
-      if (body[0] == "true") {
-        showDialog(
-                context: context,
-                builder: (BuildContext context) => const codeDialogLogin())
-            .then((exit) {
-          if (mounted) {
-            setState(() {
-              _nullTextCode();
-            });
-          }
-        });
-      } else if (body[0] == "success") {
-        await SessionManager().set('token', body[1]);
-        await SessionManager().set('Id', body[2][0]);
-        await SessionManager().set('fName', body[2][1]);
-        await SessionManager().set('lName', body[2][2]);
-        await SessionManager().set('userName', body[2][3]);
-        await SessionManager().set('email', body[2][4]);
-        await SessionManager().set('password', globals.passwordLogin);
-        await SessionManager().set('phoneNumber', body[2][5]);
-        await SessionManager().set('gender', body[2][6]);
-        await SessionManager().set('dateOfBirth', body[2][7]);
-        // //payment ticket
-        // await SessionManager().set('redTicket', body[2][8]);
-        // await SessionManager().set('yellowTicket', body[2][9]);
-        // await SessionManager().set('blueTicket', body[2][10]);
-        // await SessionManager().set('greenTicket', body[2][11]);
-        globals.isLoggedIn = true;
+      if (body[0] == "success") {
 
-        Navigator.pushNamedAndRemoveUntil(
+
+        if(body[1]== "1") {
+          SessionManager session = SessionManager();
+          await session.set('token', body[2]);
+          await session.set('Id', body[3][0]);
+          await session.set('fName', body[3][1]);
+          await session.set('lName', body[3][2]);
+          await session.set('userName', body[3][3]);
+          await session.set('email', _emailLogin);
+          await session.set('password', _passwordLogin);
+          await session.set('phoneNumber', body[3][4]);
+          await session.set('gender', body[3][5]);
+          await session.set('dateOfBirth', body[3][6]);
+          await session.set('isLoggedIn', true);
+          //print(await session.get('isLoggedIn'));
+          Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
+        }else{
+          showDialog(
+              context: context,
+              builder: (BuildContext context) => const CodeDialogLogin())
+              .then((exit) {
+            if (mounted) {
+              setState(() {
+                _nullTextCode();
+              });
+            }
+          });
+        }
       } else if (body[0] == "errorVersion") {
         if (mounted) {
           setState(() {
-            errTxt = "Your version: " +
+            _errTxt = "Your version: " +
                 globals.version +
                 "\n" +
                 globals.errorVersion;
-            colErrTxt = globals.red_1;
+            _colErrTxt = globals.red_1;
             ErrorPopup(context, globals.errorVersion);
           });
         }
       } else if (body[0] == "error8") {
-        colEmail = Colors.red.shade50;
-        colEmail_1 = Colors.red.shade900;
-        colEmail_2 = Colors.red.shade900.withOpacity(0.5);
-        colPass = Colors.red.shade50;
-        colPass_1 = Colors.red.shade900;
-        colPass_2 = Colors.red.shade900.withOpacity(0.5);
+        _colEmail = Colors.red.shade50;
+        _colEmail_1 = Colors.red.shade900;
+        _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
+        _colPass = Colors.red.shade50;
+        _colPass_1 = Colors.red.shade900;
+        _colPass_2 = Colors.red.shade900.withOpacity(0.5);
         if (mounted) {
           setState(() {
-            errTxt = globals.warning8;
-            colErrTxt = globals.red_1;
+            _errTxt = globals.warning8;
+            _colErrTxt = globals.red_1;
             WarningPopup(context, globals.warning8);
           });
         }
       } else {
         if (mounted) {
           setState(() {
-            errTxt = globals.errorElse;
-            colErrTxt = globals.red_1;
+            _errTxt = globals.errorElse;
+            _colErrTxt = globals.red_1;
             ErrorPopup(context, globals.errorElse);
           });
         }
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       if (mounted) {
         setState(() {
-          errTxt = globals.errorException;
-          colErrTxt = globals.red_1;
+          _errTxt = globals.errorException;
+          _colErrTxt = globals.red_1;
           ErrorPopup(context, globals.errorException);
         });
       }
@@ -406,20 +401,25 @@ class _LoginState extends State<Login> {
     exit(0);
   }
 
+  _clearLogin(){
+    _emailLogin = null;
+    _passwordLogin = null;
+  }
+
   _nullLogin() {
     if (mounted) {
       setState(() {
-        globals.clearLogin();
+        _clearLogin();
 
-        errTxtEmail = '';
-        errTxtPass = '';
-        errTxt = '';
-        colEmail = globals.blue; //email
-        colEmail_1 = globals.blue_1;
-        colEmail_2 = globals.blue_2;
-        colPass = globals.blue; //password
-        colPass_1 = globals.blue_1;
-        colPass_2 = globals.blue_2;
+        _errTxtEmail = '';
+        _errTxtPass = '';
+        _errTxt = '';
+        _colEmail = globals.blue; //email
+        _colEmail_1 = globals.blue_1;
+        _colEmail_2 = globals.blue_2;
+        _colPass = globals.blue; //password
+        _colPass_1 = globals.blue_1;
+        _colPass_2 = globals.blue_2;
       });
     }
   }
@@ -427,22 +427,4 @@ class _LoginState extends State<Login> {
   _nullTextCode() {
     globals.sixCodeNb = null;
   }
-
-// _checkIfIsRegist() async {
-//   try {
-//     var data = {
-//       'version': globals.version,
-//       'email': globals.emailLogin,
-//     };
-//
-//     var res =
-//         await CallApi().postData(data, 'Login/Control/(Control)Login.php');
-//     print(res);
-//     print(res.body);
-//     //print("pppppp");
-//     List<dynamic> body = json.decode(res.body);
-//   }catch(e){
-//
-//   }
-// }
 }

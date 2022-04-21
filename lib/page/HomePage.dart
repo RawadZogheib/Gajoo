@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/CustomImage.dart';
@@ -1456,8 +1457,10 @@ class _HomePageState extends State<HomePage> {
     // }
   }
 
-  _checkIfIsLoggedIn() {
-    if (globals.isLoggedIn == false) {
+  _checkIfIsLoggedIn() async {
+    SessionManager session = SessionManager();
+
+    if (await session.get('isLoggedIn') == false) {
       WarningPopup(context, globals.warning400);
     } else {
       showDialog(
@@ -1475,8 +1478,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  _checkIfIsLoggedInBlue() {
-    if (globals.isLoggedIn == false) {
+  _checkIfIsLoggedInBlue() async {
+    SessionManager session = SessionManager();
+
+    if (await session.get('isLoggedIn') == false) {
       WarningPopup(context, globals.warning400);
     } else {
       Navigator.pushNamedAndRemoveUntil(context, "/MyAudio", (route) => false);
