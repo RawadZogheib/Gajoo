@@ -29,7 +29,7 @@ class MyCustomCalender extends StatelessWidget {
         //border: Border.all(width: 1),
       ),
       child: PagedVerticalCalendar(
-        startDate: DateTime.now().toLocal().subtract(const Duration(days: 60)),
+        //startDate: DateTime.now().toLocal().subtract(const Duration(days: 60)),
         onDayPressed: (date) => onDayPressed(date),
         scrollController: ScrollController(),
         /// customize the month header look by adding a week indicator

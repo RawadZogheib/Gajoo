@@ -10,6 +10,7 @@ const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
 const String myIP = "https://kwikcode.net/gajoo_php";
+//const String myIP = "http://127.0.0.1/gajoo_php";
 
 // bool? isLoggedIn;
 
@@ -125,4 +126,4 @@ String? sixCodeNb;
 // String? newPassword2;
 
 //myDrawer
-// bool isLoading = false;
+bool isLoading = false;
