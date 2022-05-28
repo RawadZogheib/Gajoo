@@ -78,6 +78,7 @@ const String error409 = 'Coupon already claimed!';
 const String error410 = 'You don\'t have enough bill.';// Wallet doesn't Exists
 const String error411 = 'You don\'t have enough bill.';
 const String error412 = 'The course is no longer available.';
+const String error413 = 'You already have this course.';
 //for AlertDialog
 String x = '0';
 

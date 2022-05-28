@@ -203,7 +203,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           ErrorPopup(context, globals.errorException);
         }
       }
-      debugPrint('load library end!!!');
+      debugPrint('load calendar end!!!');
       debugPrint(
           '=========<<======================================================<<==================================================<<=========');
     }

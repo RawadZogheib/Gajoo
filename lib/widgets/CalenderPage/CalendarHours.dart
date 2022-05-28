@@ -176,6 +176,10 @@ class _CalendarHoursState extends State<CalendarHours> {
           if (mounted) {
             ErrorPopup(context, globals.errorToken);
           }
+        } else if (body[0] == "error4") {
+          if (mounted) {
+            ErrorPopup(context, globals.error4);
+          }
         } else if (body[0] == "error7") {
           if (mounted) {
             WarningPopup(context, globals.warning7);
@@ -187,6 +191,14 @@ class _CalendarHoursState extends State<CalendarHours> {
         } else if (body[0] == "error411") {
           if (mounted) {
             ErrorPopup(context, globals.error411);
+          }
+        } else if (body[0] == "error412") {
+          if (mounted) {
+            ErrorPopup(context, globals.error412);
+          }
+        } else if (body[0] == "error413") {
+          if (mounted) {
+            ErrorPopup(context, globals.error413);
           }
         } else {
           if (mounted) {

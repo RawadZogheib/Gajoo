@@ -344,6 +344,7 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
       ).then((value) {
         _loadDates();
+        _getCoupons();
       });
     } else if (_redList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
@@ -358,6 +359,7 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
       ).then((value) {
         _loadDates();
+        _getCoupons();
       });
       // if (mounted) {
       //   ErrorPopup(context, globals.error401);
@@ -449,7 +451,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ErrorPopup(context, globals.errorException);
         }
       }
-      debugPrint('load library end!!!');
+      debugPrint('load calendar end!!!');
       debugPrint(
           '=========<<======================================================<<==================================================<<=========');
     }
@@ -464,7 +466,7 @@ class _CalendarPageState extends State<CalendarPage> {
           _isLoadingTickets = true;
         });
       }
-      debugPrint('Load tickets');
+      debugPrint('Load coupons');
 
       var data = {
         'version': globals.version,
@@ -523,7 +525,7 @@ class _CalendarPageState extends State<CalendarPage> {
         ErrorPopup(context, globals.errorException);
       }
     }
-    debugPrint('load library end!!!');
+    debugPrint('load coupons end!!!');
     debugPrint(
         '=========<<======================================================<<==================================================<<=========');
   }
