@@ -27,8 +27,8 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   bool _isLoading = false;
-  Set<String> _greenList = {};
-  Set<String> _redList = {};
+  final Set<String> _greenList = {};
+  final Set<String> _redList = {};
 
   int? _freeCoupon;
   int? _redCoupon;
@@ -292,7 +292,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                         greenList: _greenList,
                                         redList: _redList,
                                         onDayPressed: (date) {
-                                          print(DateFormat('yyyy-MM-dd')
+                                          debugPrint(DateFormat('yyyy-MM-dd')
                                               .format(date));
                                           _checkIfIsLoggedIn(date);
                                         },
@@ -372,20 +372,23 @@ class _CalendarPageState extends State<CalendarPage> {
     // Load from db
     if (_isLoading == false) {
       try {
-        print(
+        debugPrint(
             '=========>>======================================================>>==================================================>>=========');
         _isLoading = true;
-        print('Load calendar');
+        debugPrint('Load calendar');
 
         var data = {
           'version': globals.version,
           'account_Id': await SessionManager().get("Id"),
           'teacher_Id': widget.teacherId,
+          'type': globals.type,
+          'language': globals.language,
+          'level': globals.level,
         };
 
         var res = await CallApi()
             .postData(data, '/Calendar/Control/(Control)loadDates.php');
-        print(res.body);
+        debugPrint(res.body);
         List<dynamic> body = json.decode(res.body);
 
         _greenList.clear();
@@ -440,28 +443,28 @@ class _CalendarPageState extends State<CalendarPage> {
         }
         _isLoading = false;
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
         _isLoading = false;
         if (mounted) {
           ErrorPopup(context, globals.errorException);
         }
       }
-      print('load library end!!!');
-      print(
+      debugPrint('load library end!!!');
+      debugPrint(
           '=========<<======================================================<<==================================================<<=========');
     }
   }
 
   Future<void> _getCoupons() async {
     try {
-      print(
+      debugPrint(
           '=========>>======================================================>>==================================================>>=========');
       if (mounted) {
         setState(() {
           _isLoadingTickets = true;
         });
       }
-      print('Load tickets');
+      debugPrint('Load tickets');
 
       var data = {
         'version': globals.version,
@@ -470,7 +473,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
       var res = await CallApi()
           .postData(data, '/Payment/Control/(Control)loadCoupons.php');
-      print(res.body);
+      debugPrint(res.body);
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
@@ -512,7 +515,7 @@ class _CalendarPageState extends State<CalendarPage> {
         });
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       if (mounted) {
         setState(() {
           _isLoadingTickets = false;
@@ -520,8 +523,8 @@ class _CalendarPageState extends State<CalendarPage> {
         ErrorPopup(context, globals.errorException);
       }
     }
-    print('load library end!!!');
-    print(
+    debugPrint('load library end!!!');
+    debugPrint(
         '=========<<======================================================<<==================================================<<=========');
   }
 

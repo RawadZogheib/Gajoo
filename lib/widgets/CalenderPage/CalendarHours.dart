@@ -1,18 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CalendarHours extends StatefulWidget {
-  String id;
+  String course_Id;
   String courseStudents;
   String courseMaxStudents;
   String fromTime;
   String toTime;
   bool isTaken;
-  var onTap;
+  Function onTap;
 
   CalendarHours({
-    required this.id,
+    required this.course_Id,
     required this.courseStudents,
     required this.courseMaxStudents,
     required this.fromTime,
@@ -26,6 +30,8 @@ class CalendarHours extends StatefulWidget {
 }
 
 class _CalendarHoursState extends State<CalendarHours> {
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,10 +96,7 @@ class _CalendarHoursState extends State<CalendarHours> {
           ),
           widget.isTaken != false
               ? InkWell(
-                  onTap: () {
-                    widget.onTap();
-                    SuccessPopup(context, globals.success404);
-                  },
+                  onTap: () => _buyCourse(),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12.0),
@@ -137,6 +140,80 @@ class _CalendarHoursState extends State<CalendarHours> {
         ],
       ),
     );
+  }
+
+  Future<void> _buyCourse() async {
+    // buy from db
+    if (_isLoading == false) {
+      try {
+        debugPrint(
+            '=========>>======================================================>>==================================================>>=========');
+        _isLoading = true;
+        //_loadScreen();
+        debugPrint('buy course start');
+
+        var data = {
+          'version': globals.version,
+          'account_Id': await SessionManager().get("Id"),
+          'course_Id': widget.course_Id,
+        };
+
+        var res = await CallApi()
+            .postData(data, '/Calendar/Control/(Control)buyCourse.php');
+        debugPrint(res.body);
+        List<dynamic> body = json.decode(res.body);
+
+        if (body[0] == "success") {
+          widget.onTap(); // pop popUp
+          if (mounted) {
+            SuccessPopup(context, globals.success404);
+          }
+        } else if (body[0] == "errorVersion") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorVersion);
+          }
+        } else if (body[0] == "errorToken") {
+          if (mounted) {
+            ErrorPopup(context, globals.errorToken);
+          }
+        } else if (body[0] == "error7") {
+          if (mounted) {
+            WarningPopup(context, globals.warning7);
+          }
+        } else if (body[0] == "error410") {
+          if (mounted) {
+            ErrorPopup(context, globals.error410);
+          }
+        } else if (body[0] == "error411") {
+          if (mounted) {
+            ErrorPopup(context, globals.error411);
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+            ErrorPopup(context, globals.errorElse);
+          }
+        }
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      } catch (e) {
+        print(e);
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+          ErrorPopup(context, globals.errorException);
+        }
+      }
+      debugPrint('buy course end!!!');
+      debugPrint(
+          '=========<<======================================================<<==================================================<<=========');
+    }
   }
 }
 

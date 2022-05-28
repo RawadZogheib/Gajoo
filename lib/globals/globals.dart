@@ -75,6 +75,9 @@ const String error406 = 'There is no courses available on this day.';
 const String warning407 = 'There is no teacehrs available.';
 const String success408 = "Payment Done Successfully.";///////
 const String error409 = 'Coupon already claimed!';
+const String error410 = 'You don\'t have enough bill.';// Wallet doesn't Exists
+const String error411 = 'You don\'t have enough bill.';
+const String error412 = 'The course is no longer available.';
 //for AlertDialog
 String x = '0';
 

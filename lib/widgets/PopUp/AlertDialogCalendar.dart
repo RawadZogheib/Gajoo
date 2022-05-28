@@ -108,22 +108,25 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
     // Load from db
     if (_isLoading == false) {
       try {
-      print(
+        debugPrint(
           '=========>>======================================================>>==================================================>>=========');
       _isLoading = true;
       _loadScreen();
-      print('load calendar');
+      debugPrint('load calendar');
 
       var data = {
         'version': globals.version,
         'account_Id': await SessionManager().get("Id"),
         'teacher_Id': widget.teacherId,
+        'type': globals.type,
+        'language': globals.language,
+        'level': globals.level,
         'date': DateFormat('yyyy-MM-dd').format(widget.date),
       };
 
       var res = await CallApi()
           .postData(data, '/Calendar/Control/(Control)loadHoursMins.php');
-      print(res.body);
+      debugPrint(res.body);
       List<dynamic> body = json.decode(res.body);
 
       _availableTime.clear();
@@ -132,7 +135,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
         for (int i = 0; i < body[1].length; i++) {
           _availableTime.add(
             CalendarHours(
-              id: body[1][i][0],
+              course_Id: body[1][i][0],
               fromTime: DateFormat('HH:mm')
                   .format(
                     DateFormat('yyyy-MM-dd HH:mm')
@@ -152,7 +155,8 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
               courseMaxStudents: body[1][i][3],
               isTaken: int.parse(body[1][i][2]) < int.parse(body[1][i][3]),
               onTap: () {
-                print('ssa'); //or null
+                debugPrint('ssa'); //or null
+                Navigator.pop(context);
               },
             ),
           );
@@ -191,7 +195,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
         });
       }
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
         if (mounted) {
           setState(() {
             _isLoading = false;
@@ -199,8 +203,8 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           ErrorPopup(context, globals.errorException);
         }
       }
-      print('load library end!!!');
-      print(
+      debugPrint('load library end!!!');
+      debugPrint(
           '=========<<======================================================<<==================================================<<=========');
     }
   }
@@ -211,7 +215,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
     _timer = Timer.periodic(const Duration(milliseconds: 150), (Timer t) {
       if (mounted) {
         if (_isLoading == true) {
-          print(k);
+          debugPrint(k.toString());
           setState(() {
             if (k % maxK == 0) {
               _availableTimeLoading = [
