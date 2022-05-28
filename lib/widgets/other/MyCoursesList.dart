@@ -110,8 +110,8 @@ class MyCoursesItem extends StatelessWidget {
                   Text(
                     DateFormat('yyyy-MM-dd HH:mm').format(
                       DateFormat('yyyy-MM-dd HH:mm')
-                          .parse(date, true)
-                          .toLocal(),)
+                          .parse(date, true))
+                          //.toLocal(),)
                         .toString(),
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
