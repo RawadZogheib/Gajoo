@@ -73,35 +73,38 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - Assets/noCoursesFound.png
-     - Assets/HomePage/logo.png
-     - Assets/HomePage/Other/img1.png
-     - Assets/HomePage/Other/img2.png
-     - Assets/HomePage/AnimatedLogo/img1.png
-     - Assets/HomePage/AnimatedLogo/img2.png
-     - Assets/HomePage/AnimatedLogo/img3.png
-     - Assets/HomePage/AnimatedLogo/img4.png
-     - Assets/HomePage/AnimatedLogo/img5.png
-     - Assets/HomePage/CoverImage/img0.jpg
-     - Assets/HomePage/CoverImage/img1.webp
-     - Assets/HomePage/CoverImage/img2.jpg
-     - Assets/HomePage/CoverImage/img3.jpg
-     - Assets/HomePage/ProfilePicture/img1.png
-     - Assets/HomePage/ProfilePicture/img2.png
-     - Assets/HomePage/ProfilePicture/img3.png
-     - Assets/HomePage/graphics/strikethrough2.png
-     - Assets/Tickets/freeTicket.png
-     - Assets/Tickets/redTicket.png
-     - Assets/Tickets/yellowTicket.png
-     - Assets/Tickets/blueTicket.png
-     - Assets/Tickets/greenTicket.png
-     - Assets/Tickets/imageTicket0.png
-     - Assets/Tickets/imageTicket1.png
-     - Assets/Tickets/imageTicket2.png
-     - Assets/Tickets/imageTicket3.png
-     - Assets/Tickets/imageTicket4.png
-     - Assets/SettingsPage/books.jpg
-     - Assets/Quiz/FR/avion.png
+    - Assets/noCoursesFound.png
+    - Assets/HomePage/logo.png
+    - Assets/HomePage/Other/img1.png
+    - Assets/HomePage/Other/img2.png
+    - Assets/HomePage/AnimatedLogo/img1.png
+    - Assets/HomePage/AnimatedLogo/img2.png
+    - Assets/HomePage/AnimatedLogo/img3.png
+    - Assets/HomePage/AnimatedLogo/img4.png
+    - Assets/HomePage/AnimatedLogo/img5.png
+    - Assets/HomePage/CoverImage/img0.jpg
+    - Assets/HomePage/CoverImage/img1.webp
+    - Assets/HomePage/CoverImage/img2.jpg
+    - Assets/HomePage/CoverImage/img3.jpg
+    - Assets/HomePage/ProfilePicture/img1.png
+    - Assets/HomePage/ProfilePicture/img2.png
+    - Assets/HomePage/ProfilePicture/img3.png
+    - Assets/HomePage/graphics/strikethrough2.png
+    - Assets/Tickets/freeTicket.png
+    - Assets/Tickets/redTicket.png
+    - Assets/Tickets/yellowTicket.png
+    - Assets/Tickets/blueTicket.png
+    - Assets/Tickets/greenTicket.png
+    - Assets/Tickets/imageTicket0.png
+    - Assets/Tickets/imageTicket1.png
+    - Assets/Tickets/imageTicket2.png
+    - Assets/Tickets/imageTicket3.png
+    - Assets/Tickets/imageTicket4.png
+    - Assets/SettingsPage/books.jpg
+    - Assets/Quiz/FR/avion.png
+    - Assets/Quiz/FR/footBall.png
+    - Assets/Quiz/FR/mer.png
+    - Assets/Quiz/FR/notFootBall.png
 
 
 
