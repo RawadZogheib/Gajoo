@@ -1411,7 +1411,7 @@ class _HomePageState extends State<HomePage> {
               languageView: _tempLanguageView,
               isHeart: false,
               isHeartLikedTeacher: false,
-              isButton: true,
+              isButton: false,
               liked: false,
               isHidden: false,
               listOfCharacteristic_t: _tempListOfCharacteristic_t,
