@@ -44,7 +44,7 @@ class _TestPageState extends State<TestPage> {
 class AlertDialogQuiz extends StatefulWidget {
   String index;
 
-  AlertDialogQuiz({required this.index});
+  AlertDialogQuiz({Key? key, required this.index}) : super(key: key);
 
   // : maxQuestion = index == 'AR'
   //       ? 13
@@ -150,7 +150,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       } else {
         setState(() {
           _currentTimer++;
-          print('$_currentTimer Second');
+          debugPrint('$_currentTimer Second');
         });
       }
     });
@@ -265,14 +265,14 @@ class QCUWidget extends StatefulWidget {
   String question;
   String question2;
   List<String> ansList;
-  var onTap;
+  Function onTap;
 
   QCUWidget(
-      {required this.questionId,
+      {Key? key, required this.questionId,
       required this.question,
       this.question2 = '',
       required this.ansList,
-      required this.onTap});
+      required this.onTap}) : super(key: key);
 
   @override
   State<QCUWidget> createState() => _QCUWidgetState();
@@ -341,7 +341,7 @@ class _QCUWidgetState extends State<QCUWidget> {
   }
 
   _onTap(String val) {
-    print(val);
+    debugPrint(val);
     widget.onTap();
   }
 }
@@ -351,14 +351,14 @@ class QCUWidget2 extends StatefulWidget {
   String question;
   String pronomIndefini;
   String asset;
-  var onTap;
+  Function onTap;
 
   QCUWidget2(
-      {required this.questionId,
+      {Key? key, required this.questionId,
       required this.question,
       required this.pronomIndefini,
       required this.asset,
-      required this.onTap});
+      required this.onTap}) : super(key: key);
 
   @override
   State<QCUWidget2> createState() => _QCUWidget2State();
@@ -389,20 +389,6 @@ class _QCUWidget2State extends State<QCUWidget2> {
                 widget.pronomIndefini,
                 style: const TextStyle(fontSize: 20),
               ),
-              // myTextInput2(
-              //   textString: 'Your Answer',
-              //   labelText: 'Your Answer',
-              //   spaceAllowed: true,
-              //   enterAllowed: false,
-              //   obscure: false,
-              //   colBlue: colLName,
-              //   colBlue_1: colLName_1,
-              //   colBlue_2: colLName_2,
-              //   onChange: (value) {
-              //     LName = value;
-              //     _checkColor();
-              //   },
-              // ),
             ],
           ),
           SizedBox(
@@ -428,7 +414,7 @@ class _QCUWidget2State extends State<QCUWidget2> {
   }
 
   _onTap(String val) {
-    print(val);
+    debugPrint(val);
     widget.onTap();
   }
 }
