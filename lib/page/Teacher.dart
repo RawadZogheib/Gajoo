@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
@@ -366,6 +367,8 @@ class _TeacherState extends State<Teacher> {
               language: body[1][i][5][j][1],
               level: body[1][i][5][j][2]));
         }
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        print(body[1][i][1]);
 
         _TeacherCardList.add(
           TeacherCard(
@@ -383,7 +386,7 @@ class _TeacherState extends State<Teacher> {
               isHeart: true,
               isHeartLikedTeacher: false,
               isButton: true,
-              liked: false,
+              liked: body[1][i][6] == "1" ? true : false,   //bade 7otta mn lbody
               isHidden: false,
               listOfCharacteristic_t: _tempListOfCharacteristic_t,
               isHidable: true,
@@ -513,19 +516,19 @@ class _TeacherState extends State<Teacher> {
           j++) {
         //print(_TeacherCard[i].listOfCharacteristic_t[j].type);
 
-        print(_TeacherCardList[i].listOfCharacteristic_t[j].type +
-            " " +
-            j.toString() +
-            " " +
-            _TeacherCardList[i].listOfCharacteristic_t[j].language +
-            " " +
-            j.toString() +
-            " " +
-            _TeacherCardList[i].listOfCharacteristic_t[j].level +
-            " " +
-            j.toString() +
-            " " +
-            _TeacherCardList[i].age);
+        // print(_TeacherCardList[i].listOfCharacteristic_t[j].type +
+        //     " " +
+        //     j.toString() +
+        //     " " +
+        //     _TeacherCardList[i].listOfCharacteristic_t[j].language +
+        //     " " +
+        //     j.toString() +
+        //     " " +
+        //     _TeacherCardList[i].listOfCharacteristic_t[j].level +
+        //     " " +
+        //     j.toString() +
+        //     " " +
+        //     _TeacherCardList[i].age);
         // print(widget.languages);
         // print(widget.level);
         if (_TeacherCardList[i].listOfCharacteristic_t[j].type !=
@@ -548,7 +551,7 @@ class _TeacherState extends State<Teacher> {
                 isHeart: true,
                 isHeartLikedTeacher: false,
                 isButton: true,
-                liked: false,
+                liked: _TeacherCardList[i].liked, //not liked
                 isHidden: true,
                 listOfCharacteristic_t:
                     _TeacherCardList[i].listOfCharacteristic_t,
@@ -556,6 +559,7 @@ class _TeacherState extends State<Teacher> {
                 onPressed: () {}),
           );
 
+          print(_TeacherCardListFiltered[i].name);
           print("trueeeeeeeeeeeee: $i");
         } else {
           _TeacherCardListFiltered.add(
@@ -572,7 +576,7 @@ class _TeacherState extends State<Teacher> {
                 isHeart: true,
                 isHeartLikedTeacher: false,
                 isButton: true,
-                liked: false,
+                liked: _TeacherCardList[i].liked,
                 isHidden: false,
                 listOfCharacteristic_t:
                     _TeacherCardList[i].listOfCharacteristic_t,
@@ -581,7 +585,7 @@ class _TeacherState extends State<Teacher> {
           );
         }
       }
-      print(i);
+      //print(i);
       print(
           "========================================================================================================");
     }
@@ -589,6 +593,7 @@ class _TeacherState extends State<Teacher> {
       _TeacherCardListFiltered;
     });
   }
+
 
   _cleanColorType() {
     if (mounted) {
@@ -1193,6 +1198,21 @@ class _TeacherState extends State<Teacher> {
   }
 
   _back() {
+    setState(() {
+      globals.language = '';
+      globals.type = '';
+      globals.level = '';
+      level1 = globals.transparent;
+      level2 = globals.transparent;
+      level3 = globals.transparent;
+      language1 = globals.transparent;
+      language2 = globals.transparent;
+      language3 = globals.transparent;
+      type1 = globals.transparent;
+      type2 = globals.transparent;
+      type3 = globals.transparent;
+    });
+
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
   }
 }

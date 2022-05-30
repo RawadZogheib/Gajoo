@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/page/CalendarPage.dart';
 
@@ -104,19 +108,33 @@ class _TeacherCardState extends State<TeacherCard> {
                               fontSize: 18,
                             )),
                         Text(
-                            (widget.languageView.contains('Arabic') ||
-                                widget.languageView.contains('arabic')
-                                ? 'Arabic' + (widget.languageView.contains('French') ||
-                                widget.languageView.contains('french') || widget.languageView.contains('English') ||
-                                widget.languageView.contains('english')? ', ':'')
-                                    : '') + (widget.languageView.contains('French') ||
-                                widget.languageView.contains('french')
-                                ? 'French' + (widget.languageView.contains('English') ||
-                                widget.languageView.contains('english')? ', ':'')
-                                    : '') + (widget.languageView.contains('English') ||
-                                widget.languageView.contains('english')
-                                ? 'English'
-                                : ''),
+                          (widget.languageView.contains('Arabic') ||
+                                      widget.languageView.contains('arabic')
+                                  ? 'Arabic' +
+                                      (widget.languageView.contains('French') ||
+                                              widget.languageView
+                                                  .contains('french') ||
+                                              widget.languageView
+                                                  .contains('English') ||
+                                              widget.languageView
+                                                  .contains('english')
+                                          ? ', '
+                                          : '')
+                                  : '') +
+                              (widget.languageView.contains('French') ||
+                                      widget.languageView.contains('french')
+                                  ? 'French' +
+                                      (widget.languageView
+                                                  .contains('English') ||
+                                              widget.languageView
+                                                  .contains('english')
+                                          ? ', '
+                                          : '')
+                                  : '') +
+                              (widget.languageView.contains('English') ||
+                                      widget.languageView.contains('english')
+                                  ? 'English'
+                                  : ''),
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Colors.grey,
@@ -129,10 +147,14 @@ class _TeacherCardState extends State<TeacherCard> {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      Navigator.pushAndRemoveUntil(context,
-                                          MaterialPageRoute(builder: (context) => CalendarPage(
-                                            teacherId: widget.Id,
-                                          )), (route) => false);
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CalendarPage(
+                                                    teacherId: widget.Id,
+                                                  )),
+                                          (route) => false);
                                       // Navigator.pushNamedAndRemoveUntil(context,
                                       //     '/CalendarPage', (route) => false);
                                     },
@@ -152,23 +174,24 @@ class _TeacherCardState extends State<TeacherCard> {
                           top: 20,
                           right: 20,
                           child: IconButton(
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            onPressed: () {
-                              setState(() {
-                                widget.liked = !widget.liked;
-                                if (widget.isHeartLikedTeacher != false &&
-                                    widget.liked == false &&
-                                    widget.onPressed != null) {
-                                  widget.onPressed(widget.Id);
-                                }
-                              });
-                            },
-                            icon: widget.liked == false
-                                ? const Icon(Icons.favorite_border)
-                                : const Icon(Icons.favorite),
-                          ),
+                              highlightColor: Colors.transparent,
+                              splashColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              onPressed: () {
+                                setState(() {
+                                  widget.liked = !widget.liked;
+                                  if (widget.isHeartLikedTeacher != false &&
+                                      widget.liked == false &&
+                                      widget.onPressed != null) {
+                                    widget.onPressed(widget.Id);
+                                  }
+                                  _AddOrRemoveLike();
+                                  //_getLikedOrNot();
+                                });
+                              },
+                              icon: widget.liked == false
+                                  ? const Icon(Icons.favorite_border)
+                                  : const Icon(Icons.favorite)),
                         )
                       : Container(),
                 ],
@@ -236,7 +259,7 @@ class _TeacherCardState extends State<TeacherCard> {
                   Container(
                     height: 55,
                     width: 110,
-                    margin: const EdgeInsets.only(top: 26.0,right: 140),
+                    margin: const EdgeInsets.only(top: 26.0, right: 140),
                     padding: const EdgeInsets.only(top: 6.0, bottom: 5.0),
                     decoration: BoxDecoration(
                       color: Colors.transparent.withOpacity(0.2),
@@ -364,4 +387,65 @@ class _TeacherCardState extends State<TeacherCard> {
       ),
     );
   }
+
+_AddOrRemoveLike() async {
+  SessionManager session = SessionManager();
+  if(widget.liked == false){
+    var data = {
+      'version': globals.version,
+      'email': await session.get('email'),
+      'teacher_Id': widget.Id,
+      //'isLiked': widget.liked.toString()
+    };
+
+    print(await session.get('email'));
+    print(widget.Id);
+    print(widget.liked);
+    print(globals.version);
+    var res = await CallApi()
+        .postData(data, '/Teacher/Control/(Control)isNotLikedTeacher.php');
+
+    print(res.body);
+    List<dynamic> body = json.decode(res.body);
+
+    if(body[0] == "success"){
+      //send the liked ones to the likedTeacher page
+      // session.set('teacher_Id', widget.Id);
+      // session.set('isLiked', widget.liked.toString());
+      print("doneeeee");
+    }
+
+  }else{
+    var data = {
+      'version': globals.version,
+      'email': await session.get('email'),
+      'teacher_Id': widget.Id,
+      //'isLiked': widget.liked.toString()
+    };
+
+    print(await session.get('email'));
+    print(widget.Id);
+    print(widget.liked);
+    print(globals.version);
+    var res = await CallApi()
+        .postData(data, '/Teacher/Control/(Control)isLikedTeacher.php');
+    print(res.body);
+    print("11111111111111111111111");
+    List<dynamic> body = json.decode(res.body);
+
+    if(body[0] == "success"){
+      //send the liked ones to the likedTeacher page
+      // session.set('teacher_Id', widget.Id);
+      // session.set('isLiked', widget.liked.toString());
+      print("doneeeee2222222222222222");
+    }
+  }
+}
+
+
+  // _getLikedOrNot() async {
+  //   if(await SessionManager().get('teacher_Id'));
+  //
+  // }
+
 }

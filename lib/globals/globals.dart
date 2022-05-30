@@ -4,13 +4,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 
 //Version
 const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
-const String myIP = "https://kwikcode.net/gajoo_php";
-//const String myIP = "http://127.0.0.1/gajoo_php";
+//const String myIP = "https://kwikcode.net/gajoo_php";
+const String myIP = "http://127.0.0.1/Gajoo_php";
 
 // bool? isLoggedIn;
 

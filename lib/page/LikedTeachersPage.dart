@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
 import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:gajoo/widgets/other/MyFooter.dart';
@@ -31,7 +35,13 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
     initialScrollOffset: 0.0,
   );
 
-  final List<TeacherCard> _LikedTeacherCard = [];
+  int _key = 0;
+  var _age;
+
+  List<TeacherCard> _TeacherCardList = [];
+  //List<TeacherCard> _TeacherCardListFiltered = [];
+
+  //final List<TeacherCard> _LikedTeacherCard = [];
 
   @override
   void initState() {
@@ -125,8 +135,7 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                                             child: SingleChildScrollView(
                                               controller: ScrollController(),
                                               child: Wrap(
-                                                children:
-                                                _LikedTeacherCard,
+                                                children: _TeacherCardList
                                               ),
                                             ),
                                           ),
@@ -192,7 +201,7 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                                         child: SingleChildScrollView(
                                           controller: ScrollController(),
                                           child: Wrap(
-                                            children: _LikedTeacherCard,
+                                            children: _TeacherCardList
                                           ),
                                         ),
                                       ),
@@ -261,7 +270,7 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
                                         child: SingleChildScrollView(
                                           controller: ScrollController(),
                                           child: Wrap(
-                                            children: _LikedTeacherCard,
+                                            children: _TeacherCardList
                                           ),
                                         ),
                                       ),
@@ -317,7 +326,7 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
       print("30sec gone!!");
       if (mounted) {
         print("30sec gone, and _loadChildrenOnline!!");
-        _loadLikedTeachers();
+        //_loadLikedTeachers();
       } else {
         print(
             '=========<<======================================================<<==================================================<<=========');
@@ -325,224 +334,105 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
     });
   }
 
-  void _loadLikedTeachers() {
-    // load from db
-    setState(() {
-      _LikedTeacherCard.clear();
-      _LikedTeacherCard.addAll([
-        TeacherCard(
-            Id: "1",
-            name: 'Michel Nachar',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            languageView: {},
-            isHeart: true,
-            isHeartLikedTeacher: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "2",
-            name: 'Rawad Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            languageView: {},
-            isHeart: true,
-            isHeartLikedTeacher: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "3",
-            name: 'Rima Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            languageView: {},
-            isHeart: true,
-            isHeartLikedTeacher: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "4",
-            name: 'Ghada Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            languageView: {},
-            isHeart: true,
-            isHeartLikedTeacher: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "5",
-            name: 'Michel Nachar',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            languageView: {},
-            isHeart: true,
-            isHeartLikedTeacher: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "6",
-            name: 'Rawad Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            languageView: {},
-            isHeart: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "7",
-            name: 'Rima Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img3.png',
-            languageView: {},
-            isHeart: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "8",
-            name: 'Ghada Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            languageView: {},
-            isHeart: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                // for(int i = 0; i<_LikedTeacherCard.length; i++){
-                //   if(_LikedTeacherCard[i].Id == Id){
-                //     _LikedTeacherCard.removeAt(i);
-                //   }
-                // }
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "9",
-            name: 'Michel Nachar',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-            languageView: {},
-            isHeart: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-        TeacherCard(
-            Id: "10",
-            name: 'Rawad Zogheib',
-            age: "24",
-            NbOfCourses: "45",
-            NbOfCoursesReserved: "40",
-            NbOfCoursesLeft: "5",
-            imageUrl: 'Assets/HomePage/ProfilePicture/img2.png',
-            languageView: {},
-            isHeart: true,
-            isButton: true,
-            listOfCharacteristic_t: [],
-            liked: true,
-            isHidden: false,
-            isHidable: true,
-            onPressed: (Id) {
-              setState(() {
-                _LikedTeacherCard.removeWhere((element) => element.Id == Id);
-              });
-            }),
-      ]);
-    });
-  }
+  _loadLikedTeachers() async {
+    SessionManager session = SessionManager();
+      var data = {
+        'version': globals.version,
+        'email': await session.get('email'),
+      };
+
+    var res = await CallApi()
+        .postData(data, '/LikedTeacher/Control/(Control)getLikedTeachers.php');
+
+    print(res.body);
+    List<dynamic> body = json.decode(res.body);
+
+    _TeacherCardList.clear();
+
+    if (body[0] == "success") {
+      //print(body[1]);
+
+      for (int i = 0; i < body[1].length; i++) {
+        Set<String> _tempLanguageView = {};
+        List<Characteristic_t> _tempListOfCharacteristic_t = [];
+        _age = DateTime.now().year - DateTime.parse(body[1][i][2]).year;
+        print(_age);
+
+        //print(body[1][i][3] + "hhhhhhhhhhhhh");
+        for (int j = 0; j < body[1][i][5].length; j++) {
+          if (body[1][i][5][j][1] == "Arabic" ||
+              body[1][i][5][j][1] == "arabic") {
+            //for language
+            _tempLanguageView.add("Arabic");
+          } else if (body[1][i][5][j][1] == "French" ||
+              body[1][i][5][j][1] == "french") {
+            _tempLanguageView.add("French");
+          } else if (body[1][i][5][j][1] == "English" ||
+              body[1][i][5][j][1] == "english") {
+            _tempLanguageView.add("English");
+          }
+          _tempListOfCharacteristic_t.add(Characteristic_t(
+              type: body[1][i][5][j][0],
+              language: body[1][i][5][j][1],
+              level: body[1][i][5][j][2]));
+        }
+
+        _TeacherCardList.add(
+          TeacherCard(
+              key: ValueKey(_key++),
+              Id: body[1][i][0],
+              name: body[1][i][1],
+              age: _age.toString(),
+              NbOfCourses: body[1][i][3],
+              NbOfCoursesReserved: body[1][i][4],
+              NbOfCoursesLeft:
+              (int.parse(body[1][i][3]) - int.parse(body[1][i][4]))
+                  .toString(),
+              imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+              languageView: _tempLanguageView,
+              isHeart: true,
+              isHeartLikedTeacher: false,
+              isButton: true,
+              liked: true,   //bade 7otta mn lbody
+              isHidden: false,
+              listOfCharacteristic_t: _tempListOfCharacteristic_t,
+              isHidable: true,
+              onPressed: () {}),
+        );
+      }
+      //
+      setState(() {
+        _TeacherCardList;
+      });
+
+      // if (mounted) {
+      //   setState(() {
+      //     _greenList;
+      //     _redList;
+      //   });
+      // }
+    } else if (body[0] == "empty") {
+      WarningPopup(context, globals.warning407);
+    } else if (body[0] == "errorVersion") {
+      if (mounted) {
+        ErrorPopup(context, globals.errorVersion);
+      }
+    } else if (body[0] == "errorToken") {
+      if (mounted) {
+        ErrorPopup(context, globals.errorToken);
+      }
+    } else if (body[0] == "error7") {
+      if (mounted) {
+        WarningPopup(context, globals.warning7);
+      }
+    } else {
+      if (mounted) {
+        ErrorPopup(context, globals.errorElse);
+      }
+    }
+
+    }
+
 
   _choosedFilters() {
     if (globals.type == "Language Lessons") {
