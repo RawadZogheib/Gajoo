@@ -18,17 +18,7 @@ import '../widgets/button/myButton.dart';
 import '../widgets/other/MyCustomScrollBehavior.dart';
 import '../widgets/other/myDrawer.dart';
 
-Color type1 = HexColor('#dfe2e6');
-Color type2 = HexColor('#dfe2e6');
-Color type3 = HexColor('#dfe2e6');
 
-Color language1 = HexColor('#dfe2e6');
-Color language2 = HexColor('#dfe2e6');
-Color language3 = HexColor('#dfe2e6');
-
-Color level1 = HexColor('#dfe2e6');
-Color level2 = HexColor('#dfe2e6');
-Color level3 = HexColor('#dfe2e6');
 
 class Teacher extends StatefulWidget {
   @override
@@ -36,6 +26,19 @@ class Teacher extends StatefulWidget {
 }
 
 class _TeacherState extends State<Teacher> {
+
+  Color type1 = HexColor('#dfe2e6');
+  Color type2 = HexColor('#dfe2e6');
+  Color type3 = HexColor('#dfe2e6');
+
+  Color language1 = HexColor('#dfe2e6');
+  Color language2 = HexColor('#dfe2e6');
+  Color language3 = HexColor('#dfe2e6');
+
+  Color level1 = HexColor('#dfe2e6');
+  Color level2 = HexColor('#dfe2e6');
+  Color level3 = HexColor('#dfe2e6');
+
   Timer? timer;
   int _key = 0;
   var _age;
@@ -920,7 +923,7 @@ class _TeacherState extends State<Teacher> {
           ),
           child: Drawer(
             child: Material(
-              color: HexColor('#222222'), //globals.blue1,
+              color: Colors.white, //globals.blue1,
               child: ScrollConfiguration(
                 behavior: MyCustomScrollBehavior(),
                 child: ListView(
@@ -1202,15 +1205,15 @@ class _TeacherState extends State<Teacher> {
       globals.language = '';
       globals.type = '';
       globals.level = '';
-      level1 = globals.transparent;
-      level2 = globals.transparent;
-      level3 = globals.transparent;
-      language1 = globals.transparent;
-      language2 = globals.transparent;
-      language3 = globals.transparent;
-      type1 = globals.transparent;
-      type2 = globals.transparent;
-      type3 = globals.transparent;
+      level1 = HexColor('#dfe2e6');
+      level2 = HexColor('#dfe2e6');
+      level3 = HexColor('#dfe2e6');
+      language1 = HexColor('#dfe2e6');
+      language2 = HexColor('#dfe2e6');
+      language3 = HexColor('#dfe2e6');
+      type1 = HexColor('#dfe2e6');
+      type2 = HexColor('#dfe2e6');
+      type3 = HexColor('#dfe2e6');
     });
 
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
