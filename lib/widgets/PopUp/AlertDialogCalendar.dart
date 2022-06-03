@@ -135,7 +135,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
         for (int i = 0; i < body[1].length; i++) {
           _availableTime.add(
             CalendarHours(
-              course_Id: body[1][i][0],
+              courseId: body[1][i][0],
               fromTime: DateFormat('HH:mm')
                   .format(
                     DateFormat('yyyy-MM-dd HH:mm')

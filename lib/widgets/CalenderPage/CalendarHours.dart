@@ -7,7 +7,7 @@ import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CalendarHours extends StatefulWidget {
-  String course_Id;
+  String courseId;
   String courseStudents;
   String courseMaxStudents;
   String fromTime;
@@ -16,7 +16,7 @@ class CalendarHours extends StatefulWidget {
   Function onTap;
 
   CalendarHours({
-    required this.course_Id,
+    required this.courseId,
     required this.courseStudents,
     required this.courseMaxStudents,
     required this.fromTime,
@@ -155,7 +155,7 @@ class _CalendarHoursState extends State<CalendarHours> {
         var data = {
           'version': globals.version,
           'account_Id': await SessionManager().get("Id"),
-          'course_Id': widget.course_Id,
+          'course_Id': widget.courseId,
         };
 
         var res = await CallApi()
