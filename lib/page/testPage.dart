@@ -68,7 +68,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
   int _iterator = 0;
   final double _maxTimer = 30;
 
-  List<String> _answerList = [];
+  final List<String> _answerList = [];
 
   @override
   void initState() {
@@ -545,7 +545,7 @@ class QCUWidget3 extends StatefulWidget {
 }
 
 class _QCUWidget3State extends State<QCUWidget3> {
-  String _typedText = '';
+  final String _typedText = '';
 
   @override
   Widget build(BuildContext context) {
