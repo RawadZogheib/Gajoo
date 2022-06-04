@@ -507,6 +507,7 @@ class _TeacherState extends State<Teacher> {
   }
 
   _checkFilter() {
+    var _checkCharacteristics = false;
     _TeacherCardListFiltered.clear();
     for (int i = 0; i < _TeacherCardList.length; i++) {
       // print(widget.type);
@@ -514,79 +515,103 @@ class _TeacherState extends State<Teacher> {
 
       //print(_TeacherCard[i].listOfCharacteristic_t.length);
 
-      for (int j = 0;
-          j < _TeacherCardList[i].listOfCharacteristic_t.length;
-          j++) {
-        //print(_TeacherCard[i].listOfCharacteristic_t[j].type);
+      if(_TeacherCardList[i].listOfCharacteristic_t.isEmpty){
+        _checkCharacteristics = false;
+      }else {
+        for (int j = 0;
+        j < _TeacherCardList[i].listOfCharacteristic_t.length;
+        j++) {
+          print(_TeacherCardList[i].listOfCharacteristic_t[j].type);
+          print("typeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
-        // print(_TeacherCardList[i].listOfCharacteristic_t[j].type +
-        //     " " +
-        //     j.toString() +
-        //     " " +
-        //     _TeacherCardList[i].listOfCharacteristic_t[j].language +
-        //     " " +
-        //     j.toString() +
-        //     " " +
-        //     _TeacherCardList[i].listOfCharacteristic_t[j].level +
-        //     " " +
-        //     j.toString() +
-        //     " " +
-        //     _TeacherCardList[i].age);
-        // print(widget.languages);
-        // print(widget.level);
-        if (_TeacherCardList[i].listOfCharacteristic_t[j].type !=
-                globals.type ||
-            _TeacherCardList[i].listOfCharacteristic_t[j].language !=
-                globals.language ||
-            _TeacherCardList[i].listOfCharacteristic_t[j].level !=
-                globals.level) {
-          _TeacherCardListFiltered.add(
-            TeacherCard(
-                key: ValueKey(_key++),
-                Id: _TeacherCardList[i].Id,
-                name: _TeacherCardList[i].name,
-                age: _TeacherCardList[i].age,
-                NbOfCourses: _TeacherCardList[i].NbOfCourses,
-                NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
-                NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
-                imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-                languageView: _TeacherCardList[i].languageView,
-                isHeart: true,
-                isHeartLikedTeacher: false,
-                isButton: true,
-                liked: _TeacherCardList[i].liked, //not liked
-                isHidden: true,
-                listOfCharacteristic_t:
-                    _TeacherCardList[i].listOfCharacteristic_t,
-                isHidable: true,
-                onPressed: () {}),
-          );
-
-          print(_TeacherCardListFiltered[i].name);
-          print("trueeeeeeeeeeeee: $i");
-        } else {
-          _TeacherCardListFiltered.add(
-            TeacherCard(
-                key: ValueKey(_key++),
-                Id: _TeacherCardList[i].Id,
-                name: _TeacherCardList[i].name,
-                age: _TeacherCardList[i].age,
-                NbOfCourses: _TeacherCardList[i].NbOfCourses,
-                NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
-                NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
-                imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
-                languageView: _TeacherCardList[i].languageView,
-                isHeart: true,
-                isHeartLikedTeacher: false,
-                isButton: true,
-                liked: _TeacherCardList[i].liked,
-                isHidden: false,
-                listOfCharacteristic_t:
-                    _TeacherCardList[i].listOfCharacteristic_t,
-                isHidable: true,
-                onPressed: () {}),
-          );
+          // print(_TeacherCardList[i].listOfCharacteristic_t[j].type +
+          //     " " +
+          //     j.toString() +
+          //     " " +
+          //     _TeacherCardList[i].listOfCharacteristic_t[j].language +
+          //     " " +
+          //     j.toString() +
+          //     " " +
+          //     _TeacherCardList[i].listOfCharacteristic_t[j].level +
+          //     " " +
+          //     j.toString() +
+          //     " " +
+          //     _TeacherCardList[i].age);
+          // print(widget.languages);
+          // print(widget.level);
+          if (_TeacherCardList[i].listOfCharacteristic_t[j].type !=
+              globals.type ||
+              _TeacherCardList[i].listOfCharacteristic_t[j].language !=
+                  globals.language ||
+              _TeacherCardList[i].listOfCharacteristic_t[j].level !=
+                  globals.level) {
+            _checkCharacteristics = false;
+            print(
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            print(_TeacherCardList[i].listOfCharacteristic_t[j].type);
+            print(
+                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+            print(_TeacherCardList[i].listOfCharacteristic_t[j].language);
+            print(
+                "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
+            print(_TeacherCardList[i].listOfCharacteristic_t[j].level);
+          } else {
+            _checkCharacteristics = true;
+            _TeacherCardListFiltered.add(
+              TeacherCard(
+                  key: ValueKey(_key++),
+                  Id: _TeacherCardList[i].Id,
+                  name: _TeacherCardList[i].name,
+                  age: _TeacherCardList[i].age,
+                  NbOfCourses: _TeacherCardList[i].NbOfCourses,
+                  NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
+                  NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
+                  imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+                  languageView: _TeacherCardList[i].languageView,
+                  isHeart: true,
+                  isHeartLikedTeacher: false,
+                  isButton: true,
+                  liked: _TeacherCardList[i].liked,
+                  isHidden: false,
+                  listOfCharacteristic_t:
+                  _TeacherCardList[i].listOfCharacteristic_t,
+                  isHidable: true,
+                  onPressed: () {}),
+            );
+            break;
+          }
         }
+      }
+      if(_checkCharacteristics == false){
+        _TeacherCardListFiltered.add(
+          TeacherCard(
+              key: ValueKey(_key++),
+              Id: _TeacherCardList[i].Id,
+              name: _TeacherCardList[i].name,
+              age: _TeacherCardList[i].age,
+              NbOfCourses: _TeacherCardList[i].NbOfCourses,
+              NbOfCoursesReserved: _TeacherCardList[i].NbOfCoursesReserved,
+              NbOfCoursesLeft: _TeacherCardList[i].NbOfCoursesLeft,
+              imageUrl: 'Assets/HomePage/ProfilePicture/img1.png',
+              languageView: _TeacherCardList[i].languageView,
+              isHeart: true,
+              isHeartLikedTeacher: false,
+              isButton: true,
+              liked: _TeacherCardList[i].liked, //not liked
+              isHidden: true,
+              listOfCharacteristic_t:
+              _TeacherCardList[i].listOfCharacteristic_t,
+              isHidable: true,
+              onPressed: () {}),
+        );
+
+
+
+      }else{
+
+
+        print(_TeacherCardListFiltered[i].name);
+        print("trueeeeeeeeeeeee: $i");
       }
       //print(i);
       print(
