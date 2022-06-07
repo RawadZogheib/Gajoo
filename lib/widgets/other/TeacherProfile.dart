@@ -179,7 +179,7 @@ class TeacherName extends StatelessWidget {
           Text(
             text1,
             textAlign: TextAlign.end,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Expanded(
             child: Text(
