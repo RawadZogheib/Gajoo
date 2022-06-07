@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0-69.2.beta <3.0.0"
+  sdk: ">=2.17.1 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,15 +38,14 @@ dependencies:
   sizer: ^2.0.15
   shared_preferences: ^2.0.13
   http: ^0.13.4
-  motion_toast: ^2.1.1
+  motion_toast: ^2.1.9
   infinite_listview: ^1.1.0
-  scrollable_clean_calendar: ^1.0.1
-  paged_vertical_calendar: ^1.0.6
+  paged_vertical_calendar: ^1.1.2
   flip_card: ^0.6.0
   url_launcher: ^6.0.20
   audioplayers: ^0.20.1
   animated_text_kit: ^4.2.1
-  flutter_typeahead: ^3.2.4
+  #  flutter_typeahead: ^4.0.0
   flutter_placeholder_textlines: ^1.1.2
 
 dev_dependencies:
@@ -102,9 +101,6 @@ flutter:
     - Assets/Tickets/imageTicket4.png
     - Assets/SettingsPage/books.jpg
     - Assets/Quiz/FR/avion.png
-    - Assets/Quiz/FR/footBall.png
-    - Assets/Quiz/FR/mer.png
-    - Assets/Quiz/FR/notFootBall.png
 
 
 

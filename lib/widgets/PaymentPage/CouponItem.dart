@@ -573,25 +573,25 @@ class _CouponItemState extends State<CouponItem> {
           if (body[0] == "success") {
             widget.onBuy(widget.index, widget.val);
             widget.val = widget.valInit;
-            SuccessPopup(context, globals.success408);
+            successPopup(context, globals.success408);
           } else if (body[0] == "empty") {
-            WarningPopup(context, globals.error405);
+            warningPopup(context, globals.error405);
           } else if (body[0] == "errorVersion") {
             if (mounted) {
-              ErrorPopup(context, globals.errorVersion);
+              errorPopup(context, globals.errorVersion);
             }
           } else if (body[0] == "errorToken") {
             if (mounted) {
-              ErrorPopup(context, globals.errorToken);
+              errorPopup(context, globals.errorToken);
             }
           } else if (body[0] == "error7") {
             if (mounted) {
-              WarningPopup(context, globals.warning7);
+              warningPopup(context, globals.warning7);
             }
           } else {
             _isSending = false;
             if (mounted) {
-              ErrorPopup(context, globals.errorElse);
+              errorPopup(context, globals.errorElse);
             }
           }
           _isSending = false;
@@ -599,7 +599,7 @@ class _CouponItemState extends State<CouponItem> {
           print(e);
           _isSending = false;
           if (mounted) {
-            ErrorPopup(context, globals.errorException);
+            errorPopup(context, globals.errorException);
           }
         }
         print('send payment end!!!');
@@ -607,7 +607,7 @@ class _CouponItemState extends State<CouponItem> {
             '=========<<======================================================<<==================================================<<=========');
       }
     }else{
-      ErrorPopup(context, globals.error409);
+      errorPopup(context, globals.error409);
     }
   }
 }

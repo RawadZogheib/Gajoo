@@ -107,21 +107,21 @@ class _FirstPage extends State<FirstPage> {
         }
       }else if (body[0] == "errorVersion") {
         if (mounted) {
-          ErrorPopup(context, globals.errorVersion);
+          errorPopup(context, globals.errorVersion);
         }
         await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
       } else if (body[0] == "error8") {
         if (mounted) {
-          WarningPopup(context, globals.warning8);
+          warningPopup(context, globals.warning8);
         }
         await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
             context, '/HomePage', (route) => false);
       } else {
         if (mounted) {
-          ErrorPopup(context, globals.errorElse);
+          errorPopup(context, globals.errorElse);
         }
         await session.set('isLoggedIn', false);
         Navigator.pushNamedAndRemoveUntil(
@@ -130,7 +130,7 @@ class _FirstPage extends State<FirstPage> {
     } catch (e) {
       print(e);
       if (mounted) {
-        ErrorPopup(context, globals.errorException);
+        errorPopup(context, globals.errorException);
       }
       await session.set('isLoggedIn', false);
       Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);

@@ -168,25 +168,25 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           });
         }
       } else if (body[0] == "empty") {
-        WarningPopup(context, globals.error406);
+        warningPopup(context, globals.error406);
       } else if (body[0] == "errorVersion") {
         if (mounted) {
-          ErrorPopup(context, globals.errorVersion);
+          errorPopup(context, globals.errorVersion);
         }
       } else if (body[0] == "errorToken") {
         if (mounted) {
-          ErrorPopup(context, globals.errorToken);
+          errorPopup(context, globals.errorToken);
         }
       } else if (body[0] == "error7") {
         if (mounted) {
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         }
       } else {
         if (mounted) {
           setState(() {
             _isLoading = false;
           });
-          ErrorPopup(context, globals.errorElse);
+          errorPopup(context, globals.errorElse);
         }
       }
       if(mounted) {
@@ -200,7 +200,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
           setState(() {
             _isLoading = false;
           });
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         }
       }
       debugPrint('load calendar end!!!');

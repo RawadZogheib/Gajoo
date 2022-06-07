@@ -172,7 +172,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       debugPrint(_answerList.toString());
       _timer?.cancel();
       Navigator.pop(context);
-      SuccessPopup(context, 'Quiz Finished!');
+      successPopup(context, 'Quiz Finished!');
     }
   }
 

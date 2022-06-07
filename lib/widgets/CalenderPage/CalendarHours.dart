@@ -117,7 +117,7 @@ class _CalendarHoursState extends State<CalendarHours> {
                   ),
                 )
               : InkWell(
-                  onTap: () => ErrorPopup(context, globals.error403),
+                  onTap: () => errorPopup(context, globals.error403),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12.0),
@@ -166,46 +166,46 @@ class _CalendarHoursState extends State<CalendarHours> {
         if (body[0] == "success") {
           widget.onTap(); // pop popUp
           if (mounted) {
-            SuccessPopup(context, globals.success404);
+            successPopup(context, globals.success404);
           }
         } else if (body[0] == "errorVersion") {
           if (mounted) {
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           }
         } else if (body[0] == "errorToken") {
           if (mounted) {
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           }
         } else if (body[0] == "error4") {
           if (mounted) {
-            ErrorPopup(context, globals.error4);
+            errorPopup(context, globals.error4);
           }
         } else if (body[0] == "error7") {
           if (mounted) {
-            WarningPopup(context, globals.warning7);
+            warningPopup(context, globals.warning7);
           }
         } else if (body[0] == "error410") {
           if (mounted) {
-            ErrorPopup(context, globals.error410);
+            errorPopup(context, globals.error410);
           }
         } else if (body[0] == "error411") {
           if (mounted) {
-            ErrorPopup(context, globals.error411);
+            errorPopup(context, globals.error411);
           }
         } else if (body[0] == "error412") {
           if (mounted) {
-            ErrorPopup(context, globals.error412);
+            errorPopup(context, globals.error412);
           }
         } else if (body[0] == "error413") {
           if (mounted) {
-            ErrorPopup(context, globals.error413);
+            errorPopup(context, globals.error413);
           }
         } else {
           if (mounted) {
             setState(() {
               _isLoading = false;
             });
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           }
         }
         if (mounted) {
@@ -219,7 +219,7 @@ class _CalendarHoursState extends State<CalendarHours> {
           setState(() {
             _isLoading = false;
           });
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         }
       }
       debugPrint('buy course end!!!');

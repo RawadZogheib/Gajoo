@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+// import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
@@ -422,7 +422,7 @@ class _RegistrationState extends State<Registration> {
                         top: 8.0,
                         right: MediaQuery.of(context).size.width * 0.3),
                     child: Container(
-                      child: languages(),
+                      // child: languages(),
                     ),
                   ),
 
@@ -434,7 +434,7 @@ class _RegistrationState extends State<Registration> {
                         top: 8.0,
                         right: MediaQuery.of(context).size.width * 0.3),
                     child: Container(
-                      child: countries(),
+                      // child: countries(),
                     ),
                   ),
 
@@ -480,7 +480,7 @@ class _RegistrationState extends State<Registration> {
           _colFName_1 = globals.red_1;
           _colFName_2 = globals.red_2;
           _errTxtFname = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
         //color red
         //text1 = globals.error1;
@@ -503,7 +503,7 @@ class _RegistrationState extends State<Registration> {
           _colLName_1 = globals.red_1;
           _colLName_2 = globals.red_2;
           _errTxtLname = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
         //color red
         //text2 = globals.error1;
@@ -524,7 +524,7 @@ class _RegistrationState extends State<Registration> {
           _colUserName_1 = globals.red_1;
           _colUserName_2 = globals.red_2;
           _errTxtUsr = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -543,7 +543,7 @@ class _RegistrationState extends State<Registration> {
           _colEmail_1 = globals.red_1;
           _colEmail_2 = globals.red_2;
           _errTxtEmail = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -562,7 +562,7 @@ class _RegistrationState extends State<Registration> {
           _colPass_1 = globals.red_1;
           _colPass_2 = globals.red_2;
           _errTxtPass = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -581,7 +581,7 @@ class _RegistrationState extends State<Registration> {
           _colRePass_1 = globals.red_1;
           _colRePass_2 = globals.red_2;
           _errTxtRepass = globals.warning7;
-          WarningPopup(context,globals.warning7);
+          warningPopup(context,globals.warning7);
         });
       }
 
@@ -600,7 +600,7 @@ class _RegistrationState extends State<Registration> {
           _colPhoneNb_1 = globals.red_1;
           _colPhoneNb_2 = globals.red_2;
           _errTxtPhone = globals.warning7;
-          WarningPopup(context,globals.warning7);
+          warningPopup(context,globals.warning7);
         });
       }
 
@@ -617,7 +617,7 @@ class _RegistrationState extends State<Registration> {
           _colRadioMale_1 = globals.red_1;
           _colRadioFem_1 = globals.red_1;
           _errTxtGender = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -654,7 +654,7 @@ class _RegistrationState extends State<Registration> {
           _colLanguages_1 = globals.red_1;
           _colLanguages_2 = globals.red_2;
           _errTxtLang = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -674,7 +674,7 @@ class _RegistrationState extends State<Registration> {
           _colCountry_1 = globals.red_1;
           _colCountry_2 = globals.red_2;
           _errTxtCountry = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
 
@@ -686,7 +686,7 @@ class _RegistrationState extends State<Registration> {
             _colEmail_2 = globals.red_2;
             _colErrTxtEmail = globals.red_1;
             _errTxtEmail = globals.warning2_5;
-            WarningPopup(context, globals.warning2_5);
+            warningPopup(context, globals.warning2_5);
           });
         } else if (_password!.length < 8) {
           setState(() {
@@ -695,7 +695,7 @@ class _RegistrationState extends State<Registration> {
             _colPass_2 = globals.red_2;
             _colErrTxtPass = globals.red_1;
             _errTxtPass = globals.warning2_3;
-            WarningPopup(context, globals.warning2_3);
+            warningPopup(context, globals.warning2_3);
           });
         } else if (!_passExp.hasMatch(_password!)) {
           setState(() {
@@ -704,7 +704,7 @@ class _RegistrationState extends State<Registration> {
             _colPass_2 = globals.red_2;
             _colErrTxtPass = globals.red_1;
             _errTxtPass = globals.warning2_3;
-            WarningPopup(context, globals.warning2_3);
+            warningPopup(context, globals.warning2_3);
           });
         } else if (_password != _repassword) {
           setState(() {
@@ -713,7 +713,7 @@ class _RegistrationState extends State<Registration> {
             _colRePass_2 = globals.red_2;
             _colErrTxtRepass = globals.red_1;
             _errTxtRepass = globals.error3;
-            ErrorPopup(context, globals.error3);
+            errorPopup(context, globals.error3);
           });
         } else if (_userName!.contains(" ")) {
           setState(() {
@@ -722,7 +722,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_2 = globals.red_2;
             _colErrTxtUsr = globals.red_1;
             _errTxtUsr = globals.warning1;
-            WarningPopup(context, globals.warning1);
+            warningPopup(context, globals.warning1);
           });
         } else if (_userName!.length < 8) {
           setState(() {
@@ -731,7 +731,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_2 = globals.red_2;
             _colErrTxtUsr = globals.red_1;
             _errTxtUsr = globals.warning2_1;
-            WarningPopup(context, globals.warning2_1);
+            warningPopup(context, globals.warning2_1);
           });
         } else if (!_exp.hasMatch(_userName!)) {
           setState(() {
@@ -740,7 +740,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_2 = globals.red_2;
             _colErrTxtUsr = globals.red_1;
             _errTxtUsr = globals.warning2_2;
-            WarningPopup(context, globals.warning2_2);
+            warningPopup(context, globals.warning2_2);
           });
         } else if (!_phoneExp.hasMatch(_phoneNumber!)) {
           setState(() {
@@ -749,7 +749,7 @@ class _RegistrationState extends State<Registration> {
             _colPhoneNb_2 = globals.red_2;
             _colErrTxtPhone = globals.red_1;
             _errTxtPhone = globals.error9;
-            ErrorPopup(context, globals.error9);
+            errorPopup(context, globals.error9);
           });
         } else {
           _reg(); // Calling the Function for Database
@@ -828,7 +828,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_1 = globals.red_1;
             _colUserName_2 = globals.red_2;
             _errTxtUsr = globals.warning1;
-            WarningPopup(context, globals.warning1);
+            warningPopup(context, globals.warning1);
           });
         } else if (body[0] == "error2_1") {
           setState(() {
@@ -837,7 +837,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_1 = globals.red_1;
             _colUserName_2 = globals.red_2;
             _errTxtUsr = globals.warning2_1;
-            WarningPopup(context, globals.warning2_1);
+            warningPopup(context, globals.warning2_1);
           });
         } else if (body[0] == "error2_2") {
           setState(() {
@@ -846,7 +846,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_1 = globals.red_1;
             _colUserName_2 = globals.red_2;
             _errTxtUsr = globals.warning2_2;
-            WarningPopup(context, globals.warning2_2);
+            warningPopup(context, globals.warning2_2);
           });
         } else if (body[0] == "error2_3") {
           setState(() {
@@ -855,7 +855,7 @@ class _RegistrationState extends State<Registration> {
             _colPass_2 = globals.red_2;
             _colErrTxtPass = globals.red_1;
             _errTxtPass = globals.warning2_3;
-            WarningPopup(context, globals.warning2_3);
+            warningPopup(context, globals.warning2_3);
           });
         } else if (body[0] == "error2_5") {
           setState(() {
@@ -864,7 +864,7 @@ class _RegistrationState extends State<Registration> {
             _colEmail_2 = globals.red_2;
             _colErrTxtEmail = globals.red_1;
             _errTxtEmail = globals.warning2_5;
-            WarningPopup(context, globals.warning2_5);
+            warningPopup(context, globals.warning2_5);
           });
         } else if (body[0] == "error2_7") {
           setState(() {
@@ -873,7 +873,7 @@ class _RegistrationState extends State<Registration> {
             _colPhoneNb_2 = globals.red_2;
             _colErrTxtPhone = globals.red_1;
             _errTxtPhone = globals.error2_7;
-            ErrorPopup(context, globals.error2_7);
+            errorPopup(context, globals.error2_7);
           });
         } else if (body[0] == "error3") {
           setState(() {
@@ -882,13 +882,13 @@ class _RegistrationState extends State<Registration> {
             _colRePass_2 = globals.red_2;
             _colErrTxtRepass = globals.red_1;
             _errTxtRepass = globals.error3;
-            ErrorPopup(context, globals.error3);
+            errorPopup(context, globals.error3);
           });
         } else if (body[0] == "error4") {
           setState(() {
             _colErrTxt = globals.red_1;
             _errTxt = globals.error4;
-            ErrorPopup(context, globals.error4);
+            errorPopup(context, globals.error4);
           });
         } else if (body[0] == "error5") {
           setState(() {
@@ -897,7 +897,7 @@ class _RegistrationState extends State<Registration> {
             _colUserName_1 = globals.red_1;
             _colUserName_2 = globals.red_2;
             _errTxtUsr = globals.warning5;
-            WarningPopup(context, globals.warning5);
+            warningPopup(context, globals.warning5);
           });
         } else if (body[0] == "error6") {
           setState(() {
@@ -906,39 +906,39 @@ class _RegistrationState extends State<Registration> {
             _colEmail_1 = globals.red_1;
             _colEmail_2 = globals.red_2;
             _errTxtEmail = globals.warning6;
-            WarningPopup(context, globals.warning6);
+            warningPopup(context, globals.warning6);
           });
         } else if (body[0] == "error7") {
           setState(() {
             _colErrTxt = globals.red_1;
             _errTxt = globals.warning7;
-            WarningPopup(context, globals.warning7);
+            warningPopup(context, globals.warning7);
           });
         } else if (body[0] == "errorVersion") {
           setState(() {
             _colErrTxt = globals.red_1;
             _errTxt = globals.errorVersion;
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           });
         } else {
           setState(() {
             _colErrTxt = globals.red_1;
             _errTxt = globals.errorElse;
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           });
         }
       } else {
         setState(() {
           _colErrTxt = globals.red_1;
           _errTxt = 'No nulls allowed';
-          ErrorPopup(context, _errTxt);
+          errorPopup(context, _errTxt);
         });
       }
     } catch (e) {
       setState(() {
         _colErrTxt = globals.red_1;
         _errTxt = globals.errorException;
-        ErrorPopup(context, globals.errorException);
+        errorPopup(context, globals.errorException);
       });
     }
   }
@@ -1032,71 +1032,71 @@ class _RegistrationState extends State<Registration> {
 
 
 
-  Widget languages() => TypeAheadFormField<dynamic>(
-    textFieldConfiguration: TextFieldConfiguration(
-      autofocus: true,
-      onEditingComplete: (){},
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: _colLanguages),
-            borderRadius: BorderRadius.circular(10)),
-        filled: true,
-        fillColor: _colLanguages,
-        hintText: "choose your language",
-        hintStyle: TextStyle(
-          fontSize: 15.0,
-          color: _colLanguages_1,
-        ),
-        border: InputBorder.none,
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: _colLanguages_1)),
-      ),
-      controller: controllerLanguages,
-    ),
-    suggestionsCallback: LanguageData.getSuggestions,
-    itemBuilder: (context, dynamic suggestion) => ListTile(
-      title: Text(suggestion!,style: TextStyle(color: _colLanguages_1),),
-    ),
-    onSuggestionSelected: (dynamic suggestion) {
-      controllerLanguages.text = suggestion!;
-      _languages = controllerLanguages.text;
-    },
-  );
+  // Widget languages() => TypeAheadFormField<dynamic>(
+  //   textFieldConfiguration: TextFieldConfiguration(
+  //     autofocus: true,
+  //     onEditingComplete: (){},
+  //     decoration: InputDecoration(
+  //       enabledBorder: OutlineInputBorder(
+  //           borderSide: BorderSide(color: _colLanguages),
+  //           borderRadius: BorderRadius.circular(10)),
+  //       filled: true,
+  //       fillColor: _colLanguages,
+  //       hintText: "choose your language",
+  //       hintStyle: TextStyle(
+  //         fontSize: 15.0,
+  //         color: _colLanguages_1,
+  //       ),
+  //       border: InputBorder.none,
+  //       focusedBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(10),
+  //           borderSide: BorderSide(color: _colLanguages_1)),
+  //     ),
+  //     controller: controllerLanguages,
+  //   ),
+  //   suggestionsCallback: LanguageData.getSuggestions,
+  //   itemBuilder: (context, dynamic suggestion) => ListTile(
+  //     title: Text(suggestion!,style: TextStyle(color: _colLanguages_1),),
+  //   ),
+  //   onSuggestionSelected: (dynamic suggestion) {
+  //     controllerLanguages.text = suggestion!;
+  //     _languages = controllerLanguages.text;
+  //   },
+  // );
 
 
 
-  Widget countries() => TypeAheadFormField<dynamic>(
-    textFieldConfiguration: TextFieldConfiguration(
-      autofocus: true,
-      onEditingComplete: (){},
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: _colCountry),
-            borderRadius: BorderRadius.circular(10)),
-        filled: true,
-        fillColor: _colCountry,
-        hintText: "Choose your Country",
-        hintStyle: TextStyle(
-          fontSize: 15.0,
-          color: _colCountry_1,
-        ),
-        border: InputBorder.none,
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: _colCountry_1)),
-      ),
-      controller: controllerCountries,
-    ),
-    suggestionsCallback: CountryData.getSuggestions,
-    itemBuilder: (context, dynamic suggestion) => ListTile(
-      title: Text(suggestion!,style: TextStyle(color: _colCountry_1),),
-    ),
-    onSuggestionSelected: (dynamic suggestion) {
-      controllerCountries.text = suggestion!;
-      _countries = suggestion!;
-    },
-  );
+  // Widget countries() => TypeAheadFormField<dynamic>(
+  //   textFieldConfiguration: TextFieldConfiguration(
+  //     autofocus: true,
+  //     onEditingComplete: (){},
+  //     decoration: InputDecoration(
+  //       enabledBorder: OutlineInputBorder(
+  //           borderSide: BorderSide(color: _colCountry),
+  //           borderRadius: BorderRadius.circular(10)),
+  //       filled: true,
+  //       fillColor: _colCountry,
+  //       hintText: "Choose your Country",
+  //       hintStyle: TextStyle(
+  //         fontSize: 15.0,
+  //         color: _colCountry_1,
+  //       ),
+  //       border: InputBorder.none,
+  //       focusedBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.circular(10),
+  //           borderSide: BorderSide(color: _colCountry_1)),
+  //     ),
+  //     controller: controllerCountries,
+  //   ),
+  //   suggestionsCallback: CountryData.getSuggestions,
+  //   itemBuilder: (context, dynamic suggestion) => ListTile(
+  //     title: Text(suggestion!,style: TextStyle(color: _colCountry_1),),
+  //   ),
+  //   onSuggestionSelected: (dynamic suggestion) {
+  //     controllerCountries.text = suggestion!;
+  //     _countries = suggestion!;
+  //   },
+  // );
 
 }
 

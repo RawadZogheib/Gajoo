@@ -229,7 +229,7 @@ class _changePasswordState extends State<changePassword> {
           colPassword2_2 = Colors.red.shade900.withOpacity(0.5);
           errPassword2 = globals.warning2_3;
           colErrPassword2 = globals.red_1;
-          WarningPopup(context, globals.warning2_3);
+          warningPopup(context, globals.warning2_3);
         });
       } else if (!passExp.hasMatch(password2)) {
         setState(() {
@@ -244,7 +244,7 @@ class _changePasswordState extends State<changePassword> {
           colPassword2_2 = Colors.red.shade900.withOpacity(0.5);
           errPassword2 = globals.warning2_3;
           colErrPassword2 = globals.red_1;
-          WarningPopup(context, globals.warning2_3);
+          warningPopup(context, globals.warning2_3);
         });
       } else if (password2 != password3) {
         setState(() {
@@ -259,7 +259,7 @@ class _changePasswordState extends State<changePassword> {
           colPassword3_2 = Colors.red.shade900.withOpacity(0.5);
           errPassword3 = globals.error3;
           colErrPassword3 = globals.red_1;
-          ErrorPopup(context, globals.error3);
+          errorPopup(context, globals.error3);
 
         });
       }else {
@@ -295,7 +295,7 @@ class _changePasswordState extends State<changePassword> {
         await SessionManager().set('password', password2);
         print(SessionManager().get('password'));
 
-        SuccessPopup(context, "Your Password have been changed Successfully");
+        successPopup(context, "Your Password have been changed Successfully");
         Navigator.pushNamedAndRemoveUntil(context, '/MySettings', (route) => false);
 
       } else if (body[0] == "errorToken") {
@@ -303,7 +303,7 @@ class _changePasswordState extends State<changePassword> {
           setState(() {
             errTxt = globals.errorToken;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           });
         }
       } else if (body[0] == "errorVersion") {
@@ -314,20 +314,20 @@ class _changePasswordState extends State<changePassword> {
                 "\n" +
                 globals.errorVersion;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           });
         }
       } else if (body[0] == "error7") {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       } else if (body[0] == "error4") {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = globals.error4;
-          WarningPopup(context, globals.error4);
+          warningPopup(context, globals.error4);
         });
       } else if (body[0] == "error3") {
         setState(() {
@@ -336,7 +336,7 @@ class _changePasswordState extends State<changePassword> {
           colPassword1_2 = Colors.red.shade900.withOpacity(0.5);
           errPassword1 = globals.error3;
           colErrPassword1 = globals.red_1;
-          WarningPopup(context, globals.error3);
+          warningPopup(context, globals.error3);
         });
       }else if (body[0] == "error2_3") {
         setState(() {
@@ -345,14 +345,14 @@ class _changePasswordState extends State<changePassword> {
           colPassword1_2 = Colors.red.shade900.withOpacity(0.5);
           errPassword1 = globals.warning2_3;
           colErrPassword1 = globals.red_1;
-          WarningPopup(context, globals.warning2_3);
+          warningPopup(context, globals.warning2_3);
         });
       }else {
         if (mounted) {
           setState(() {
             errTxt = globals.errorElse;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           });
         }
       }
@@ -362,7 +362,7 @@ class _changePasswordState extends State<changePassword> {
         setState(() {
           errTxt = globals.errorException;
           colErrTxt = globals.red_1;
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         });
       }
     }

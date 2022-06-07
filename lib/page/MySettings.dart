@@ -430,7 +430,7 @@ class _MySettingsState extends State<MySettings> {
           setState(() {
             errTxt = globals.errorToken;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           });
         }
       } else if (body[0] == "errorVersion") {
@@ -441,27 +441,27 @@ class _MySettingsState extends State<MySettings> {
                 "\n" +
                 globals.errorVersion;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           });
         }
       } else if (body[0] == "error7") {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = globals.warning7;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       } else if (body[0] == "error4") {
         setState(() {
           colErrTxt = globals.red_1;
           errTxt = globals.error4;
-          WarningPopup(context, globals.error4);
+          warningPopup(context, globals.error4);
         });
       } else {
         if (mounted) {
           setState(() {
             errTxt = globals.errorElse;
             colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           });
         }
       }
@@ -471,7 +471,7 @@ class _MySettingsState extends State<MySettings> {
         setState(() {
           errTxt = globals.errorException;
           colErrTxt = globals.red_1;
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         });
       }
     }

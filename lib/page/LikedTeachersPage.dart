@@ -412,22 +412,22 @@ class _LikedTeachersPageState extends State<LikedTeachersPage> {
       //   });
       // }
     } else if (body[0] == "empty") {
-      WarningPopup(context, globals.warning407);
+      warningPopup(context, globals.warning407);
     } else if (body[0] == "errorVersion") {
       if (mounted) {
-        ErrorPopup(context, globals.errorVersion);
+        errorPopup(context, globals.errorVersion);
       }
     } else if (body[0] == "errorToken") {
       if (mounted) {
-        ErrorPopup(context, globals.errorToken);
+        errorPopup(context, globals.errorToken);
       }
     } else if (body[0] == "error7") {
       if (mounted) {
-        WarningPopup(context, globals.warning7);
+        warningPopup(context, globals.warning7);
       }
     } else {
       if (mounted) {
-        ErrorPopup(context, globals.errorElse);
+        errorPopup(context, globals.errorElse);
       }
     }
 

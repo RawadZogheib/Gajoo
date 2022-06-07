@@ -326,11 +326,11 @@ class _CalendarPageState extends State<CalendarPage> {
     if (await session.get('isLoggedIn') == false) {
       // Is loggedIn
       if (mounted) {
-        WarningPopup(context, globals.warning400);
+        warningPopup(context, globals.warning400);
       }
     } else if (_date.isBefore(DateTime.parse(
         DateFormat('yyyy-MM-dd').format(DateTime.now().toLocal())))) {
-      if (mounted) ErrorPopup(context, globals.error402); // _date < today
+      if (mounted) errorPopup(context, globals.error402); // _date < today
     } else if (_greenList.contains(DateFormat('yyyy-MM-dd').format(
       DateFormat('yyyy-MM-dd').parse(_date.toLocal().toString(), true),
     ))) {
@@ -366,7 +366,7 @@ class _CalendarPageState extends State<CalendarPage> {
       // }
     } else {
       // Error else
-      if (mounted) ErrorPopup(context, globals.error406);
+      if (mounted) errorPopup(context, globals.error406);
     }
   }
 
@@ -424,23 +424,23 @@ class _CalendarPageState extends State<CalendarPage> {
             });
           }
         } else if (body[0] == "empty") {
-          WarningPopup(context, globals.error405);
+          warningPopup(context, globals.error405);
         } else if (body[0] == "errorVersion") {
           if (mounted) {
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           }
         } else if (body[0] == "errorToken") {
           if (mounted) {
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           }
         } else if (body[0] == "error7") {
           if (mounted) {
-            WarningPopup(context, globals.warning7);
+            warningPopup(context, globals.warning7);
           }
         } else {
           _isLoading = false;
           if (mounted) {
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           }
         }
         _isLoading = false;
@@ -448,7 +448,7 @@ class _CalendarPageState extends State<CalendarPage> {
         debugPrint(e.toString());
         _isLoading = false;
         if (mounted) {
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         }
       }
       debugPrint('load calendar end!!!');
@@ -490,25 +490,25 @@ class _CalendarPageState extends State<CalendarPage> {
           });
         }
       } else if (body[0] == "empty") {
-        WarningPopup(context, globals.error405);
+        warningPopup(context, globals.error405);
       } else if (body[0] == "errorVersion") {
         if (mounted) {
-          ErrorPopup(context, globals.errorVersion);
+          errorPopup(context, globals.errorVersion);
         }
       } else if (body[0] == "errorToken") {
         if (mounted) {
-          ErrorPopup(context, globals.errorToken);
+          errorPopup(context, globals.errorToken);
         }
       } else if (body[0] == "error7") {
         if (mounted) {
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         }
       } else {
         if (mounted) {
           setState(() {
             _isLoadingTickets = false;
           });
-          ErrorPopup(context, globals.errorElse);
+          errorPopup(context, globals.errorElse);
         }
       }
       if (mounted) {
@@ -522,7 +522,7 @@ class _CalendarPageState extends State<CalendarPage> {
         setState(() {
           _isLoadingTickets = false;
         });
-        ErrorPopup(context, globals.errorException);
+        errorPopup(context, globals.errorException);
       }
     }
     debugPrint('load coupons end!!!');

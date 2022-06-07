@@ -1431,22 +1431,22 @@ class _HomePageState extends State<HomePage> {
       //   });
       // }
     } else if (body[0] == "empty") {
-      WarningPopup(context, globals.warning407);
+      warningPopup(context, globals.warning407);
     } else if (body[0] == "errorVersion") {
       if (mounted) {
-        ErrorPopup(context, globals.errorVersion);
+        errorPopup(context, globals.errorVersion);
       }
     } else if (body[0] == "errorToken") {
       if (mounted) {
-        ErrorPopup(context, globals.errorToken);
+        errorPopup(context, globals.errorToken);
       }
     } else if (body[0] == "error7") {
       if (mounted) {
-        WarningPopup(context, globals.warning7);
+        warningPopup(context, globals.warning7);
       }
     } else {
       if (mounted) {
-        ErrorPopup(context, globals.errorElse);
+        errorPopup(context, globals.errorElse);
       }
     }
     // } catch (e) {
@@ -1461,7 +1461,7 @@ class _HomePageState extends State<HomePage> {
     SessionManager session = SessionManager();
 
     if (await session.get('isLoggedIn') == false) {
-      WarningPopup(context, globals.warning400);
+      warningPopup(context, globals.warning400);
     } else {
       showDialog(
         context: context,
@@ -1482,7 +1482,7 @@ class _HomePageState extends State<HomePage> {
     SessionManager session = SessionManager();
 
     if (await session.get('isLoggedIn') == false) {
-      WarningPopup(context, globals.warning400);
+      warningPopup(context, globals.warning400);
     } else {
       Navigator.pushNamedAndRemoveUntil(context, "/MyAudio", (route) => false);
     }

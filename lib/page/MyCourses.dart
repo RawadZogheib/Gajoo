@@ -277,23 +277,23 @@ class _MyCoursesState extends State<MyCourses> {
             });
           }
         } else if (body[0] == "empty") {
-          WarningPopup(context, globals.error405);
+          warningPopup(context, globals.error405);
         } else if (body[0] == "errorVersion") {
           if (mounted) {
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           }
         } else if (body[0] == "errorToken") {
           if (mounted) {
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           }
         } else if (body[0] == "error7") {
           if (mounted) {
-            WarningPopup(context, globals.warning7);
+            warningPopup(context, globals.warning7);
           }
         } else {
           _isLoading = false;
           if (mounted) {
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           }
         }
         _isLoading = false;
@@ -301,7 +301,7 @@ class _MyCoursesState extends State<MyCourses> {
         print(e);
         _isLoading = false;
         if (mounted) {
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         }
       }
       print('load library end!!!');

@@ -133,7 +133,7 @@ class MyCoursesItem extends StatelessWidget {
                     .isAtSameMomentAs(DateTime.parse(date)))
                 ? InkWell(
               onTap: () {
-                SuccessPopup(context, 'Joined the meeting');
+                successPopup(context, 'Joined the meeting');
                 _launchURL(_url);
               },
               child: ClipRRect(
@@ -161,7 +161,7 @@ class MyCoursesItem extends StatelessWidget {
                 .isBefore(DateTime.parse(date))
                 ? InkWell(
               onTap: () {
-                ErrorPopup(context, 'Meeting havn\'t started yet');
+                errorPopup(context, 'Meeting havn\'t started yet');
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
@@ -188,7 +188,7 @@ class MyCoursesItem extends StatelessWidget {
                 .isAfter(
                 DateTime.parse(date).add(Duration(minutes: courseDuration)))
                 ? InkWell(
-              onTap: () => ErrorPopup(context, 'Meeting Expired'),
+              onTap: () => errorPopup(context, 'Meeting Expired'),
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12.0),
@@ -210,7 +210,7 @@ class MyCoursesItem extends StatelessWidget {
               ),
             )
                 : InkWell(
-              onTap: () => ErrorPopup(context, 'Error, please reload the page'),
+              onTap: () => errorPopup(context, 'Error, please reload the page'),
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12.0),

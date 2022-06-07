@@ -270,7 +270,7 @@ class _LoginState extends State<Login> {
           _colEmail_2 = Colors.red.shade900.withOpacity(0.5);
           _errTxtEmail = globals.warning7;
           _colErrTxtEmail = globals.red_1;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
     }
@@ -292,7 +292,7 @@ class _LoginState extends State<Login> {
           _colPass_2 = Colors.red.shade900.withOpacity(0.5);
           _errTxtPass = globals.warning7;
           _colErrTxtPass = globals.red_1;
-          WarningPopup(context, globals.warning7);
+          warningPopup(context, globals.warning7);
         });
       }
     }
@@ -359,7 +359,7 @@ class _LoginState extends State<Login> {
                 "\n" +
                 globals.errorVersion;
             _colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           });
         }
       } else if (body[0] == "error8") {
@@ -373,7 +373,7 @@ class _LoginState extends State<Login> {
           setState(() {
             _errTxt = globals.warning8;
             _colErrTxt = globals.red_1;
-            WarningPopup(context, globals.warning8);
+            warningPopup(context, globals.warning8);
           });
         }
       } else {
@@ -381,7 +381,7 @@ class _LoginState extends State<Login> {
           setState(() {
             _errTxt = globals.errorElse;
             _colErrTxt = globals.red_1;
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           });
         }
       }
@@ -391,7 +391,7 @@ class _LoginState extends State<Login> {
         setState(() {
           _errTxt = globals.errorException;
           _colErrTxt = globals.red_1;
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         });
       }
     }

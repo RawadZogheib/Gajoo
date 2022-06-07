@@ -344,7 +344,7 @@ class _myDrawerState extends State<myDrawer> {
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 2
         // ));
-        WarningPopup(context, 'Coming Soon!!');
+        warningPopup(context, 'Coming Soon!!');
         break;
       case 2: // Liked Teachers
         if (globals.currentPage != 'LikedTeachersPage') {
@@ -356,13 +356,13 @@ class _myDrawerState extends State<myDrawer> {
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 4
         // ));
-        WarningPopup(context, 'Coming Soon!!');
+        warningPopup(context, 'Coming Soon!!');
         break;
       case 4: // Notifications
         // Navigator.of(context).push(MaterialPageRoute(
         //   builder: (context) => const Scaffold(), // Page 5
         // ));
-        WarningPopup(context, 'Coming Soon!!');
+        warningPopup(context, 'Coming Soon!!');
         break;
       case 5: // Settings
         // Navigator.of(context).push(MaterialPageRoute(
@@ -431,22 +431,22 @@ class _myDrawerState extends State<myDrawer> {
           //WarningPopup(context, globals.error405);
         } else if (body[0] == "errorVersion") {
           if (mounted) {
-            ErrorPopup(context, globals.errorVersion);
+            errorPopup(context, globals.errorVersion);
           }
         } else if (body[0] == "errorToken") {
           if (mounted) {
-            ErrorPopup(context, globals.errorToken);
+            errorPopup(context, globals.errorToken);
           }
         } else if (body[0] == "error7") {
           if (mounted) {
-            WarningPopup(context, globals.warning7);
+            warningPopup(context, globals.warning7);
           }
         } else {
           if (mounted) {
             setState(() {
               globals.isLoading = false;
             });
-            ErrorPopup(context, globals.errorElse);
+            errorPopup(context, globals.errorElse);
           } else {
             globals.isLoading = false;
           }
@@ -464,7 +464,7 @@ class _myDrawerState extends State<myDrawer> {
           setState(() {
             globals.isLoading = false;
           });
-          ErrorPopup(context, globals.errorException);
+          errorPopup(context, globals.errorException);
         } else {
           globals.isLoading = false;
         }

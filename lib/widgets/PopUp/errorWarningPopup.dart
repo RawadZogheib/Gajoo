@@ -1,65 +1,88 @@
-import 'package:flutter/cupertino.dart'; //CupertinoIcons.checkmark_alt_circle,//Success Icon
+//import 'package:flutter/cupertino.dart'; //CupertinoIcons.checkmark_alt_circle,//Success Icon
+import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter/material.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 
-ErrorPopup(BuildContext context, String? text) {
-  MotionToast(
-    icon: Icons.error,
-    primaryColor: globals.red2,
-    secondaryColor: globals.red1,
-    toastDuration: const Duration(seconds: 3),
-    backgroundType: BACKGROUND_TYPE.solid,
-    title: const Text(
-      'Error',
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    description: Text(
-      text != null ? text : 'Unexpected Error.',
-    ),
-    position: MOTION_TOAST_POSITION.bottom,
-    animationType: ANIMATION.fromRight,
-    height: 100,
-  ).show(context);
+errorPopup(BuildContext context, String? text) {
+  if(text == globals.errorToken){
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/intro_page', (route) => false);
+    MotionToast(
+      icon: Icons.error,
+      primaryColor: globals.red2,
+      secondaryColor: globals.red1,
+      toastDuration: const Duration(seconds: 3),
+      backgroundType: BackgroundType.solid,
+      title: const Text(
+        'Error',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      description: Text(
+        text ?? 'Unexpected Error.',
+      ),
+      position: MotionToastPosition.bottom,
+      animationType: AnimationType.fromRight,
+      height: 100,
+    ).show(context);
+  }else{
+    MotionToast(
+      icon: Icons.error,
+      primaryColor: globals.red2,
+      secondaryColor: globals.red1,
+      toastDuration: const Duration(seconds: 3),
+      backgroundType: BackgroundType.solid,
+      title: const Text(
+        'Error',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      description: Text(
+        text ?? 'Unexpected Error.',
+      ),
+      position: MotionToastPosition.bottom,
+      animationType: AnimationType.fromRight,
+      height: 100,
+    ).show(context);
+  }
 }
 
-WarningPopup(BuildContext context, String? text) {
+warningPopup(BuildContext context, String? text) {
   MotionToast(
     icon: Icons.warning,
     primaryColor: globals.yellow2,
     secondaryColor: globals.yellow1,
     toastDuration: const Duration(seconds: 3),
-    backgroundType: BACKGROUND_TYPE.solid,
+    backgroundType: BackgroundType.solid,
     title: const Text(
       'Warning',
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
     description: Text(
-      text != null ? text : 'Unexpected Warning.',
+      text ?? 'Unexpected Warning.',
     ),
-    position: MOTION_TOAST_POSITION.bottom,
-    animationType: ANIMATION.fromRight,
+    position: MotionToastPosition.bottom,
+    animationType: AnimationType.fromRight,
     height: 100,
   ).show(context);
 }
 
-SuccessPopup(BuildContext context, String? text) {
+successPopup(BuildContext context, String? text) {
   MotionToast(
-    icon: CupertinoIcons.checkmark_alt_circle,
+    icon: cupertino.CupertinoIcons.checkmark_alt_circle,
     primaryColor: globals.green2,
     secondaryColor: globals.green1,
     toastDuration: const Duration(seconds: 3),
-    backgroundType: BACKGROUND_TYPE.solid,
+    backgroundType: BackgroundType.solid,
     title: const Text(
       'Success',
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
     description: Text(
-      text != null ? text : 'Unexpected Success.',
+      text ?? 'Unexpected Success.',
     ),
-    position: MOTION_TOAST_POSITION.bottom,
-    animationType: ANIMATION.fromRight,
+    position: MotionToastPosition.bottom,
+    animationType: AnimationType.fromRight,
     height: 100,
   ).show(context);
 }
