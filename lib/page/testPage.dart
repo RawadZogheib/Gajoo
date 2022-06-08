@@ -32,6 +32,7 @@ class _TestPageState extends State<TestPage> {
   void _getQuiz() {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) => AlertDialogQuiz(index: 'FR'),
     ).then((exit) {
       if (mounted) {
@@ -98,7 +99,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
         contentPadding:
             const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
         title: const Center(
-          child: Text('_text',
+          child: Text('Quiz',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -170,6 +171,27 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       });
     } else {
       debugPrint(_answerList.toString());
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO: Send to server
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
+      // TODO
       _timer?.cancel();
       Navigator.pop(context);
       successPopup(context, 'Quiz Finished!');
@@ -191,7 +213,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question: '1. Je sais me présenter?',
             ansList: const ['Oui', 'Non', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 1
           QCUWidget(
             key: const ValueKey(2.1),
             questionId: 2.1,
@@ -199,7 +221,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Léo a bu de la limonade.',
             ansList: const ['Oui', 'Non', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 2
           QCUWidget(
             key: const ValueKey(2.2),
             questionId: 2.2,
@@ -207,7 +229,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Matou roule partout à moto.',
             ansList: const ['Oui', 'Non', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 3
           QCUWidget(
             key: const ValueKey(2.3),
             questionId: 2.3,
@@ -215,7 +237,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Charles aime faire du sport.',
             ansList: const ['Oui', 'Non', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 4
           QCUWidget(
             key: const ValueKey(2.4),
             questionId: 2.4,
@@ -223,7 +245,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Marie-Madeleine a peur du noir.',
             ansList: const ['Oui', 'Non', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 5
           QCUWidget(
             key: const ValueKey(3.1),
             questionId: 3.1,
@@ -231,7 +253,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'La limonade est un jus.',
             ansList: const ['Vrai', 'Faux', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 6
           QCUWidget(
             key: const ValueKey(3.2),
             questionId: 3.2,
@@ -239,7 +261,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'La moto est un moyen de transport aérien.',
             ansList: const ['Vrai', 'Faux', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 7
           QCUWidget(
             key: const ValueKey(3.3),
             questionId: 3.3,
@@ -247,7 +269,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Le sport est indispensable pour rester en bonne forme.',
             ansList: const ['Vrai', 'Faux', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 8
           QCUWidget(
             key: const ValueKey(3.4),
             questionId: 3.4,
@@ -255,7 +277,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'La peur est une émotion agréable.',
             ansList: const ['Vrai', 'Faux', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 9
           QCUWidget2(
             key: const ValueKey(4),
             questionId: 4,
@@ -263,7 +285,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             pronomIndefini: 'Un',
             asset: 'Assets/Quiz/FR/avion.png',
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 10
           QCUWidget3(
             key: const ValueKey(5),
             questionId: 5,
@@ -272,7 +294,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             asset1: 'Assets/Quiz/FR/footBall.png',
             asset2: 'Assets/Quiz/FR/notFootBall.png',
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 11
           QCUWidget(
             key: const ValueKey(6),
             questionId: 6,
@@ -281,7 +303,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             question2: 'Sara écrit________',
             ansList: const ['au tableau.', 'au tablo.', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 12
           QCUWidget4(
             key: const ValueKey(7),
             questionId: 7,
@@ -289,7 +311,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             letters: 'e – b – a – r – c – l – a – t',
             pronomIndefini: 'Un',
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 13
           QCUWidget4(
             key: const ValueKey(8),
             questionId: 8,
@@ -297,7 +319,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             letters: 're - cou - tu - ver',
             pronomIndefini: 'Une',
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 14
           QCUWidget4(
             key: const ValueKey(9),
             questionId: 9,
@@ -305,7 +327,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             letters: 'va - Nadine - l’école - mère - avec - à - sa',
             pronomIndefini: '',
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 15
           QCUWidget5(
             key: const ValueKey(10),
             questionId: 10,
@@ -314,14 +336,323 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             asset: 'Assets/Quiz/FR/mer.png',
             ansList: const ['la mer. ', 'la mère.', 'Pas de réponse'],
             onTap: (String val) => _nextQuestion(val),
-          ),
+          ), // 16
         ]);
         break;
       case 'FR_DELF': // French Test (DELF)
 
         break;
       case 'EN': // English Test
-
+        _testList.addAll([
+          QCUWidget(
+            key: const ValueKey(1),
+            questionId: 1,
+            question: '1. I .......... that the situation is out of control.',
+            ansList: const ['see', 'am seeing', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 1
+          QCUWidget(
+            key: const ValueKey(2),
+            questionId: 2,
+            question:
+                '2. You haven\'t said a word all morning. What...........  about?',
+            ansList: const [
+              'do you think',
+              'are you thinking',
+              'Non of the above'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 2
+          QCUWidget(
+            key: const ValueKey(3),
+            questionId: 3,
+            question: '3. Mary..........  very naughty these days.',
+            ansList: const ['is', 'is being', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 3
+          QCUWidget(
+            key: const ValueKey(4),
+            questionId: 4,
+            question:
+                '4. Our school usually breaks .......... for the summer in July.',
+            ansList: const ['off', 'up', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 4
+          QCUWidget(
+            key: const ValueKey(5),
+            questionId: 5,
+            question:
+                '5. The man managed to break ............... , of prison early this morning.',
+            ansList: const ['off', 'out', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 5
+          QCUWidget(
+            key: const ValueKey(6),
+            questionId: 6,
+            question:
+                '6. Abraham Lincoln was the first.......... president of the USA.',
+            ansList: const ['republican', 'republic', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 6
+          QCUWidget(
+            key: const ValueKey(7),
+            questionId: 7,
+            question:
+                '7. She has never been on TV before. It\'s the first time........ .',
+            ansList: const [
+              'she was on TV',
+              'she is on TV',
+              'Non of the above'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 7
+          QCUWidget(
+            key: const ValueKey(8),
+            questionId: 8,
+            question: '8. "What .......... for a living?" "I work as a nurse."',
+            ansList: const ['are you doing', 'you do', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 8
+          QCUWidget(
+            key: const ValueKey(9),
+            questionId: 9,
+            question: '9. By 2008, Katie ....... six countries in Europe.',
+            ansList: const [
+              'had already visited',
+              'already visited',
+              'Non of the above'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 9
+          QCUWidget(
+            key: const ValueKey(10),
+            questionId: 10,
+            question:
+                '10. They ....... for three hours before they found the house.',
+            ansList: const [
+              'have been walking',
+              'has been walking',
+              'were walking'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 10
+          QCUWidget(
+            key: const ValueKey(11),
+            questionId: 11,
+            question:
+                '11. "Do you remember when we were children?" "Yes, Grandma .......... always make us strawberry muffins.',
+            ansList: const ['would', 'was used to', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 11
+          QCUWidget(
+            key: const ValueKey(12),
+            questionId: 12,
+            question:
+                '12. "Tom had trouble with the group project." "Yes. He ...... to working with others." ',
+            ansList: const ['isn\'t didn\'t used', 'are', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 12
+          QCUWidget(
+            key: const ValueKey(13),
+            questionId: 13,
+            question:
+                '13. Don\'t feel bad if your first job isn\'t anything exciting. Before they were famous, some of today\'s stars......... ordinary jobs, too!',
+            ansList: const ['have had', 'had', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 13
+          QCUWidget(
+            key: const ValueKey(14),
+            questionId: 14,
+            question:
+                '14. The Internet has brought ........... great changes in the way we get information. ',
+            ansList: const ['up', 'about', 'in'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 14
+          QCUWidget(
+            key: const ValueKey(15),
+            questionId: 15,
+            question:
+                '15. I find it very easy to .............................. people. There\'s hardly anyone I don\'t like.',
+            ansList: const [
+              'have a good time',
+              'have the time of my life',
+              'get along with'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 15
+          QCUWidget(
+            key: const ValueKey(16),
+            questionId: 16,
+            question:
+                '16. Are you seeing Julie tonight? No, I will have already left ............. the time she gets here. ',
+            ansList: const ['at', 'on', 'by'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 16
+          QCUWidget(
+            key: const ValueKey(17),
+            questionId: 17,
+            question: '17. The plane ............ off at 9 sharp.',
+            ansList: const ['takes', 'will take', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 17
+          QCUWidget(
+            key: const ValueKey(18),
+            questionId: 18,
+            question:
+                '18. Her family couldn\'t decide .......... the best place to go for their summer holidays.',
+            ansList: const ['what', 'on', 'about'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 18
+          QCUWidget(
+            key: const ValueKey(19),
+            questionId: 19,
+            question: '19. The teachers don\'t allow ..........in class.',
+            ansList: const ['to talk', 'talk', 'talking'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 19
+          QCUWidget(
+            key: const ValueKey(20),
+            questionId: 20,
+            question:
+                '20. Why don\'t you try ...................... (put) some petrol in the. tank?',
+            ansList: const ['to put', 'put', 'putting'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 20
+          QCUWidget(
+            key: const ValueKey(21),
+            questionId: 21,
+            question:
+                '21. The teacher didn\'t believe Jarrod\'s excuse ........having been so late.',
+            ansList: const ['on', 'at', 'for'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 21
+          QCUWidget(
+            key: const ValueKey(22),
+            questionId: 22,
+            question:
+                '22. A new shopping center ..........outside the city center.',
+            ansList: const ['is being built', 'built', 'to be built'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 22
+          QCUWidget(
+            key: const ValueKey(23),
+            questionId: 23,
+            question:
+                '23. Where................Volkswagen cars ..............?',
+            ansList: const [
+              'are ........manufacture',
+              'is............ manufactured',
+              'Non of the above'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 23
+          QCUWidget(
+            key: const ValueKey(24),
+            questionId: 24,
+            question: '24. She was very ......... by the story he told .',
+            ansList: const ['amuse', 'amusing', 'amused'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 24
+          QCUWidget(
+            key: const ValueKey(25),
+            questionId: 25,
+            question:
+                '25. If you go to San Francisco, you ............the Golden Gate Bridge.',
+            ansList: const ['will see', 'would see', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 25
+          QCUWidget(
+            key: const ValueKey(26),
+            questionId: 26,
+            question:
+                '26. It\'s snowing outside. I\'m cold. I wish...........a hat and some gloves.',
+            ansList: const ['have worn', 'had worn', 'am wearing'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 26
+          QCUWidget(
+            key: const ValueKey(27),
+            questionId: 27,
+            question: '27. Rarely............... on time.',
+            ansList: const ['he shows', 'does he show', 'shows he'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 27
+          QCUWidget(
+            key: const ValueKey(28),
+            questionId: 28,
+            question:
+                '28. I\'ll give you my phone number........... you need some information.',
+            ansList: const ['so that', 'in case', 'when'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 28
+          QCUWidget(
+            key: const ValueKey(29),
+            questionId: 29,
+            question:
+                '29. "Good news Cancerians! ..................of the hard time you\'ve been going through lately, things are set to Improve.',
+            ansList: const ['despite', 'inspite', 'although'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 29
+          QCUWidget(
+            key: const ValueKey(30),
+            questionId: 30,
+            question: '30. People............ might develop lung cancer.',
+            ansList: const [
+              'who smoke heavily',
+              'who smoke heavily,',
+              ',who smoke heavily,'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 30
+          QCUWidget(
+            key: const ValueKey(31),
+            questionId: 31,
+            question: '31. My sister ............ lives in America.',
+            ansList: const [
+              'who works as a scientist',
+              'who works as a scientist,',
+              ',who works as a scientist,'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 31
+          QCUWidget(
+            key: const ValueKey(32),
+            questionId: 32,
+            question:
+                '32. He was completely ............ after running for over half an hour.',
+            ansList: const ['broke out', 'worn out', 'lost out'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 32
+          QCUWidget(
+            key: const ValueKey(33),
+            questionId: 33,
+            question:
+                '33. "Why did you choose to become a marine biologist?"she asked.',
+            ansList: const [
+              'She wanted to know Why did you choose to become a marine biologist.',
+              'She wanted to know Why you chose to become a marine biologist?',
+              'She wanted to know Why you had chosen to become a marine biologist.'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 33
+          QCUWidget(
+            key: const ValueKey(34),
+            questionId: 34,
+            question: '34. The professor said " Do not forget your projects."',
+            ansList: const [
+              'The professor told them Do not forget the projects.',
+              'The professor told to not forget the projects.',
+              'Non of the above'
+            ],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 34
+          QCUWidget(
+            key: const ValueKey(35),
+            questionId: 35,
+            question: '35. Paul.............at the garage Yesterday.',
+            ansList: const ['fixed his car', 'had his car fixed', 'Non of the above'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 35
+        ]);
         break;
     }
     return _testList;
