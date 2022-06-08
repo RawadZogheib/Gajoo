@@ -54,7 +54,7 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
       ),
       backgroundColor: widget.color,
       contentPadding:
-          const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
+      const EdgeInsets.only(left: 0.0, right: 0.0, bottom: 0.0, top: 30),
       title: Center(
         child: Text(DateFormat('yyyy-MM-dd').format(widget.date),
             style: const TextStyle(
@@ -87,16 +87,16 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
               padding: const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 12.0),
               child: _isLoading == true
                   ? ListView(
-                      controller: ScrollController(),
-                      children: _availableTimeLoading,
-                    )
+                controller: ScrollController(),
+                children: _availableTimeLoading,
+              )
                   : ListView.builder(
-                      itemCount: _availableTime.length,
-                      controller: ScrollController(),
-                      itemBuilder: (context, index) {
-                        return _availableTime[index];
-                      },
-                    ),
+                itemCount: _availableTime.length,
+                controller: ScrollController(),
+                itemBuilder: (context, index) {
+                  return _availableTime[index];
+                },
+              ),
             ),
           ),
         ),
@@ -109,91 +109,94 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
     if (_isLoading == false) {
       try {
         debugPrint(
-          '=========>>======================================================>>==================================================>>=========');
-      _isLoading = true;
-      _loadScreen();
-      debugPrint('load calendar');
+            '=========>>======================================================>>==================================================>>=========');
+        _isLoading = true;
+        _loadScreen();
+        debugPrint('load calendar');
 
-      var data = {
-        'version': globals.version,
-        'account_Id': await SessionManager().get("Id"),
-        'teacher_Id': widget.teacherId,
-        'type': globals.type,
-        'language': globals.language,
-        'level': globals.level,
-        'date': DateFormat('yyyy-MM-dd').format(widget.date),
-      };
+        var data = {
+          'version': globals.version,
+          'account_Id': await SessionManager().get("Id"),
+          'teacher_Id': widget.teacherId,
+          'type': globals.type,
+          'language': globals.language,
+          'level': globals.level,
+          'date': DateFormat('yyyy-MM-dd').format(widget.date),
+        };
 
-      var res = await CallApi()
-          .postData(data, '/Calendar/Control/(Control)loadHoursMins.php');
-      debugPrint(res.body);
-      List<dynamic> body = json.decode(res.body);
+        var res = await CallApi()
+            .postData(data, '/Calendar/Control/(Control)loadHoursMins.php');
+        debugPrint(res.body);
+        List<dynamic> body = json.decode(res.body);
 
-      _availableTime.clear();
+        _availableTime.clear();
 
-      if (body[0] == "success") {
-        for (int i = 0; i < body[1].length; i++) {
-          _availableTime.add(
-            CalendarHours(
-              courseId: body[1][i][0],
-              fromTime: DateFormat('HH:mm')
-                  .format(
-                    DateFormat('yyyy-MM-dd HH:mm')
-                        .parse('${body[1][i][1]}.000', true)
-                        .toLocal(),
-                  )
-                  .toString(),
-              toTime: DateFormat('HH:mm')
-                  .format(
-                    DateFormat('yyyy-MM-dd HH:mm')
-                        .parse('${body[1][i][1]}.000', true)
-                        .add(Duration(minutes: int.parse(body[1][i][4])))
-                        .toLocal(),
-                  )
-                  .toString(),
-              courseStudents: body[1][i][2],
-              courseMaxStudents: body[1][i][3],
-              isTaken: int.parse(body[1][i][2]) < int.parse(body[1][i][3]),
-              onTap: () {
-                debugPrint('ssa'); //or null
-                Navigator.pop(context);
-              },
-            ),
-          );
-        }
+        if (body[0] == "success") {
+          for (int i = 0; i < body[1].length; i++) {
+            _availableTime.add(
+              CalendarHours(
+                courseId: body[1][i][0],
+                fromTime: DateFormat('HH:mm')
+                    .format(
+                  DateFormat('yyyy-MM-dd HH:mm')
+                      .parse('${body[1][i][1]}.000', true)
+                      .toLocal(),
+                )
+                    .toString(),
+                toTime: DateFormat('HH:mm')
+                    .format(
+                  DateFormat('yyyy-MM-dd HH:mm')
+                      .parse('${body[1][i][1]}.000', true)
+                      .add(Duration(minutes: int.parse(body[1][i][4])))
+                      .toLocal(),
+                )
+                    .toString(),
+                courseStudents: body[1][i][2],
+                courseMaxStudents: body[1][i][3],
+                isTaken: int.parse(body[1][i][2]) < int.parse(body[1][i][3]),
+                type: body[1][i][5],
+                language: body[1][i][6],
+                level: body[1][i][7],
+                onTap: () {
+                  debugPrint('ssa'); //or null
+                  Navigator.pop(context);
+                },
+              ),
+            );
+          }
 
-        if (mounted) {
-          setState(() {
-            _availableTime;
-          });
+          if (mounted) {
+            setState(() {
+              _availableTime;
+            });
+          }
+        } else if (body[0] == "empty") {
+          warningPopup(context, globals.error406);
+        } else if (body[0] == "errorVersion") {
+          if (mounted) {
+            errorPopup(context, globals.errorVersion);
+          }
+        } else if (body[0] == "errorToken") {
+          if (mounted) {
+            errorPopup(context, globals.errorToken);
+          }
+        } else if (body[0] == "error7") {
+          if (mounted) {
+            warningPopup(context, globals.warning7);
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+            errorPopup(context, globals.errorElse);
+          }
         }
-      } else if (body[0] == "empty") {
-        warningPopup(context, globals.error406);
-      } else if (body[0] == "errorVersion") {
-        if (mounted) {
-          errorPopup(context, globals.errorVersion);
-        }
-      } else if (body[0] == "errorToken") {
-        if (mounted) {
-          errorPopup(context, globals.errorToken);
-        }
-      } else if (body[0] == "error7") {
-        if (mounted) {
-          warningPopup(context, globals.warning7);
-        }
-      } else {
-        if (mounted) {
+        if(mounted) {
           setState(() {
             _isLoading = false;
           });
-          errorPopup(context, globals.errorElse);
         }
-      }
-      if(mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
       } catch (e) {
         debugPrint(e.toString());
         if (mounted) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/NewIcons.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
@@ -13,6 +14,10 @@ class CalendarHours extends StatefulWidget {
   String fromTime;
   String toTime;
   bool isTaken;
+  String type;
+  String language;
+  String level;
+
   Function onTap;
 
   CalendarHours({
@@ -22,6 +27,9 @@ class CalendarHours extends StatefulWidget {
     required this.fromTime,
     required this.toTime,
     required this.isTaken,
+    required this.type,
+    required this.language,
+    required this.level,
     required this.onTap,
   });
 
@@ -85,58 +93,76 @@ class _CalendarHoursState extends State<CalendarHours> {
                   ),
                 ],
               ),
-              const Text(
-                'French Speaking',
-                style: TextStyle(
+              Text(
+                widget.type +
+                    ' (' +
+                    widget.language +
+                    ')\nfor ' +
+                    widget.level, // 'French Speaking',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   color: Colors.white70,
-                  fontSize: 14,
+                  fontSize: 13,
                 ),
               )
             ],
           ),
-          widget.isTaken != false
-              ? InkWell(
-                  onTap: () => _buyCourse(),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                    ),
-                    child: Container(
-                      height: 35,
-                      width: 100,
-                      alignment: Alignment.center,
-                      color: Colors.white,
-                      child: const Text(
-                        'Get Course',
-                        style: TextStyle(
-                          color: Colors.green,
-                        ),
-                      ),
-                    ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              widget.isTaken != false
+                  ? InkWell(
+                onTap: () => _buyCourse(),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12.0),
+                    bottomRight: Radius.circular(12.0),
                   ),
-                )
-              : InkWell(
-                  onTap: () => errorPopup(context, globals.error403),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      bottomRight: Radius.circular(12.0),
-                    ),
-                    child: Container(
-                      height: 35,
-                      width: 100,
-                      alignment: Alignment.center,
-                      color: Colors.red.shade900.withOpacity(0.8),
-                      child: Text(
-                        'Expired',
-                        style: TextStyle(
-                          color: Colors.red.shade400,
-                        ),
+                  child: Container(
+                    height: 35,
+                    width: 100,
+                    alignment: Alignment.center,
+                    color: Colors.white,
+                    child: const Text(
+                      'Get Course',
+                      style: TextStyle(
+                        color: Colors.green,
                       ),
                     ),
                   ),
                 ),
+              )
+                  : InkWell(
+                onTap: () => errorPopup(context, globals.error403),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12.0),
+                    bottomRight: Radius.circular(12.0),
+                  ),
+                  child: Container(
+                    height: 35,
+                    width: 100,
+                    alignment: Alignment.center,
+                    color: Colors.red.shade900.withOpacity(0.8),
+                    child: Text(
+                      'Expired',
+                      style: TextStyle(
+                        color: Colors.red.shade400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              SizedBox(
+                width: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: _getParticipants(),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -155,7 +181,7 @@ class _CalendarHoursState extends State<CalendarHours> {
         var data = {
           'version': globals.version,
           'account_Id': await SessionManager().get("Id"),
-          'course_Id': widget.courseId,
+          'course_Id': widget.courseId
         };
 
         var res = await CallApi()
@@ -226,6 +252,28 @@ class _CalendarHoursState extends State<CalendarHours> {
       debugPrint(
           '=========<<======================================================<<==================================================<<=========');
     }
+  }
+
+  List<Widget> _getParticipants() {
+    List<Widget> _children = [];
+    int _k = int.parse(widget.courseStudents);
+    for (int i = 0; i < int.parse(widget.courseMaxStudents); i++) {
+      if (_k > 0) {
+        _children.add(const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 1.0),
+          child: Icon(NewIcons.user, size: 13, color: Colors.white),
+        ));
+      } else {
+        _children.add(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 1.0),
+          child: Icon(NewIcons.user,
+              size: 13, color: Colors.transparent.withOpacity(0.15)),
+        ));
+      }
+      _k--;
+    }
+
+    return _children;
   }
 }
 
