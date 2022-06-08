@@ -9,6 +9,7 @@ import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/Code/codeDialog.dart';
 import 'package:gajoo/widgets/dateOfBirth/myDateOfBirth.dart';
 import 'package:gajoo/widgets/PopUp/errorAlertDialog.dart';
+import 'package:gajoo/widgets/other/newTypeAhead.dart';
 import 'package:gajoo/widgets/radioButton/myRadioButton.dart';
 import 'package:gajoo/widgets/textInput/myErrorText.dart';
 import 'package:gajoo/widgets/textInput/myTextInput.dart';
@@ -422,7 +423,7 @@ class _RegistrationState extends State<Registration> {
                         top: 8.0,
                         right: MediaQuery.of(context).size.width * 0.3),
                     child: Container(
-                      // child: languages(),
+                      child: TypeAhead(Items: globals.Languages, name: "Languages", onTap: (val)=> _setLanguages(val)),
                     ),
                   ),
 
@@ -434,7 +435,7 @@ class _RegistrationState extends State<Registration> {
                         top: 8.0,
                         right: MediaQuery.of(context).size.width * 0.3),
                     child: Container(
-                      // child: countries(),
+                      child: TypeAhead(Items: globals.Countries, name: "Countries", onTap: (val)=> _setCountries(val)),
                     ),
                   ),
 
@@ -1031,6 +1032,24 @@ class _RegistrationState extends State<Registration> {
   }
 
 
+  _setLanguages(String val) {
+    _languages = val;
+    // globals.uniId = val;
+    //globals.uniId = globals.univercitiesName.indexWhere((element) => element == val).toString();
+    print(val);
+    print(_languages);
+  }
+
+
+  _setCountries(String val) {
+    _countries = val;
+    // globals.uniId = val;
+    //globals.uniId = globals.univercitiesName.indexWhere((element) => element == val).toString();
+    print(val);
+    print(_countries);
+  }
+
+
 
   // Widget languages() => TypeAheadFormField<dynamic>(
   //   textFieldConfiguration: TextFieldConfiguration(
@@ -1100,33 +1119,33 @@ class _RegistrationState extends State<Registration> {
 
 }
 
-class LanguageData {
-
-
-  static List getSuggestions(String query) =>
-      List.of(globals.Languages).where((language){
-
-        final languageLower = language.toLowerCase();
-        final queryLower = query.toLowerCase();
-        return languageLower.contains(queryLower);
-
-
-      }).toList();
-
-}
-
-
-class CountryData {
-
-
-  static List getSuggestions(String query) =>
-      List.of(globals.Countries).where((country){
-
-        final countryLower = country.toLowerCase();
-        final queryLower = query.toLowerCase();
-        return countryLower.contains(queryLower);
-
-
-      }).toList();
-
-}
+// class LanguageData {
+//
+//
+//   static List getSuggestions(String query) =>
+//       List.of(globals.Languages).where((language){
+//
+//         final languageLower = language.toLowerCase();
+//         final queryLower = query.toLowerCase();
+//         return languageLower.contains(queryLower);
+//
+//
+//       }).toList();
+//
+// }
+//
+//
+// class CountryData {
+//
+//
+//   static List getSuggestions(String query) =>
+//       List.of(globals.Countries).where((country){
+//
+//         final countryLower = country.toLowerCase();
+//         final queryLower = query.toLowerCase();
+//         return countryLower.contains(queryLower);
+//
+//
+//       }).toList();
+//
+// }

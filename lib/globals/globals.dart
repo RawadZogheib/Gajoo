@@ -122,6 +122,9 @@ String? type;
 String? language;
 String? level;
 
+//MyAudio language
+String? audioLang;
+
 //for 6 digit code
 String? sixCodeNb;
 
