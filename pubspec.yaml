@@ -102,6 +102,9 @@ flutter:
     - Assets/Tickets/imageTicket4.png
     - Assets/SettingsPage/books.jpg
     - Assets/Quiz/FR/avion.png
+    - Assets/Quiz/FR/notFootBall.png
+    - Assets/Quiz/FR/footBall.png
+    - Assets/Quiz/FR/mer.png
 
 
 
