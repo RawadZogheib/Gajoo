@@ -32,6 +32,9 @@ class _MyAudioState extends State<MyAudio> {
   Color type2 = HexColor('#dfe2e6');
   Color type3 = HexColor('#dfe2e6');
 
+  var _theme_Id;
+  bool _imgNull = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -91,29 +94,64 @@ class _MyAudioState extends State<MyAudio> {
             : null,
         drawer: MyDrawerFilter(),
         backgroundColor: globals.whiteBlue,
-        body: Column(
-          children: [
-            MediaQuery.of(context).size.width > 650
-                ? const MyHeader()
-                : Container(),
-            Expanded(
-              child: ScrollConfiguration(
-                behavior: MyCustomScrollBehavior(),
-                child: SingleChildScrollView(
-                  controller: ScrollController(),
-                  child: Column(
-                    children: [
-                      ScrollConfiguration(
-                        behavior: MyCustomScrollBehavior(),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          controller: ScrollController(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: ClipRRect(
+        body: Container(
+          decoration: _imgNull == false ? BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage("https://kwikcode.net/gajoo_php/Themes/Theme${_theme_Id}.png"),
+              fit: BoxFit.cover,
+            ),
+          ) : null,
+          child: Column(
+            children: [
+              MediaQuery.of(context).size.width > 650
+                  ? const MyHeader()
+                  : Container(),
+              Expanded(
+                child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: SingleChildScrollView(
+                    controller: ScrollController(),
+                    child: Column(
+                      children: [
+                        ScrollConfiguration(
+                          behavior: MyCustomScrollBehavior(),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: ScrollController(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30),
+                                      bottomRight: Radius.circular(30),
+                                    ),
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height *
+                                          0.8,
+                                      width: 500,
+                                      padding: const EdgeInsets.all(12.0),
+                                      color: Colors.white,
+                                      child: MyAudioList(
+                                        audiosList: _audioList,
+                                      ),
+                                    ),
+                                  ),
+
+                                ),
+                                _clicked == true ?
+                                  AudioText(
+                                      textAudio: 'ksjdhffjdm \n ugsdifgusdfiaksdgaisdugiasdugaisdguiasdgi',
+                                      cancelButton: true,
+                                      onTap: () {
+                                        _offClicked();
+                                      }
+                                  )
+                                    : ClipRRect(
                                   borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(30),
                                     topRight: Radius.circular(30),
@@ -121,60 +159,33 @@ class _MyAudioState extends State<MyAudio> {
                                     bottomRight: Radius.circular(30),
                                   ),
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height *
+                                    height:
+                                    MediaQuery.of(context).size.height *
                                         0.8,
                                     width: 500,
-                                    padding: const EdgeInsets.all(12.0),
-                                    color: Colors.white,
-                                    child: MyAudioList(
-                                      audiosList: _audioList,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
-
-                              ),
-                              _clicked == true ?
-                                AudioText(
-                                    textAudio: 'ksjdhffjdm \n ugsdifgusdfiaksdgaisdugiasdugaisdguiasdgi',
-                                    cancelButton: true,
-                                    onTap: () {
-                                      _offClicked();
-                                    }
-                                )
-                                  : ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30),
+                                const SizedBox(
+                                  width: 60,
                                 ),
-                                child: Container(
-                                  height:
-                                  MediaQuery.of(context).size.height *
-                                      0.8,
-                                  width: 500,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 60,
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const MyFooter(),
-                    ],
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const MyFooter(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: Builder(
           builder: (context) => FloatingActionButton(
@@ -238,6 +249,9 @@ class _MyAudioState extends State<MyAudio> {
                 body[1][i][4],
                     () {
                   _onClicked();
+                  setState(() {
+                    _theme_Id = body[1][i][2];
+                  });
                 }
               ],
             );
@@ -260,6 +274,7 @@ class _MyAudioState extends State<MyAudio> {
   _onClicked() {
     setState(() {
       _clicked = true;
+      _imgNull = false;
     });
   }
 
@@ -267,6 +282,7 @@ class _MyAudioState extends State<MyAudio> {
     print('asdsad');
     setState(() {
       _clicked = false;
+      _imgNull = true;
     });
   }
 
@@ -529,6 +545,8 @@ class _MyAudioState extends State<MyAudio> {
       ),
     );
   }
+
+  
 
 
   _back() {
