@@ -36,10 +36,10 @@ class MyAudioList extends StatelessWidget {
                 // print(DateTime.parse(
                 //     DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now().toUtc())));
                 return MyAudioItem(
-                  audioId: audiosList[index][0],
+                  audioId: audiosList[index][0].toString(),
                   width: 400,
                   text: audiosList[index][1],
-                  maxTime: audiosList[index][2],
+                  maxTime: double.parse(audiosList[index][2]),
                   date: audiosList[index][3],
                   onTap: () {
                     audiosList[index][4]();

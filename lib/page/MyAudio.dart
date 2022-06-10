@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/hexColor/hexColor.dart';
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
+import 'package:gajoo/widgets/button/myButton.dart';
 import 'package:gajoo/widgets/other/AudioText.dart';
 import 'package:gajoo/widgets/other/MyAudioList.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
@@ -19,9 +24,13 @@ class MyAudio extends StatefulWidget {
 }
 
 class _MyAudioState extends State<MyAudio> {
-  Timer? timer;
+  //Timer? timer;
   List<List<dynamic>> _audioList = [];
   bool _clicked = false;
+
+  Color type1 = HexColor('#dfe2e6');
+  Color type2 = HexColor('#dfe2e6');
+  Color type3 = HexColor('#dfe2e6');
 
   @override
   void initState() {
@@ -34,7 +43,7 @@ class _MyAudioState extends State<MyAudio> {
   @override
   void dispose() {
     // TODO: implement dispose
-    timer?.cancel();
+    //timer?.cancel();
     super.dispose();
   }
 
@@ -80,7 +89,7 @@ class _MyAudioState extends State<MyAudio> {
                 ],
               )
             : null,
-        endDrawer: myDrawer(),
+        drawer: MyDrawerFilter(),
         backgroundColor: globals.whiteBlue,
         body: Column(
           children: [
@@ -167,6 +176,15 @@ class _MyAudioState extends State<MyAudio> {
             ),
           ],
         ),
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () => MediaQuery.of(context).size.width < 650
+                ? _open()
+                : Scaffold.of(context).openDrawer(),
+            tooltip: 'Filter',
+            child: const Icon(Icons.add),
+          ),
+        ),
       ),
     );
   }
@@ -174,58 +192,69 @@ class _MyAudioState extends State<MyAudio> {
   _loadNewPage() {
     print(
         '=========>>======================================================>>==================================================>>=========');
-    timer?.cancel();
+    //timer?.cancel();
     _loadAudio(); //0
-    _loadPage(); //1 -> INFINI
+    //_loadPage(); //1 -> INFINI
   }
 
-  _loadPage() {
-    timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
-      print(
-          '=========>>======================================================>>==================================================>>=========');
-      print("30sec gone!!");
-      if (mounted) {
-        print("30sec gone, and _loadChildrenOnline!!");
-        _loadAudio();
+  // _loadPage() {
+  //   timer = Timer.periodic(const Duration(seconds: 30), (Timer t) {
+  //     print(
+  //         '=========>>======================================================>>==================================================>>=========');
+  //     print("30sec gone!!");
+  //     if (mounted) {
+  //       print("30sec gone, and _loadChildrenOnline!!");
+  //       _loadAudio();
+  //     } else {
+  //       print(
+  //           '=========<<======================================================<<==================================================<<=========');
+  //     }
+  //   });
+  // }
+
+  _loadAudio() async {
+
+    try {
+      var data = {
+        'version': globals.version,
+        'account_Id': await SessionManager().get("Id"),
+      };
+
+      var res = await CallApi()
+          .postData(data, '/Audios/Control/(Control)getAudioData.php');
+
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
+      if (body[0] == "success") {
+        setState(() {
+          _audioList.clear();
+          for (int i = 0; i < body[1].length; i++) {
+            _audioList.add(
+              [
+                body[1][i][0],
+                body[1][i][1],
+                body[1][i][3],
+                body[1][i][4],
+                    () {
+                  _onClicked();
+                }
+              ],
+            );
+          }
+        });
+      } else if (body[0] == 'error10') {
+        warningPopup(context, globals.warning10);
+      } else if (body[0] == "errorToken") {
+        errorPopup(context, globals.errorToken);
       } else {
-        print(
-            '=========<<======================================================<<==================================================<<=========');
+        errorPopup(context, globals.errorElse);
       }
-    });
-  }
+    }catch(e){
+      print(e);
+      errorPopup(context, globals.errorException);
+    }
 
-  void _loadAudio() {
-    setState(() {
-      _audioList.clear();
-      _audioList.add(
-        [
-          '1',
-          'Arabic Audio',
-          110.0,
-          DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-08 20:35:00.000', true),
-          ),
-          () {
-            _onClicked();
-          }
-        ],
-      );
-      _audioList.add(
-        [
-          '2',
-          'French Audio',
-          113.0,
-          DateFormat('yyyy-MM-dd HH:mm').format(
-            DateFormat('yyyy-MM-dd HH:mm')
-                .parse('2022-03-08 20:35:00.000', true),
-          ),
-          () {
-            _onClicked();
-          }
-        ],
-      );
-    });
   }
 
   _onClicked() {
@@ -240,6 +269,267 @@ class _MyAudioState extends State<MyAudio> {
       _clicked = false;
     });
   }
+
+
+  _open() {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 0.55,
+          padding:
+          EdgeInsets.only(bottom: MediaQuery
+              .of(context)
+              .viewInsets
+              .bottom),
+          decoration: BoxDecoration(
+            color: globals.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Drawer(
+            child: Material(
+              color: HexColor('#222222'), //globals.blue1,
+              child: ScrollConfiguration(
+                behavior: MyCustomScrollBehavior(),
+                child: ListView(
+                  controller: ScrollController(),
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text('Audio Language: ',style: TextStyle(
+                              color: Colors.white
+                          ),),
+                        ),
+                        const SizedBox(height: 20,),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type1,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'ARABIC',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.audioLang = "ARABIC";
+                                      type1 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type2,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'FRENCH',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.audioLang = "FRENCH";
+                                      type2 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                color1: type3,
+                                color2: Colors.black,
+                                btnText: const Text(
+                                  'ENGLISH',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      globals.audioLang = "ENGLISH";
+                                      type3 = Colors.yellowAccent;
+                                    });
+                                    //_checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ).then((exit) async {});
+  }
+
+  _cleanColorType() {
+    if (mounted) {
+      setState(() {
+        type1 = HexColor('#dfe2e6');
+        type2 = HexColor('#dfe2e6');
+        type3 = HexColor('#dfe2e6');
+      });
+    }
+  }
+
+
+
+  MyDrawerFilter() {
+    return Drawer(
+      child: Material(
+        color: HexColor('#222222'), //globals.blue1,
+        child: ScrollConfiguration(
+          behavior: MyCustomScrollBehavior(),
+          child: ListView(
+            controller: ScrollController(),
+            children: <Widget>[
+              Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.asset(
+                      'Assets/HomePage/ProfilePicture/img1.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Audio Language: ',style: TextStyle(
+                      color: Colors.white
+                    ),),
+                  ),
+                  const SizedBox(height: 20,),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 3.0, right: 3.0, bottom: 3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type1,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ARABIC',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.audioLang = "ARABIC";
+                                type1 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type2,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'FRENCH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.audioLang = "FRENCH";
+                                type2 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          color1: type3,
+                          color2: Colors.black,
+                          btnText: const Text(
+                            'ENGLISH',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                globals.audioLang = "ENGLISH";
+                                type3 = Colors.yellowAccent;
+                              });
+                              //_checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 
   _back() {
     Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
