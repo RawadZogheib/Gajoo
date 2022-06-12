@@ -412,26 +412,26 @@ class _MyAudioState extends State<MyAudio> {
                                 },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 33.0),
-                              child: myBtn2(
-                                height: 25,
-                                width: 150,
-                                btnText: const Text(
-                                  'Clear Filter',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 12),
-                                ),
-                                onPress: () {
-                                  _cleanColorType();
-                                  if (mounted) {
-                                    setState(() {
-                                      _filterCheck = false;
-                                    });
-                                  }
-                                },
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(top: 33.0),
+                            //   child: myBtn2(
+                            //     height: 25,
+                            //     width: 150,
+                            //     btnText: const Text(
+                            //       'Clear Filter',
+                            //       style: TextStyle(
+                            //           fontWeight: FontWeight.bold, fontSize: 12),
+                            //     ),
+                            //     onPress: () {
+                            //       _cleanColorType();
+                            //       if (mounted) {
+                            //         setState(() {
+                            //           _filterCheck = false;
+                            //         });
+                            //       }
+                            //     },
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
@@ -562,26 +562,27 @@ class _MyAudioState extends State<MyAudio> {
                           },
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 33.0),
-                        child: myBtn2(
-                          height: 25,
-                          width: 150,
-                          btnText: const Text(
-                            'Clear Filter',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12),
-                          ),
-                          onPress: () {
-                            _cleanColorType();
-                            if (mounted) {
-                              setState(() {
-                                _filterCheck = false;
-                              });
-                            }
-                          },
-                        ),
-                      ),
+                      //For filter clearrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 33.0),
+                      //   child: myBtn2(
+                      //     height: 25,
+                      //     width: 150,
+                      //     btnText: const Text(
+                      //       'Clear Filter',
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.bold, fontSize: 12),
+                      //     ),
+                      //     onPress: () {
+                      //       _cleanColorType();
+                      //       if (mounted) {
+                      //         setState(() {
+                      //           _filterCheck = false;
+                      //         });
+                      //       }
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
