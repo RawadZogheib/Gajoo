@@ -254,7 +254,7 @@ class _MyAudioState extends State<MyAudio> {
                   setState(() {
                     _theme_Id = body[1][i][2];
                   });
-                }
+                },
               ],
             );
           }
@@ -610,9 +610,10 @@ class _MyAudioState extends State<MyAudio> {
             _audioList[i][3],
                 () {
               _onClicked();
-              setState(() {
-                _theme_Id = _audioList[i][4];
-              });
+              _audioList[i][4]();
+              // setState(() {
+              //   _theme_Id = _audioList[i][4];
+              // });
             }
           ],
         );

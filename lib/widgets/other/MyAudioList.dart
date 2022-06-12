@@ -41,9 +41,7 @@ class MyAudioList extends StatelessWidget {
                   text: audiosList[index][1],
                   maxTime: audiosList[index][2],
                   date: audiosList[index][3],
-                  onTap: () {
-                    audiosList[index][4]();
-                  },
+                  onTap: () => audiosList[index][4](),
                 );
               }),
         ),
