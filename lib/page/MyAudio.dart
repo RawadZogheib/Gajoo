@@ -26,7 +26,9 @@ class MyAudio extends StatefulWidget {
 class _MyAudioState extends State<MyAudio> {
   //Timer? timer;
   List<List<dynamic>> _audioList = [];
+  List<List<dynamic>> _audioFilteredList = [];
   bool _clicked = false;
+  bool _filterCheck = false;
 
   Color type1 = HexColor('#dfe2e6');
   Color type2 = HexColor('#dfe2e6');
@@ -93,6 +95,7 @@ class _MyAudioState extends State<MyAudio> {
               )
             : null,
         drawer: MyDrawerFilter(),
+        endDrawer: myDrawer(),
         backgroundColor: globals.whiteBlue,
         body: Container(
           decoration: _imgNull == false ? BoxDecoration(
@@ -137,7 +140,7 @@ class _MyAudioState extends State<MyAudio> {
                                       padding: const EdgeInsets.all(12.0),
                                       color: Colors.white,
                                       child: MyAudioList(
-                                        audiosList: _audioList,
+                                        audiosList: _filterCheck == false ? _audioList : _audioFilteredList,
                                       ),
                                     ),
                                   ),
@@ -238,14 +241,13 @@ class _MyAudioState extends State<MyAudio> {
       List<dynamic> body = json.decode(res.body);
 
       if (body[0] == "success") {
-        setState(() {
           _audioList.clear();
           for (int i = 0; i < body[1].length; i++) {
             _audioList.add(
               [
                 body[1][i][0],
                 body[1][i][1],
-                body[1][i][3],
+                double.parse(body[1][i][3]),
                 body[1][i][4],
                     () {
                   _onClicked();
@@ -256,7 +258,12 @@ class _MyAudioState extends State<MyAudio> {
               ],
             );
           }
-        });
+          setState(() {
+            print(_audioList.length);
+            print(_audioList[1][1]);
+            _audioList;
+          });
+
       } else if (body[0] == 'error10') {
         warningPopup(context, globals.warning10);
       } else if (body[0] == "errorToken") {
@@ -349,10 +356,10 @@ class _MyAudioState extends State<MyAudio> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      globals.audioLang = "ARABIC";
+                                      globals.audioLang = "arabic";
                                       type1 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -373,10 +380,10 @@ class _MyAudioState extends State<MyAudio> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      globals.audioLang = "FRENCH";
+                                      globals.audioLang = "french";
                                       type2 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
                                   }
                                 },
                               ),
@@ -397,10 +404,30 @@ class _MyAudioState extends State<MyAudio> {
                                   _cleanColorType();
                                   if (mounted) {
                                     setState(() {
-                                      globals.audioLang = "ENGLISH";
+                                      globals.audioLang = "english";
                                       type3 = Colors.yellowAccent;
                                     });
-                                    //_checkFilter();
+                                    _checkFilter();
+                                  }
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 33.0),
+                              child: myBtn2(
+                                height: 25,
+                                width: 150,
+                                btnText: const Text(
+                                  'Clear Filter',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                                onPress: () {
+                                  _cleanColorType();
+                                  if (mounted) {
+                                    setState(() {
+                                      _filterCheck = false;
+                                    });
                                   }
                                 },
                               ),
@@ -479,10 +506,10 @@ class _MyAudioState extends State<MyAudio> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                globals.audioLang = "ARABIC";
+                                globals.audioLang = "arabic";
                                 type1 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -503,10 +530,10 @@ class _MyAudioState extends State<MyAudio> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                globals.audioLang = "FRENCH";
+                                globals.audioLang = "french";
                                 type2 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
                             }
                           },
                         ),
@@ -527,10 +554,30 @@ class _MyAudioState extends State<MyAudio> {
                             _cleanColorType();
                             if (mounted) {
                               setState(() {
-                                globals.audioLang = "ENGLISH";
+                                globals.audioLang = "english";
                                 type3 = Colors.yellowAccent;
                               });
-                              //_checkFilter();
+                              _checkFilter();
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 33.0),
+                        child: myBtn2(
+                          height: 25,
+                          width: 150,
+                          btnText: const Text(
+                            'Clear Filter',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
+                          onPress: () {
+                            _cleanColorType();
+                            if (mounted) {
+                              setState(() {
+                                _filterCheck = false;
+                              });
                             }
                           },
                         ),
@@ -546,6 +593,35 @@ class _MyAudioState extends State<MyAudio> {
     );
   }
 
+
+  _checkFilter(){
+    print(_audioList);
+    _audioFilteredList.clear();
+    print(_audioList.length);
+    for(int i=0; i< _audioList.length; i++){
+      print(_audioList[i][1].toString().toLowerCase());
+      if(globals.audioLang == _audioList[i][1].toString().toLowerCase()){
+        _audioFilteredList.add(
+          [
+            _audioList[i][0],
+            _audioList[i][1],
+            _audioList[i][2],
+            _audioList[i][3],
+                () {
+              _onClicked();
+              setState(() {
+                _theme_Id = _audioList[i][4];
+              });
+            }
+          ],
+        );
+      }
+    }
+    setState(() {
+      _filterCheck = true;
+      _audioFilteredList;
+    });
+  }
   
 
 
