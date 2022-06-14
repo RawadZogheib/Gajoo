@@ -33,7 +33,7 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) => AlertDialogQuiz(index: 'FR'),
+      builder: (BuildContext context) => AlertDialogQuiz(index: 'FR_DELF'),
     ).then((exit) {
       if (mounted) {
         setState(() {
@@ -203,7 +203,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
         []; // ['questionType' ,'questionId', 'question', ['answer1','answer2',...,'answerN']]
     switch (index) {
       case 'AR': // Arabic Test
-
+        _testList.addAll([]);
         break;
       case 'FR': // French Test
         _testList.addAll([
@@ -340,7 +340,50 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
         ]);
         break;
       case 'FR_DELF': // French Test (DELF)
+        _testList.addAll([
+          QCUWidget(
+            key: const ValueKey(1),
+            questionId: 1,
+            question: '1.1 Je complète la phrase avec le mot qui me semble correct:',
+            question2: 'Appelle-moi ____________________ tu aurais besoin d’aide.',
+            ansList: const ['au cas où', 'dès que', 'quand', 'si'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 1
+          QCUWidget(
+            key: const ValueKey(2),
+            questionId: 2,
+            question: '1.2 Je complète la phrase avec le mot qui me semble correct:',
+            question2: 'Désolée, je ne peux pas venir aujourd’hui car je dois ___________________ ma fille chez le médecin.',
+            ansList: const ['amener', 'emporter', 'ramener', 'apporter'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 2
+          QCUWidget(
+            key: const ValueKey(3),
+            questionId: 3,
+            question: '1.3 Je complète la phrase avec le mot qui me semble correct:',
+            question2: 'Après avoir payé l’addition, il est normal de laisser un ______________ au serveur.',
+            ansList: const ['salaire', 'pourboire', 'profit', 'solide'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 3
+          QCUWidget(
+            key: const ValueKey(4),
+            questionId: 4,
+            question: '1.4 Je complète la phrase avec le mot qui me semble correct:',
+            question2: 'Comment tu __________________ au travail le matin ?',
+            ansList: const ['es', 'marches', 'vas', 'prends'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 4
+          QCUWidget6(
+            key: const ValueKey(5),
+            questionId: 5,
+            question: '5.Je choisis la bonne réponse:',
+            question2: 'L’enfant a vu ',
+            asset: 'Assets/Quiz/FR/mer.png',
+            ansList: const ['la mer.', 'la mère.', 'Pas de réponse'],
+            onTap: (String val) => _nextQuestion(val),
+          ), // 5
 
+        ]);
         break;
       case 'EN': // English Test
         _testList.addAll([
@@ -649,7 +692,11 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
             key: const ValueKey(35),
             questionId: 35,
             question: '35. Paul.............at the garage Yesterday.',
-            ansList: const ['fixed his car', 'had his car fixed', 'Non of the above'],
+            ansList: const [
+              'fixed his car',
+              'had his car fixed',
+              'Non of the above'
+            ],
             onTap: (String val) => _nextQuestion(val),
           ), // 35
         ]);
@@ -680,6 +727,15 @@ class QCUWidget extends StatefulWidget {
 }
 
 class _QCUWidgetState extends State<QCUWidget> {
+  List<Widget> _children = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loadButtons();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -707,35 +763,8 @@ class _QCUWidgetState extends State<QCUWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MyBtn3(
-                btnText: widget.ansList[0],
-                height: 70,
-                width: 100,
-                onPress: () => _onTap(widget.ansList[0]),
-                color1: Colors.red,
-                color2: Colors.white,
-              ),
-              const SizedBox(width: 10),
-              MyBtn3(
-                btnText: widget.ansList[1],
-                height: 70,
-                width: 100,
-                onPress: () => _onTap(widget.ansList[1]),
-                color1: Colors.red,
-                color2: Colors.white,
-              ),
-              const SizedBox(width: 10),
-              MyBtn3(
-                btnText: widget.ansList[2],
-                height: 70,
-                width: 100,
-                onPress: () => _onTap(widget.ansList[2]),
-                color1: Colors.red,
-                color2: Colors.white,
-              ),
-            ],
-          )
+            children: _children,
+          ),
         ],
       ),
     );
@@ -744,6 +773,25 @@ class _QCUWidgetState extends State<QCUWidget> {
   _onTap(String val) {
     // Save Answer
     widget.onTap(val);
+  }
+
+  void _loadButtons() {
+    for (var _element in widget.ansList) {
+      _children.add(MyBtn3(
+        btnText: _element,
+        height: 70,
+        width: 200,
+        onPress: () => _onTap(_element),
+        color1: Colors.red,
+        color2: Colors.white,
+      ));
+      _children.add(const SizedBox(width: 10));
+    }
+    if (mounted) {
+      setState(() {
+        _children;
+      });
+    }
   }
 }
 
@@ -1153,5 +1201,111 @@ class _QCUWidget5State extends State<QCUWidget5> {
   _onTap(String val) {
     // Save Answer
     widget.onTap(val);
+  }
+}
+
+class QCUWidget6 extends StatefulWidget {
+  double questionId;
+  String question;
+  String question2;
+  String asset;
+  List<String> ansList;
+  Function(String value) onTap;
+
+  QCUWidget6(
+      {Key? key,
+        required this.questionId,
+        required this.question,
+        required this.question2,
+        required this.asset,
+        required this.ansList,
+        required this.onTap})
+      : super(key: key);
+
+  @override
+  State<QCUWidget6> createState() => _QCUWidget6State();
+}
+
+class _QCUWidget6State extends State<QCUWidget6> {
+  List<Widget> _children = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loadButtons();
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.7, //300
+      width: MediaQuery.of(context).size.width * 0.7, //400
+      child: ScrollConfiguration(
+        behavior: MyCustomScrollBehavior(),
+        child: SingleChildScrollView(
+          controller: ScrollController(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.12,
+              ),
+              Text(
+                widget.question,
+                style:
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    widget.asset,
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.06,
+              ),
+              Text(
+                widget.question2,
+                style: const TextStyle(fontSize: 20),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _children,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _onTap(String val) {
+    // Save Answer
+    widget.onTap(val);
+  }
+
+  void _loadButtons() {
+    for (var _element in widget.ansList) {
+      _children.add(MyBtn3(
+        btnText: _element,
+        height: 70,
+        width: 200,
+        onPress: () => _onTap(_element),
+        color1: Colors.red,
+        color2: Colors.white,
+      ));
+      _children.add(const SizedBox(width: 10));
+    }
+    if (mounted) {
+      setState(() {
+        _children;
+      });
+    }
   }
 }
