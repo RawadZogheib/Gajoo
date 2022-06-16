@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
+import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/button/myButton.dart';
@@ -171,6 +174,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       });
     } else {
       debugPrint(_answerList.toString());
+      _sendAnswer();
       // TODO
       // TODO
       // TODO
@@ -195,6 +199,38 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       _timer?.cancel();
       Navigator.pop(context);
       successPopup(context, 'Quiz Finished!');
+    }
+  }
+
+  _sendAnswer() async {
+    try {
+      var data = {
+        'version': globals.version,
+        'account_Id': await SessionManager().get("Id"),
+        'list': _answerList,
+        'type': "FR"
+      };
+
+      var res = await CallApi()
+          .postData(data, '/Quiz/Control/(Control)quiz.php');
+
+      print(res.body);
+      List<dynamic> body = json.decode(res.body);
+
+      if (body[0] == "success") {
+
+
+
+      } else if (body[0] == 'error10') {
+        warningPopup(context, globals.warning10);
+      } else if (body[0] == "errorToken") {
+        errorPopup(context, globals.errorToken);
+      } else {
+        errorPopup(context, globals.errorElse);
+      }
+    }catch(e){
+      print(e);
+      errorPopup(context, globals.errorException);
     }
   }
 
