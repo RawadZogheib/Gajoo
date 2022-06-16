@@ -18,6 +18,7 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+  String quizType = 'FR_DELF';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _TestPageState extends State<TestPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) => AlertDialogQuiz(index: 'FR_DELF'),
+      builder: (BuildContext context) => AlertDialogQuiz(index: quizType),
     ).then((exit) {
       if (mounted) {
         setState(() {
@@ -174,6 +175,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
       });
     } else {
       debugPrint(_answerList.toString());
+      debugPrint(widget.index);// quizType
       _sendAnswer();
       // TODO
       // TODO
