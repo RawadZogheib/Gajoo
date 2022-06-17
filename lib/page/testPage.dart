@@ -18,7 +18,7 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-  String quizType = 'FR_DELF';
+  String quizType = 'FR';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,26 +176,10 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
     } else {
       debugPrint(_answerList.toString());
       debugPrint(widget.index);// quizType
-      _sendAnswer();
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
+      _sendAnswer(widget.index, _answerList);
       // TODO
       // TODO
       // TODO: Send to server
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
-      // TODO
       // TODO
       // TODO
       _timer?.cancel();
@@ -204,13 +188,13 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
     }
   }
 
-  _sendAnswer() async {
+  _sendAnswer(String quizType, List<String> answerList) async {
     try {
       var data = {
         'version': globals.version,
         'account_Id': await SessionManager().get("Id"),
-        'list': _answerList,
-        'type': "FR"
+        'list': answerList,
+        'type': quizType
       };
 
       var res = await CallApi()
@@ -221,6 +205,7 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
 
       if (body[0] == "success") {
 
+        print(body[1]);
 
 
       } else if (body[0] == 'error10') {
@@ -245,13 +230,6 @@ class _AlertDialogQuizState extends State<AlertDialogQuiz> {
         break;
       case 'FR': // French Test
         _testList.addAll([
-          QCUWidget(
-            key: const ValueKey(1),
-            questionId: 1,
-            question: '1. Je sais me présenter?',
-            ansList: const ['Oui', 'Non', 'Pas de réponse'],
-            onTap: (String val) => _nextQuestion(val),
-          ), // 1
           QCUWidget(
             key: const ValueKey(2.1),
             questionId: 2.1,
