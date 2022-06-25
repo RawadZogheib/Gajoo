@@ -103,9 +103,10 @@ class _CalendarPageState extends State<CalendarPage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        width: 400,
+                        height: 70,
+                        // width: 400,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
                               children: [
@@ -137,7 +138,7 @@ class _CalendarPageState extends State<CalendarPage> {
                               ],
                             ),
                             const SizedBox(width: 15),
-                            Row(
+                            globals.type == 'Language Lessons'?Row(
                               children: [
                                 _isLoadingTickets == true
                                     ? SizedBox(
@@ -163,9 +164,9 @@ class _CalendarPageState extends State<CalendarPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ],
-                            ),
+                            ): const SizedBox.shrink(),
                             const SizedBox(width: 15),
-                            Row(
+                            globals.type == 'Native Speaking'?Row(
                               children: [
                                 _isLoadingTickets == true
                                     ? SizedBox(
@@ -191,37 +192,37 @@ class _CalendarPageState extends State<CalendarPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ],
-                            ),
+                            ): const SizedBox.shrink(),
+                            // const SizedBox(width: 15),
+                            // Row(
+                            //   children: [
+                            //     _isLoadingTickets == true
+                            //         ? SizedBox(
+                            //             height: 10.0,
+                            //             width: 10.0,
+                            //             child: CircularProgressIndicator(
+                            //                 color: HexColor('#5576c3')))
+                            //         : Text(
+                            //             _blueCoupon == null
+                            //                 ? '-'
+                            //                 : _blueCoupon.toString(),
+                            //             style: TextStyle(
+                            //               color: HexColor('#5576c3'),
+                            //               fontWeight: FontWeight.bold,
+                            //             ),
+                            //           ),
+                            //     const SizedBox(width: 5),
+                            //     const Image(
+                            //       image: AssetImage(
+                            //           'Assets/Tickets/blueTicket.png'),
+                            //       height: 40,
+                            //       width: 40,
+                            //       fit: BoxFit.cover,
+                            //     ),
+                            //   ],
+                            // ),
                             const SizedBox(width: 15),
-                            Row(
-                              children: [
-                                _isLoadingTickets == true
-                                    ? SizedBox(
-                                        height: 10.0,
-                                        width: 10.0,
-                                        child: CircularProgressIndicator(
-                                            color: HexColor('#5576c3')))
-                                    : Text(
-                                        _blueCoupon == null
-                                            ? '-'
-                                            : _blueCoupon.toString(),
-                                        style: TextStyle(
-                                          color: HexColor('#5576c3'),
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                const SizedBox(width: 5),
-                                const Image(
-                                  image: AssetImage(
-                                      'Assets/Tickets/blueTicket.png'),
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 15),
-                            Row(
+                            globals.type == 'Diploma Certificate'?Row(
                               children: [
                                 _isLoadingTickets == true
                                     ? SizedBox(
@@ -247,7 +248,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ],
-                            ),
+                            ):const SizedBox.shrink(),
                           ],
                         ),
                       ),
