@@ -242,5 +242,5 @@ class MyCoursesItem extends StatelessWidget {
 }
 
 void _launchURL(_url) async {
-  if (!await launch(_url)) throw 'Could not launch $_url';
+  if (!await launchUrl(_url)) throw 'Could not launch $_url';
 }
