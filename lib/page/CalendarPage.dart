@@ -108,7 +108,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
+                            globals.type == 'Language Lessons'?Row(
                               children: [
                                 _isLoadingTickets == true
                                     ? SizedBox(
@@ -136,7 +136,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   fit: BoxFit.cover,
                                 ),
                               ],
-                            ),
+                            ): const SizedBox.shrink(),
                             const SizedBox(width: 15),
                             globals.type == 'Language Lessons'?Row(
                               children: [
