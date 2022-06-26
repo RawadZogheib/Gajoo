@@ -200,13 +200,10 @@ class _MyAudioItemState extends State<MyAudioItem> {
       inactiveColor: _inactiveColor,
       thumbColor: _thumbColor,
       onChanged: (double value) {
-        setState(() {
-          _audioPlayer.seek(Duration(seconds: value.toInt()));
-        });
         // if (_isPlaying == true) {
-        //   setState(() {
-        //     _audioPlayer.seek(Duration(seconds: value.toInt()));
-        //   });
+          setState(() {
+            _audioPlayer.seek(Duration(seconds: value.toInt()));
+          });
         // }
       },
     );
