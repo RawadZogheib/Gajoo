@@ -141,7 +141,9 @@ class _MyCoursesState extends State<MyCourses> {
                                             name: _coursesList[_courseId!][5],
                                             age: _coursesList[_courseId!][6],
                                             languages:
-                                                'Arabic, french, english',
+                                              _coursesList[_courseId!][9].toString()
+                                                  .replaceAll(RegExp('{'), '')
+                                                  .replaceAll(RegExp('}'), ''),
                                             nbrOfCourses:
                                                 _coursesList[_courseId!][7],
                                             coursesReserved:
