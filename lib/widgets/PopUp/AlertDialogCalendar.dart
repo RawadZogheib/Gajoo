@@ -154,9 +154,10 @@ class _AlertDialogCalendarState extends State<AlertDialogCalendar> {
                 courseStudents: body[1][i][2],
                 courseMaxStudents: body[1][i][3],
                 isTaken: int.parse(body[1][i][2]) < int.parse(body[1][i][3]),
-                type: body[1][i][5],
-                language: body[1][i][6],
-                level: body[1][i][7],
+                price: body[1][i][5],
+                type: body[1][i][6],
+                language: body[1][i][7],
+                level: body[1][i][8],
                 onTap: () {
                   // debugPrint('ssa'); //or null
                   Navigator.pop(context);

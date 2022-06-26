@@ -5,6 +5,7 @@ import 'package:gajoo/NewIcons.dart';
 import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/api/my_session.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/PopUp/AlertBeforeBuy.dart';
 import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 
 class CalendarHours extends StatefulWidget {
@@ -14,6 +15,7 @@ class CalendarHours extends StatefulWidget {
   String fromTime;
   String toTime;
   bool isTaken;
+  String price;
   String type;
   String language;
   String level;
@@ -28,6 +30,7 @@ class CalendarHours extends StatefulWidget {
     required this.toTime,
     required this.isTaken,
     required this.type,
+    required this.price,
     required this.language,
     required this.level,
     required this.onTap,
@@ -112,47 +115,47 @@ class _CalendarHoursState extends State<CalendarHours> {
             children: [
               widget.isTaken != false
                   ? InkWell(
-                onTap: () => _buyCourse(),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12.0),
-                    bottomRight: Radius.circular(12.0),
-                  ),
-                  child: Container(
-                    height: 35,
-                    width: 100,
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    child: const Text(
-                      'Get Course',
-                      style: TextStyle(
-                        color: Colors.green,
+                      onTap: () => _beforeBuyCourse(),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(12.0),
+                          bottomRight: Radius.circular(12.0),
+                        ),
+                        child: Container(
+                          height: 35,
+                          width: 100,
+                          alignment: Alignment.center,
+                          color: Colors.white,
+                          child: const Text(
+                            'Get Course',
+                            style: TextStyle(
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              )
+                    )
                   : InkWell(
-                onTap: () => errorPopup(context, globals.error403),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12.0),
-                    bottomRight: Radius.circular(12.0),
-                  ),
-                  child: Container(
-                    height: 35,
-                    width: 100,
-                    alignment: Alignment.center,
-                    color: Colors.red.shade900.withOpacity(0.8),
-                    child: Text(
-                      'Expired',
-                      style: TextStyle(
-                        color: Colors.red.shade400,
+                      onTap: () => errorPopup(context, globals.error403),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(12.0),
+                          bottomRight: Radius.circular(12.0),
+                        ),
+                        child: Container(
+                          height: 35,
+                          width: 100,
+                          alignment: Alignment.center,
+                          color: Colors.red.shade900.withOpacity(0.8),
+                          child: Text(
+                            'Expired',
+                            style: TextStyle(
+                              color: Colors.red.shade400,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 4),
               SizedBox(
                 width: 100,
@@ -166,6 +169,15 @@ class _CalendarHoursState extends State<CalendarHours> {
         ],
       ),
     );
+  }
+
+  _beforeBuyCourse() {
+    if (_isLoading == false) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertBeforeBuy(price: widget.price, onTap: () => _buyCourse()));
+    }
   }
 
   Future<void> _buyCourse() async {
