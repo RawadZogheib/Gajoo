@@ -81,6 +81,13 @@ class _MyAudioItemState extends State<MyAudioItem> {
   Color _thumbColor = Colors.grey;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _audioPlayer.pause();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
@@ -213,12 +220,14 @@ class _MyAudioItemState extends State<MyAudioItem> {
     if (_isPlaying) {
       // Stop
       await _audioPlayer.pause().then((value) {
-        setState(() {
-          _activeColor = Colors.grey;
-          _inactiveColor = Colors.grey.shade300;
-          _thumbColor = Colors.grey;
-          _isPlaying = false;
-        });
+        if(mounted) {
+          setState(() {
+            _activeColor = Colors.grey;
+            _inactiveColor = Colors.grey.shade300;
+            _thumbColor = Colors.grey;
+            _isPlaying = false;
+          });
+        }
       });
       // if (res == 1) {
       //   setState(() {
@@ -235,12 +244,14 @@ class _MyAudioItemState extends State<MyAudioItem> {
       debugPrint(_url);
 
       await _audioPlayer.play(_source).then((value) {
-        setState(() {
-          _activeColor = Colors.blue;
-          _inactiveColor = Colors.blue.shade100;
-          _thumbColor = Colors.blue;
-          _isPlaying = true;
-        });
+        if(mounted) {
+          setState(() {
+            _activeColor = Colors.blue;
+            _inactiveColor = Colors.blue.shade100;
+            _thumbColor = Colors.blue;
+            _isPlaying = true;
+          });
+        }
       });//isLocal: true
       // if (res == 1) {
       //   setState(() {
@@ -252,17 +263,21 @@ class _MyAudioItemState extends State<MyAudioItem> {
       // }
 
       _audioPlayer.onDurationChanged.listen((Duration thisDuration) {
-        setState(() {
-          _duration = thisDuration;
-        });
+        if(mounted) {
+          setState(() {
+            _duration = thisDuration;
+          });
+        }
       });
 
       _audioPlayer.onPositionChanged.listen((Duration thisPosition) {
-        setState(() {
-          _position = thisPosition;
-          debugPrint(_position.toString());
-          debugPrint(Duration(seconds: widget.maxTime.toInt()).toString());
-        });
+        if(mounted){
+          setState(() {
+            _position = thisPosition;
+            debugPrint(_position.toString());
+            // debugPrint(Duration(seconds: widget.maxTime.toInt()).toString());
+          });
+        }
         if (_position >= Duration(seconds: widget.maxTime.toInt())) {
           _isPlaying = true;
           _getAudio();
