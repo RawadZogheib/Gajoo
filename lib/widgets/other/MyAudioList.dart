@@ -166,11 +166,11 @@ class _MyAudioItemState extends State<MyAudioItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: const [
                             Icon(
-                              Icons.stop,
+                              Icons.pause,
                               color: Colors.white,
                             ),
                             Text(
-                              'Stop',
+                              'Pause',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -212,7 +212,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
   _getAudio() async {
     if (_isPlaying) {
       // Stop
-      await _audioPlayer.stop().then((value) {
+      await _audioPlayer.pause().then((value) {
         setState(() {
           _activeColor = Colors.grey;
           _inactiveColor = Colors.grey.shade300;
