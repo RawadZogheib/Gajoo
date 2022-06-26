@@ -106,78 +106,88 @@ class _MyCoursesState extends State<MyCourses> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           controller: ScrollController(),
-                          child: _coursesList.isNotEmpty?Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    topRight: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                    bottomRight: Radius.circular(30),
-                                  ),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.8,
-                                    width: 500,
-                                    padding: const EdgeInsets.all(12.0),
-                                    color: Colors.white,
-                                    child: MyCoursesList(
-                                      coursesList: _coursesList,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 60,
-                              ),
-                              _clicked == true
-                                  ? TeacherProfile(
-                                      name: _coursesList[_courseId!][5],
-                                      age: _coursesList[_courseId!][6],
-                                      languages: 'Arabic, french, english',
-                                      nbrOfCourses: _coursesList[_courseId!][7],
-                                      coursesReserved: _coursesList[_courseId!]
-                                          [8],
-                                      coursesLeft: (int.parse(
-                                                  _coursesList[_courseId!][7]) -
-                                              int.parse(
-                                                  _coursesList[_courseId!][8]))
-                                          .toString(),
-                                      cancelButton: true,
-                                      onTap: () {
-                                        _offClicked();
-                                      },
-                                    )
-                                  : ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30),
-                                        bottomLeft: Radius.circular(30),
-                                        bottomRight: Radius.circular(30),
-                                      ),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.8,
-                                        width: 500,
-                                        decoration: const BoxDecoration(
+                          child: _coursesList.isNotEmpty
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30),
+                                          bottomLeft: Radius.circular(30),
+                                          bottomRight: Radius.circular(30),
+                                        ),
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.8,
+                                          width: 500,
+                                          padding: const EdgeInsets.all(12.0),
                                           color: Colors.white,
+                                          child: MyCoursesList(
+                                            coursesList: _coursesList,
+                                          ),
                                         ),
                                       ),
                                     ),
-                            ],
-                          ):SizedBox(
-                            height: MediaQuery.of(context).size.height *
-                                0.8,
-                            width: 900,
-                            child: Image.asset(
-                            'Assets/noCoursesFound.png',
-                            fit: BoxFit.contain,
-                        ),
-                          ),
+                                    const SizedBox(
+                                      width: 60,
+                                    ),
+                                    _clicked == true
+                                        ? TeacherProfile(
+                                            name: _coursesList[_courseId!][5],
+                                            age: _coursesList[_courseId!][6],
+                                            languages:
+                                                'Arabic, french, english',
+                                            nbrOfCourses:
+                                                _coursesList[_courseId!][7],
+                                            coursesReserved:
+                                                _coursesList[_courseId!][8],
+                                            coursesLeft: (int.parse(
+                                                        _coursesList[_courseId!]
+                                                            [7]) -
+                                                    int.parse(
+                                                        _coursesList[_courseId!]
+                                                            [8]))
+                                                .toString(),
+                                            cancelButton: true,
+                                            onTap: () {
+                                              _offClicked();
+                                            },
+                                          )
+                                        : ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(30),
+                                              topRight: Radius.circular(30),
+                                              bottomLeft: Radius.circular(30),
+                                              bottomRight: Radius.circular(30),
+                                            ),
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.8,
+                                              width: 500,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                  ],
+                                )
+                              : SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.8,
+                                  width: 900,
+                                  child: Image.asset(
+                                    'Assets/noCoursesFound.png',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
                         ),
                       ),
                       const SizedBox(
