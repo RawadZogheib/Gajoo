@@ -232,7 +232,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
       // Play
       String _url = '${globals.audioIP}/Audios/audio${widget.audioId}.mp3';
       Source _source = UrlSource(_url);
-      print(_url);
+      debugPrint(_url);
 
       await _audioPlayer.play(_source).then((value) {
         setState(() {
