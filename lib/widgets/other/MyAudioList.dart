@@ -73,9 +73,9 @@ class MyAudioItem extends StatefulWidget {
 
 class _MyAudioItemState extends State<MyAudioItem> {
   bool _isPlaying = false;
-  AudioPlayer _audioplayer = AudioPlayer();
-  Duration _duration = Duration();
-  Duration _position = Duration();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  Duration _duration = const Duration();
+  Duration _position = const Duration();
   Color _activeColor = Colors.grey;
   Color _inactiveColor = Colors.grey.shade300;
   Color _thumbColor = Colors.grey;
@@ -202,7 +202,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
       onChanged: (double value) {
         if (_isPlaying == true) {
           setState(() {
-            _audioplayer.seek(Duration(seconds: value.toInt()));
+            _audioPlayer.seek(Duration(seconds: value.toInt()));
           });
         }
       },
@@ -212,41 +212,56 @@ class _MyAudioItemState extends State<MyAudioItem> {
   _getAudio() async {
     if (_isPlaying) {
       // Stop
-      var res = await _audioplayer.stop();
-      if (res == 1) {
+      await _audioPlayer.stop().then((value) {
         setState(() {
           _activeColor = Colors.grey;
           _inactiveColor = Colors.grey.shade300;
           _thumbColor = Colors.grey;
           _isPlaying = false;
         });
-      }
+      });
+      // if (res == 1) {
+      //   setState(() {
+      //     _activeColor = Colors.grey;
+      //     _inactiveColor = Colors.grey.shade300;
+      //     _thumbColor = Colors.grey;
+      //     _isPlaying = false;
+      //   });
+      // }
     } else {
       // Play
       String _url = '${globals.audioIP}/Audios/audio${widget.audioId}.mp3';
+      Source _source = UrlSource(_url);
       print(_url);
 
-      var res = await _audioplayer.play(_url, isLocal: true);
-      if (res == 1) {
+      await _audioPlayer.play(_source).then((value) {
         setState(() {
           _activeColor = Colors.blue;
           _inactiveColor = Colors.blue.shade100;
           _thumbColor = Colors.blue;
           _isPlaying = true;
         });
-      }
+      });//isLocal: true
+      // if (res == 1) {
+      //   setState(() {
+      //     _activeColor = Colors.blue;
+      //     _inactiveColor = Colors.blue.shade100;
+      //     _thumbColor = Colors.blue;
+      //     _isPlaying = true;
+      //   });
+      // }
 
-      _audioplayer.onDurationChanged.listen((Duration thisDuration) {
+      _audioPlayer.onDurationChanged.listen((Duration thisDuration) {
         setState(() {
           _duration = thisDuration;
         });
       });
 
-      _audioplayer.onAudioPositionChanged.listen((Duration thisPosition) {
+      _audioPlayer.onPositionChanged.listen((Duration thisPosition) {
         setState(() {
           _position = thisPosition;
-          print(_position);
-          print(Duration(seconds: widget.maxTime.toInt()));
+          debugPrint(_position.toString());
+          debugPrint(Duration(seconds: widget.maxTime.toInt()).toString());
         });
         if (_position >= Duration(seconds: widget.maxTime.toInt())) {
           _isPlaying = true;

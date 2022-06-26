@@ -19,7 +19,7 @@ class submitButton extends StatelessWidget {
             height: 60,
             decoration: BoxDecoration(
                 color: globals.blue_2,
-                borderRadius: BorderRadius.all(Radius.circular(14)),
+                borderRadius: const BorderRadius.all(const Radius.circular(14)),
                 border: Border.all(color: globals.blue_1, width: 4)),
             child: Center(
               child: Text(
@@ -34,7 +34,7 @@ class submitButton extends StatelessWidget {
         //_launchApp();
         showDialog(
             context: context,
-            builder: (BuildContext context) => ContainerApplication());
+            builder: (BuildContext context) => const ContainerApplication());
       },
     );
   }
