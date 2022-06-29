@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:gajoo/api/my_api.dart';
 import 'package:gajoo/globals/globals.dart' as globals;
+import 'package:gajoo/widgets/PopUp/errorWarningPopup.dart';
 import 'package:gajoo/widgets/other/MyCustomScrollBehavior.dart';
 import 'package:intl/intl.dart';
 
@@ -90,9 +94,7 @@ class _MyAudioItemState extends State<MyAudioItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        widget.onTap();
-      },
+      onTap: () => widget.onTap(),
       child: Container(
         height: 90,
         width: widget.width,
@@ -250,6 +252,8 @@ class _MyAudioItemState extends State<MyAudioItem> {
             _inactiveColor = Colors.blue.shade100;
             _thumbColor = Colors.blue;
             _isPlaying = true;
+            widget.onTap();
+            //_getImage();
           });
         }
       });//isLocal: true
