@@ -38,7 +38,15 @@ class AudioText extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Center(child: Text(textAudio)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: Column(
+                      children: [
+                        const SizedBox(height: 40,),
+                        Text(textAudio),
+                      ],
+                    )),
+                  ),
                 ],
               ),
             ),

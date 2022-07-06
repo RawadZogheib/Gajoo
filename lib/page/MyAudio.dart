@@ -36,6 +36,7 @@ class _MyAudioState extends State<MyAudio> {
 
   var _theme_Id;
   bool _imgNull = true;
+  String _text = '';
 
   @override
   void initState() {
@@ -148,7 +149,7 @@ class _MyAudioState extends State<MyAudio> {
                                 ),
                                 _clicked == true ?
                                   AudioText(
-                                      textAudio: 'ksjdhffjdm \n ugsdifgusdfiaksdgaisdugiasdugaisdguiasdgi',
+                                      textAudio: _text,
                                       cancelButton: true,
                                       onTap: () {
                                         _offClicked();
@@ -253,6 +254,7 @@ class _MyAudioState extends State<MyAudio> {
                   _onClicked();
                   setState(() {
                     _theme_Id = body[1][i][2];
+                    _text = body[1][i][5];
                   });
                 },
               ],
