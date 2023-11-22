@@ -101,7 +101,7 @@ class _MyAudioState extends State<MyAudio> {
         body: Container(
           decoration: _imgNull == false ? BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage("https://kwikcode.net/gajoo_php/Themes/Theme${_theme_Id}.png"),
+              image: NetworkImage("${globals.themeIP}/Themes/Theme${_theme_Id}.png"),
               fit: BoxFit.cover,
             ),
           ) : null,

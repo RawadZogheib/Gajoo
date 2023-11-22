@@ -10,9 +10,12 @@ import 'package:gajoo/widgets/HomePage/TeacherCard.dart';
 const String version = "v1.0";
 
 //Server Ip  (page[/my_api.dart])
-const String myIP = "https://kwikcode.net/gajoo_php";
+// const String myIP = "https://kwikcode.net/gajoo_php";
+// const String myIP = "https://gajoo.net/gajoo_php";
+const String myIP = "/gajoo_php";
 // const String myIP = "https://cros-anywhere.herokuapp.com/https://kwikcode.net/gajoo_php";
-const String audioIP = "https://kwikcode.net/gajoo_php";
+const String themeIP = "https://gajoo.net/gajoo_php";
+const String audioIP = "https://gajoo.net/gajoo_php";
 //const String myIP = "http://127.0.0.1/Gajoo_php";
 
 // bool? isLoggedIn;
